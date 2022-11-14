@@ -1,9 +1,21 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+import enum
+
+
+# class GenderType(enum.Enum):
+#     MALE = "Male"
+#     FEMALE = "Female"
+#     NON_BINARY = "Non-binary"
+#     NOT_PREFER = "Prefer not to say"
 
 
 class User(db.Model, UserMixin):
+    '''
+    Relationships:
+        User has many Comments, Likes, Replies, Posts, Stories
+    '''
     __tablename__ = 'users'
 
     if environment == "production":
@@ -13,6 +25,10 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    phone_number = db.Column(db.String(10), unique=True)
+    gender = db.Column(db.Enum("Male", "Female", "Non-binary", "Prefer not to say"), nullable=False, default="Prefer not to say")
+    is_verified = db.Column(db.Boolean, nullable=False, default=False)
+    is_private = db.Column(db.Boolean, nullable=False, default=False)
 
     @property
     def password(self):
@@ -29,5 +45,9 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'phone_number': self.phone_number,
+            'gender': self.gender,
+            'is_verified': self.is_verified,
+            'is_private': self.is_private
         }

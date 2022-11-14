@@ -1,8 +1,8 @@
-"""create_users_table
+"""create users table
 
-Revision ID: ffdc0a98111c
+Revision ID: 62e50ffcd73d
 Revises:
-Create Date: 2020-11-20 15:06:02.230689
+Create Date: 2022-11-14 12:53:58.116341
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'ffdc0a98111c'
+revision = '62e50ffcd73d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,14 +27,19 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('phone_number', sa.String(length=10), nullable=True),
+    sa.Column('gender', sa.Enum('Male', 'Female', 'Non-binary', 'Prefer not to say'), nullable=False),
+    sa.Column('is_verified', sa.Boolean(), nullable=False),
+    sa.Column('is_private', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('phone_number'),
     sa.UniqueConstraint('username')
     )
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-    # ### end Alembic commands ###qqqqqqqqq
+    # ### end Alembic commands ###
 
 
 def downgrade():
