@@ -31,6 +31,7 @@ class User(db.Model, UserMixin):
     is_private = db.Column(db.Boolean, nullable=False, default=False)
 
     posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
+    comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
 
     @property
     def password(self):
