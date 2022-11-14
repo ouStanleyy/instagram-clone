@@ -30,6 +30,8 @@ class User(db.Model, UserMixin):
     is_verified = db.Column(db.Boolean, nullable=False, default=False)
     is_private = db.Column(db.Boolean, nullable=False, default=False)
 
+    posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
+
     @property
     def password(self):
         return self.hashed_password
