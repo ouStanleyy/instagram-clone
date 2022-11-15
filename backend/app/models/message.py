@@ -16,8 +16,8 @@ class Message(db.Model):
     recipient_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
     message = db.Column(db.Text(1000))
 
-    sender = db.relationship("User", back_populates='senders')
-    recipient = db.relationship("User", back_populates='recipients')
+    sender = db.relationship("User", foreign_keys=[sender_id], back_populates='senders')
+    recipient = db.relationship("User", foreign_keys=[recipient_id], back_populates='recipients')
 
     def to_dict(self):
         return {

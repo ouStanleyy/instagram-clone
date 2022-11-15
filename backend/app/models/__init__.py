@@ -2,6 +2,12 @@ from .db import db, environment, SCHEMA
 from .user import User
 from .post import Post
 from .comment import Comment
+from .follow import Follow
+from .like import Like
+from .media import Media
+from .message import Message
+from .reply import Reply
+from .view import View
 
 
 # """create_users_table

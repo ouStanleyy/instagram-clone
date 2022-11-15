@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profile_picture = db.Column(db.String)
     phone_number = db.Column(db.String(10), unique=True)
     gender = db.Column(db.Enum("Male", "Female", "Non-binary", "Prefer not to say"), nullable=False, default="Prefer not to say")
     is_verified = db.Column(db.Boolean, nullable=False, default=False)
@@ -34,10 +35,11 @@ class User(db.Model, UserMixin):
     comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
     replies = db.relationship("Reply", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
     likes = db.relationship("Like", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
-    followers = db.relationship("Follow", back_populates="follower", cascade="all, delete-orphan", passive_deletes=True)
-    followings = db.relationship("Follow", back_populates="following", cascade="all, delete-orphan", passive_deletes=True)
-    senders = db.relationship("Message", back_populates="sender", cascade="all, delete-orphan", passive_deletes=True)
-    recipients = db.relationship("Message", back_populates="recipient", cascade="all, delete-orphan", passive_deletes=True)
+    views = db.relationship("View", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
+    followers = db.relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower", cascade="all, delete-orphan", passive_deletes=True)
+    followings = db.relationship("Follow", foreign_keys="Follow.following_id", back_populates="following", cascade="all, delete-orphan", passive_deletes=True)
+    senders = db.relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan", passive_deletes=True)
+    recipients = db.relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient", cascade="all, delete-orphan", passive_deletes=True)
 
     @property
     def password(self):
@@ -56,6 +58,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'phone_number': self.phone_number,
+            'profile_picture': self.profile_picture,
             'gender': self.gender,
             'is_verified': self.is_verified,
             'is_private': self.is_private

@@ -16,8 +16,8 @@ class Follow(db.Model):
     following_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
     is_pending = db.Column(db.Boolean, nullable=False, default=False)
 
-    follower = db.relationship("User", back_populates='followers')
-    following = db.relationship("User", back_populates='followings')
+    follower = db.relationship("User", foreign_keys=[follower_id], back_populates='followers')
+    following = db.relationship("User", foreign_keys=[following_id], back_populates='followings')
 
     def to_dict(self):
         return {
