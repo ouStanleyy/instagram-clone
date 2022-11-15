@@ -32,7 +32,8 @@ class User(db.Model, UserMixin):
 
     posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
     comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
-    replies = db.relationship("Replies", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
+    replies = db.relationship("Reply", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
+    likes = db.relationship("Like", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
 
     @property
     def password(self):
