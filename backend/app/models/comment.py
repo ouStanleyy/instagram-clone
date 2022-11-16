@@ -13,13 +13,13 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete="CASCADE"))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
     comment = db.Column(db.Text(2200))
 
     user = db.relationship("User", back_populates='comments')
     post = db.relationship("Post", back_populates='comments')
-    replies = db.relationship("Reply", back_populates="comment", cascade="all, delete-orphan", passive_deletes=True)
+    replies = db.relationship("Reply", back_populates="comment", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

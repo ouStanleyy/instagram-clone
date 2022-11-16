@@ -12,8 +12,8 @@ class Message(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
-    recipient_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
+    sender_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     message = db.Column(db.Text(1000))
 
     sender = db.relationship("User", foreign_keys=[sender_id], back_populates='senders')

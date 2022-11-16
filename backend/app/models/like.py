@@ -12,8 +12,8 @@ class Like(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete="CASCADE"))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
     user = db.relationship("User", back_populates='likes')
     post = db.relationship("Post", back_populates='likes')

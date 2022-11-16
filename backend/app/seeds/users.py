@@ -11,6 +11,7 @@ def seed_users():
         username='bobbie', email='bobbie@aa.io', password='password')
 
     bobbie.posts.append(Post(caption="User 3's related post."))
+    bobbie.posts.append(Post(caption="User 3's related post."))
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
