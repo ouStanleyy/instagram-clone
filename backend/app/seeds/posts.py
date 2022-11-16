@@ -1,15 +1,78 @@
 from app.models import db, Post, environment, SCHEMA
+from datetime import datetime, timedelta
+
+posts = [
+    {
+        "user_id": 1,
+        "caption": "Demo_User's first post."
+    },
+    {
+        "user_id": 1,
+        "caption": "Demo_User's second post."
+    },
+    {
+        "user_id": 1,
+        "is_story": True,
+        "expires_at": datetime.now() + timedelta(days=1)
+    },
+    {
+        "user_id": 2,
+        "is_story": True,
+        "expires_at": datetime.now() + timedelta(days=1)
+    },
+    {
+        "user_id": 2,
+        "is_story": True,
+        "expires_at": datetime.now() + timedelta(days=1)
+    },
+    {
+        "user_id": 2,
+        "is_story": True,
+        "expires_at": datetime.now() + timedelta(days=1)
+    },
+    {
+        "user_id": 3,
+        "caption": "Bobbie_Demo's first post."
+    },
+    {
+        "user_id": 3,
+        "caption": "Bobbie_Demo's second post."
+    },
+    {
+        "user_id": 4,
+        "caption": "Stan_Demo's first post."
+    },
+    {
+        "user_id": 4,
+        "caption": "Stan_Demo's second post."
+    },
+    {
+        "user_id": 4,
+        "is_story": True,
+        "expires_at": datetime.now() + timedelta(days=1)
+    },
+    {
+        "user_id": 5,
+        "caption": "Rey_Demo's first post."
+    },
+    {
+        "user_id": 5,
+        "caption": "Rey_Demo's second post."
+    },
+    {
+        "user_id": 6,
+        "caption": "Dan_Demo's first post."
+    },
+    {
+        "user_id": 6,
+        "caption": "Dan_Demo's second post."
+    },
+
+]
 
 
-# Adds a demo user, you can add other users here if you want
 def seed_posts():
-    post_1 = Post(user_id=1, caption="User 1's first post.")
-    post_2 = Post(user_id=1, caption="User 1's second post.")
-    post_3 = Post(user_id=1, caption="User 1's third post.")
-    post_4 = Post(user_id=2, caption="User 2's first post.")
-    post_5 = Post(user_id=3, caption="User 3's first post.")
-
-    db.session.add_all([post_1, post_2, post_3, post_4, post_5])
+    db.session.add_all([Post(**post) for post in posts])
     db.session.commit()
 
 
@@ -21,7 +84,8 @@ def seed_posts():
 # it will reset the primary keys for you as well.
 def undo_posts():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM posts")
 

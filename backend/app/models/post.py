@@ -16,14 +16,19 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     caption = db.Column(db.Text(2200))
     is_story = db.Column(db.Boolean, nullable=False, default=False)
-    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    created_at = db.Column(db.DateTime(timezone=True),
+                           server_default=func.now())
     expires_at = db.Column(db.DateTime)
 
     user = db.relationship("User", back_populates="posts")
-    comments = db.relationship("Comment", back_populates="post", cascade="all, delete-orphan")
-    likes = db.relationship("Like", back_populates="post", cascade="all, delete-orphan")
-    views = db.relationship("View", back_populates="post", cascade="all, delete-orphan")
-    media = db.relationship("Media", back_populates="post", cascade="all, delete-orphan")
+    comments = db.relationship(
+        "Comment", back_populates="post", cascade="all, delete-orphan")
+    likes = db.relationship("Like", back_populates="post",
+                            cascade="all, delete-orphan")
+    views = db.relationship("View", back_populates="post",
+                            cascade="all, delete-orphan")
+    media = db.relationship("Media", back_populates="post",
+                            cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
