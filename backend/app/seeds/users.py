@@ -59,7 +59,7 @@ users = [
         "password": "danieldemopw",
         "phone_number": "6666666666",
         "is_verified": True,
-        "is_private": False
+        "is_private": True
     },
 ]
 
