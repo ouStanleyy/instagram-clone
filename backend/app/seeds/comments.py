@@ -1,16 +1,68 @@
-from app.models import db, Comment, User, Post, environment, SCHEMA
+from app.models import db, Comment, environment, SCHEMA
 
+comments = [
+    {
+        "user_id": 1,
+        "post_id": 1,
+        "comment": "Demo_User comments on their own post 1."
+    },
+    {
+        "user_id": 2,
+        "post_id": 1,
+        "comment": "Marnie_Demo comments on Demo_user's first post."
+    },
+    {
+        "user_id": 3,
+        "post_id": 1,
+        "comment": "Bobbie_Demo comments on Demo_user's first post."
+    },
+    {
+        "user_id": 4,
+        "post_id": 1,
+        "comment": "Stan_demo comments on Demo_user's first post."
+    },
+    {
+        "user_id": 5,
+        "post_id": 1,
+        "comment": "Rey_demo comments on Demo_user's first post."
+    },
+    {
+        "user_id": 6,
+        "post_id": 1,
+        "comment": "Dan_demo comments on Demo_user's first post."
+    },
+    {
+        "user_id": 1,
+        "post_id": 7,
+        "comment": "Demo_User comments on Bobbie_Demo's first post."
+    },
+    {
+        "user_id": 5,
+        "post_id": 10,
+        "comment": "Rey_User comments on Stan_Demo's second post."
+    },
+    {
+        "user_id": 6,
+        "post_id": 10,
+        "comment": "Dan_User comments on Stan_Demo's second post."
+    },
+    {
+        "user_id": 4,
+        "post_id": 14,
+        "comment": "Stan_User comments on Dan_Demo's first post."
+    },
+    {
+        "user_id": 4,
+        "post_id": 12,
+        "comment": "Stan_User comments on Rey_Demo's first post."
+    },
+]
 
 # Adds a demo user, you can add other users here if you want
-def seed_comments():
-    comment_1 = Comment(user_id=1, post_id=1, comment="User 1 commenting on post 1")
-    comment_2 = Comment(user_id=1, post_id=2, comment="User 1 commenting on post 2")
-    comment_3 = Comment(user_id=2, post_id=1, comment="User 2 commenting post 1")
-    comment_4 = Comment(user_id=3, post_id=1, comment="User 3 commenting post 1")
-    comment_5 = Comment(user_id=3, post_id=2, comment="User 3 commenting post 2")
-    comment_6 = Comment(user_id=1, post_id=3, comment="User 1 commenting post 3")
 
-    db.session.add_all([comment_1, comment_2, comment_3, comment_4, comment_5, comment_6])
+
+def seed_comments():
+    db.session.add_all([Comment(**comment) for comment in comments])
     db.session.commit()
 
 
@@ -22,7 +74,8 @@ def seed_comments():
 # it will reset the primary keys for you as well.
 def undo_comments():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM comments")
 

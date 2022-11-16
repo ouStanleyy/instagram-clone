@@ -1,20 +1,71 @@
 from app.models import db, User, Post, environment, SCHEMA
 
+users = [
+    {
+        "username": "Demo_User",
+        "full_name": "Demo User",
+        "gender": "Prefer not to say",
+        "email": "demo_user@email.com",
+        "password": "demouserpw",
+        "phone_number": "1111111111",
+        "is_verified": True,
+        "is_private": True
+    },
+    {
+        "username": "Marnie_Demo",
+        "full_name": "Marnie Demo",
+        "gender": "Prefer not to say",
+        "email": "marnie_demo@email.com",
+        "password": "marniedemopw",
+        "phone_number": "2222222222",
+        "is_verified": False,
+        "is_private": False
+    },
+    {
+        "username": "Bobbie_Demo",
+        "full_name": "Bobbie Demo",
+        "gender": "Prefer not to say",
+        "email": "bobbie_demo@email.com",
+        "password": "bobbiedemopw",
+        "phone_number": "3333333333",
+        "is_verified": False,
+        "is_private": False
+    },
+    {
+        "username": "Stan_Demo",
+        "full_name": "Stanley Demo",
+        "gender": "Male",
+        "email": "stanley_demo@email.com",
+        "password": "stanleydemopw",
+        "phone_number": "4444444444",
+        "is_verified": True,
+        "is_private": False
+    },
+    {
+        "username": "Rey_Demo",
+        "full_name": "Reyhaneh Demo",
+        "gender": "Female",
+        "email": "reyhaneh_demo@email.com",
+        "password": "reyhanehdemopw",
+        "phone_number": "5555555555",
+        "is_verified": True,
+        "is_private": False
+    },
+    {
+        "username": "Dan_Demo",
+        "full_name": "Daniel Demo",
+        "gender": "Male",
+        "email": "daniel_demo@email.com",
+        "password": "danieldemopw",
+        "phone_number": "6666666666",
+        "is_verified": True,
+        "is_private": False
+    },
+]
 
-# Adds a demo user, you can add other users here if you want
+
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password', phone_number='5555555555', is_verified=True, is_private=True)
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
-
-    bobbie.posts.append(Post(caption="User 3's related post."))
-    bobbie.posts.append(Post(caption="User 3's related post."))
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add_all([User(**user) for user in users])
     db.session.commit()
 
 
@@ -26,7 +77,8 @@ def seed_users():
 # it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM users")
 
