@@ -6,6 +6,8 @@ from .likes import seed_likes, undo_likes
 from .follows import seed_follows, undo_follows
 from .replies import seed_replies, undo_replies
 from .media import seed_media, undo_media
+from .views import seed_views, undo_views
+from .messages import seed_messages, undo_messages
 
 from app.models.db import db, environment, SCHEMA
 
@@ -30,6 +32,8 @@ def seed():
     seed_follows()
     seed_replies()
     seed_media()
+    seed_views()
+    seed_messages()
     # Add other seed functions here
 
 
@@ -43,4 +47,6 @@ def undo():
     undo_follows()
     undo_replies()
     undo_media()
+    undo_views()
+    undo_messages()
     # Add other undo functions here

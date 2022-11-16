@@ -67,12 +67,27 @@ follows = [
         "is_pending": False
     },
     {
+        "follower_id": 5,
+        "following_id": 4,
+        "is_pending": False
+    },
+    {
+        "follower_id": 6,
+        "following_id": 4,
+        "is_pending": False
+    },
+    {
         "follower_id": 2,
         "following_id": 5,
         "is_pending": False
     },
     {
         "follower_id": 4,
+        "following_id": 5,
+        "is_pending": False
+    },
+    {
+        "follower_id": 6,
         "following_id": 5,
         "is_pending": False
     },
