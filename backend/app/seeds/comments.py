@@ -19,42 +19,42 @@ comments = [
     {
         "user_id": 4,
         "post_id": 1,
-        "comment": "Stan_demo comments on Demo_user's first post."
+        "comment": "Stan_Demo comments on Demo_user's first post."
     },
     {
         "user_id": 5,
         "post_id": 1,
-        "comment": "Rey_demo comments on Demo_user's first post."
+        "comment": "Rey_Demo comments on Demo_user's first post."
     },
     {
         "user_id": 6,
         "post_id": 1,
-        "comment": "Dan_demo comments on Demo_user's first post."
+        "comment": "Dan_Demo comments on Demo_user's first post."
     },
     {
         "user_id": 1,
         "post_id": 7,
-        "comment": "Demo_User comments on Bobbie_Demo's first post."
+        "comment": "Demo_Demo comments on Bobbie_Demo's first post."
     },
     {
         "user_id": 5,
         "post_id": 10,
-        "comment": "Rey_User comments on Stan_Demo's second post."
+        "comment": "Rey_Demo comments on Stan_Demo's second post."
     },
     {
         "user_id": 6,
         "post_id": 10,
-        "comment": "Dan_User comments on Stan_Demo's second post."
+        "comment": "Dan_Demo comments on Stan_Demo's second post."
     },
     {
         "user_id": 4,
         "post_id": 14,
-        "comment": "Stan_User comments on Dan_Demo's first post."
+        "comment": "Stan_Demo comments on Dan_Demo's first post."
     },
     {
         "user_id": 4,
         "post_id": 12,
-        "comment": "Stan_User comments on Rey_Demo's first post."
+        "comment": "Stan_Demo comments on Rey_Demo's first post."
     },
 ]
 
