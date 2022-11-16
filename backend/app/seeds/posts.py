@@ -9,11 +9,7 @@ def seed_posts():
     post_4 = Post(user_id=2, caption="User 2's first post.")
     post_5 = Post(user_id=3, caption="User 3's first post.")
 
-    db.session.add(post_1)
-    db.session.add(post_2)
-    db.session.add(post_3)
-    db.session.add(post_4)
-    db.session.add(post_5)
+    db.session.add_all([post_1, post_2, post_3, post_4, post_5])
     db.session.commit()
 
 

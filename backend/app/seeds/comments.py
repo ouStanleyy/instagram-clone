@@ -11,9 +11,6 @@ def seed_comments():
     comment_6 = Comment(user_id=1, post_id=3, comment="User 1 commenting post 3")
 
     db.session.add_all([comment_1, comment_2, comment_3, comment_4, comment_5, comment_6])
-    user_1 = User.query.get(1)
-
-    db.session.delete(user_1)
     db.session.commit()
 
 
