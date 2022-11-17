@@ -39,3 +39,10 @@ class Post(db.Model):
             'created_at': self.created_at,
             'expires_at': self.expires_at
         }
+
+    def to_dict_media(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'preview_media': self.media[0].to_dict()
+        }
