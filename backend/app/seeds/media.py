@@ -50,6 +50,10 @@ medias = [
         "url": "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
     },
     {
+        "post_id": 12,
+        "url": "https://www.cdc.gov/healthypets/images/pets/cute-dog-headshot.jpg?_=42445",
+    },
+    {
         "post_id": 13,
         "url": "https://cdn.arstechnica.net/wp-content/uploads/2022/04/GettyImages-997016774.jpg",
     },

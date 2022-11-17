@@ -39,3 +39,36 @@ class Post(db.Model):
             'created_at': self.created_at,
             'expires_at': self.expires_at
         }
+
+    def to_dict_discovery(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'media': [media.to_dict() for media in self.media]
+        }
+
+    def to_dict_feed(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'caption': self.caption,
+            'is_story': self.is_story,
+            'created_at': self.created_at,
+            'expires_at': self.expires_at,
+            'num_of_comments': len(self.comments),
+            'media': [media.to_dict() for media in self.media],
+            'likes': [like.to_dict() for like in self.likes]
+        }
+
+    def to_dict_detail(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'caption': self.caption,
+            'is_story': self.is_story,
+            'created_at': self.created_at,
+            'expires_at': self.expires_at,
+            'media': [media.to_dict() for media in self.media],
+            'likes': [like.to_dict() for like in self.likes],
+            'comments': [comment.to_dict() for comment in self.comments]
+        }
