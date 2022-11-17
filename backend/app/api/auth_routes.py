@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from sqlalchemy import or_
 from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
@@ -25,7 +26,7 @@ def authenticate():
     """
     if current_user.is_authenticated:
         return current_user.to_dict()
-    return {'errors': ['Unauthorized']}
+    return {'errors': ["Authentication required"]}, 401
 
 
 @auth_routes.route('/login', methods=['POST'])
@@ -39,9 +40,12 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
+
+        user = User.query.filter(or_(User.email == form.data["credential"], User.username == form.data["credential"])).first()
         login_user(user)
-        return user.to_dict()
+        user_dict = {key:val for key,val in user.to_dict().items() if key in ['id','username','full_name','email']}
+        print(user_dict)
+        return user_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -51,7 +55,7 @@ def logout():
     Logs a user out
     """
     logout_user()
-    return {'message': 'User logged out'}
+    return {'message': "Successfully logged out"}
 
 
 @auth_routes.route('/signup', methods=['POST'])
@@ -65,12 +69,14 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            full_name=form.data['full_name']
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return user.to_dict()
+        user_dict = {key:val for key,val in user.to_dict().items() if key in ['id','username','full_name','email']}
+        return user_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -79,4 +85,4 @@ def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
-    return {'errors': ['Unauthorized']}, 401
+    return {'errors': ['Forbidden']}, 403

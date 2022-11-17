@@ -49,6 +49,7 @@ users = [
         "username": "Rey_Demo",
         "full_name": "Reyhaneh Demo",
         "gender": "Female",
+        "bio": "It's Rey",
         "email": "reyhaneh_demo@email.com",
         "password": "reyhanehdemopw",
         "phone_number": "5555555555",

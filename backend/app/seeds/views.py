@@ -1,5 +1,5 @@
 from app.models import db, View, environment, SCHEMA
-# 3 4 5 6 11
+
 views = [
     {
         "user_id": 2,
@@ -70,8 +70,10 @@ views = [
 
 def seed_views():
     db.session.add_all([View(**view) for view in views])
-    # user = User.query.get(1)
-    # db.session.delete(user)
+    # user1 = User.query.get(1)
+    # user2 = User.query.get(2)
+    # db.session.delete(user1)
+    # db.session.delete(user2)
     db.session.commit()
 
 
