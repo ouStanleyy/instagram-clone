@@ -67,3 +67,5 @@ class User(db.Model, UserMixin):
             'is_verified': self.is_verified,
             'is_private': self.is_private
         }
+
+

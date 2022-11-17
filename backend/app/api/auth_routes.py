@@ -43,7 +43,9 @@ def login():
 
         user = User.query.filter(or_(User.email == form.data["credential"], User.username == form.data["credential"])).first()
         login_user(user)
-        return user.to_dict()
+        user_dict = {key:val for key,val in user.to_dict().items() if key in ['id','username','full_name','email']}
+        print(user_dict)
+        return user_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -53,7 +55,7 @@ def logout():
     Logs a user out
     """
     logout_user()
-    return {'message': 'User logged out'}
+    return {'message': "Successfully logged out"}
 
 
 @auth_routes.route('/signup', methods=['POST'])
@@ -67,12 +69,14 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            full_name=form.data['full_name']
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return user.to_dict()
+        user_dict = {key:val for key,val in user.to_dict().items() if key in ['id','username','full_name','email']}
+        return user_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
