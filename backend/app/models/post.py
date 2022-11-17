@@ -40,9 +40,22 @@ class Post(db.Model):
             'expires_at': self.expires_at
         }
 
-    def to_dict_media(self):
+    def to_dict_discovery(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'preview_media': self.media[0].to_dict()
+            'media': [media.to_dict() for media in self.media]
+        }
+
+    def to_dict_feed(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'caption': self.caption,
+            'is_story': self.is_story,
+            'created_at': self.created_at,
+            'expires_at': self.expires_at,
+            'num_of_comments': len(self.comments),
+            'media': [media.to_dict() for media in self.media],
+            'likes': [like.to_dict() for like in self.likes]
         }
