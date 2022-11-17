@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, session, request, redirect
 from flask_login import login_required, current_user
 from app.models import Post, Media, User, Follow, db
 
@@ -16,10 +16,8 @@ def posts():
     Use: discovery page
     """
 
-    user_id = current_user.get_id()
-
     posts = Post.query.filter(Post.user.has(
-        User.is_private == False), Post.user_id != user_id, Post.is_story == False).order_by(Post.id.desc()).all()
+        User.is_private == False), Post.user_id != current_user.id, Post.is_story == False).order_by(Post.id.desc()).all()
 
     return {"Posts": [post.to_dict_discovery() for post in posts]}
 
@@ -32,14 +30,40 @@ def posts_feed():
 
     Filter: Only posts from Current User's following, Not Stories
 
-    User: feed page
+    Use: feed page
     """
     # Get the current user's following
-    user_id = current_user.get_id()
-    followings = Follow.query.filter_by(follower_id=user_id).all()
+    followings = Follow.query.filter_by(follower_id=current_user.id).all()
 
     # Get the posts that are not stories from followings
     posts = [Post.query.filter_by(
         user_id=following.following_id, is_story=False).all() for following in followings]
 
     return {"Posts": [post.to_dict_feed() for sub_post in posts for post in sub_post]}
+
+
+def authorized_follower(cb):
+    def wrapper(post_id):
+        post = Post.query.get(post_id)
+        is_owner = post.user_id == current_user.id
+
+        if not is_owner:
+            follow = Follow.query.filter_by(
+                follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
+            if not follow:
+                return redirect("../auth/unauthorized")
+        return cb(post_id)
+    return wrapper
+
+
+@post_routes.route("/<int:post_id>", methods=["GET"])
+@login_required
+@authorized_follower
+def post_detail(post_id):
+    """
+    Query for a post and return that post in a dictionary
+
+    Use: post detail page
+    """
+    post = Post.query.get(post_id)
+    return post.to_dict_detail()
