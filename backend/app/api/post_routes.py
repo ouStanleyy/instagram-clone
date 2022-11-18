@@ -108,6 +108,13 @@ def create_post():
         db.session.commit()
         # AFTER COMMIT, YOU CAN ACCESS NEWLY CREATED POST.ID
         # CREATE MEDIA HERE?
+        # print("HEREHEEHEEHE", form.data['media'])
+        # media = Media(
+        #     post_id=post.id,
+        #     url=form.data['media']
+        # )
+        # db.session.add(media)
+        # db.session.commit()
         return {"message": "Post created successfully"}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -134,4 +141,24 @@ def edit_post(post_id):
             post.allow_comments = form.data['allow_comments']
             db.session.commit()
             return {"message": "Succesfully updated"}
+    return redirect("../auth/unauthorized")
+
+
+@post_routes.route("/<int:post_id>", methods=["DELETE"])
+@login_required
+def delete_post(post_id):
+    """
+    Query for a post or story and deletes it
+
+    Current user must be the owner of the post
+
+    Use: Deleting a Post
+    """
+
+    post = Post.query.get_or_404(post_id)
+
+    if post.user_id == current_user.id:
+        db.session.delete(post)
+        db.session.commit()
+        return {"message": "Successfully deleted"}
     return redirect("../auth/unauthorized")
