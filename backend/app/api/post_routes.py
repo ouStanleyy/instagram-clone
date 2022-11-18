@@ -5,7 +5,21 @@ from app.models import Post, Media, User, Follow, db
 post_routes = Blueprint("posts", __name__)
 
 
-@post_routes.route("/", methods=["GET"])
+def authorized_follower(cb):
+    def wrapper(post_id):
+        post = Post.query.get_or_404(post_id)
+        is_owner = post.user_id == current_user.id
+
+        if not is_owner:
+            follow = Follow.query.filter_by(
+                follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
+            if not follow:
+                return redirect("../auth/unauthorized")
+        return cb(post_id)
+    return wrapper
+
+
+@post_routes.route("/")
 @login_required
 def posts():
     """
@@ -22,7 +36,20 @@ def posts():
     return {"Posts": [post.to_dict_discovery() for post in posts]}
 
 
-@post_routes.route("/following", methods=["GET"])
+@post_routes.route("/<int:post_id>")
+@login_required
+@authorized_follower
+def post_detail(post_id):
+    """
+    Query for a post and return that post in a dictionary
+
+    Use: post detail page
+    """
+    post = Post.query.get(post_id)
+    return post.to_dict_detail()
+
+
+@post_routes.route("/following")
 @login_required
 def posts_feed():
     """
@@ -42,28 +69,11 @@ def posts_feed():
     return {"Posts": [post.to_dict_feed() for sub_post in posts for post in sub_post]}
 
 
-def authorized_follower(cb):
-    def wrapper(post_id):
-        post = Post.query.get(post_id)
-        is_owner = post.user_id == current_user.id
-
-        if not is_owner:
-            follow = Follow.query.filter_by(
-                follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
-            if not follow:
-                return redirect("../auth/unauthorized")
-        return cb(post_id)
-    return wrapper
-
-
-@post_routes.route("/<int:post_id>", methods=["GET"])
+@post_routes.route("/", methods=["POST"])
 @login_required
-@authorized_follower
-def post_detail(post_id):
+def create_post():
     """
-    Query for a post and return that post in a dictionary
+    Creates a post from form
 
-    Use: post detail page
+    Use: Make post
     """
-    post = Post.query.get(post_id)
-    return post.to_dict_detail()
