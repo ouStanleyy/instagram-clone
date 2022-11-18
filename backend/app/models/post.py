@@ -38,6 +38,8 @@ class Post(db.Model):
             'user_id': self.user_id,
             'caption': self.caption,
             'is_story': self.is_story,
+            'show_like_count': self.show_like_count,
+            'allow_comments': self.allow_comments,
             'created_at': self.created_at,
             'expires_at': self.expires_at
         }
@@ -55,6 +57,8 @@ class Post(db.Model):
             'user_id': self.user_id,
             'caption': self.caption,
             'is_story': self.is_story,
+            'show_like_count': self.show_like_count,
+            'allow_comments': self.allow_comments,
             'created_at': self.created_at,
             'expires_at': self.expires_at,
             'num_of_comments': len(self.comments),
@@ -68,6 +72,8 @@ class Post(db.Model):
             'user_id': self.user_id,
             'caption': self.caption,
             'is_story': self.is_story,
+            'show_like_count': self.show_like_count,
+            'allow_comments': self.allow_comments,
             'created_at': self.created_at,
             'expires_at': self.expires_at,
             'media': [media.to_dict() for media in self.media],
