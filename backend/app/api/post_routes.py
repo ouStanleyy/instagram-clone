@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, session, request, redirect
+from flask import Blueprint, request, redirect
 from flask_login import login_required, current_user
 from app.models import Post, Media, User, Follow, db
 from app.forms import PostForm
@@ -37,7 +37,8 @@ def posts():
     """
     Query for all posts and their media and returns them in a list of post dictionaries
 
-    Filter: Not Current User's Post, Not Stories, Not Private User's Post
+    Validations:
+        - Exclude: Current User's Post, Stories, and Private User Posts
 
     Use: discovery page
     """
@@ -85,10 +86,10 @@ def posts_feed():
 @login_required
 def create_post():
     """
-    Creates a post from form and returns post details
-    Sets a 24 hour expiration if story
+    Creates a post from form and Sets a 24 hour expiration if story
 
-    Use: Make post
+    Validations:
+        - If story, can NOT set: caption, show_like_count, and allow_comments
     """
     # ADD MEDIA TO FORM
     form = PostForm()
@@ -125,9 +126,11 @@ def edit_post(post_id):
     """
     Query for a post (not story) by id, update the post
 
-    FrontEnd: Uses the same form as create a post, but disables image uploads and is_story toggle
+    Validations:
+        - Can NOT edit: media and is_story
+        - If post is story, can NOT edit caption
 
-    Use: Edit post
+    FrontEnd: Uses the same form as create a post
     """
 
     post = Post.query.get_or_404(post_id)
@@ -150,9 +153,9 @@ def delete_post(post_id):
     """
     Query for a post or story and deletes it
 
-    Current user must be the owner of the post
-
-    Use: Deleting a Post
+    Validations:
+        - Current user must be the owner of the post
+        - Post must exist
     """
 
     post = Post.query.get_or_404(post_id)
