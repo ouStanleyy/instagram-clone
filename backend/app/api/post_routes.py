@@ -13,6 +13,8 @@ def authorized_follower(cb):
         - Post belongs to a Public User or
         - Current user is a follower or
         - Post belongs to current user
+
+        OPTIMIZE THIS
     """
     def wrapper(post_id):
         post = Post.query.get_or_404(post_id)
