@@ -16,6 +16,8 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     caption = db.Column(db.Text(2200))
     is_story = db.Column(db.Boolean, nullable=False, default=False)
+    show_like_count = db.Column(db.Boolean, nullable=False, default=True)
+    allow_comments = db.Column(db.Boolean, nullable=False, default=True)
     created_at = db.Column(db.DateTime(timezone=True),
                            server_default=func.now())
     expires_at = db.Column(db.DateTime)
@@ -36,6 +38,8 @@ class Post(db.Model):
             'user_id': self.user_id,
             'caption': self.caption,
             'is_story': self.is_story,
+            'show_like_count': self.show_like_count,
+            'allow_comments': self.allow_comments,
             'created_at': self.created_at,
             'expires_at': self.expires_at
         }
@@ -53,6 +57,8 @@ class Post(db.Model):
             'user_id': self.user_id,
             'caption': self.caption,
             'is_story': self.is_story,
+            'show_like_count': self.show_like_count,
+            'allow_comments': self.allow_comments,
             'created_at': self.created_at,
             'expires_at': self.expires_at,
             'num_of_comments': len(self.comments),
@@ -66,6 +72,8 @@ class Post(db.Model):
             'user_id': self.user_id,
             'caption': self.caption,
             'is_story': self.is_story,
+            'show_like_count': self.show_like_count,
+            'allow_comments': self.allow_comments,
             'created_at': self.created_at,
             'expires_at': self.expires_at,
             'media': [media.to_dict() for media in self.media],
