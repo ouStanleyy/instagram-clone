@@ -1,16 +1,25 @@
 from flask import Blueprint, jsonify, session, request, redirect
 from flask_login import login_required, current_user
 from app.models import Post, Media, User, Follow, db
+from app.forms import PostForm
+from .auth_routes import validation_errors_to_error_messages
 
 post_routes = Blueprint("posts", __name__)
 
 
 def authorized_follower(cb):
+    """
+    Check's if:
+        - Post belongs to a Public User or
+        - Current user is a follower or
+        - Post belongs to current user
+    """
     def wrapper(post_id):
         post = Post.query.get_or_404(post_id)
-        is_owner = post.user_id == current_user.id
+        owner = User.query.get(post.user_id)
+        is_owner = owner.id == current_user.id
 
-        if not is_owner:
+        if not is_owner and owner.is_private:
             follow = Follow.query.filter_by(
                 follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
             if not follow:
@@ -73,9 +82,22 @@ def posts_feed():
 @login_required
 def create_post():
     """
-    Creates a post from form
+    Creates a post from form and returns post details
 
     Use: Make post
     """
 
-
+    form = PostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        post = Post(
+            user_id=current_user.id,
+            caption=form.data['caption'],
+            is_story=form.data['is_story'],
+            show_like_count=form.data['show_like_count'],
+            allow_comments=form.data['allow_comments']
+        )
+        db.session.add(post)
+        db.session.commit()
+        return {"message": "Post created successfully"}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
