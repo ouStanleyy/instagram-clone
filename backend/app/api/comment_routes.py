@@ -1,14 +1,14 @@
 from flask import Blueprint, request, redirect, url_for
 from flask_login import login_required, current_user
-from app.models import Comment, db, Post, User, Follow
-from app.forms import CommentForm
-# from .post_routes import authorized_follower
+from app.models import Comment, db, Post, User, Follow, Reply
+from app.forms import CommentForm, ReplyForm
+from .post_routes import authorized_follower
 from .auth_routes import validation_errors_to_error_messages
 
 
 comment_routes = Blueprint("comments", __name__)
 
-
+# Modify it in post routes
 def authorized_follower2(cb):
     """
     Check's if:
@@ -16,7 +16,11 @@ def authorized_follower2(cb):
         - Current user is a follower or
         - Post belongs to current user
     """
-    def wrapper(post_id):
+    def wrapper(*args, **kwargs):
+        post_id = kwargs.get("post_id")
+        if "comment_id" in kwargs:
+            comment = Comment.query.get(kwargs["comment_id"])
+            post_id = comment.post_id
 
         post = Post.query.get(post_id)
         owner = User.query.get(post.user_id)
@@ -25,7 +29,6 @@ def authorized_follower2(cb):
         if not is_owner and owner.is_private and not post.is_story:
             follow = Follow.query.filter_by(
                 follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
-            print(follow)
             if not follow:
                 return redirect(url_for("auth.unauthorized"))
         return cb(post_id)
@@ -71,7 +74,7 @@ def delete_comment(comment_id):
     return redirect("../auth/unauthorized")
 
 
-
+# Move to post routes
 @comment_routes.route("/<int:post_id>/comments", methods=["GET"])
 @login_required
 @authorized_follower2
@@ -84,7 +87,7 @@ def get_comments(post_id):
     comments = post.comments
     return {"Comments": [comment.to_dict() for comment in comments]}
 
-
+# Move to post routes
 @comment_routes.route("/<int:post_id>/comments", methods=["POST"])
 @login_required
 @authorized_follower2
@@ -109,3 +112,27 @@ def add_comment(post_id):
         return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+# Go back to authorized_follower func in post routes
+@comment_routes.route("/<int:comment_id>/replies", methods=["POST"])
+@login_required
+@authorized_follower2
+def add_reply(comment_id):
+    """
+    Query for a comment by id
+
+    Creates a reply on the comment
+    """
+    form = ReplyForm()
+    comment = Comment.query.get(comment_id)
+
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        reply = Reply(
+            user_id = current_user.id,
+            comment_id = comment.id,
+            reply = form.data["reply"]
+        )
+        db.session.add(reply)
+        db.session.commit()
+        return reply.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
