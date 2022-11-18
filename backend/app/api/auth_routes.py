@@ -41,9 +41,11 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
 
-        user = User.query.filter(or_(User.email == form.data["credential"], User.username == form.data["credential"])).first()
+        user = User.query.filter(or_(
+            User.email == form.data["credential"], User.username == form.data["credential"])).first()
         login_user(user)
-        user_dict = {key:val for key,val in user.to_dict().items() if key in ['id','username','full_name','email']}
+        user_dict = {key: val for key, val in user.to_dict().items() if key in [
+            'id', 'username', 'full_name', 'email']}
         print(user_dict)
         return user_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -75,7 +77,8 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        user_dict = {key:val for key,val in user.to_dict().items() if key in ['id','username','full_name','email']}
+        user_dict = {key: val for key, val in user.to_dict().items() if key in [
+            'id', 'username', 'full_name', 'email']}
         return user_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
