@@ -6,18 +6,21 @@ from wtforms.validators import DataRequired, Length, ValidationError
 def story_post_disable_likes_comments(form, field):
     """
       If post is a story:
-        - Disable captions
         - Disable show like counts
         - Disable allow comments
     """
-    is_story = form["is_story"]
+    is_story = form.data["is_story"]
 
     if is_story and field.data == True:
-        raise ValidationError("Story must disable Likes and Comments")
+        raise ValidationError(f'Story must disable {field.name}')
 
 
 def story_post_disable_captions(form, field):
-    is_story = form["is_story"]
+    """
+      If post is a story:
+        - Disable captions
+    """
+    is_story = form.data["is_story"]
 
     if is_story and len(field.data) > 0:
         raise ValidationError("Story must disable Captions")
@@ -38,9 +41,9 @@ class PostForm(FlaskForm):
     """
     media = FieldList(StringField("media url", validators=[DataRequired()]))
     caption = StringField('Write a caption...', validators=[
-                          Length(max=2200), story_post_disable_captions])
+        Length(max=2200), story_post_disable_captions])
     show_like_count = BooleanField(
         "Show Likes/Views", default=True, validators=[story_post_disable_likes_comments])
     allow_comments = BooleanField("Allow Comments", default=True, validators=[
-                                  story_post_disable_likes_comments])
-    is_story = BooleanField("", default=False)
+        story_post_disable_likes_comments])
+    is_story = BooleanField("Story", default=False)

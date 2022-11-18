@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Post, Media, User, Follow, db
 from app.forms import PostForm
 from .auth_routes import validation_errors_to_error_messages
+from datetime import datetime, timedelta
 
 post_routes = Blueprint("posts", __name__)
 
@@ -56,7 +57,7 @@ def post_detail(post_id):
 
     Use: post detail page
     """
-    post = Post.query.get(post_id)
+    post = Post.query.get_or_404(post_id)
     return post.to_dict_detail()
 
 
@@ -85,21 +86,52 @@ def posts_feed():
 def create_post():
     """
     Creates a post from form and returns post details
+    Sets a 24 hour expiration if story
 
     Use: Make post
     """
-
+    # ADD MEDIA TO FORM
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         post = Post(
             user_id=current_user.id,
             caption=form.data['caption'],
             is_story=form.data['is_story'],
+            expires_at=datetime.now() +
+            timedelta(hours=24) if form.data['is_story'] else None,
             show_like_count=form.data['show_like_count'],
             allow_comments=form.data['allow_comments']
         )
         db.session.add(post)
         db.session.commit()
+        # AFTER COMMIT, YOU CAN ACCESS NEWLY CREATED POST.ID
+        # CREATE MEDIA HERE?
         return {"message": "Post created successfully"}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@post_routes.route("/<int:post_id>", methods=["PUT"])
+@login_required
+def edit_post(post_id):
+    """
+    Query for a post (not story) by id, update the post
+
+    FrontEnd: Uses the same form as create a post, but disables image uploads and is_story toggle
+
+    Use: Edit post
+    """
+
+    post = Post.query.get_or_404(post_id)
+
+    if post.user_id == current_user.id and not post.is_story:
+        form = PostForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            post.caption = form.data['caption']
+            post.show_like_count = form.data['show_like_count']
+            post.allow_comments = form.data['allow_comments']
+            db.session.commit()
+            return {"message": "Succesfully updated"}
+    return redirect("../auth/unauthorized")
