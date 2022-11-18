@@ -38,10 +38,10 @@ class User(db.Model, UserMixin):
     replies = db.relationship("Reply", back_populates="user", cascade="all, delete-orphan")
     likes = db.relationship("Like", back_populates="user", cascade="all, delete-orphan")
     views = db.relationship("View", back_populates="user", cascade="all, delete-orphan")
-    followers = db.relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower", cascade="all, delete-orphan")
-    followings = db.relationship("Follow", foreign_keys="Follow.following_id", back_populates="following", cascade="all, delete-orphan")
-    senders = db.relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan")
-    recipients = db.relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient", cascade="all, delete-orphan")
+    followers = db.relationship("Follow", foreign_keys="Follow.following_id", back_populates="following", cascade="all, delete-orphan")
+    followings = db.relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower", cascade="all, delete-orphan")
+    senders = db.relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient", cascade="all, delete-orphan")
+    recipients = db.relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -68,4 +68,24 @@ class User(db.Model, UserMixin):
             'is_private': self.is_private
         }
 
+    def to_dict_all(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'full_name': self.full_name,
+            'profile_picture': self.profile_picture,
+            'is_verified': self.is_verified
+        }
 
+    def to_dict_user_id(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'full_name': self.full_name,
+            'bio': self.bio,
+            'num_of_followers': len(self.followers),
+            'num_of_followings': len(self.followings),
+            'profile_picture': self.profile_picture,
+            'is_verified': self.is_verified,
+            'posts': [post.to_dict() for post in self.posts]
+        }
