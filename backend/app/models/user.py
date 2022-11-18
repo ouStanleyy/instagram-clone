@@ -87,5 +87,6 @@ class User(db.Model, UserMixin):
             'num_of_followings': len(self.followings),
             'profile_picture': self.profile_picture,
             'is_verified': self.is_verified,
-            'posts': [post.to_dict() for post in self.posts]
+            'is_private': self.is_private,
+            'posts': [post.to_dict_user_details() for post in self.posts]
         }

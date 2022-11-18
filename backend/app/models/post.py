@@ -48,7 +48,8 @@ class Post(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'media': [media.to_dict() for media in self.media]
+            'preview_media': self.media[0].url,
+            'num_of_media': len(self.media)
         }
 
     def to_dict_feed(self):
@@ -79,4 +80,13 @@ class Post(db.Model):
             'media': [media.to_dict() for media in self.media],
             'likes': [like.to_dict() for like in self.likes],
             'comments': [comment.to_dict() for comment in self.comments]
+        }
+
+    def to_dict_user_details(self):
+        return {
+            'id': self.id,
+            'num_of_likes': len(self.likes),
+            'num_of_comments': len(self.comments),
+            'preview_media': self.media[0].url,
+            'num_of_media': len(self.media)
         }

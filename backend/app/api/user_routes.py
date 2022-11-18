@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import User, Follow
 
 user_routes = Blueprint('users', __name__)
 
@@ -21,5 +21,11 @@ def user(user_id):
     """
     Query for a user by id and returns that user in a dictionary
     """
-    user = User.query.get_or_404(user_id)
-    return user.to_dict_user_id()
+    user = User.query.get_or_404(user_id).to_dict_user_id()
+
+    if (not user_id == current_user.id
+        and user['is_private']
+        and not Follow.query.filter_by(follower_id=current_user.id, following_id=user_id, is_pending=False).first()):
+        user.pop('posts')
+
+    return user
