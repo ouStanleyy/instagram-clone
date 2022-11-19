@@ -29,8 +29,24 @@ function User() {
         <strong>Username</strong> {user.username}
       </li>
       <li>
+        <strong>Full Name</strong> {user.full_name}
+      </li>
+      <li>
         <strong>Email</strong> {user.email}
       </li>
+      <li>
+        <strong>Bio</strong> {user.bio}
+      </li>
+      <li>
+        <strong>Phone Number</strong> {user.phone_number}
+      </li>
+      <li>
+        <strong>Gender</strong> {user.gender}
+      </li>
+
+        <img src={user.profile_picture} />
+      
+
     </ul>
   );
 }

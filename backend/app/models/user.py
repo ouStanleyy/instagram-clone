@@ -22,7 +22,9 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
+    username = db.Column(db.String(30), nullable=False, unique=True)
+    full_name = db.Column(db.String)
+    bio = db.Column(db.String(150))
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_picture = db.Column(db.String)
@@ -31,15 +33,15 @@ class User(db.Model, UserMixin):
     is_verified = db.Column(db.Boolean, nullable=False, default=False)
     is_private = db.Column(db.Boolean, nullable=False, default=False)
 
-    posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
-    comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
-    replies = db.relationship("Reply", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
-    likes = db.relationship("Like", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
-    views = db.relationship("View", back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
-    followers = db.relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower", cascade="all, delete-orphan", passive_deletes=True)
-    followings = db.relationship("Follow", foreign_keys="Follow.following_id", back_populates="following", cascade="all, delete-orphan", passive_deletes=True)
-    senders = db.relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan", passive_deletes=True)
-    recipients = db.relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient", cascade="all, delete-orphan", passive_deletes=True)
+    posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan")
+    replies = db.relationship("Reply", back_populates="user", cascade="all, delete-orphan")
+    likes = db.relationship("Like", back_populates="user", cascade="all, delete-orphan")
+    views = db.relationship("View", back_populates="user", cascade="all, delete-orphan")
+    followers = db.relationship("Follow", foreign_keys="Follow.following_id", back_populates="following", cascade="all, delete-orphan")
+    followings = db.relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower", cascade="all, delete-orphan")
+    senders = db.relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient", cascade="all, delete-orphan")
+    recipients = db.relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -57,9 +59,34 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
+            'full_name': self.full_name,
+            'bio': self.bio,
             'phone_number': self.phone_number,
             'profile_picture': self.profile_picture,
             'gender': self.gender,
             'is_verified': self.is_verified,
             'is_private': self.is_private
+        }
+
+    def to_dict_all(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'full_name': self.full_name,
+            'profile_picture': self.profile_picture,
+            'is_verified': self.is_verified
+        }
+
+    def to_dict_user_id(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'full_name': self.full_name,
+            'bio': self.bio,
+            'num_of_followers': len(self.followers),
+            'num_of_followings': len(self.followings),
+            'profile_picture': self.profile_picture,
+            'is_verified': self.is_verified,
+            'is_private': self.is_private,
+            'posts': [post.to_dict_user_details() for post in self.posts]
         }

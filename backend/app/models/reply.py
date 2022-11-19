@@ -12,8 +12,8 @@ class Reply(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
-    comment_id = db.Column(db.Integer, db.ForeignKey('comments.id', ondelete="CASCADE"))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    comment_id = db.Column(db.Integer, db.ForeignKey('comments.id'))
     reply = db.Column(db.Text(2200))
 
     user = db.relationship("User", back_populates='replies')
