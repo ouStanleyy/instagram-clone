@@ -1,6 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import User, Follow
+from app.models import User, Follow, db
+from app.forms import UpdateProfileForm
+from .auth_routes import validation_errors_to_error_messages
 
 user_routes = Blueprint('users', __name__)
 
@@ -29,3 +31,21 @@ def user(user_id):
         user.pop('posts')
 
     return user
+
+@user_routes.route('/profile', methods=["PUT"])
+@login_required
+def update_user_profile():
+    """
+    Update current user's profile with provided data
+    """
+    form = UpdateProfileForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        for key, val in form.data.items():
+            if val:
+                setattr(current_user, key, val)
+        db.session.commit()
+        return current_user.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
