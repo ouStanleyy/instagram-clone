@@ -1,7 +1,7 @@
-from flask import Blueprint, request, redirect
+from flask import Blueprint, request, redirect, url_for
 from flask_login import login_required, current_user
-from app.models import Post, Media, User, Follow, db
-from app.forms import PostForm
+from app.models import Post, Media, User, Follow,Comment, db
+from app.forms import PostForm, CommentForm
 from .auth_routes import validation_errors_to_error_messages
 from datetime import datetime, timedelta
 
@@ -17,17 +17,25 @@ def authorized_follower(cb):
 
         OPTIMIZE THIS
     """
-    def wrapper(post_id):
+    def wrapper(*args, **kwargs):
+
+        post_id = kwargs.get("post_id")
+        if "comment_id" in kwargs:
+            comment = Comment.query.get_or_404(kwargs["comment_id"])
+            post_id = comment.post_id
+
         post = Post.query.get_or_404(post_id)
-        owner = User.query.get(post.user_id)
+        owner = User.query.get_or_404(post.user_id)
         is_owner = owner.id == current_user.id
 
-        if not is_owner and owner.is_private:
+        if not is_owner and owner.is_private and not post.is_story:
             follow = Follow.query.filter_by(
                 follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
             if not follow:
-                return redirect("../auth/unauthorized")
-        return cb(post_id)
+                return redirect(url_for("auth.unauthorized"))
+
+        return cb(kwargs.get("post_id") or kwargs.get("comment_id"))
+    wrapper.__name__ = cb.__name__
     return wrapper
 
 
@@ -165,3 +173,40 @@ def delete_post(post_id):
         db.session.commit()
         return {"message": "Successfully deleted"}
     return redirect("../auth/unauthorized")
+
+
+@post_routes.route("/<int:post_id>/comments", methods=["GET"])
+@login_required
+@authorized_follower
+def get_comments(post_id):
+    """
+    Query for all comments of a post
+    """
+    post = Post.query.get_or_404(post_id)
+    comments = post.comments
+    return {"Comments": [comment.to_dict() for comment in comments]}
+
+
+@post_routes.route("/<int:post_id>/comments", methods=["POST"])
+@login_required
+@authorized_follower
+def add_comment(post_id):
+    """
+    Query for a post by id
+
+    Creates a comment on the post
+    """
+    form = CommentForm()
+    post = Post.query.get_or_404(post_id)
+
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        comment = Comment(
+            user_id = current_user.id,
+            post_id = post.id,
+            comment = form.data["comment"]
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
