@@ -1,35 +1,42 @@
 from app.models import db, Message, environment, SCHEMA
+from datetime import datetime, timedelta
 
 messages = [
     {
         "sender_id": 1,
         "recipient_id": 2,
-        "message": "Demo_User says hi to Marnie_Demo"
+        "message": "Demo_User says hi to Marnie_Demo",
+        "time_sent": datetime.now() - timedelta(hours=12)
     },
     {
         "sender_id": 2,
         "recipient_id": 1,
-        "message": "Marnie_Demo says hi back to Demo_User"
+        "message": "Marnie_Demo says hi back to Demo_User",
+        "time_sent": datetime.now() - timedelta(hours=11)
     },
     {
         "sender_id": 1,
         "recipient_id": 2,
-        "message": "Demo_User says how are you Marnie_Demo"
+        "message": "Demo_User says how are you Marnie_Demo",
+        "time_sent": datetime.now() - timedelta(hours=10)
     },
     {
         "sender_id": 2,
         "recipient_id": 1,
-        "message": "Marnie_Demo leaves Demo_User on read"
+        "message": "Marnie_Demo leaves Demo_User on read",
+        "time_sent": datetime.now() - timedelta(hours=9)
     },
     {
         "sender_id": 4,
         "recipient_id": 5,
-        "message": "Stan_Demo asks do you like dogs to Rey_Demo"
+        "message": "Stan_Demo asks do you like dogs to Rey_Demo",
+        "time_sent": datetime.now() - timedelta(hours=13)
     },
     {
         "sender_id": 5,
         "recipient_id": 4,
-        "message": "Rey_Demo says yes to Stan_Demo"
+        "message": "Rey_Demo says yes to Stan_Demo",
+        "time_sent": datetime.now() - timedelta(hours=7)
     }
 ]
 
