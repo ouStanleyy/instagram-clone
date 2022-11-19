@@ -52,3 +52,22 @@ def like(post_id):
         db.session.commit()
         return {"message": "Successfully liked"}
     return redirect("../auth/unauthorized")
+
+
+@like_routes.route("/", methods=["DELETE"])
+@login_required
+def unlike(post_id):
+    """
+      Query for the like and delete it
+
+      Validations:
+        - Like and Post must exist
+        - Can only remove if like belongs to Current User
+    """
+
+    like = Like.query.filter_by(
+        user_id=current_user.id, post_id=post_id).first_or_404()
+
+    db.session.delete(like)
+    db.session.commit()
+    return {"message": "Successfully unliked"}
