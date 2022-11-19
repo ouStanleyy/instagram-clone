@@ -1,5 +1,5 @@
 from flask import Blueprint, request, redirect
-from app.models import Like, Post
+from app.models import db, Like, Post, Follow, User
 from flask_login import current_user, login_user, login_required
 
 like_routes = Blueprint("likes", __name__, url_prefix="/likes")
@@ -7,7 +7,7 @@ like_routes = Blueprint("likes", __name__, url_prefix="/likes")
 
 @like_routes.route("/")
 @login_required
-def test(post_id):
+def get_likes(post_id):
     """
       Query for all likes of a post
 
@@ -32,6 +32,23 @@ def like(post_id):
       Validations:
         - Current User can like their own post
         - Post must belong to a public user or Current User is a follower
+        - Post can NOT be a story
+        - Like can NOT already exist
     """
 
     post = Post.query.get_or_404(post_id)
+    owner = User.query.get(post.user_id)
+    like_exists = Like.query.filter_by(
+        post_id=post_id, user_id=current_user.id).first()
+    is_follower = Follow.query.filter_by(
+        follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
+
+    if (not owner.is_private or is_follower or owner.id == current_user.id) and not like_exists and not post.is_story:
+        like = Like(
+            post_id=post.id,
+            user_id=current_user.id
+        )
+        db.session.add(like)
+        db.session.commit()
+        return {"message": "Successfully liked"}
+    return redirect("../auth/unauthorized")
