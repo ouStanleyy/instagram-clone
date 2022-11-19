@@ -32,6 +32,7 @@ def user(user_id):
 
     return user
 
+
 @user_routes.route('/profile', methods=["PUT"])
 @login_required
 def update_user_profile():
@@ -49,3 +50,14 @@ def update_user_profile():
         return current_user.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@user_routes.route('/profile', methods=["DELETE"])
+@login_required
+def delete_user_profile():
+    """
+    Delete current user's profile permanently
+    """
+    db.session.delete(current_user)
+    db.session.commit()
+    return {"message": "Successfully deleted"}
