@@ -10,11 +10,8 @@ from .api.auth_routes import auth_routes
 from .api.post_routes import post_routes
 from .api.like_routes import like_routes
 from .api.comment_routes import comment_routes
-<<<<<<< HEAD
 from .api.follow_routes import follow_routes
-=======
 from .api.reply_routes import reply_routes
->>>>>>> 7331e7a8c13fe0780a59cdcbade230dce22ccee9
 from .seeds import seed_commands
 from .config import Config
 
