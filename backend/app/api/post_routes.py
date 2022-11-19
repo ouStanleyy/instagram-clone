@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for
 from flask_login import login_required, current_user
-from app.models import Post, Media, User, Follow,Comment, db
+from app.models import Post, Media, User, Follow, Comment, db
 from app.forms import PostForm, CommentForm
 from .auth_routes import validation_errors_to_error_messages
 from datetime import datetime, timedelta
@@ -99,7 +99,6 @@ def create_post():
     Validations:
         - If story, can NOT set: caption, show_like_count, and allow_comments
     """
-    # ADD MEDIA TO FORM
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -113,17 +112,13 @@ def create_post():
             show_like_count=form.data['show_like_count'],
             allow_comments=form.data['allow_comments']
         )
+
+        medias = [Media(url=obj["url"]) for obj in form.media.data]
+        for media in medias:
+            post.media.append(media)
+
         db.session.add(post)
         db.session.commit()
-        # AFTER COMMIT, YOU CAN ACCESS NEWLY CREATED POST.ID
-        # CREATE MEDIA HERE?
-        # print("HEREHEEHEEHE", form.data['media'])
-        # media = Media(
-        #     post_id=post.id,
-        #     url=form.data['media']
-        # )
-        # db.session.add(media)
-        # db.session.commit()
         return {"message": "Post created successfully"}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -202,9 +197,9 @@ def add_comment(post_id):
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         comment = Comment(
-            user_id = current_user.id,
-            post_id = post.id,
-            comment = form.data["comment"]
+            user_id=current_user.id,
+            post_id=post.id,
+            comment=form.data["comment"]
         )
         db.session.add(comment)
         db.session.commit()
