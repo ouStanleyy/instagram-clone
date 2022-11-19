@@ -1,8 +1,9 @@
-from flask import Blueprint, jsonify, session, request, redirect
+from flask import Blueprint, request, redirect
 from flask_login import login_required, current_user
 from app.models import Post, Media, User, Follow, db
 from app.forms import PostForm
 from .auth_routes import validation_errors_to_error_messages
+from datetime import datetime, timedelta
 
 post_routes = Blueprint("posts", __name__)
 
@@ -13,6 +14,8 @@ def authorized_follower(cb):
         - Post belongs to a Public User or
         - Current user is a follower or
         - Post belongs to current user
+
+        OPTIMIZE THIS
     """
     def wrapper(post_id):
         post = Post.query.get_or_404(post_id)
@@ -34,7 +37,8 @@ def posts():
     """
     Query for all posts and their media and returns them in a list of post dictionaries
 
-    Filter: Not Current User's Post, Not Stories, Not Private User's Post
+    Validations:
+        - Exclude: Current User's Post, Stories, and Private User Posts
 
     Use: discovery page
     """
@@ -54,7 +58,7 @@ def post_detail(post_id):
 
     Use: post detail page
     """
-    post = Post.query.get(post_id)
+    post = Post.query.get_or_404(post_id)
     return post.to_dict_detail()
 
 
@@ -82,22 +86,82 @@ def posts_feed():
 @login_required
 def create_post():
     """
-    Creates a post from form and returns post details
+    Creates a post from form and Sets a 24 hour expiration if story
 
-    Use: Make post
+    Validations:
+        - If story, can NOT set: caption, show_like_count, and allow_comments
     """
-
+    # ADD MEDIA TO FORM
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         post = Post(
             user_id=current_user.id,
             caption=form.data['caption'],
             is_story=form.data['is_story'],
+            expires_at=datetime.now() +
+            timedelta(hours=24) if form.data['is_story'] else None,
             show_like_count=form.data['show_like_count'],
             allow_comments=form.data['allow_comments']
         )
         db.session.add(post)
         db.session.commit()
+        # AFTER COMMIT, YOU CAN ACCESS NEWLY CREATED POST.ID
+        # CREATE MEDIA HERE?
+        # print("HEREHEEHEEHE", form.data['media'])
+        # media = Media(
+        #     post_id=post.id,
+        #     url=form.data['media']
+        # )
+        # db.session.add(media)
+        # db.session.commit()
         return {"message": "Post created successfully"}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@post_routes.route("/<int:post_id>", methods=["PUT"])
+@login_required
+def edit_post(post_id):
+    """
+    Query for a post (not story) by id, update the post
+
+    Validations:
+        - Can NOT edit: media and is_story
+        - If post is story, can NOT edit caption
+
+    FrontEnd: Uses the same form as create a post
+    """
+
+    post = Post.query.get_or_404(post_id)
+
+    if post.user_id == current_user.id and not post.is_story:
+        form = PostForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            post.caption = form.data['caption']
+            post.show_like_count = form.data['show_like_count']
+            post.allow_comments = form.data['allow_comments']
+            db.session.commit()
+            return {"message": "Succesfully updated"}
+    return redirect("../auth/unauthorized")
+
+
+@post_routes.route("/<int:post_id>", methods=["DELETE"])
+@login_required
+def delete_post(post_id):
+    """
+    Query for a post or story and deletes it
+
+    Validations:
+        - Current user must be the owner of the post
+        - Post must exist
+    """
+
+    post = Post.query.get_or_404(post_id)
+
+    if post.user_id == current_user.id:
+        db.session.delete(post)
+        db.session.commit()
+        return {"message": "Successfully deleted"}
+    return redirect("../auth/unauthorized")
