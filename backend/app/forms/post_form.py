@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FieldList, BooleanField
+from wtforms import StringField, FieldList, BooleanField, Form, FormField
 from wtforms.validators import DataRequired, Length, ValidationError
 
 
@@ -26,6 +26,10 @@ def story_post_disable_captions(form, field):
         raise ValidationError("Story must disable Captions")
 
 
+class MediaForm(Form):
+    url = StringField("media url")
+
+
 class PostForm(FlaskForm):
     """
     User Side:
@@ -39,7 +43,8 @@ class PostForm(FlaskForm):
           1. Create media in db
           2. Append to post
     """
-    media = FieldList(StringField("media url", validators=[DataRequired()]))
+    media = FieldList(FormField(MediaForm), min_entries=1,
+                      max_entries=10, validators=[DataRequired()])
     caption = StringField('Write a caption...', validators=[
         Length(max=2200), story_post_disable_captions])
     show_like_count = BooleanField(
