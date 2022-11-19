@@ -17,13 +17,17 @@ def authorized_follower2(cb):
         - Post belongs to current user
     """
     def wrapper(*args, **kwargs):
+
         post_id = kwargs.get("post_id")
         if "comment_id" in kwargs:
-            comment = Comment.query.get(kwargs["comment_id"])
+            comment = Comment.query.get_or_404(kwargs["comment_id"])
+            print(comment.to_dict())
             post_id = comment.post_id
+            print(post_id)
 
-        post = Post.query.get(post_id)
-        owner = User.query.get(post.user_id)
+        post = Post.query.get_or_404(post_id)
+        print(post.to_dict())
+        owner = User.query.get_or_404(post.user_id)
         is_owner = owner.id == current_user.id
 
         if not is_owner and owner.is_private and not post.is_story:
@@ -31,7 +35,8 @@ def authorized_follower2(cb):
                 follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
             if not follow:
                 return redirect(url_for("auth.unauthorized"))
-        return cb(post_id)
+
+        return cb(kwargs.get("post_id") or kwargs.get("comment_id"))
     wrapper.__name__ = cb.__name__
     return wrapper
 
@@ -82,10 +87,10 @@ def get_comments(post_id):
     """
     Query for all comments of a post
     """
-    print("Here**********************")
     post = Post.query.get_or_404(post_id)
     comments = post.comments
     return {"Comments": [comment.to_dict() for comment in comments]}
+
 
 # Move to post routes
 @comment_routes.route("/<int:post_id>/comments", methods=["POST"])
@@ -112,6 +117,7 @@ def add_comment(post_id):
         return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+
 # Go back to authorized_follower func in post routes
 @comment_routes.route("/<int:comment_id>/replies", methods=["POST"])
 @login_required
@@ -136,3 +142,15 @@ def add_reply(comment_id):
         db.session.commit()
         return reply.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@comment_routes.route("/<int:comment_id>/replies", methods=["GET"])
+@login_required
+@authorized_follower2
+def get_replies(comment_id):
+    """
+    Query for all replies of a comment
+    """
+    comment = Comment.query.get_or_404(comment_id)
+    replies = comment.replies
+    return {"Replies": [reply.to_dict() for reply in replies]}
