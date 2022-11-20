@@ -34,7 +34,7 @@ def user(user_id):
     return user
 
 
-@user_routes.route('/profile', methods=["PUT"])
+@user_routes.route('/profile', methods=['PUT'])
 @login_required
 def update_user_profile():
     """
@@ -53,7 +53,7 @@ def update_user_profile():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@user_routes.route('/profile', methods=["DELETE"])
+@user_routes.route('/profile', methods=['DELETE'])
 @login_required
 def delete_user_profile():
     """
@@ -61,7 +61,7 @@ def delete_user_profile():
     """
     db.session.delete(current_user)
     db.session.commit()
-    return {"message": "Successfully deleted"}
+    return {'message': 'Successfully deleted'}
 
 
 @user_routes.route('/<int:user_id>/follows')
@@ -79,4 +79,27 @@ def follows_of_user(user_id):
     if (not user.is_private or current_user.id in (follow.follower_id for follow in follows)):
         return {'Follows': [follow.to_dict() for follow in follows if not follow.is_pending]}
 
-    return redirect(url_for("auth.unauthorized"))
+    return redirect(url_for('auth.unauthorized'))
+
+
+@user_routes.route('/<int:user_id>/follows', methods=['POST'])
+@login_required
+def follow_user(user_id):
+    """
+    Creates a new follow between current user and user specifed by id
+    """
+    if current_user.id == user_id:
+        return {'message': 'User cannot follow self'}, 400
+
+    user = User.query.get_or_404(user_id)
+
+    for follower in user.followers:
+        if current_user.id == follower.follower_id:
+            return {'message': f'{"Request is already pending" if follower.is_pending else "User is already a follower" }'}, 400
+
+    follow = Follow(follower_id=current_user.id, following_id=user.id, is_pending=user.is_private)
+
+    db.session.add(follow)
+    db.session.commit()
+
+    return follow.to_dict()
