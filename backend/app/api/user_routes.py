@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import login_required, current_user
 from app.models import User, Follow, db
 from app.forms import UpdateProfileForm
+from sqlalchemy import or_
 from .auth_routes import validation_errors_to_error_messages
 
 user_routes = Blueprint('users', __name__)
@@ -61,3 +62,21 @@ def delete_user_profile():
     db.session.delete(current_user)
     db.session.commit()
     return {"message": "Successfully deleted"}
+
+
+@user_routes.route('/<int:user_id>/follows')
+@login_required
+def follows_of_user(user_id):
+    """
+    Query for all follows of the specified user by id and returns them in a list of follow dictionaries
+    """
+    user = User.query.get_or_404(user_id)
+    follows = Follow.query.filter(or_(Follow.follower_id==user_id, Follow.following_id==user_id)).all()
+
+    if user_id == current_user.id:
+        return {'Follows': [follow.to_dict() for follow in follows]}
+
+    if (not user.is_private or current_user.id in (follow.follower_id for follow in follows)):
+        return {'Follows': [follow.to_dict() for follow in follows if not follow.is_pending]}
+
+    return redirect(url_for("auth.unauthorized"))
