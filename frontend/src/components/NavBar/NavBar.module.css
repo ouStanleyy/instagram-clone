@@ -1,0 +1,20 @@
+.navBar {
+  /* border: 1px solid blue; */
+  border-right: 1px solid #DBDBDB;
+  display: flex;
+  /* position: fixed; */
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+  padding: 8px 12px 20px;
+  max-width: 244px;
+}
+
+.navLink {
+  text-decoration: none;
+}
+
+.active {
+  font-weight: bold;
+}
