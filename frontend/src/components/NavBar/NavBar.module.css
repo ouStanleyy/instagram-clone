@@ -18,3 +18,24 @@
 .active {
   font-weight: bold;
 }
+
+/* Position relative for z-index of children to be in front */
+.moreLink {
+  z-index: 1;
+  position: relative;
+}
+
+.hideDropDown {
+  visibility: hidden;
+  pointer-events: none;
+  /* display: none; */
+}
+
+.moreDropDown {
+  visibility: visible;
+  border-radius: 6px;
+  width: 238px;
+  z-index: 2;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .0975) ;
+}

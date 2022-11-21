@@ -5,7 +5,7 @@ import styles from "./NavItem.module.css";
 const NavItem = ({ type }) => {
   const user = useSelector((state) => state.session.user);
   const isLogo = type === "Logo" || type === "Instagram";
-  const classLogo = isLogo ? styles.logo : styles.navItem;
+  const style = isLogo ? styles.logo : styles.navItem;
 
   const profilePicture = (
     <>
@@ -24,8 +24,7 @@ const NavItem = ({ type }) => {
   );
 
   return (
-    // <div className={styles.navItem + " " + classLogo}>
-    <div className={classLogo}>
+    <div className={style}>
       {type === "Profile" ? profilePicture : iconButton}
     </div>
   );

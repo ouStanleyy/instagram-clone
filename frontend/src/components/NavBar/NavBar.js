@@ -1,10 +1,15 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import LogoutButton from "../auth/LogoutButton";
 import NavItem from "./NavItem";
 import styles from "./NavBar.module.css";
+import MoreItem from "./MoreItem";
+import { logout } from "../../store/session";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const [showMore, setShowMore] = useState(false);
   const user = useSelector((state) => state.session.user);
   const links = [
     // { icon: "Logo", path: "/" },
@@ -34,6 +39,9 @@ const NavBar = () => {
     </>
   );
 
+  const handleShowMore = (e) => setShowMore((prev) => !prev);
+  const handleLogout = async (e) => await dispatch(logout());
+
   return (
     <ul className={styles.navBar}>
       <div>
@@ -51,8 +59,28 @@ const NavBar = () => {
           ))}
       </div>
       {user && (
-        <div className={styles.moreLink}>
-          <LogoutButton />
+        <div className={styles.moreLink} onClick={handleShowMore}>
+          <div
+            className={showMore ? styles.moreDropDown : styles.hideDropDown}
+            id="menu-dropdown"
+          >
+            <NavLink to="/settings" exact={true} className={styles.navLink}>
+              <MoreItem type="Settings" />
+            </NavLink>
+            <NavLink to="/saved" exact={true} className={styles.navLink}>
+              <MoreItem type="Saved" />
+            </NavLink>
+            <NavLink to="/report" exact={true} className={styles.navLink}>
+              <MoreItem type="Report a problem" />
+            </NavLink>
+            <NavLink to="#" exact={true} className={styles.navLink}>
+              <MoreItem type="Switch accounts" />
+            </NavLink>
+            <NavLink to="#" exact={true} className={styles.navLink}>
+              <MoreItem type="Log Out" onClick={handleLogout} />
+            </NavLink>
+            {/* <LogoutButton style={styles.navLink} /> */}
+          </div>
           <NavItem type="More" />
         </div>
       )}
