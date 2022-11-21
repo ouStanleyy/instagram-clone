@@ -40,8 +40,7 @@ class Post(db.Model):
             'is_story': self.is_story,
             'show_like_count': self.show_like_count,
             'allow_comments': self.allow_comments,
-            'created_at': self.created_at,
-            'expires_at': self.expires_at
+            'created_at': self.created_at
         }
 
     def to_dict_discovery(self):
@@ -61,7 +60,6 @@ class Post(db.Model):
             'show_like_count': self.show_like_count,
             'allow_comments': self.allow_comments,
             'created_at': self.created_at,
-            'expires_at': self.expires_at,
             'num_of_comments': len(self.comments),
             'media': [media.to_dict() for media in self.media],
             'likes': [like.to_dict() for like in self.likes]
@@ -76,7 +74,6 @@ class Post(db.Model):
             'show_like_count': self.show_like_count,
             'allow_comments': self.allow_comments,
             'created_at': self.created_at,
-            'expires_at': self.expires_at,
             'media': [media.to_dict() for media in self.media],
             'likes': [like.to_dict() for like in self.likes],
             'comments': [comment.to_dict() for comment in self.comments]

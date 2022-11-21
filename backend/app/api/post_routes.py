@@ -46,15 +46,19 @@ def posts():
     Query for all posts and their media and returns them in a list of post dictionaries
 
     Validations:
-        - Exclude: Current User's Post, Stories, and Private User Posts
+        - Exclude: Current User's Post, Stories, Current Followings, and Private User Posts
 
     Use: discovery page
     """
 
-    posts = Post.query.filter(Post.user.has(
-        User.is_private == False), Post.user_id != current_user.id, Post.is_story == False).order_by(Post.id.desc()).all()
+    posts = Post.query.filter(Post.user.has(User.is_private == False),
+                              Post.user_id != current_user.id,
+                              Post.is_story == False).order_by(Post.id.desc()).all()
 
-    return {"Posts": [post.to_dict_discovery() for post in posts]}
+    return {"Posts": [post.to_dict_discovery()
+                      for post in posts
+                      if post.user_id not in
+                      [following.following_id for following in current_user.followings if not following.is_pending]]}
 
 
 @post_routes.route("/<int:post_id>")
@@ -63,6 +67,9 @@ def posts():
 def post_detail(post_id):
     """
     Query for a post and return that post in a dictionary
+
+    Validations:
+        - Post must belong to Public User or a Following
 
     Use: post detail page
     """
@@ -119,7 +126,7 @@ def create_post():
 
         db.session.add(post)
         db.session.commit()
-        return {"message": "Post created successfully"}
+        return {**post.to_dict(), "media": [media.to_dict() for media in post.media]}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -147,7 +154,7 @@ def edit_post(post_id):
             post.allow_comments = form.data['allow_comments']
             db.session.commit()
             return {"message": "Succesfully updated"}
-    return redirect("../auth/unauthorized")
+    return redirect(url_for("auth.unauthorized"))
 
 
 @post_routes.route("/<int:post_id>", methods=["DELETE"])
@@ -176,10 +183,12 @@ def delete_post(post_id):
 def get_comments(post_id):
     """
     Query for all comments of a post
+
+    Validations:
+        - Post must belong to Public User or Following
     """
     post = Post.query.get_or_404(post_id)
-    comments = post.comments
-    return {"Comments": [comment.to_dict() for comment in comments]}
+    return {"Comments": [comment.to_dict() for comment in post.comments]}
 
 
 @post_routes.route("/<int:post_id>/comments", methods=["POST"])
@@ -190,18 +199,24 @@ def add_comment(post_id):
     Query for a post by id
 
     Creates a comment on the post
+
+    Validations:
+        - Post must belong to Public User or Following
+        - Post must have allow_comments = True
+        - Post must is_story = False
     """
     form = CommentForm()
     post = Post.query.get_or_404(post_id)
-
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        comment = Comment(
-            user_id=current_user.id,
-            post_id=post.id,
-            comment=form.data["comment"]
-        )
-        db.session.add(comment)
-        db.session.commit()
-        return comment.to_dict()
+        if post.allow_comments and not post.is_story:
+            comment = Comment(
+                user_id=current_user.id,
+                post_id=post.id,
+                comment=form.data["comment"]
+            )
+            db.session.add(comment)
+            db.session.commit()
+            return comment.to_dict()
+        return redirect(url_for("auth.unauthorized"))
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
