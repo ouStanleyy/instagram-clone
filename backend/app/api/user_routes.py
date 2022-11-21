@@ -95,7 +95,7 @@ def follow_user(user_id):
 
     for follower in user.followers:
         if current_user.id == follower.follower_id:
-            return {'message': f'{"Request is already pending" if follower.is_pending else "User is already a follower" }'}, 400
+            return {'message': f'{"Request is already pending" if follower.is_pending else "You are already a follower" }'}, 400
 
     follow = Follow(follower_id=current_user.id, following_id=user.id, is_pending=user.is_private)
 
