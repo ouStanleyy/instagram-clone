@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect
+from flask import Blueprint, redirect, url_for
 from flask_login import login_required, current_user
 from app.models import Follow, db
 
@@ -13,9 +13,10 @@ def accept_follow(follow_id):
 
     Request must be for current user
     """
-    follow = Follow.query.filter_by(follower_id=follow_id,
-                                    following_id=current_user.id,
-                                    is_pending=True).first_or_404()
+    follow = Follow.query.get_or_404(follow_id)
+    if follow.following_id != current_user.id:
+        return redirect(url_for("auth.unauthorized"))
+        
     follow.is_pending = False
     db.session.commit()
     return follow.to_dict()
@@ -34,5 +35,5 @@ def delete_follow(follow_id):
         db.session.delete(follow)
         db.session.commit()
         return "Successfully deleted"
-    return redirect("../auth/unauthorized")
+    return redirect(url_for("auth.unauthorized"))
 
