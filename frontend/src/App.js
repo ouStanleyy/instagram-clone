@@ -27,9 +27,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <ProtectedRoute path="/" exact={true}> */}
       <NavBar />
-      {/* </ProtectedRoute> */}
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -53,6 +51,31 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
+
+  // return (
+  //   <BrowserRouter>
+  //     <NavBar />
+  //     <Switch>
+  //       <Route path="/login" exact={true}>
+  //         <LoginForm />
+  //       </Route>
+  //       <Route path="/sign-up" exact={true}>
+  //         <SignUpForm />
+  //       </Route>
+  //       <ProtectedRoute>
+  //         <UsersList path="/users" exact={true} />
+  //         <User path="/users/:userId" exact={true} />
+  //       </ProtectedRoute>
+  //       <Route path="/" exact={true}>
+  //         {/* <h1>My Home Page</h1> */}
+  //       </Route>
+  //       {/* <Route path="/posts">
+  //         <h1>Post</h1>
+  //         <Posts />
+  //       </Route> */}
+  //     </Switch>
+  //   </BrowserRouter>
+  // );
 }
 
 export default App;
