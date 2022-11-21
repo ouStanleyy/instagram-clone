@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import LogoutButton from "../auth/LogoutButton";
 import NavItem from "./NavItem";
 import styles from "./NavBar.module.css";
 import MoreItem from "./MoreItem";

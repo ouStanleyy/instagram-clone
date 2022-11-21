@@ -10,7 +10,7 @@ const NavItem = ({ type }) => {
   const profilePicture = (
     <>
       <div className={styles.profilePicture}>
-        <img src={user?.profile_picture} />
+        <img src={user?.profile_picture} alt={`${user?.full_name} profile`} />
       </div>
       <span>Profile</span>
     </>

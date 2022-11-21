@@ -45,7 +45,7 @@ def login():
             User.email == form.data["credential"], User.username == form.data["credential"])).first()
         login_user(user)
         user_dict = {key: val for key, val in user.to_dict().items() if key in [
-            'id', 'username', 'full_name', 'email']}
+            'id', 'username', 'full_name', 'email', 'profile_picture']}
         print(user_dict)
         return user_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
