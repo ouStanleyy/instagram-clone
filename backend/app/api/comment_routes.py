@@ -52,7 +52,7 @@ def delete_comment(comment_id):
         db.session.delete(comment)
         db.session.commit()
         return "Successfully deleted"
-    return redirect("../auth/unauthorized")
+    return redirect(url_for("auth.unauthorized"))
 
 
 @comment_routes.route("/<int:comment_id>/replies", methods=["POST"])
@@ -92,5 +92,4 @@ def get_replies(comment_id):
     Query for all replies of a comment
     """
     comment = Comment.query.get_or_404(comment_id)
-    replies = comment.replies
-    return {"Replies": [reply.to_dict() for reply in replies]}
+    return {"Replies": [reply.to_dict() for reply in comment.replies]}
