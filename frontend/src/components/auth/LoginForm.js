@@ -18,14 +18,6 @@ const LoginForm = () => {
     }
   };
 
-  const updateCredential = (e) => {
-    setCredential(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
   if (user) {
     return <Redirect to="/" />;
   }
@@ -33,18 +25,18 @@ const LoginForm = () => {
   return (
     <form onSubmit={onLogin}>
       <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+        {errors.map((error, idx) => (
+          <div key={idx}>{error}</div>
         ))}
       </div>
       <div>
-        <label htmlFor="email">Email or Username</label>
+        <label htmlFor="credential">Email or Username</label>
         <input
-          name="email"
+          name="credential"
           type="text"
           placeholder="Email or Username"
           value={credential}
-          onChange={updateCredential}
+          onChange={(e) => setCredential(e.target.value)}
         />
       </div>
       <div>
@@ -54,7 +46,7 @@ const LoginForm = () => {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={updatePassword}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
       </div>
