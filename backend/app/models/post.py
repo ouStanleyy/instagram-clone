@@ -76,7 +76,8 @@ class Post(db.Model):
             'created_at': self.created_at,
             'media': [media.to_dict() for media in self.media],
             'likes': [like.to_dict() for like in self.likes],
-            'comments': [comment.to_dict() for comment in self.comments]
+            'comments': [comment.to_dict() for comment in self.comments],
+            'user': self.user.to_dict()
         }
 
     def to_dict_user_details(self):
@@ -85,5 +86,5 @@ class Post(db.Model):
             'num_of_likes': len(self.likes),
             'num_of_comments': len(self.comments),
             'preview_media': self.media[0].url,
-            'num_of_media': len(self.media)
+            'num_of_media': len(self.media),
         }

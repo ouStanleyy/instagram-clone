@@ -6,6 +6,18 @@ medias = [
         "url": "https://expertphotography.b-cdn.net/wp-content/uploads/2022/05/Landscape-Photography-Sophie-Turner.jpg",
     },
     {
+        "post_id": 1,
+        "url": "https://www.travelandleisure.com/thmb/VscfMXHNO6uBpaX2cuIW1q2ZtA8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/tokyo-japan-TOKYOTG0621-52012ff551dc46c4a87ac8e3151307a4.jpg",
+    },
+    {
+        "post_id": 1,
+        "url": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dG9reW98ZW58MHx8MHx8&w=1000&q=80",
+    },
+    {
+        "post_id": 1,
+        "url": "https://i.guim.co.uk/img/media/36c2f80951eb4efd941af3f74cb54741cc08cc82/0_1097_7829_4695/master/7829.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=239adec63d677461e6d5ca4210be3579",
+    },
+    {
         "post_id": 2,
         "url": "https://www.adorama.com/alc/wp-content/uploads/2018/11/landscape-photography-tips-yosemite-valley-feature.jpg",
     },

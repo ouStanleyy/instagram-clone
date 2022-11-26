@@ -6,9 +6,9 @@ import SignUpForm from "./components/auth/SignUpForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import NavBar from "./components/NavBar/NavBar";
 import { UsersList, User } from "./components/Users";
-// import Posts from "./components/Post";
 import { authenticate } from "./store/session";
 import Splash from "./components/Splash/Splash";
+import { PostDetailCard } from "./components/Posts";
 
 function App() {
   const user = useSelector((session) => session.user);
@@ -75,10 +75,13 @@ function App() {
         <Route path="/splash" exact={true}>
           <Splash />
         </Route>
-        {/* <Route path="/posts">
+        <Route path="/posts" exact={true}>
           <h1>Post</h1>
-          <Posts />
-        </Route> */}
+        </Route>
+        <Route path="/posts/:postId" exact={true}>
+          <h1>Post Id</h1>
+          <PostDetailCard />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

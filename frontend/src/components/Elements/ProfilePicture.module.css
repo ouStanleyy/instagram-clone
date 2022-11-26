@@ -1,0 +1,26 @@
+.profileSmall,
+.profileMedium,
+.profileLarge {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profileLarge {
+  width: 56px;
+  height: 56px;
+}
+
+.profileMedium {
+  width: 32px;
+  height: 32px;
+}
+
+.profileSmall{
+  width: 24px;
+  height: 24px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}

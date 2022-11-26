@@ -1,0 +1,32 @@
+.headerContainer {
+  border-bottom: 1px solid #DBDBDB;
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+
+.profile {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.username {
+  color: #262626;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.blueCheck {
+  height: 12px;
+  width: 12px;
+}
+
+.moreButton{
+  border: none;
+  background-color: transparent;
+}
+
+.moreButton:hover{
+cursor: pointer;
+}
