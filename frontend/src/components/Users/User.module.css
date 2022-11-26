@@ -1,0 +1,125 @@
+.userBody {
+  background-color: #fafafa;
+}
+
+.userInnerBody {
+  width: 85%;
+  padding-top: 20px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userHeader {
+  display: flex;
+  justify-content: space-around;
+  width: 65%;
+}
+
+.profilePicture {
+  width: 144px;
+  height: 144px;
+  border-radius: 50%;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 65%;
+}
+
+.userDetails > p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.username {
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.detailsStats {
+  display: flex;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.detailsStats span {
+  font-weight: 600;
+}
+
+.userNavBar {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 66%;
+  border-top: 1px solid #dbdbdb;
+}
+
+.userNavItem {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  width: 68px;
+  border-top: 1px solid #262626;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.postsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.postContainer {
+  position: relative;
+  height: 308px;
+  width: 308px;
+}
+
+.previewMedia {
+  position: absolute;
+  width: 308px;
+  height: 308px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.postDetails {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  width: 308px;
+  height: 308px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.detailsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.postDetails:hover {
+  z-index: 1;
+}
+
+.previewMedia:hover {
+  z-index: -1;
+}
