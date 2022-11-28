@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import session from './session'
-import commentReducer from './comment'
-
-const rootReducer = combineReducers({
-  session,
-  comment: commentReducer,
-
-=======
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session";
@@ -19,7 +8,6 @@ const rootReducer = combineReducers({
   session,
   users,
   posts,
->>>>>>> ed3a0a28cc03a482321b099ea250e6e8e4788fce
 });
 
 let enhancer;
