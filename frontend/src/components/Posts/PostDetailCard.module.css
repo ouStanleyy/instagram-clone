@@ -1,0 +1,29 @@
+.cardContainer {
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 935px;
+  overflow: hidden;
+}
+
+.info {
+  border: 1px solid blue;
+  /* height: 100%; */
+  /* width: 40%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  flex: 1;
+}
+
+.comments {
+  padding: 6px 8px;
+  align-self: stretch;
+}
+
+.comments li {
+  list-style: none;
+  margin: 14px 0;
+}

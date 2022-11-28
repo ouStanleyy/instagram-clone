@@ -1,6 +1,7 @@
 import { icons } from "./icons";
 import { useSelector } from "react-redux";
 import styles from "./NavItem.module.css";
+import ProfilePicture from "../Elements/ProfilePIcture";
 
 const NavItem = ({ type }) => {
   const user = useSelector((state) => state.session.user);
@@ -10,7 +11,8 @@ const NavItem = ({ type }) => {
   const profilePicture = (
     <>
       <div className={styles.profilePicture}>
-        <img src={user?.profile_picture} alt={`${user?.full_name} profile`} />
+        <ProfilePicture user={user} size={"small"} />
+        {/* <img src={user?.profile_picture} alt={`${user?.full_name} profile`} /> */}
       </div>
       <span>Profile</span>
     </>

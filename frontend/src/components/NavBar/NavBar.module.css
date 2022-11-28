@@ -1,14 +1,15 @@
 .navBar {
   /* border: 1px solid blue; */
-  border-right: 1px solid #DBDBDB;
+  border-right: 1px solid #dbdbdb;
   display: flex;
-  /* position: fixed; */
+  position: fixed;
   height: 100vh;
   flex-direction: column;
   justify-content: space-between;
   align-items: space-between;
   padding: 8px 12px 20px;
-  max-width: 244px;
+  width: 244px;
+  background-color: white;
 }
 
 .navLink {
@@ -36,6 +37,6 @@
   border-radius: 6px;
   width: 238px;
   z-index: 2;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .0975) ;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.0975);
 }
