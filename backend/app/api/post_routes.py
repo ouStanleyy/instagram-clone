@@ -73,8 +73,10 @@ def post_detail(post_id):
 
     Use: post detail page
     """
-    post = Post.query.get_or_404(post_id)
-    return post.to_dict_detail()
+    # post = Post.query.get_or_404(post_id)
+    # return post.to_dict_detail()
+    post = Post.query.get_or_404(post_id).to_dict_detail()
+    return post
 
 
 @post_routes.route("/following")
