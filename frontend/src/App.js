@@ -61,7 +61,7 @@ function App() {
         </Route>
         <Route path="/login" exact={true}>
           <NavBar />
-          <LoginForm />
+          {/* <LoginForm /> */}
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />

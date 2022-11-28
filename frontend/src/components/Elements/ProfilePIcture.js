@@ -1,6 +1,7 @@
 import styles from "./ProfilePicture.module.css";
 import { Link } from "react-router-dom";
 
+// size : "small", "medium", "large", "xlarge"
 const ProfilePicture = ({ user, size = "large" }) => {
   let style;
 

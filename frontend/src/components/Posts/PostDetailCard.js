@@ -28,7 +28,7 @@ const PostDetailCard = () => {
             return <li key={comment.id}>{comment.comment}</li>;
           })}
         </div>
-        <div>
+        <div className={styles.commentForm}>
           <div>like, comment, share icons</div>
           <div>Liked by {post?.likes.length} people</div>
           <div>Add a comment..</div>
