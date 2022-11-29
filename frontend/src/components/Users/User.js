@@ -1,19 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
+import { Modal } from "../../context/Modal";
 import { getUserById } from "../../store/users";
+import { PostDetailCard } from "../Posts";
 import styles from "./User.module.css";
 
 function User() {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector((state) => state.users[userId]);
+  const [postModal, setPostModal] = useState({});
+
+  const togglePostModal = (idx) => () => {
+    setPostModal((state) => ({
+      ...state,
+      [idx]: !state[idx],
+    }));
+  };
+
+  useEffect(() => {
+    user?.posts?.forEach((_, idx) => {
+      setPostModal((state) => ({
+        ...state,
+        [idx]: false,
+      }));
+    });
+  }, [user?.posts]);
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await dispatch(getUserById(userId));
-        console.log(res);
+        await dispatch(getUserById(userId));
       } catch (err) {}
     })();
   }, [dispatch, userId]);
@@ -135,11 +153,15 @@ function User() {
         </div>
       </div>
       <div className={styles.postsContainer}>
-        {user.posts?.map((post) => {
+        {user.posts?.map((post, idx) => {
           return (
-            <div key={post.id} className={styles.postContainer}>
-              <Link to={`/posts/${post.id}`}>
-                <div className={styles.postDetails}>
+            <>
+              <div key={post.id} className={styles.postContainer}>
+                {/* <Link to={`/posts/${post.id}`}> */}
+                <div
+                  className={styles.postDetails}
+                  onClick={togglePostModal(idx)}
+                >
                   <div className={styles.detailsContainer}>
                     <div className={styles.detailsSvg}>
                       <svg
@@ -196,8 +218,14 @@ function User() {
                   alt="preview media"
                   className={styles.previewMedia}
                 />
-              </Link>
-            </div>
+                {/* </Link> */}
+              </div>
+              {postModal[idx] && (
+                <Modal onClose={togglePostModal(idx)}>
+                  <PostDetailCard postId={post.id} />
+                </Modal>
+              )}
+            </>
           );
         })}
       </div>

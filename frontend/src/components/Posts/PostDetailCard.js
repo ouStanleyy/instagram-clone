@@ -10,15 +10,16 @@ import { InputContainer, CommentsForm } from "../Comment";
 import { loadAllComments } from "../../store/comments";
 
 
-const PostDetailCard = () => {
+const PostDetailCard = (props) => {
   const dispatch = useDispatch();
   const { postId } = useParams();
-  const post = useSelector((state) => state.posts[postId]);
-
-
+  const post = useSelector(
+    (state) => state.posts[props.postId ? props.postId : postId]
+  );
+  console.log(props.postId);
   useEffect(() => {
     (async () => {
-      await dispatch(getPostById(postId));
+      await dispatch(getPostById(props.postId ? props.postId : postId));
     })();
   }, []);
 
