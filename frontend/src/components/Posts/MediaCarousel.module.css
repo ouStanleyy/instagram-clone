@@ -5,6 +5,7 @@
   height: 600px;
   position: relative;
   overflow: hidden;
+  flex: 3;
 }
 
 .slide {

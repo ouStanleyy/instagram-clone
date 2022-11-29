@@ -6,6 +6,9 @@ import MediaCarousel from "./MediaCarousel";
 import PostHeader from "./PostHeader";
 import styles from "./PostDetailCard.module.css";
 import { getUserById } from "../../store/users";
+import Comment from "../Comment/comment";
+import CommentItem from "./CommentItem";
+import LikeBar from "./LikeBar";
 
 const PostDetailCard = (props) => {
   const dispatch = useDispatch();
@@ -27,10 +30,12 @@ const PostDetailCard = (props) => {
         <PostHeader user={post?.user} />
         <div className={styles.comments}>
           {post?.comments.map((comment) => {
-            return <li key={comment.id}>{comment.comment}</li>;
+            // return <li key={comment.id}>{comment.comment}</li>;
+            return <CommentItem comment={comment} />;
           })}
         </div>
         <div>
+          <LikeBar />
           {/* <div>like, comment, share icons</div>
           <div>Liked by {post?.likes.length} people</div>
           <div>Add a comment..</div> */}
