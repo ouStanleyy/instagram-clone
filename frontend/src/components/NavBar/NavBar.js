@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useState } from "react";
 import NavItem from "./NavItem";
 import styles from "./NavBar.module.css";
@@ -7,6 +7,7 @@ import MoreItem from "./MoreItem";
 import { logout } from "../../store/session";
 
 const NavBar = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [showMore, setShowMore] = useState(false);
   const user = useSelector((state) => state.session.user);
@@ -39,7 +40,10 @@ const NavBar = () => {
   );
 
   const handleShowMore = (e) => setShowMore((prev) => !prev);
-  const handleLogout = async (e) => await dispatch(logout());
+  const handleLogout = async (e) => {
+    await dispatch(logout());
+    history.push("/");
+  };
 
   return (
     <ul className={styles.navBar}>

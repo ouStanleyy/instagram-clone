@@ -1,0 +1,9 @@
+.innerBody {
+  width: 85%;
+  padding-top: 20px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

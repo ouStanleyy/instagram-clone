@@ -1,4 +1,4 @@
-.userBody {
+/* .userBody {
   background-color: #fafafa;
 }
 
@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .userHeader {
   display: flex;
@@ -31,11 +31,6 @@
   width: 65%;
 }
 
-.userDetails > p {
-  font-size: 16px;
-  font-weight: 600;
-}
-
 .username {
   font-size: 28px;
   font-weight: 300;
@@ -49,6 +44,16 @@
 
 .detailsStats span {
   font-weight: 600;
+}
+
+.fullName {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bio {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .userNavBar {
