@@ -1,5 +1,5 @@
-import Container  from "./container";
-import Comment from "./comment";
+import InputContainer from "./inputContainer";
+import CommentsForm from "./commentsForm";
 
-export {Container, Comment}
+export {InputContainer, CommentsForm}
 

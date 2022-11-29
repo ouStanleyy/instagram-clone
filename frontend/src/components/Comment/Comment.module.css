@@ -68,7 +68,7 @@
   }
 
   .likesDiv{
-    height:60px
+    height:75px
   }
   #likeButton{
     margin: 15px;
@@ -108,4 +108,9 @@
     font-size: 14px;
     background-color: white;
     border: none;
+  }
+
+  .moreButton{
+    border: none;
+    background-color: transparent;
   }

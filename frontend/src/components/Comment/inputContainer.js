@@ -1,16 +1,16 @@
 import { useSelector, useDispatch} from "react-redux";
 import { useState } from "react";
-import { createComment} from "../../store/comment"
+import { createComment} from "../../store/comments"
 import styles from "./Comment.module.css"
 import { icons } from "../NavBar/icons";
 import styleSvg from "../NavBar/NavItem.module.css"
 import EmojiWindow from "./EmojiWindow";
 import CommentsForm from "./commentsForm";
 
-const InputContainer = () =>{
+const InputContainer = ({postId}) =>{
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-    let post_id = 1
+    // let post_id = 1
     const {id} = user
     const [comment, setComment] = useState('')
     const [errors, setErrors] = useState([])
@@ -21,7 +21,7 @@ const InputContainer = () =>{
         e.preventDefault()
 
         const payload = {comment, user_id:id }
-        dispatch(createComment(payload, post_id))
+        dispatch(createComment(payload, postId))
         setComment("")
     }
 
