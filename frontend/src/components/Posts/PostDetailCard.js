@@ -7,14 +7,16 @@ import PostHeader from "./PostHeader";
 import styles from "./PostDetailCard.module.css";
 import { getUserById } from "../../store/users";
 
-const PostDetailCard = () => {
+const PostDetailCard = (props) => {
   const dispatch = useDispatch();
   const { postId } = useParams();
-  const post = useSelector((state) => state.posts[postId]);
-
+  const post = useSelector(
+    (state) => state.posts[props.postId ? props.postId : postId]
+  );
+  console.log(props.postId);
   useEffect(() => {
     (async () => {
-      await dispatch(getPostById(postId));
+      await dispatch(getPostById(props.postId ? props.postId : postId));
     })();
   }, []);
 
@@ -29,9 +31,9 @@ const PostDetailCard = () => {
           })}
         </div>
         <div>
-          <div>like, comment, share icons</div>
+          {/* <div>like, comment, share icons</div>
           <div>Liked by {post?.likes.length} people</div>
-          <div>Add a comment..</div>
+          <div>Add a comment..</div> */}
         </div>
       </div>
     </div>
