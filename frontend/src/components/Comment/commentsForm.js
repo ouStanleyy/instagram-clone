@@ -27,4 +27,4 @@ const CommentsForm = ()=>{
 
 }
 
-export default CommentsForm
+export default CommentsForm;

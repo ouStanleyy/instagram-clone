@@ -9,6 +9,8 @@ import { UsersList, User } from "./components/Users";
 import { authenticate } from "./store/session";
 import Splash from "./components/Splash/Splash";
 import { PostDetailCard } from "./components/Posts";
+import CommentsForm from "./components/Comment/commentsForm";
+import InputContainer from "./components/Comment/inputContainer";
 
 function App() {
   const user = useSelector((session) => session.user);
@@ -56,6 +58,10 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/comments" exact={true}>
+          <CommentsForm />
+          <InputContainer />
+        </Route>
         <Route path="/" exact={true}>
           {user ? <NavBar /> : <Splash />}
         </Route>

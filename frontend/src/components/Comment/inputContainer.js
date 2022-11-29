@@ -29,7 +29,6 @@ const InputContainer = () =>{
 
         <form className={styles.form} onSubmit={handleSubmit}>
 
-
             <div className={styles.likesDiv}>
                 <div id={styles.likeButton}>{icons["Notifications"]}</div>
             </div>
