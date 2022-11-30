@@ -2,10 +2,9 @@ import { useSelector, useDispatch} from "react-redux";
 import { useState } from "react";
 import { createComment} from "../../store/comments"
 import styles from "./Comment.module.css"
-import { icons } from "../NavBar/icons";
 import styleSvg from "../NavBar/NavItem.module.css"
 import EmojiWindow from "./EmojiWindow";
-import CommentsForm from "./commentsForm";
+import CommentsForm from "./cmContainer";
 
 const InputContainer = ({postId}) =>{
     const dispatch = useDispatch();
@@ -29,9 +28,6 @@ const InputContainer = ({postId}) =>{
 
         <form className={styles.form} onSubmit={handleSubmit}>
 
-            <div className={styles.likesDiv}>
-                <div id={styles.likeButton}>{icons["Notifications"]}</div>
-            </div>
             <div className={styles.inputContainer}>
                 <div className={styles.emojiInput}>
                     <img

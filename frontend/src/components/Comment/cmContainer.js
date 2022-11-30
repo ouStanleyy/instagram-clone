@@ -4,11 +4,10 @@ import { useEffect } from "react";
 import Comment from "./comment";
 import styles from "./Comment.module.css"
 
-const CommentsForm = ({postId})=>{
+const CmContainer = ({postId})=>{
     const dispatch = useDispatch();
     let comments = useSelector((state)=> Object.values(state.comments))
     const post = useSelector((state) => state.posts[postId]);
-
 
 
     useEffect(()=>{
@@ -40,4 +39,4 @@ const CommentsForm = ({postId})=>{
 
 }
 
-export default CommentsForm;
+export default CmContainer;

@@ -9,8 +9,6 @@ import { UsersList, User } from "./components/Users";
 import { authenticate } from "./store/session";
 import Splash from "./components/Splash/Splash";
 import { PostDetailCard } from "./components/Posts";
-import CommentsForm from "./components/Comment/commentsForm";
-import InputContainer from "./components/Comment/inputContainer";
 import styles from "./App.module.css";
 
 function App() {
@@ -60,10 +58,6 @@ function App() {
     <BrowserRouter>
       {user && <NavBar />}
       <Switch>
-        <Route path="/comments" exact={true}>
-          <CommentsForm />
-          <InputContainer />
-        </Route>
         <Route path="/" exact={true}>
           <Splash user={user} />
         </Route>
