@@ -31,7 +31,7 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('profile_picture', sa.String(), nullable=True),
     sa.Column('phone_number', sa.String(length=10), nullable=True),
-    sa.Column('gender', sa.Enum('Male', 'Female', 'Non-binary', 'Prefer not to say'), nullable=False),
+    sa.Column('gender', sa.Enum('Male', 'Female', 'Non-binary', 'Prefer not to say', name='gender'), nullable=False),
     sa.Column('is_verified', sa.Boolean(), nullable=False),
     sa.Column('is_private', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
