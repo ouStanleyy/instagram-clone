@@ -2,25 +2,31 @@
   border: 1px solid #DBDBDB;
   border-radius: 3px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   max-width: 935px;
+  width: 90vw;
   overflow: hidden;
+  position: relative;
+  /* border: 1px solid red; */
 }
 
 .info {
-  border: 1px solid blue;
-  /* height: 100%; */
+  /* border: 1px solid blue; */
+  max-height: 600px;
   /* width: 40%; */
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  flex: 1;
+  flex: 2;
 }
 
 .comments {
   padding: 6px 8px;
   align-self: stretch;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .comments li {

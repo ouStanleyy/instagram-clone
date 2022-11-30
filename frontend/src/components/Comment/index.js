@@ -1,6 +1,5 @@
 import InputContainer from "./inputContainer";
 import CmContainer from "./cmContainer";
-import LikeBar from "./likeBar";
+import LikeBar from "./LikeBar";
 
-export {CmContainer, InputContainer, LikeBar}
-
+export { CmContainer, InputContainer, LikeBar };
