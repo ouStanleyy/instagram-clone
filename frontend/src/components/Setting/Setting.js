@@ -8,9 +8,26 @@ const Setting = () => {
   return (
     <div className={styles.settingContainer}>
       <div className={styles.settingNav}>
-        <NavLink to="/account/edit">Edit profile</NavLink>
+        <NavLink
+          to="/account/edit"
+          exact={true}
+          activeClassName={styles.activeLink}
+        >
+          Edit profile
+        </NavLink>
+        <NavLink
+          to="/account/password"
+          exact={true}
+          activeClassName={styles.activeLink}
+        >
+          Change password
+        </NavLink>
       </div>
-      <div className={styles.settingOption}></div>
+      <div className={styles.settingOption}>
+        <Switch>
+          <Route path="/account/edit">Editing</Route>
+        </Switch>
+      </div>
     </div>
   );
 };
