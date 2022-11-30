@@ -39,9 +39,9 @@ const MediaCarousel = ({ medias }) => {
         }`}
         onClick={handleSlidePrev}
       >
-        <span
-          className={`material-symbols-outlined + ${styles.leftArrow}`}
-        ></span>
+        <span className={`material-symbols-outlined + ${styles.leftArrow}`}>
+          expand_circle_down
+        </span>
       </button>
       <button
         className={`${styles.btn} ${styles.btnNext} ${
@@ -49,9 +49,9 @@ const MediaCarousel = ({ medias }) => {
         }`}
         onClick={handleSlideNext}
       >
-        <span
-          className={`material-symbols-outlined + ${styles.rightArrow}`}
-        ></span>
+        <span className={`material-symbols-outlined + ${styles.rightArrow}`}>
+          expand_circle_down
+        </span>
       </button>
     </div>
   );
