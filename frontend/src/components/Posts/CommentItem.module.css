@@ -1,0 +1,33 @@
+.container {
+  /* border: 1px solid red; */
+  display: flex;
+  gap: 12px;
+  padding: 8px 12px;
+}
+
+.commentContainer {
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.replyButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #8E8E8E;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0;
+}
+
+.username {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.like {
+  cursor: pointer;
+}

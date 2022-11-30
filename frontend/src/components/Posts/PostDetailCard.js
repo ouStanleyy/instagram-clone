@@ -6,6 +6,10 @@ import MediaCarousel from "./MediaCarousel";
 import PostHeader from "./PostHeader";
 import styles from "./PostDetailCard.module.css";
 import { getUserById } from "../../store/users";
+import Comment from "../Comment/comment";
+import CommentItem from "./CommentItem";
+// import LikeBar from "./LikeBar";
+import { InputContainer, CmContainer, LikeBar } from "../Comment";
 
 const PostDetailCard = (props) => {
   const dispatch = useDispatch();
@@ -13,28 +17,21 @@ const PostDetailCard = (props) => {
   const post = useSelector(
     (state) => state.posts[props.postId ? props.postId : postId]
   );
-  console.log(props.postId);
+
   useEffect(() => {
     (async () => {
       await dispatch(getPostById(props.postId ? props.postId : postId));
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.cardContainer}>
       <MediaCarousel medias={post?.media} />
       <div className={styles.info}>
         <PostHeader user={post?.user} />
-        <div className={styles.comments}>
-          {post?.comments.map((comment) => {
-            return <li key={comment.id}>{comment.comment}</li>;
-          })}
-        </div>
-        <div>
-          {/* <div>like, comment, share icons</div>
-          <div>Liked by {post?.likes.length} people</div>
-          <div>Add a comment..</div> */}
-        </div>
+        <CmContainer post={post} />
+        <LikeBar />
+        <InputContainer post={post} />
       </div>
     </div>
   );
