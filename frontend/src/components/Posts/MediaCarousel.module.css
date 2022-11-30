@@ -1,0 +1,57 @@
+.slider {
+  background-color: black;
+  width: 100%;
+  max-width: 600px;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+  flex: 3;
+}
+
+.slide {
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  position: absolute;
+  transition: all 0.2s;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+}
+
+.btn {
+  position: absolute;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.btnPrev {
+  top: 45%;
+  left: 2%;
+}
+
+.btnNext {
+  top: 45%;
+  right: 2%;
+}
+
+.leftArrow, .rightArrow {
+  opacity: .8;
+  color: white;
+}
+
+.leftArrow {
+  transform: rotate(90deg);
+}
+
+.rightArrow{
+  transform: rotate(-90deg);
+}
+
+.hideArrow {
+  display: none;
+}
