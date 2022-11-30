@@ -20,7 +20,7 @@ const NavBar = () => {
     { icon: "Messages", path: "/messages" },
     { icon: "Notifications", path: "/notifications" },
     { icon: "Create", path: "/create" },
-    { icon: "Profile", path: "/profile" },
+    { icon: "Profile", path: `/users/${user.id}` },
     { icon: "More", path: "#" },
   ];
 

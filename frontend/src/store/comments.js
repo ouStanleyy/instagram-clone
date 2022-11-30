@@ -93,7 +93,7 @@ export const deleteCommentThunk = (comment_id) => async (dispatch) => {
 
 const initialState = {};
 
-const commentsReducer = (state = initialState, action) => {
+const commentReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case ADD_COMMENT:
@@ -113,4 +113,4 @@ const commentsReducer = (state = initialState, action) => {
   }
 };
 
-export default commentsReducer;
+export default commentReducer;
