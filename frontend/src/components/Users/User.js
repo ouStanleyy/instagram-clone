@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import { getUserById } from "../../store/users";
+import Follows from "../Follows/Follows";
 import { PostDetailCard } from "../Posts";
 import styles from "./User.module.css";
 
@@ -10,15 +11,30 @@ function User() {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector((state) => state.users[userId]);
+  const [followsModal, setFollowsModal] = useState({
+    show: false,
+    followType: "",
+  });
   const [postModal, setPostModal] = useState({});
 
-  const togglePostModal = (idx) => () => {
+  // Toggles the follow modal on/off depending on the followType("followers", "following")
+  const toggleFollowsModal =
+    (followType = "") =>
+    () => {
+      setFollowsModal((state) => ({
+        show: !state.show,
+        followType,
+      }));
+    };
+
+  // Toggles the post modal on/off depending on the current index of the mapped posts
+  const togglePostModal = (idx) => () =>
     setPostModal((state) => ({
       ...state,
       [idx]: !state[idx],
     }));
-  };
 
+  // Maps each index of the posts as keys in the post modal state and defaults their value to "false"
   useEffect(() => {
     user?.posts?.forEach((_, idx) => {
       setPostModal((state) => ({
@@ -66,10 +82,16 @@ function User() {
             <p>
               <span>{user.posts?.length}</span> posts
             </p>
-            <p>
+            <p
+              className={styles.followModal}
+              onClick={toggleFollowsModal("Followers")}
+            >
               <span>{user.num_of_followers}</span> followers
             </p>
-            <p>
+            <p
+              className={styles.followModal}
+              onClick={toggleFollowsModal("Following")}
+            >
               <span>{user.num_of_followings}</span> following
             </p>
           </div>
@@ -229,6 +251,15 @@ function User() {
           );
         })}
       </div>
+      {followsModal.show && (
+        <Modal onClose={toggleFollowsModal()}>
+          <Follows
+            followType={followsModal.followType}
+            userId={userId}
+            onClose={toggleFollowsModal()}
+          />
+        </Modal>
+      )}
       {/* </div> */}
       {/* </div> */}
     </>
