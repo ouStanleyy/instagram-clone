@@ -13,7 +13,7 @@ class Post(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     caption = db.Column(db.Text(2200))
     is_story = db.Column(db.Boolean, nullable=False, default=False)
     show_like_count = db.Column(db.Boolean, nullable=False, default=True)

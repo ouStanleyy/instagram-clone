@@ -13,8 +13,8 @@ class Message(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    recipient_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    sender_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    recipient_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     message = db.Column(db.Text(1000))
     time_sent = db.Column(db.DateTime(timezone=True),
                           server_default=func.now())
