@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllComments } from "../../store/comments";
 import { useEffect } from "react";
-import Comment from "./comment";
+import Comment from "./Comment";
 import styles from "./Comment.module.css";
 
 const CmContainer = ({ post }) => {

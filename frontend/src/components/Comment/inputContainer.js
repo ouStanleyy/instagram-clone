@@ -4,7 +4,7 @@ import { createComment } from "../../store/comments";
 import styles from "./Comment.module.css";
 import styleSvg from "../NavBar/NavItem.module.css";
 import EmojiWindow from "./EmojiWindow";
-import CommentsForm from "./cmContainer";
+import CommentsForm from "./CmContainer";
 
 const InputContainer = ({ post }) => {
   const dispatch = useDispatch();
