@@ -66,6 +66,15 @@
     font-size: 13px;
     margin-left: 10px;
   }
+  .replyContainer{
+    display: flex;
+  }
+  .moreButton{
+    align-self: center;
+    border: none;
+    background-color: transparent;
+  }
+
 
   .likesDiv{
     height:75px
@@ -112,8 +121,3 @@
     border: none;
   }
 
-  .moreButton{
-    align-self: center;
-    border: none;
-    background-color: transparent;
-  }

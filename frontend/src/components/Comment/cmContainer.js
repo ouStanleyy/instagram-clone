@@ -10,7 +10,7 @@ const CmContainer = ({ post }) => {
 
   useEffect(() => {
     dispatch(loadAllComments(post?.id));
-  }, [dispatch]);
+  }, [dispatch, post]);
 
   return (
     <>
