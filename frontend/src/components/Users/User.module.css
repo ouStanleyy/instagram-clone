@@ -38,17 +38,21 @@
 
 .detailsStats {
   display: flex;
-  gap: 8px;
+  gap: 40px;
   font-size: 16px;
 }
 
 .detailsStats span {
-  font-weight: 600;
+  font-weight: 500;
+}
+
+.followModal {
+  cursor: pointer;
 }
 
 .fullName {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .bio {
@@ -112,6 +116,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  cursor: pointer;
 }
 
 .detailsContainer {
