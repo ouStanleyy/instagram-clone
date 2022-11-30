@@ -1,19 +1,18 @@
-import { useRef } from "react";
-import styles from "./EmojiWindow.module.css"
+// import { useRef } from "react";
+// import styles from "./EmojiWindow.module.css";
 
-const EmojiWindow = ({emojiWindow})=>{
+const EmojiWindow = ({ emojiWindow }) => {
+  //   let ref = useRef();
 
-    let ref = useRef();
-
-    return (
-        <>
-        {/* <div
+  return (
+    <>
+      {/* <div
         className={styles.show}>
             <div className="sub-window">🧡</div>
 
         </div> */}
-        </>
-    )
-}
+    </>
+  );
+};
 
-export default EmojiWindow
+export default EmojiWindow;

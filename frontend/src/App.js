@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import NavBar from "./components/NavBar/NavBar";
@@ -10,6 +9,7 @@ import { authenticate } from "./store/session";
 import Splash from "./components/Splash/Splash";
 import { PostDetailCard } from "./components/Posts";
 import styles from "./App.module.css";
+import { Setting } from "./components/Setting";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -71,8 +71,8 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
-          <Route path="/splash" exact={true}>
-            <Splash />
+          <Route path="/account">
+            <Setting />
           </Route>
           <Route path="/posts" exact={true}>
             <h1>Post</h1>
