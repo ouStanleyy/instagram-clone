@@ -6,7 +6,7 @@ import MediaCarousel from "./MediaCarousel";
 import PostHeader from "./PostHeader";
 import styles from "./PostDetailCard.module.css";
 import { getUserById } from "../../store/users";
-import Comment from "../Comment/comment";
+import Comment from "../Comment/Comment";
 import CommentItem from "./CommentItem";
 // import LikeBar from "./LikeBar";
 import { InputContainer, CmContainer, LikeBar } from "../Comment";
