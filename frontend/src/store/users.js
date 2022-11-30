@@ -39,7 +39,7 @@ export const getUserById = (userId) => async (dispatch) => {
 const usersReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_USERS:
-      return { ...action.users };
+      return { ...state, ...action.users };
     case LOAD_USER_DETAILS:
       return {
         ...state,
