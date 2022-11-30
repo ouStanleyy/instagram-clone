@@ -9,6 +9,7 @@ import { getUserById } from "../../store/users";
 import Comment from "../Comment/comment";
 import CommentItem from "./CommentItem";
 import LikeBar from "./LikeBar";
+import { InputContainer, CmContainer, LikeBar } from "../Comment";
 
 const PostDetailCard = (props) => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const PostDetailCard = (props) => {
   const post = useSelector(
     (state) => state.posts[props.postId ? props.postId : postId]
   );
+
   console.log(props.postId);
   useEffect(() => {
     (async () => {
@@ -34,11 +36,12 @@ const PostDetailCard = (props) => {
             return <CommentItem comment={comment} />;
           })}
         </div>
+
         <div>
           <LikeBar />
-          {/* <div>like, comment, share icons</div>
+          <div>like, comment, share icons</div>
           <div>Liked by {post?.likes.length} people</div>
-          <div>Add a comment..</div> */}
+          <div>Add a comment..</div>
         </div>
       </div>
     </div>
