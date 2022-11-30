@@ -30,19 +30,16 @@ const PostDetailCard = (props) => {
       <MediaCarousel medias={post?.media} />
       <div className={styles.info}>
         <PostHeader user={post?.user} />
-        {/* <div className={styles.comments}>
+        <div className={styles.comments}>
           {post?.comments.map((comment) => {
             return <li key={comment.id}>{comment.comment}</li>;
           })}
-        </div> */}
+        </div>
 
         <div>
-          {/* <div>like, comment, share icons</div>
+          <div>like, comment, share icons</div>
           <div>Liked by {post?.likes.length} people</div>
-          <div>Add a comment..</div> */}
-          <CmContainer postId={props.postId}/>
-          <LikeBar />
-          <InputContainer postId ={props.postId}/>
+          <div>Add a comment..</div>
         </div>
       </div>
     </div>
