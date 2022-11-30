@@ -10,6 +10,7 @@ import { authenticate } from "./store/session";
 import Splash from "./components/Splash/Splash";
 import { PostDetailCard } from "./components/Posts";
 import styles from "./App.module.css";
+import { Setting } from "./components/Setting";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -71,8 +72,8 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
-          <Route path="/splash" exact={true}>
-            <Splash />
+          <Route path="/account" exact={true}>
+            <Setting />
           </Route>
           <Route path="/posts" exact={true}>
             <h1>Post</h1>
