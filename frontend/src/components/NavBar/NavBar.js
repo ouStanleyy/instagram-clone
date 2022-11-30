@@ -67,7 +67,7 @@ const NavBar = () => {
             className={showMore ? styles.moreDropDown : styles.hideDropDown}
             id="menu-dropdown"
           >
-            <NavLink to="/settings" exact={true} className={styles.navLink}>
+            <NavLink to="/account" exact={true} className={styles.navLink}>
               <MoreItem type="Settings" />
             </NavLink>
             <NavLink to="/saved" exact={true} className={styles.navLink}>

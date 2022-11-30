@@ -7,10 +7,13 @@ import styles from "./Comment.module.css";
 const CmContainer = ({ post }) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
+  // let comments = useSelector((state) => state.posts[post?.id]?.comments);
 
   useEffect(() => {
-    dispatch(loadAllComments(post?.id));
-  }, [dispatch]);
+    (async () => {
+      await dispatch(loadAllComments(post?.id));
+    })();
+  }, [dispatch, post?.id]);
 
   return (
     <>

@@ -15,7 +15,7 @@ const PostHeader = ({ user }) => {
             <img
               alt="verified"
               className={styles.blueCheck}
-              referrerpolicy="origin-when-cross-origin"
+              referrerPolicy="origin-when-cross-origin"
               src="https://static.xx.fbcdn.net/assets/?revision=1889448554733237&amp;name=ig-verifiedbadge-shared&amp;density=1"
             />
           )}

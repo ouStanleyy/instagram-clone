@@ -51,7 +51,14 @@ export const createComment = (comment, post_id) => async (dispatch) => {
 export const loadAllComments = (post_id) => async (dispatch) => {
   const response = await fetch(`/api/posts/${post_id}/comments`);
   const data = await response.json();
-  dispatch(getAllComments(data));
+
+  const payload = {};
+
+  for (let obj of data.Comments) {
+    payload[obj.id] = obj;
+  }
+
+  dispatch(getAllComments(payload));
 };
 
 export const editComment = (comment, comment_id) => async (dispatch) => {
@@ -99,10 +106,7 @@ const commentReducer = (state = initialState, action) => {
     case ADD_COMMENT:
       return { ...state, [action.payload.id]: action.payload };
     case GET_All_COMMENTS:
-      for (let obj of action.payload.Comments) {
-        newState[obj.id] = obj;
-      }
-      return newState;
+      return { ...action.payload };
     case EDIT_COMMENT:
       return { ...state, [action.payload.id]: action.payload };
     case DELETE_COMMENT:
