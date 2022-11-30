@@ -13,8 +13,8 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')))
     comment = db.Column(db.Text(2200))
 
     user = db.relationship("User", back_populates='comments')
@@ -26,5 +26,7 @@ class Comment(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'post_id': self.post_id,
-            'comment': self.comment
+            'comment': self.comment,
+            'user': self.user.to_dict_all()
+
         }

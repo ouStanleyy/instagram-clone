@@ -1,11 +1,12 @@
-from flask import Blueprint, request, redirect
+from flask import Blueprint, request, redirect, url_for
 from app.models import db, Like, Post, Follow, User
 from flask_login import current_user, login_user, login_required
+from .post_routes import authorized_follower
 
-like_routes = Blueprint("likes", __name__, url_prefix="/likes")
+like_routes = Blueprint("likes", __name__)
 
 
-@like_routes.route("/")
+@like_routes.route("")
 @login_required
 def get_likes(post_id):
     """
@@ -20,11 +21,12 @@ def get_likes(post_id):
 
     if is_owner or not post.is_story:
         return {"Likes": [like.to_dict() for like in post.likes]}
-    return redirect("../auth/unauthorized")
+    return redirect(url_for("auth.unauthorized"))
 
 
-@like_routes.route("/", methods=["POST"])
+@like_routes.route("", methods=["POST"])
 @login_required
+@authorized_follower
 def like(post_id):
     """
       Query for a post and create a like
@@ -35,15 +37,12 @@ def like(post_id):
         - Post can NOT be a story
         - Like can NOT already exist
     """
-
+    # it can be optimized querying post twice
     post = Post.query.get_or_404(post_id)
-    owner = User.query.get(post.user_id)
     like_exists = Like.query.filter_by(
         post_id=post_id, user_id=current_user.id).first()
-    is_follower = Follow.query.filter_by(
-        follower_id=current_user.id, following_id=post.user_id, is_pending=False).first()
 
-    if (not owner.is_private or is_follower or owner.id == current_user.id) and not like_exists and not post.is_story:
+    if not like_exists and not post.is_story:
         like = Like(
             post_id=post.id,
             user_id=current_user.id
@@ -51,10 +50,10 @@ def like(post_id):
         db.session.add(like)
         db.session.commit()
         return {"message": "Successfully liked"}
-    return redirect("../auth/unauthorized")
+    return redirect(url_for("auth.unauthorized"))
 
 
-@like_routes.route("/", methods=["DELETE"])
+@like_routes.route("", methods=["DELETE"])
 @login_required
 def unlike(post_id):
     """

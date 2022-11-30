@@ -13,7 +13,7 @@ class Post(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     caption = db.Column(db.Text(2200))
     is_story = db.Column(db.Boolean, nullable=False, default=False)
     show_like_count = db.Column(db.Boolean, nullable=False, default=True)
@@ -40,8 +40,7 @@ class Post(db.Model):
             'is_story': self.is_story,
             'show_like_count': self.show_like_count,
             'allow_comments': self.allow_comments,
-            'created_at': self.created_at,
-            'expires_at': self.expires_at
+            'created_at': self.created_at
         }
 
     def to_dict_discovery(self):
@@ -61,7 +60,6 @@ class Post(db.Model):
             'show_like_count': self.show_like_count,
             'allow_comments': self.allow_comments,
             'created_at': self.created_at,
-            'expires_at': self.expires_at,
             'num_of_comments': len(self.comments),
             'media': [media.to_dict() for media in self.media],
             'likes': [like.to_dict() for like in self.likes]
@@ -76,10 +74,10 @@ class Post(db.Model):
             'show_like_count': self.show_like_count,
             'allow_comments': self.allow_comments,
             'created_at': self.created_at,
-            'expires_at': self.expires_at,
             'media': [media.to_dict() for media in self.media],
             'likes': [like.to_dict() for like in self.likes],
-            'comments': [comment.to_dict() for comment in self.comments]
+            'comments': [comment.to_dict() for comment in self.comments],
+            'user': self.user.to_dict()
         }
 
     def to_dict_user_details(self):
@@ -88,5 +86,5 @@ class Post(db.Model):
             'num_of_likes': len(self.likes),
             'num_of_comments': len(self.comments),
             'preview_media': self.media[0].url,
-            'num_of_media': len(self.media)
+            'num_of_media': len(self.media),
         }

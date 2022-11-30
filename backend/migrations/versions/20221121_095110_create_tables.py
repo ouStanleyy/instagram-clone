@@ -1,16 +1,20 @@
 """create tables
 
-Revision ID: 80f05a9c9811
-Revises: 
-Create Date: 2022-11-19 17:20:56.360275
+Revision ID: 7e6c5e90ec4b
+Revises:
+Create Date: 2022-11-21 09:51:10.372074
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
-revision = '80f05a9c9811'
+revision = '7e6c5e90ec4b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -108,6 +112,16 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE follows SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE media SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE views SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE replies SET SCHEMA {SCHEMA};")
 
 
 def downgrade():

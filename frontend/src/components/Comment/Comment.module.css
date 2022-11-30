@@ -1,0 +1,119 @@
+
+.form{
+    /* border: 1px solid rgb(183, 182, 182, 0.250); */
+    width: 400px;
+}
+
+.cmContainer{
+    width: 400px;
+    border-bottom: 1px solid rgb(183, 182, 182, 0.250);
+    position: relative;
+    max-height: 500px;
+    /* float:left; */
+    height: 500px;
+    overflow:hidden;
+    overflow-y:auto;
+}
+.cmHome{
+    position:absolute;
+	top:0;
+  	animation: scroll 10s linear 1s infinite;
+}
+
+.container{
+    font-family: sans-serif;
+    display: flex;
+    gap: 14px;
+    margin: 20px;
+    border-radius: 24px;
+}
+
+.profilePicture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .profilePicture img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .textContainer{
+    width: 320px;
+    height: 35px;
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* gap: 10px; */
+  }
+
+  .username{
+    font-weight: bold;
+    color: #262626;
+    font-size: 13px;
+  }
+
+  .comment{
+    font-size: 13px;
+    color:#262626;
+    margin-left: 5px;
+  }
+
+  .reply{
+    text-decoration: none;
+    color: #8E8E8E;
+    font-size: 13px;
+    margin-left: 10px;
+  }
+
+  .likesDiv{
+    height:75px
+  }
+  #likeButton{
+    margin: 15px;
+    margin-top: 10px;
+  }
+
+  .inputContainer{
+
+    border-top: 1px solid rgb(183, 182, 182, 0.250);
+    width: 400px;
+    height: 55px;
+    display: flex;
+    position: relative;
+  }
+
+  .emojiInput{
+    width:50px;
+    align-self: center;
+  }
+  .emojiIcon{
+    margin-left: 10px;
+    width:30px;
+    height: 30px;
+    background-color: transparent;
+  }
+
+  .commentInput{
+    width:300px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+
+  .postComment{
+    width:50px;
+    height: 42px;
+    align-self: center;
+    color:rgb(53, 149, 246);
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+  }
+
+  .moreButton{
+    align-self: center;
+    border: none;
+    background-color: transparent;
+  }
