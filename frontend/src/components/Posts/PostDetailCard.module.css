@@ -9,11 +9,11 @@
   width: 90vw;
   overflow: hidden;
   position: relative;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .info {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   max-height: 600px;
   /* width: 40%; */
   display: flex;

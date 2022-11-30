@@ -6,7 +6,7 @@ import styleSvg from "../NavBar/NavItem.module.css";
 import EmojiWindow from "./EmojiWindow";
 import CommentsForm from "./cmContainer";
 
-const InputContainer = ({ postId }) => {
+const InputContainer = ({ post }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   // let post_id = 1
@@ -19,7 +19,7 @@ const InputContainer = ({ postId }) => {
     e.preventDefault();
 
     const payload = { comment, user_id: id };
-    dispatch(createComment(payload, post_id));
+    dispatch(createComment(payload, post.id));
     setComment("");
   };
 
