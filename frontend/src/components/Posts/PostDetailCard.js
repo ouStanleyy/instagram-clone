@@ -6,6 +6,9 @@ import MediaCarousel from "./MediaCarousel";
 import PostHeader from "./PostHeader";
 import styles from "./PostDetailCard.module.css";
 import { getUserById } from "../../store/users";
+import { InputContainer, CmContainer, LikeBar} from "../Comment";
+
+
 
 const PostDetailCard = (props) => {
   const dispatch = useDispatch();
@@ -13,12 +16,14 @@ const PostDetailCard = (props) => {
   const post = useSelector(
     (state) => state.posts[props.postId ? props.postId : postId]
   );
+
   console.log(props.postId);
   useEffect(() => {
     (async () => {
       await dispatch(getPostById(props.postId ? props.postId : postId));
     })();
   }, []);
+
 
   return (
     <div className={styles.cardContainer}>
@@ -30,10 +35,11 @@ const PostDetailCard = (props) => {
             return <li key={comment.id}>{comment.comment}</li>;
           })}
         </div>
+
         <div>
-          {/* <div>like, comment, share icons</div>
+          <div>like, comment, share icons</div>
           <div>Liked by {post?.likes.length} people</div>
-          <div>Add a comment..</div> */}
+          <div>Add a comment..</div>
         </div>
       </div>
     </div>

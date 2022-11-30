@@ -68,7 +68,7 @@
   }
 
   .likesDiv{
-    height:60px
+    height:75px
   }
   #likeButton{
     margin: 15px;
@@ -92,12 +92,14 @@
     margin-left: 10px;
     width:30px;
     height: 30px;
+    background-color: transparent;
   }
 
   .commentInput{
     width:300px;
     border: none;
     outline: none;
+    background-color: transparent;
   }
 
   .postComment{
@@ -106,6 +108,12 @@
     align-self: center;
     color:rgb(53, 149, 246);
     font-size: 14px;
-    background-color: white;
+    background-color: transparent;
     border: none;
+  }
+
+  .moreButton{
+    align-self: center;
+    border: none;
+    background-color: transparent;
   }
