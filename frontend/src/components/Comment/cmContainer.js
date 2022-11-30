@@ -9,7 +9,7 @@ const CmContainer = ({ post }) => {
   let comments = useSelector((state) => Object.values(state.comments));
 
   useEffect(() => {
-    dispatch(loadAllComments(post.id));
+    dispatch(loadAllComments(post?.id));
   }, [dispatch]);
 
   return (
