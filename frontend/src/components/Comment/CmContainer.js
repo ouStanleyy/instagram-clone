@@ -3,6 +3,7 @@ import { loadAllComments } from "../../store/comments";
 import { useEffect } from "react";
 import Comment from "./Comment";
 import styles from "./Comment.module.css";
+import { ProfilePicture } from "../Elements";
 
 const CmContainer = ({ post }) => {
   const dispatch = useDispatch();
@@ -21,10 +22,11 @@ const CmContainer = ({ post }) => {
         <div className={styles.cmHome}>
           <div className={styles.container}>
             <div className={styles.profilePicture}>
-              <img
+              {/* <img
                 src={post?.user?.profile_picture}
                 alt={post?.user?.username}
-              />
+              /> */}
+              <ProfilePicture user={post?.user} size={"medium"} />
             </div>
             <div className={styles.textContainer}>
               <span className={styles.username}>{post?.user?.username}</span>

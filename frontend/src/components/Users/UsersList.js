@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUsers } from "../../store/users";
 import styles from "./UsersList.module.css";
+import { ProfilePicture } from "../Elements";
+import SuggestionItem from "./SuggestionItem";
 
 function UsersList() {
   const dispatch = useDispatch();
@@ -20,23 +22,14 @@ function UsersList() {
 
   return (
     loaded && (
-      <>
-        <h3>Suggestions For You</h3>
-        <ul>
+      <div className={styles.suggestionContainer}>
+        <h3 className={styles.suggestionHeader}>Suggestions For You</h3>
+        <ul className={styles.suggestions}>
           {users.slice(0, 5).map((user) => {
-            return (
-              <li key={user.id}>
-                <img
-                  src={user.profile_picture}
-                  alt="profile"
-                  className={styles.profilePicture}
-                />
-                <Link to={`/users/${user.id}`}>{user.username}</Link>
-              </li>
-            );
+            return <SuggestionItem user={user} key={user.id} />;
           })}
         </ul>
-      </>
+      </div>
     )
   );
 }
