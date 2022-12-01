@@ -16,9 +16,9 @@ const PostFeedCard = ({ post }) => {
 
   return (
     <div className={styles.cardContainer}>
-      <PostHeader user={post?.user} />
+      <PostHeader user={post?.user} createdAt={post?.created_at} />
       <MediaCarousel medias={post?.media} />
-      <LikeBar />
+      <LikeBar post={post} />
       {/* <div className={styles.captionContainer}>
         <NavLink to={`/users/${post?.user_id}`} className={styles.username}>
           {post?.user?.username}

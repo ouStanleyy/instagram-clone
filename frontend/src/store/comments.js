@@ -1,4 +1,4 @@
-const ADD_COMMENT = "comments/add";
+export const ADD_COMMENT = "comments/add";
 const GET_All_COMMENTS = "comments/get";
 const EDIT_COMMENT = "comments/edit";
 const DELETE_COMMENT = "comments/delete";

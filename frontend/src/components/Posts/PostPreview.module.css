@@ -5,6 +5,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 6px;
+  margin: 6px 0;
 }
 
 .captionContainer{

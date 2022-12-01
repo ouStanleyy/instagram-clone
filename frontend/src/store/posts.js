@@ -1,3 +1,5 @@
+import { ADD_COMMENT } from "./comments";
+
 // constants
 const LOAD_POSTS_FEED = "posts/LOAD_POSTS_FEED";
 const LOAD_POST_DETAILS = "posts/LOAD_POST_DETAILS";
@@ -45,6 +47,17 @@ const postsReducer = (state = {}, action) => {
         ...state,
         [action.post.id]: { ...state[action.post.id], ...action.post },
       };
+    // case ADD_COMMENT:
+    //   return {
+    //     ...state,
+    //     [action.payload.post_id]: {
+    //       ...state[action.payload.post_id],
+    //       comments: [
+    //         ...state[action.payload.post_id].comments,
+    //         ...action.payload,
+    //       ],
+    //     },
+    //   };
     default:
       return state;
   }
