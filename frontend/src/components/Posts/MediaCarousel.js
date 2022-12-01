@@ -38,7 +38,7 @@ const MediaCarousel = ({ medias }) => {
       ))}
       <button
         className={`${styles.btn} ${styles.btnPrev} ${
-          currentSlide === 0 && styles.hideArrow
+          (currentSlide === 0 || hideArrows) && styles.hideArrow
         }`}
         onClick={handleSlidePrev}
       >

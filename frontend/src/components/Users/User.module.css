@@ -90,6 +90,7 @@
   position: relative;
   height: 308px;
   width: 308px;
+  /* aspect-ratio: 1/1; */
 }
 
 .previewMedia {
@@ -97,6 +98,7 @@
   width: 308px;
   height: 308px;
   top: 0;
+  object-fit: cover;
   bottom: 0;
   left: 0;
   right: 0;

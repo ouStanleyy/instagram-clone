@@ -11,6 +11,7 @@ function User() {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector((state) => state.users[userId]);
+  const [loaded, setLoaded] = useState(false);
   const [followsModal, setFollowsModal] = useState({
     show: false,
     followType: "",
@@ -49,6 +50,7 @@ function User() {
       try {
         await dispatch(getUserById(userId));
       } catch (err) {}
+      setLoaded(true);
     })();
   }, [dispatch, userId]);
 
@@ -62,122 +64,123 @@ function User() {
     </>
   );
 
-  return !user ? (
-    redirectMessage
-  ) : (
-    <>
-      {/* <div className={styles.userBody}> */}
-      {/* <div className={styles.userInnerBody}> */}
-      <div className={styles.userHeader}>
-        <img
-          src={user.profile_picture}
-          alt="profile"
-          className={styles.profilePicture}
-        />
-        <div className={styles.userDetails}>
-          <div className={styles.detailsHeader}>
-            <p className={styles.username}>{user.username}</p>
-          </div>
-          <div className={styles.detailsStats}>
-            <p>
-              <span>{user.posts?.length}</span> posts
-            </p>
-            <p
-              className={styles.followModal}
-              onClick={toggleFollowsModal("Followers")}
-            >
-              <span>{user.num_of_followers}</span> followers
-            </p>
-            <p
-              className={styles.followModal}
-              onClick={toggleFollowsModal("Following")}
-            >
-              <span>{user.num_of_followings}</span> following
-            </p>
-          </div>
-          <p className={styles.fullName}>{user.full_name}</p>
-          <p className={styles.bio}>{user.bio}</p>
-        </div>
-      </div>
-      <div className={styles.userNavBar}>
-        <div className={styles.userNavItem}>
-          <div className={styles.navSvg}>
-            <svg
-              aria-label=""
-              class="_ab6-"
-              color="#262626"
-              fill="#262626"
-              height="12"
-              role="img"
-              viewBox="0 0 24 24"
-              width="12"
-            >
-              <rect
-                fill="none"
-                height="18"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                width="18"
-                x="3"
-                y="3"
-              ></rect>
-              <line
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                x1="9.015"
-                x2="9.015"
-                y1="3"
-                y2="21"
-              ></line>
-              <line
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                x1="14.985"
-                x2="14.985"
-                y1="3"
-                y2="21"
-              ></line>
-              <line
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                x1="21"
-                x2="3"
-                y1="9.015"
-                y2="9.015"
-              ></line>
-              <line
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                x1="21"
-                x2="3"
-                y1="14.985"
-                y2="14.985"
-              ></line>
-            </svg>
-          </div>
-          <div className={styles.navText}>
-            <p>POSTS</p>
+  return (
+    loaded &&
+    (!user ? (
+      redirectMessage
+    ) : (
+      <>
+        {/* <div className={styles.userBody}> */}
+        {/* <div className={styles.userInnerBody}> */}
+        <div className={styles.userHeader}>
+          <img
+            src={user.profile_picture}
+            alt="profile"
+            className={styles.profilePicture}
+          />
+          <div className={styles.userDetails}>
+            <div className={styles.detailsHeader}>
+              <p className={styles.username}>{user.username}</p>
+            </div>
+            <div className={styles.detailsStats}>
+              <p>
+                <span>{user.posts?.length}</span> posts
+              </p>
+              <p
+                className={styles.followModal}
+                onClick={toggleFollowsModal("Followers")}
+              >
+                <span>{user.num_of_followers}</span> followers
+              </p>
+              <p
+                className={styles.followModal}
+                onClick={toggleFollowsModal("Following")}
+              >
+                <span>{user.num_of_followings}</span> following
+              </p>
+            </div>
+            <p className={styles.fullName}>{user.full_name}</p>
+            <p className={styles.bio}>{user.bio}</p>
           </div>
         </div>
-      </div>
-      <div className={styles.postsContainer}>
-        {user.posts?.map((post, idx) => {
-          return (
-            <>
+        <div className={styles.userNavBar}>
+          <div className={styles.userNavItem}>
+            <div className={styles.navSvg}>
+              <svg
+                aria-label=""
+                // class="_ab6-"
+                color="#262626"
+                fill="#262626"
+                height="12"
+                role="img"
+                viewBox="0 0 24 24"
+                width="12"
+              >
+                <rect
+                  fill="none"
+                  height="18"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                ></rect>
+                <line
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  x1="9.015"
+                  x2="9.015"
+                  y1="3"
+                  y2="21"
+                ></line>
+                <line
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  x1="14.985"
+                  x2="14.985"
+                  y1="3"
+                  y2="21"
+                ></line>
+                <line
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  x1="21"
+                  x2="3"
+                  y1="9.015"
+                  y2="9.015"
+                ></line>
+                <line
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  x1="21"
+                  x2="3"
+                  y1="14.985"
+                  y2="14.985"
+                ></line>
+              </svg>
+            </div>
+            <div className={styles.navText}>
+              <p>POSTS</p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.postsContainer}>
+          {user.posts?.map((post, idx) => {
+            return (
               <div key={post.id} className={styles.postContainer}>
                 {/* <Link to={`/posts/${post.id}`}> */}
                 <div
@@ -188,7 +191,7 @@ function User() {
                     <div className={styles.detailsSvg}>
                       <svg
                         aria-label="Like"
-                        class="_ab6-"
+                        // class="_ab6-"
                         color="#ffffff"
                         fill="#ffffff"
                         height="24"
@@ -213,7 +216,7 @@ function User() {
                     <div className={styles.detailsSvg}>
                       <svg
                         aria-label="Comment"
-                        class="_ab6-"
+                        // class="_ab6-"
                         color="#ffffff"
                         fill="#ffffff"
                         height="24"
@@ -241,28 +244,28 @@ function User() {
                   className={styles.previewMedia}
                 />
                 {/* </Link> */}
+                {postModal[idx] && (
+                  <Modal onClose={togglePostModal(idx)}>
+                    <PostDetailCard postId={post.id} />
+                  </Modal>
+                )}
               </div>
-              {postModal[idx] && (
-                <Modal onClose={togglePostModal(idx)}>
-                  <PostDetailCard postId={post.id} />
-                </Modal>
-              )}
-            </>
-          );
-        })}
-      </div>
-      {followsModal.show && (
-        <Modal onClose={toggleFollowsModal()}>
-          <Follows
-            followType={followsModal.followType}
-            userId={userId}
-            onClose={toggleFollowsModal()}
-          />
-        </Modal>
-      )}
-      {/* </div> */}
-      {/* </div> */}
-    </>
+            );
+          })}
+        </div>
+        {followsModal.show && (
+          <Modal onClose={toggleFollowsModal()}>
+            <Follows
+              followType={followsModal.followType}
+              userId={userId}
+              onClose={toggleFollowsModal()}
+            />
+          </Modal>
+        )}
+        {/* </div> */}
+        {/* </div> */}
+      </>
+    ))
   );
 }
 export default User;

@@ -15,7 +15,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("users.id")))
-    caption = db.Column(db.Text(2200))
+    caption = db.Column(db.Text())
     is_story = db.Column(db.Boolean, nullable=False, default=False)
     show_like_count = db.Column(db.Boolean, nullable=False, default=True)
     allow_comments = db.Column(db.Boolean, nullable=False, default=True)

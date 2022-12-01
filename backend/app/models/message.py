@@ -15,7 +15,7 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     recipient_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-    message = db.Column(db.Text(1000))
+    message = db.Column(db.Text())
     time_sent = db.Column(db.DateTime(timezone=True),
                           server_default=func.now())
 
