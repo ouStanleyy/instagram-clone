@@ -7,8 +7,8 @@ import DeleteModal from "./DeleteModal";
 
 const Comment = ({ comment }) => {
     const user = useSelector((state) => state.session.user);
-    const owner_id = useSelector((state) =>state.posts[comment?.post_id].user_id)
-    const is_owner = (user.id == owner_id) || (user.id == comment.user_id)
+    const owner_id = useSelector((state) =>state.posts[comment?.post_id]?.user_id)
+    const is_owner = (user.id == owner_id) || (user.id == comment?.user_id)
 
     const [deleteModal, setDeleteModal] = useState(false)
     const toggleDeleteModal = ()=>{
