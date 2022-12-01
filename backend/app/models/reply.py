@@ -14,7 +14,7 @@ class Reply(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     comment_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('comments.id')))
-    reply = db.Column(db.Text(2200))
+    reply = db.Column(db.Text())
 
     user = db.relationship("User", back_populates='replies')
     comment = db.relationship("Comment", back_populates='replies')
