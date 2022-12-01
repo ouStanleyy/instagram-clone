@@ -26,7 +26,7 @@ const PostDetailCard = (props) => {
       <div className={styles.info}>
         <PostHeader user={post?.user} />
         <CmContainer post={post} />
-        <LikeBar />
+        <LikeBar post={post} />
         <InputContainer post={post} />
       </div>
     </div>
