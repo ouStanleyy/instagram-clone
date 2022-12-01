@@ -1,15 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { createComment } from "../../store/comments";
 import styles from "./Comment.module.css";
 // import styleSvg from "../NavBar/NavItem.module.css";
 import EmojiWindow from "./EmojiWindow";
 // import CommentsForm from "./CmContainer";
 
-const InputContainer = ({ post }) => {
+const InputContainer = ({ post, cmInputRef }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  // let post_id = 1
   const { id } = user;
   const [comment, setComment] = useState("");
   // const [errors, setErrors] = useState([]);
@@ -41,6 +40,7 @@ const InputContainer = ({ post }) => {
           className={styles.commentInput}
           placeholder="Add a comment..."
           value={comment}
+          ref={cmInputRef}
           onChange={(e) => setComment(e.target.value)}
         />
         <button className={styles.postComment} type="submit">

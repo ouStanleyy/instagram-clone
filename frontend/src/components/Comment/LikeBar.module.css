@@ -1,0 +1,24 @@
+
+.likeBarContainer{
+    height:120px
+}
+
+#svg{
+margin-left:15px;
+margin-top: 10px;
+}
+
+.likesLabelDiv{
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.likesLabel{
+    font-weight: 400;
+    font-size: 14px;
+}
+.likesLabelBold{
+    font-weight: 500;
+    margin-left: 4px;
+}
+

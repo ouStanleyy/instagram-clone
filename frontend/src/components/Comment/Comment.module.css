@@ -16,7 +16,7 @@
 }
 .cmHome{
     position:absolute;
-	top:0;
+	  top:0;
   	animation: scroll 10s linear 1s infinite;
 }
 
@@ -75,15 +75,6 @@
     background-color: transparent;
   }
 
-
-  .likesDiv{
-    height:75px
-  }
-  #likeButton{
-    margin: 15px;
-    margin-top: 10px;
-  }
-
   .inputContainer{
 
     border-top: 1px solid rgb(183, 182, 182, 0.250);
@@ -119,5 +110,6 @@
     font-size: 14px;
     background-color: transparent;
     border: none;
+    font-weight:500
   }
 
