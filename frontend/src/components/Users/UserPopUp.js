@@ -25,7 +25,9 @@ function UserPopUp({ userId, onClose }) {
         <div className={styles.userHeader}>
           <ProfilePicture user={user} size={"large"} onClose={onClose} />
           <div className={styles.userDetails}>
-            <p className={styles.username}>{user?.username}</p>
+            <p onClick={onClose} className={styles.username}>
+              <Link to={`/users/${userId}`}>{user?.username}</Link>
+            </p>
             <p className={styles.fullName}>{user?.full_name}</p>
           </div>
         </div>
