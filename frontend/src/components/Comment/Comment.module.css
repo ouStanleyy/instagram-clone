@@ -39,81 +39,88 @@
     overflow: hidden;
   }
 
-  .profilePicture img {
+.profilePicture img {
     max-width: 100%;
     max-height: 100%;
-  }
+}
 
-  .textContainer{
+.textContainer{
     width: 320px;
     height: 35px;
     display: flex;
     /* flex-wrap: wrap; */
     /* gap: 10px; */
-  }
+}
 
-  .username{
-    font-weight: bold;
-    color: #262626;
-    font-size: 13px;
-  }
+.username{
+  font-weight: bold;
+  color: #262626;
+  font-size: 13px;
+}
 
-  .comment{
-    font-size: 13px;
-    color:#262626;
-    margin-left: 5px;
-  }
+.comment{
+  font-size: 13px;
+  color:#262626;
+  margin-left: 5px;
+}
 
-  .reply{
-    text-decoration: none;
-    color: #8E8E8E;
-    font-size: 13px;
-    margin-left: 10px;
-  }
-  .replyContainer{
-    display: flex;
-  }
-  .moreButton{
-    align-self: center;
-    border: none;
-    background-color: transparent;
-  }
+.reply{
+  text-decoration: none;
+  color: #8E8E8E;
+  font-size: 13px;
+  margin-left: 10px;
+}
 
-  .inputContainer{
-    /* border-top: 1px solid rgb(183, 182, 182, 0.250); */
-    /* border: 1px solid blue; */
-    /* width: 400px; */
-    height: 55px;
-    display: flex;
-    position: relative;
-  }
+.replyContainer{
+  display: flex;
+}
 
-  .emojiInput{
-    width:50px;
-    align-self: center;
-  }
-  .emojiIcon{
-    margin-left: 10px;
-    width:30px;
-    height: 30px;
-    background-color: transparent;
-  }
+.moreButton{
+  align-self: center;
+  border: none;
+  background-color: transparent;
+}
 
-  .commentInput{
-    width:300px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-  }
+.inputContainer{
+  /* border-top: 1px solid rgb(183, 182, 182, 0.250); */
+  /* border: 1px solid blue; */
+  /* width: 400px; */
+  height: 55px;
+  display: flex;
+  position: relative;
+}
 
-  .postComment{
-    width:50px;
-    height: 42px;
-    align-self: center;
-    color:rgb(53, 149, 246);
-    font-size: 14px;
-    background-color: transparent;
-    border: none;
-    font-weight:500;
-    cursor: pointer;
-  }
+.emojiInput{
+  width:50px;
+  align-self: center;
+}
+
+.emojiIcon{
+  margin-left: 10px;
+  width:30px;
+  height: 30px;
+  background-color: transparent;
+}
+
+.commentInput{
+  width:300px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.postComment {
+  width:50px;
+  height: 42px;
+  align-self: center;
+  color:rgb(53, 149, 246);
+  font-size: 14px;
+  background-color: transparent;
+  border: none;
+  font-weight:500;
+  cursor: pointer;
+}
+
+.disablePost {
+  opacity: 0.6;
+}

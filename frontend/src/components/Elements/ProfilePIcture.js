@@ -19,7 +19,13 @@ const ProfilePicture = ({ user, size = "large", onClose }) => {
   return (
     <Link to={`/users/${user?.id}`}>
       <div onClick={onClose} className={style}>
-        <img src={user?.profile_picture} alt="profile" />
+        <img
+          src={
+            user?.profile_picture ||
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/680px-Default_pfp.svg.png?20220226140232"
+          }
+          alt="profile"
+        />
       </div>
     </Link>
   );

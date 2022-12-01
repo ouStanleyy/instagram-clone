@@ -44,7 +44,13 @@ const InputContainer = ({ post, cmInputRef }) => {
           onChange={(e) => setComment(e.target.value)}
         />
       </div>
-      <button className={styles.postComment} type="submit">
+      <button
+        className={`${styles.postComment} ${
+          !comment.length && styles.disablePost
+        }`}
+        type="submit"
+        disabled={!comment.length}
+      >
         Post
       </button>
     </form>

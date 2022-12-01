@@ -1,9 +1,54 @@
-.feedContainer {
+.feedLayout {
   border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  margin-left: 244px;
+  padding-top: 48px;
+}
+
+.feed {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  margin-left: 244px;
+}
+
+.sideSection {
+  /* border: 1px solid red; */
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.userCard {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.username, .fullname {
+  font-size: 14px;
+  padding-bottom: 2px;
+}
+
+.username {
+  color: #262626;
+  font-weight: 500;
+}
+
+.fullname {
+  color: #8E8E8E
 }
