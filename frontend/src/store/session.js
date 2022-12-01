@@ -1,6 +1,7 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const LOAD_FOLLOWING = "session/LOAD_FOLLOWING";
 
 // ACTION
 const setUser = (user) => ({
@@ -12,7 +13,10 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-const initialState = { user: null };
+const loadFollowing = (following) => ({
+  type: LOAD_FOLLOWING,
+  following,
+});
 
 // THUNKS
 export const authenticate = () => async (dispatch) => {
@@ -98,12 +102,29 @@ export const signUp =
     }
   };
 
-export default function reducer(state = initialState, action) {
+export const getFollowing = () => async (dispatch, getState) => {
+  const { id } = getState().session.user;
+  const res = await fetch(`/api/users/${id}/follows`);
+  const { Follows } = await res.json();
+
+  if (res.ok) {
+    const normalizedData = {};
+    Follows.filter((follow) => follow.follower_id === parseInt(id)).forEach(
+      (follow) => (normalizedData[follow.id] = follow)
+    );
+    dispatch(loadFollowing(normalizedData));
+    return normalizedData;
+  }
+};
+
+export default function reducer(state = { user: null, following: {} }, action) {
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload };
+      return { ...state, user: action.payload };
     case REMOVE_USER:
-      return { user: null };
+      return { user: null, following: {} };
+    case LOAD_FOLLOWING:
+      return { ...state, following: action.following };
     default:
       return state;
   }

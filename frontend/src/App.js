@@ -5,7 +5,7 @@ import SignUpForm from "./components/auth/SignUpForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import NavBar from "./components/NavBar/NavBar";
 import { UsersList, User } from "./components/Users";
-import { authenticate } from "./store/session";
+import { authenticate, getFollowing } from "./store/session";
 import Splash from "./components/Splash/Splash";
 import { PostDetailCard } from "./components/Posts";
 import styles from "./App.module.css";
@@ -20,6 +20,7 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
+      await dispatch(getFollowing());
       setLoaded(true);
     })();
   }, [dispatch]);
