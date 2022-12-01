@@ -1,25 +1,18 @@
-import MediaCarousel from "./MediaCarousel";
-import PostHeader from "./PostHeader";
-import styles from "./PostFeedCard.module.css";
-import { InputContainer, CmContainer, LikeBar } from "../Comment";
-import { Modal } from "../../context/Modal";
 import { useState } from "react";
-import PostDetailCard from "./PostDetailCard";
+import styles from "./PostPreview.module.css";
 import { NavLink } from "react-router-dom";
-import PostPreview from "./PostPreview";
+import { Modal } from "../../context/Modal";
+import PostDetailCard from "./PostDetailCard";
 
-const PostFeedCard = ({ post }) => {
+const PostPreview = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
-  const commentPreview = post?.comments?.[0];
+  const commentPreview = post?.comments?.[post?.comments?.length - 1];
 
   const handleToggleModal = () => setShowModal((prev) => !prev);
 
   return (
-    <div className={styles.cardContainer}>
-      <PostHeader user={post?.user} />
-      <MediaCarousel medias={post?.media} />
-      <LikeBar />
-      {/* <div className={styles.captionContainer}>
+    <div className={styles.previewContainer}>
+      <div className={styles.captionContainer}>
         <NavLink to={`/users/${post?.user_id}`} className={styles.username}>
           {post?.user?.username}
         </NavLink>
@@ -42,16 +35,13 @@ const PostFeedCard = ({ post }) => {
           View all {post?.num_of_comments} comments
         </button>
       )}
-      <InputContainer post={post} />
       {showModal && (
         <Modal onClose={handleToggleModal}>
           <PostDetailCard postId={post.id} />
         </Modal>
-      )} */}
-      <PostPreview post={post} />
-      <InputContainer post={post} />
+      )}
     </div>
   );
 };
 
-export default PostFeedCard;
+export default PostPreview;
