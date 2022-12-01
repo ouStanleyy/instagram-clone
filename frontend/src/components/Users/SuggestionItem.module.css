@@ -1,0 +1,29 @@
+.suggestionContainer {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.userInfo {
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.username, .follow {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.username {
+  color: #262626;
+  font-size: 14px;
+}
+
+.follow {
+  color: #0095F6;
+  font-size: 12px;
+}

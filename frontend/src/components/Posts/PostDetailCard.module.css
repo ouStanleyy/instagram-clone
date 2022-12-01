@@ -23,6 +23,11 @@
   flex: 2;
 }
 
+.likes {
+  /* border: 1px solid red; */
+  padding: 4px 16px;
+}
+
 .comments {
   padding: 6px 8px;
   align-self: stretch;

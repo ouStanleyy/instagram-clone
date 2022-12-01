@@ -2,20 +2,19 @@ import { icons } from "../NavBar/icons";
 import styles from "./LikeBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import {loadAllLikes} from "../../store/likes"
+import { loadAllLikes } from "../../store/likes";
 
-const LikeBar = ({post, onInputClick}) => {
-
+const LikeBar = ({ post, onInputClick }) => {
   const dispatch = useDispatch();
   const likes = useSelector((state) => Object.values(state.likes));
   // const firstLiker = useSelector((state)=>state.users[likes[0]?.user_id]?.username)
-  const firstLiker = likes[0]?.username
+  const firstLiker = likes[0]?.username;
 
-  useEffect(()=>{
-    (async ()=>{
-      await dispatch (loadAllLikes(post?.id))
+  useEffect(() => {
+    (async () => {
+      await dispatch(loadAllLikes(post?.id));
     })();
-  },[dispatch, post?.id])
+  }, [dispatch, post?.id]);
 
   return (
     <div className={styles.likeBarContainer}>
@@ -84,21 +83,25 @@ const LikeBar = ({post, onInputClick}) => {
         </svg>
       </div>
       <div className={styles.likesLabelDiv}>
-        {likes.length == 1 ? <span
-        className={styles.likesLabel}
-        >Liked by {firstLiker} </span> :""}
+        {likes.length == 1 ? (
+          <span className={styles.likesLabel}>Liked by {firstLiker} </span>
+        ) : (
+          ""
+        )}
       </div>
       <div className={styles.likesLabelDiv}>
-        {likes.length > 1 ?
-        <span
-        className={styles.likesLabel}
-        >Liked by
-        <span
-        className={styles.likesLabelBold}
-        >{firstLiker}</span> and
-        <span
-        className={styles.likesLabelBold}
-        >{likes.length-1}</span>  others</span>:""}
+        {likes.length > 1 ? (
+          <span className={styles.likesLabel}>
+            Liked by<span className={styles.likesLabelBold}>{firstLiker}</span>{" "}
+            and
+            <span className={styles.likesLabelBold}>
+              {likes.length - 1}
+            </span>{" "}
+            others
+          </span>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
