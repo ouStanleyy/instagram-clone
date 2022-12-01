@@ -27,6 +27,7 @@
   border: none;
   cursor: pointer;
   background-color: transparent;
+  z-index: 10;
 }
 
 .btnPrev {

@@ -15,7 +15,7 @@
   margin-bottom: 16px;
 }
 
-label {
+.inputContainer label {
   position: absolute;
   font-size: 8px;
   top: 6px;

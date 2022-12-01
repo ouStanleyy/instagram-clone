@@ -60,3 +60,21 @@
 .logo:hover {
   background-color: transparent;
 }
+
+.instagramLogo {
+  display: none;
+}
+
+@media screen and (max-width: 1264px){
+  .profilePicture + span, .svgContainer + span {
+    display: none;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .instagramLogo {
+    display: inline-block;
+  }
+}

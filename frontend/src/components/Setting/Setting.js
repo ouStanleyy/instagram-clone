@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Setting.module.css";
 import { NavLink, Route, Switch } from "react-router-dom";
+import EditProfile from "./EditProfile";
 
 const Setting = () => {
   const user = useSelector((state) => state.session.user);
@@ -25,7 +26,10 @@ const Setting = () => {
       </div>
       <div className={styles.settingOption}>
         <Switch>
-          <Route path="/account/edit">Editing</Route>
+          <Route path="/account/edit">
+            <EditProfile />
+          </Route>
+          <Route path="/account/password">Password</Route>
         </Switch>
       </div>
     </div>

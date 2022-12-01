@@ -21,6 +21,7 @@ const NavItem = ({ type }) => {
   const iconButton = (
     <>
       <div className={styles.svgContainer}>{icons[type]}</div>
+      {isLogo && <div className={styles.instagramLogo}>{icons["Logo"]}</div>}
       <span>{isLogo ? "" : type}</span>
     </>
   );
