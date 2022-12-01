@@ -6,6 +6,7 @@ import { getUserById } from "../../store/users";
 import Follows from "../Follows/Follows";
 import { PostDetailCard } from "../Posts";
 import styles from "./User.module.css";
+import { ProfilePicture } from "../Elements";
 
 function User() {
   const dispatch = useDispatch();
@@ -73,11 +74,12 @@ function User() {
         {/* <div className={styles.userBody}> */}
         {/* <div className={styles.userInnerBody}> */}
         <div className={styles.userHeader}>
-          <img
+          {/* <img
             src={user.profile_picture}
             alt="profile"
             className={styles.profilePicture}
-          />
+          /> */}
+          <ProfilePicture user={user} size={"XLarge"} />
           <div className={styles.userDetails}>
             <div className={styles.detailsHeader}>
               <p className={styles.username}>{user.username}</p>

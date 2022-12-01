@@ -7,6 +7,7 @@ import { UsersList } from "../Users";
 import { ProfilePicture } from "../Elements";
 import usersReducer from "../../store/users";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -38,9 +39,10 @@ const Feed = () => {
               <div className={styles.fullname}>{user?.full_name}</div>
             </div>
           </div>
-          <div>Switch</div>
+          <div className={styles.switchButton}>Switch</div>
         </div>
         <UsersList />
+        <Footer />
       </div>
     </div>
   );

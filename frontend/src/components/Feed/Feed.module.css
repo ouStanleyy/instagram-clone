@@ -52,3 +52,10 @@
 .fullname {
   color: #8E8E8E
 }
+
+.switchButton {
+  color: #0095F6;
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+}

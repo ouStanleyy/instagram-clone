@@ -1,8 +1,14 @@
 .profileSmall,
 .profileMedium,
-.profileLarge {
+.profileLarge,
+.profileXLarge {
   border-radius: 50%;
   overflow: hidden;
+}
+
+.profileXLarge {
+  width: 150px;
+  height: 150px;
 }
 
 .profileLarge {

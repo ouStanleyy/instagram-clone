@@ -12,8 +12,11 @@ const ProfilePicture = ({ user, size = "large", onClose }) => {
     case "medium":
       style = styles.profileMedium;
       break;
-    default:
+    case "large":
       style = styles.profileLarge;
+      break;
+    default:
+      style = styles.profileXLarge;
   }
 
   return (
