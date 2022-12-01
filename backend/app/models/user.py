@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_picture = db.Column(db.String)
     phone_number = db.Column(db.String(10), unique=True)
-    gender = db.Column(db.Enum("Male", "Female", "Non-binary", "Prefer not to say"), nullable=False, default="Prefer not to say")
+    gender = db.Column(db.Enum("Male", "Female", "Non-binary", "Prefer not to say", name='gender'), nullable=False, default="Prefer not to say")
     is_verified = db.Column(db.Boolean, nullable=False, default=False)
     is_private = db.Column(db.Boolean, nullable=False, default=False)
 

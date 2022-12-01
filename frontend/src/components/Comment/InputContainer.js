@@ -18,7 +18,7 @@ const InputContainer = ({ post, cmInputRef }) => {
     e.preventDefault();
 
     const payload = { comment, user_id: id };
-    console.log("HERE", post.id);
+
     dispatch(createComment(payload, post.id));
     setComment("");
   };

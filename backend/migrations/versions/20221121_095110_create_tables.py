@@ -1,12 +1,16 @@
 """create tables
 
 Revision ID: 7e6c5e90ec4b
-Revises: 
+Revises:
 Create Date: 2022-11-21 09:51:10.372074
 
 """
 from alembic import op
 import sqlalchemy as sa
+
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
@@ -27,7 +31,7 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('profile_picture', sa.String(), nullable=True),
     sa.Column('phone_number', sa.String(length=10), nullable=True),
-    sa.Column('gender', sa.Enum('Male', 'Female', 'Non-binary', 'Prefer not to say'), nullable=False),
+    sa.Column('gender', sa.Enum('Male', 'Female', 'Non-binary', 'Prefer not to say', name='gender'), nullable=False),
     sa.Column('is_verified', sa.Boolean(), nullable=False),
     sa.Column('is_private', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
@@ -48,7 +52,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=True),
     sa.Column('recipient_id', sa.Integer(), nullable=True),
-    sa.Column('message', sa.Text(length=1000), nullable=True),
+    sa.Column('message', sa.Text(), nullable=True),
     sa.Column('time_sent', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.ForeignKeyConstraint(['recipient_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
@@ -57,7 +61,7 @@ def upgrade():
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('caption', sa.Text(length=2200), nullable=True),
+    sa.Column('caption', sa.Text(), nullable=True),
     sa.Column('is_story', sa.Boolean(), nullable=False),
     sa.Column('show_like_count', sa.Boolean(), nullable=False),
     sa.Column('allow_comments', sa.Boolean(), nullable=False),
@@ -70,7 +74,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('post_id', sa.Integer(), nullable=True),
-    sa.Column('comment', sa.Text(length=2200), nullable=True),
+    sa.Column('comment', sa.Text(), nullable=True),
     sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -102,12 +106,22 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('comment_id', sa.Integer(), nullable=True),
-    sa.Column('reply', sa.Text(length=2200), nullable=True),
+    sa.Column('reply', sa.Text(), nullable=True),
     sa.ForeignKeyConstraint(['comment_id'], ['comments.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE follows SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE media SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE views SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE replies SET SCHEMA {SCHEMA};")
 
 
 def downgrade():

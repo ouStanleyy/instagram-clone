@@ -16,7 +16,7 @@ from .api.reply_routes import reply_routes
 from .seeds import seed_commands
 from .config import Config
 
-app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
+app = Flask(__name__, static_folder='../../frontend/build', static_url_path='/')
 
 # Setup login manager
 login = LoginManager(app)
@@ -97,3 +97,11 @@ def api_help():
                               app.view_functions[rule.endpoint].__doc__]
                   for rule in app.url_map.iter_rules() if rule.endpoint != 'static'}
     return route_list
+
+
+@app.errorhandler(404)
+def not_found(e):
+    """
+    Any unknown URLs that return a 404 error will return the page that bootstraps the React application
+    """
+    return app.send_static_file('index.html')

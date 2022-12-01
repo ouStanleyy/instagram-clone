@@ -12,8 +12,8 @@ class Follow(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    following_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    follower_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    following_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     is_pending = db.Column(db.Boolean, nullable=False, default=False)
 
     follower = db.relationship("User", foreign_keys=[follower_id], back_populates='followings')
