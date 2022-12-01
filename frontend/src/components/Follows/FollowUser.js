@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getUserById } from "../../store/users";
 import { ProfilePicture } from "../Elements";
 import { UserPopUp } from "../Users";
 import styles from "./FollowUser.module.css";
 
-function FollowUser({ followId, onClose }) {
+function FollowUser({ followId, currUser, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users[followId]);
+  const isCurrUser = currUser.id === followId;
   const [loaded, setLoaded] = useState(false);
   const [userPopUp, setUserPopUp] = useState(false);
   const [overPopUp, setOverPopUp] = useState(false);
@@ -45,13 +47,16 @@ function FollowUser({ followId, onClose }) {
           <p
             onMouseEnter={() => setOverUser(true)}
             onMouseLeave={() => setOverUser(false)}
+            onClick={onClose}
             className={styles.username}
           >
-            {user?.username}
+            <Link to={`/users/${followId}`}>{user?.username}</Link>
           </p>
           <p className={styles.fullName}>{user?.full_name}</p>
         </div>
-        <button className={styles.followButton}>Following</button>
+        {!isCurrUser && (
+          <button className={styles.followButton}>Following</button>
+        )}
         {userPopUp && (
           <div
             onMouseEnter={() => setOverPopUp(true)}
