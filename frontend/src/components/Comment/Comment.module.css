@@ -16,7 +16,7 @@
 }
 .cmHome{
     position:absolute;
-	top:0;
+	  top:0;
   	animation: scroll 10s linear 1s infinite;
 }
 
@@ -66,13 +66,13 @@
     font-size: 13px;
     margin-left: 10px;
   }
-
-  .likesDiv{
-    height:75px
+  .replyContainer{
+    display: flex;
   }
-  #likeButton{
-    margin: 15px;
-    margin-top: 10px;
+  .moreButton{
+    align-self: center;
+    border: none;
+    background-color: transparent;
   }
 
   .inputContainer{
@@ -109,10 +109,6 @@
     font-size: 14px;
     background-color: transparent;
     border: none;
+    font-weight:500
   }
 
-  .moreButton{
-    align-self: center;
-    border: none;
-    background-color: transparent;
-  }
