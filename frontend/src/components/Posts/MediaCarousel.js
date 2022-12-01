@@ -1,12 +1,13 @@
 import styles from "./MediaCarousel.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const MediaCarousel = ({ medias }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = document.querySelectorAll(`.${styles.slide}`);
+  const slides = useRef([]);
+  const hideArrow = medias?.length < 2;
 
   useEffect(() => {
-    slides.forEach((slide, idx) => {
+    slides.current.forEach((slide, idx) => {
       slide.style.transform = `translateX(${100 * (idx - currentSlide)}%)`;
     });
   }, [currentSlide]);
@@ -27,10 +28,12 @@ const MediaCarousel = ({ medias }) => {
     <div className={styles.slider}>
       {medias?.map((media, idx) => (
         <div
+          key={idx}
+          ref={(el) => (slides.current[idx] = el)}
           className={styles.slide}
           style={{ transform: `translateX(${idx * 100}%)` }}
         >
-          <img src={media.url} key={idx} alt="testing" />
+          <img src={media.url} alt="testing" />
         </div>
       ))}
       <button
@@ -45,7 +48,8 @@ const MediaCarousel = ({ medias }) => {
       </button>
       <button
         className={`${styles.btn} ${styles.btnNext} ${
-          currentSlide === slides.length - 1 && styles.hideArrow
+          (currentSlide === slides?.current?.length - 1 || hideArrow) &&
+          styles.hideArrow
         }`}
         onClick={handleSlideNext}
       >

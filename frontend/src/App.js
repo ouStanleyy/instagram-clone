@@ -10,6 +10,7 @@ import Splash from "./components/Splash/Splash";
 import { PostDetailCard } from "./components/Posts";
 import styles from "./App.module.css";
 import { Setting } from "./components/Setting";
+import { Feed } from "./components/Feed";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -32,7 +33,7 @@ function App() {
       {user && <NavBar />}
       <Switch>
         <Route path="/" exact={true}>
-          <Splash user={user} />
+          {user ? <Feed /> : <Splash />}
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
