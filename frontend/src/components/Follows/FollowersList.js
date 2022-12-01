@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFollowers } from "../../store/follows";
 import FollowUser from "./FollowUser";
@@ -9,27 +9,33 @@ function FollowersList({ userId, onClose }) {
   const followers = useSelector((state) =>
     Object.values(state.follows.followers)
   );
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
         await dispatch(getFollowers(userId));
+        setLoaded(true);
       } catch (err) {}
     })();
   }, [dispatch, userId]);
 
   return (
-    <>
-      {followers
-        .filter((follow) => !follow.is_pending)
-        .map((follow) => {
-          return (
-            <div key={follow.id}>
-              <FollowUser followId={follow.follower_id} onClose={onClose} />
-            </div>
-          );
-        })}
-    </>
+    loaded && (
+      <>
+        {followers
+          .filter((follow) => !follow.is_pending)
+          .map((follow) => {
+            return (
+              <FollowUser
+                key={follow.id}
+                followId={follow.follower_id}
+                onClose={onClose}
+              />
+            );
+          })}
+      </>
+    )
   );
 }
 

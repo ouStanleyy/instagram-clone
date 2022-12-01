@@ -102,6 +102,6 @@ def api_help():
 @app.errorhandler(404)
 def not_found(e):
     """
-    Flips error responses
+    Any unknown URLs that return a 404 error will return the page that bootstraps the React application
     """
     return app.send_static_file('index.html')
