@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 const MediaCarousel = ({ medias }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = document.querySelectorAll(`.${styles.slide}`);
+  const hideArrows = medias?.length < 2;
 
   useEffect(() => {
     slides.forEach((slide, idx) => {
@@ -35,23 +36,23 @@ const MediaCarousel = ({ medias }) => {
       ))}
       <button
         className={`${styles.btn} ${styles.btnPrev} ${
-          currentSlide === 0 && styles.hideArrow
+          (currentSlide === 0 || hideArrows) && styles.hideArrow
         }`}
         onClick={handleSlidePrev}
       >
-        <span
-          className={`material-symbols-outlined + ${styles.leftArrow}`}
-        ></span>
+        <span className={`material-symbols-outlined + ${styles.leftArrow}`}>
+          expand_circle_down
+        </span>
       </button>
       <button
         className={`${styles.btn} ${styles.btnNext} ${
-          currentSlide === slides.length - 1 && styles.hideArrow
+          (currentSlide === slides.length - 1 || hideArrows) && styles.hideArrow
         }`}
         onClick={handleSlideNext}
       >
-        <span
-          className={`material-symbols-outlined + ${styles.rightArrow}`}
-        ></span>
+        <span className={`material-symbols-outlined + ${styles.rightArrow}`}>
+          expand_circle_down
+        </span>
       </button>
     </div>
   );
