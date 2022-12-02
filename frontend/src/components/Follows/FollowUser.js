@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getUserById } from "../../store/users";
 import { ProfilePicture } from "../Elements";
 import { UserPopUp } from "../Users";
+import FollowButton from "./FollowButton";
 import styles from "./FollowUser.module.css";
 
 function FollowUser({ followId, currUser, onClose }) {
@@ -55,7 +56,8 @@ function FollowUser({ followId, currUser, onClose }) {
           <p className={styles.fullName}>{user?.full_name}</p>
         </div>
         {!isCurrUser && (
-          <button className={styles.followButton}>Following</button>
+          // <button className={styles.followButton}>Following</button>
+          <FollowButton user={user} />
         )}
         {userPopUp && (
           <div

@@ -33,7 +33,7 @@ function UserPopUp({ userId, onClose }) {
         </div>
         <div className={styles.detailsStats}>
           <p>
-            <span>{user?.posts?.length}</span> posts
+            <span>{user?.posts?.length || 0}</span> posts
           </p>
           <p>
             <span>{user?.num_of_followers}</span> followers
