@@ -19,8 +19,8 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await dispatch(authenticate());
-      await dispatch(getFollowing());
+      const authenticated = await dispatch(authenticate());
+      if (authenticated) await dispatch(getFollowing());
       setLoaded(true);
     })();
   }, [dispatch]);
