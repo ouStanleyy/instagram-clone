@@ -2,6 +2,7 @@ import styles from "./LikeBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loadAllLikes, createLike, deleteLikeThunk } from "../../store/likes";
+import { getUserById } from "../../store/users";
 
 const LikeBar = ({ post, onInputClick }) => {
   const dispatch = useDispatch();
@@ -10,13 +11,17 @@ const LikeBar = ({ post, onInputClick }) => {
   const likes = alllikes?.filter(like => like?.post_id == post?.id)
   const firstLiker = likes[0]?.username;
 
-  const liked = likes?.filter(like => (like?.user_id == user?.id)&& (like?.post_id == post?.id) )
+  const liked = likes?.filter(like => (like?.user_id == user?.id)&& (like?.post_id == post?.id))
 
+  console.log(post)
   useEffect(() => {
     (async () => {
       await dispatch(loadAllLikes(post?.id));
+      // await dispatch(getUserById(post?.user_id))
     })();
   }, [dispatch, post?.id]);
+
+
 
   const like = ()=>{
     dispatch(createLike(post?.id))
