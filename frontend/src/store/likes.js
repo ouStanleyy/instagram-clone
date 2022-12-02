@@ -35,6 +35,7 @@ export const loadAllLikes = (post_id) => async (dispatch) => {
     }
 
     dispatch(getAllLikes(payload));
+   
 };
 
 
