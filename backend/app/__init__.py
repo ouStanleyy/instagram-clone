@@ -97,3 +97,11 @@ def api_help():
                               app.view_functions[rule.endpoint].__doc__]
                   for rule in app.url_map.iter_rules() if rule.endpoint != 'static'}
     return route_list
+
+
+@app.errorhandler(404)
+def not_found(e):
+    """
+    Any unknown URLs that return a 404 error will return the page that bootstraps the React application
+    """
+    return app.send_static_file('index.html')

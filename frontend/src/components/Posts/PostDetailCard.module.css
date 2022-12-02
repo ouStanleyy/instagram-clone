@@ -1,5 +1,5 @@
 .cardContainer {
-  border: 1px solid #DBDBDB;
+  border: 1px solid #dbdbdb;
   border-radius: 3px;
   display: flex;
   flex-direction: row;
@@ -9,6 +9,7 @@
   width: 90vw;
   overflow: hidden;
   position: relative;
+  background-color: #ffffff;
   /* border: 1px solid red; */
 }
 
@@ -20,6 +21,11 @@
   flex-direction: column;
   justify-content: stretch;
   flex: 2;
+}
+
+.likes {
+  /* border: 1px solid red; */
+  padding: 4px 16px;
 }
 
 .comments {

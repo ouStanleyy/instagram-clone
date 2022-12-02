@@ -66,7 +66,8 @@ def unlike(post_id):
 
     like = Like.query.filter_by(
         user_id=current_user.id, post_id=post_id).first_or_404()
+    like_id = like.id
 
     db.session.delete(like)
     db.session.commit()
-    return {"message": "Successfully unliked"}
+    return {"id":like_id}

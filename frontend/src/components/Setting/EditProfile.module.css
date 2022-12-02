@@ -1,0 +1,39 @@
+.editProfileForm {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 60px;
+}
+
+.fieldContainer {
+  display: flex;
+  margin-top: 6px;
+}
+
+.labelContainer {
+  border: 1px solid red;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 32px;
+  text-align: right;
+  width:40%;
+}
+
+.inputContainer {
+ border: 1px solid blue;
+ padding-right: 60px;
+ flex: 1;
+}
+
+.inputContainer input, .inputContainer textarea{
+  width: 100%;
+  max-width: 335px;
+}
+
+.inputContainer textarea {
+  padding: 6px 10px;
+  font-size: 16px;
+  resize: vertical;
+  max-height: 400px;
+}

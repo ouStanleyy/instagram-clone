@@ -2,7 +2,27 @@ import styles from "./PostHeader.module.css";
 import ProfilePicture from "../Elements/ProfilePIcture";
 import { Link } from "react-router-dom";
 
-const PostHeader = ({ user }) => {
+const PostHeader = ({ user, createdAt }) => {
+  const getDateDiff = (createdAt) => {
+    const today = new Date();
+    const created = new Date(createdAt);
+    const hoursDiff = (today - created) / 1000 / 60 / 60;
+    const dayDiff = hoursDiff / 24;
+    const weekDiff = dayDiff / 7;
+
+    let result;
+
+    if (hoursDiff <= 24) {
+      result = `${Math.floor(hoursDiff)}h`;
+    } else if (dayDiff <= 7) {
+      result = `${Math.floor(dayDiff)}d`;
+    } else {
+      result = `${Math.floor(weekDiff)}w`;
+    }
+
+    return result;
+  };
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.profile}>
@@ -10,6 +30,9 @@ const PostHeader = ({ user }) => {
         <Link to={`/users/${user?.id}`}>
           <span className={styles.username}>{user?.username}</span>
         </Link>
+        <span className={styles.timeStamp}>
+          {createdAt && `• ${getDateDiff(createdAt)}`}
+        </span>
         <span>
           {user?.is_verified && (
             <img
