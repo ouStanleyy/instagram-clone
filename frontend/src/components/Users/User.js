@@ -14,7 +14,7 @@ function User() {
   const user = useSelector((state) => state.users[userId]);
   const isFollowing = useSelector((state) =>
     Object.values(state.session.following)
-  ).filter((follow) => follow.following_id === user.id).length;
+  ).filter((follow) => follow.following_id === user?.id).length;
   const [loaded, setLoaded] = useState(false);
   const [followsModal, setFollowsModal] = useState({
     show: false,

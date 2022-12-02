@@ -91,16 +91,17 @@
 }
 
 .emojiInput{
-  width:50px;
+  width:40px;
+  margin-left: 16px;
   align-self: center;
 }
 
-.emojiIcon{
+/* .emojiIcon{
   margin-left: 10px;
   width:30px;
   height: 30px;
   background-color: transparent;
-}
+} */
 
 .commentInput{
   width:300px;
