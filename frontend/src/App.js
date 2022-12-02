@@ -19,11 +19,14 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const authenticated = await dispatch(authenticate());
-      if (authenticated) await dispatch(getFollowing());
+      await dispatch(authenticate());
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (user) (async () => await dispatch(getFollowing()))();
+  }, [dispatch, user]);
 
   if (!loaded) {
     return null;
