@@ -100,4 +100,5 @@ class Post(db.Model):
             'num_of_comments': len(self.comments),
             'preview_media': self.media[0].url,
             'num_of_media': len(self.media),
+            'is_story': self.is_story
         }
