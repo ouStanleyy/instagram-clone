@@ -49,7 +49,8 @@ img {
   content: "";
   background: linear-gradient(white, white) padding-box,
   radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf );
-  background-size: 120% 120%;
+  background-size: calc(100% + 4px) calc(100% + 4px);
+  background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
   border: 2px solid transparent;
