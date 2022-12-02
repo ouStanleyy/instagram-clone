@@ -11,6 +11,7 @@ import { PostDetailCard } from "./components/Posts";
 import styles from "./App.module.css";
 import { Setting } from "./components/Setting";
 import { Feed } from "./components/Feed";
+import CreatePost from "./components/Posts/CreatePost";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -49,6 +50,9 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
+          <Route path="/create" exact={true}>
+            <CreatePost />
+          </Route>
           <Route path="/account">
             <Setting />
           </Route>
