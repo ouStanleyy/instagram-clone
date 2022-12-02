@@ -32,7 +32,7 @@ const PostDetailCard = (props) => {
         <PostHeader user={post?.user} />
         <CmContainer post={post} />
         <div className={styles.likes}>
-          <LikeBar post={post} onInputClick={handleInputFocus} />
+          <LikeBar post={post} onInputClick={handleInputFocus} showDate={true} />
         </div>
         <InputContainer post={post} cmInputRef={cmInputRef} />
       </div>
