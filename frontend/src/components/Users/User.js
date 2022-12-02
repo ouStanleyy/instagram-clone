@@ -12,9 +12,12 @@ function User() {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector((state) => state.users[userId]);
+  const isOwner = useSelector(
+    (state) => state.session.user.id === parseInt(userId)
+  );
   const isFollowing = useSelector((state) =>
     Object.values(state.session.following)
-  ).filter((follow) => follow.following_id === user.id).length;
+  ).filter((follow) => follow.following_id === userId).length;
   const [loaded, setLoaded] = useState(false);
   const [followsModal, setFollowsModal] = useState({
     show: false,
@@ -41,12 +44,14 @@ function User() {
 
   // Maps each index of the posts as keys in the post modal state and defaults their value to "false"
   useEffect(() => {
-    user?.posts?.forEach((_, idx) => {
-      setPostModal((state) => ({
-        ...state,
-        [idx]: false,
-      }));
-    });
+    user?.posts
+      ?.filter((post) => !post.is_story)
+      .forEach((_, idx) => {
+        setPostModal((state) => ({
+          ...state,
+          [idx]: false,
+        }));
+      });
   }, [user?.posts]);
 
   useEffect(() => {
@@ -97,21 +102,27 @@ function User() {
             </div>
             <div className={styles.detailsStats}>
               <p>
-                <span>{user.posts?.length || 0}</span> posts
+                <span>{user.num_of_posts}</span> posts
               </p>
               <p
-                className={styles.followModal}
+                className={
+                  (isOwner || !user.is_private || isFollowing) &&
+                  styles.followModal
+                }
                 onClick={
-                  (!user.is_private || isFollowing) &&
+                  (isOwner || !user.is_private || isFollowing) &&
                   toggleFollowsModal("Followers")
                 }
               >
                 <span>{user.num_of_followers}</span> followers
               </p>
               <p
-                className={styles.followModal}
+                className={
+                  (isOwner || !user.is_private || isFollowing) &&
+                  styles.followModal
+                }
                 onClick={
-                  (!user.is_private || isFollowing) &&
+                  (isOwner || !user.is_private || isFollowing) &&
                   toggleFollowsModal("Following")
                 }
               >
@@ -122,7 +133,7 @@ function User() {
             <p className={styles.bio}>{user.bio}</p>
           </div>
         </div>
-        {user.is_private && !isFollowing ? (
+        {!isOwner && user.is_private && !isFollowing ? (
           privateMessage
         ) : (
           <>
@@ -202,79 +213,85 @@ function User() {
               </div>
             </div>
             <div className={styles.postsContainer}>
-              {user.posts?.map((post, idx) => {
-                return (
-                  <div key={post.id} className={styles.postContainer}>
-                    {/* <Link to={`/posts/${post.id}`}> */}
-                    <div
-                      className={styles.postDetails}
-                      onClick={togglePostModal(idx)}
-                    >
-                      <div className={styles.detailsContainer}>
-                        <div className={styles.detailsSvg}>
-                          <svg
-                            aria-label="Like"
-                            // class="_ab6-"
-                            color="#ffffff"
-                            fill="#ffffff"
-                            height="24"
-                            role="img"
-                            viewBox="0 0 24 24"
-                            width="24"
-                          >
-                            <path
-                              d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938"
-                              fill="#ffffff"
-                              stroke="currentColor"
-                              strokeLinejoin="round"
-                              strokeWidth="4"
-                            ></path>
-                          </svg>
+              {!user.num_of_posts ? (
+                <p>No Posts Yet</p>
+              ) : (
+                user?.posts
+                  ?.filter((post) => !post.is_story)
+                  .map((post, idx) => {
+                    return (
+                      <div key={post.id} className={styles.postContainer}>
+                        {/* <Link to={`/posts/${post.id}`}> */}
+                        <div
+                          className={styles.postDetails}
+                          onClick={togglePostModal(idx)}
+                        >
+                          <div className={styles.detailsContainer}>
+                            <div className={styles.detailsSvg}>
+                              <svg
+                                aria-label="Like"
+                                // class="_ab6-"
+                                color="#ffffff"
+                                fill="#ffffff"
+                                height="24"
+                                role="img"
+                                viewBox="0 0 24 24"
+                                width="24"
+                              >
+                                <path
+                                  d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938"
+                                  fill="#ffffff"
+                                  stroke="currentColor"
+                                  strokeLinejoin="round"
+                                  strokeWidth="4"
+                                ></path>
+                              </svg>
+                            </div>
+                            <div className={styles.detailsText}>
+                              <p>{post.num_of_likes}</p>
+                            </div>
+                          </div>
+                          <div className={styles.detailsContainer}>
+                            <div className={styles.detailsSvg}>
+                              <svg
+                                aria-label="Comment"
+                                // class="_ab6-"
+                                color="#ffffff"
+                                fill="#ffffff"
+                                height="24"
+                                role="img"
+                                viewBox="0 0 24 24"
+                                width="24"
+                              >
+                                <path
+                                  d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
+                                  fill="#ffffff"
+                                  stroke="currentColor"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                ></path>
+                              </svg>
+                            </div>
+                            <div className={styles.detailsText}>
+                              <p>{post.num_of_comments}</p>
+                            </div>
+                          </div>
                         </div>
-                        <div className={styles.detailsText}>
-                          <p>{post.num_of_likes}</p>
-                        </div>
+                        <img
+                          src={post.preview_media}
+                          alt="preview media"
+                          className={styles.previewMedia}
+                        />
+                        {/* </Link> */}
+                        {postModal[idx] && (
+                          <Modal onClose={togglePostModal(idx)}>
+                            <PostDetailCard postId={post.id} />
+                          </Modal>
+                        )}
                       </div>
-                      <div className={styles.detailsContainer}>
-                        <div className={styles.detailsSvg}>
-                          <svg
-                            aria-label="Comment"
-                            // class="_ab6-"
-                            color="#ffffff"
-                            fill="#ffffff"
-                            height="24"
-                            role="img"
-                            viewBox="0 0 24 24"
-                            width="24"
-                          >
-                            <path
-                              d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
-                              fill="#ffffff"
-                              stroke="currentColor"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                            ></path>
-                          </svg>
-                        </div>
-                        <div className={styles.detailsText}>
-                          <p>{post.num_of_comments}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      src={post.preview_media}
-                      alt="preview media"
-                      className={styles.previewMedia}
-                    />
-                    {/* </Link> */}
-                    {postModal[idx] && (
-                      <Modal onClose={togglePostModal(idx)}>
-                        <PostDetailCard postId={post.id} />
-                      </Modal>
-                    )}
-                  </div>
-                );
-              })}
+                    );
+                  })
+              )}
             </div>
           </>
         )}
