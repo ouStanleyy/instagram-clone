@@ -1,0 +1,36 @@
+
+.likeBarContainer{
+    user-select: none;
+    /* border: 1px solid red; */
+    /* height:120px */
+}
+
+#svg{
+    /* border: 1px solid red; */
+    margin-right: 16px;
+    /* margin-top: 10px; */
+}
+
+#svgUnlike{
+
+}
+
+.icons {
+    /* border: 1px solid red; */
+    margin: 10px 0;
+}
+
+.likesLabelDiv{
+    /* border: 1px solid red; */
+    /* margin-top: 20px; */
+    /* margin-left: 15px; */
+}
+
+.likesLabel{
+    font-weight: 400;
+    font-size: 14px;
+}
+.likesLabelBold{
+    font-weight: 500;
+    margin-left: 4px;
+}

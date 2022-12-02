@@ -13,7 +13,8 @@ class Post(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("users.id")))
     caption = db.Column(db.Text())
     is_story = db.Column(db.Boolean, nullable=False, default=False)
     show_like_count = db.Column(db.Boolean, nullable=False, default=True)
@@ -62,7 +63,19 @@ class Post(db.Model):
             'created_at': self.created_at,
             'num_of_comments': len(self.comments),
             'media': [media.to_dict() for media in self.media],
-            'likes': [like.to_dict() for like in self.likes]
+            'likes': [like.to_dict() for like in self.likes],
+            'user': self.user.to_dict(),
+            'comments': [comment.to_dict() for comment in self.comments]
+        }
+
+    def to_dict_story(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'is_story': self.is_story,
+            'created_at': self.created_at,
+            'media': [media.to_dict() for media in self.media],
+            'user': self.user.to_dict()
         }
 
     def to_dict_detail(self):
@@ -87,4 +100,5 @@ class Post(db.Model):
             'num_of_comments': len(self.comments),
             'preview_media': self.media[0].url,
             'num_of_media': len(self.media),
+            'is_story': self.is_story
         }

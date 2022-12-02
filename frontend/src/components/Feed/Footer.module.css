@@ -1,0 +1,13 @@
+.footerContainer {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+}
+
+.nameLinks, .dot, .copyright {
+  font-size: 12px;
+  color: #C7C7C7;
+  padding-right: 6px;
+}

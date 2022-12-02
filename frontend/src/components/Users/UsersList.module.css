@@ -1,5 +1,19 @@
+.suggestionHeader {
+  color: #8E8E8E;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
 .profilePicture {
   width: 24px;
   height: 24px;
   border-radius: 50%;
+}
+
+.suggestions {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }

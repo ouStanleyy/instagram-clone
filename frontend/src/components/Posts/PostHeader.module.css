@@ -17,6 +17,11 @@
   font-weight: bold;
 }
 
+.timeStamp {
+  font-size: 14px;
+  color: #8E8E8E;
+}
+
 .blueCheck {
   height: 12px;
   width: 12px;

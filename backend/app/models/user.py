@@ -88,5 +88,6 @@ class User(db.Model, UserMixin):
             'profile_picture': self.profile_picture,
             'is_verified': self.is_verified,
             'is_private': self.is_private,
+            'num_of_posts': len([post for post in self.posts if not post.is_story]),
             'posts': [post.to_dict_user_details() for post in self.posts]
         }
