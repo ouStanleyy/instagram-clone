@@ -68,6 +68,16 @@ class Post(db.Model):
             'comments': [comment.to_dict() for comment in self.comments]
         }
 
+    def to_dict_story(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'is_story': self.is_story,
+            'created_at': self.created_at,
+            'media': [media.to_dict() for media in self.media],
+            'user': self.user.to_dict()
+        }
+
     def to_dict_detail(self):
         return {
             'id': self.id,

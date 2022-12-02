@@ -99,6 +99,26 @@ def posts_feed():
     return {"Posts": [post.to_dict_feed() for sub_post in posts for post in sub_post]}
 
 
+@post_routes.route("/following/stories")
+@login_required
+def stories_feed():
+    """
+    Query for all posts of the current user's following
+
+    Filter: Only stories from Current User's following
+
+    Use: story carousel
+    """
+    # Get the current user's following
+    followings = Follow.query.filter_by(follower_id=current_user.id).all()
+
+    # Get the posts that are not stories from followings
+    posts = [Post.query.filter_by(
+        user_id=following.following_id, is_story=True).all() for following in followings]
+
+    return {"Posts": [post.to_dict_story() for sub_post in posts for post in sub_post]}
+
+
 @post_routes.route("/", methods=["POST"])
 @login_required
 def create_post():

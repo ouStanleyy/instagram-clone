@@ -5,9 +5,9 @@ import { PostFeedCard } from "../Posts";
 import styles from "./Feed.module.css";
 import { UsersList } from "../Users";
 import { ProfilePicture } from "../Elements";
-import usersReducer from "../../store/users";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import { StoryCarousel } from "../Stories";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Feed = () => {
   return (
     <div className={styles.feedLayout}>
       <div className={styles.feed}>
-        STORIES CAROUSEL
+        <StoryCarousel stories={""} />
         {posts?.map((post, idx) => (
           <PostFeedCard post={post} key={idx} />
         ))}

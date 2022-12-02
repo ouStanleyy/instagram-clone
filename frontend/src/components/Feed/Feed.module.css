@@ -1,5 +1,5 @@
 .feedLayout {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -9,6 +9,7 @@
 }
 
 .feed {
+  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
   justify-content: center;
