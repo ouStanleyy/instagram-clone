@@ -5,9 +5,10 @@ import { PostFeedCard } from "../Posts";
 import styles from "./Feed.module.css";
 import { UsersList } from "../Users";
 import { ProfilePicture } from "../Elements";
-import usersReducer from "../../store/users";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import { StoryCarousel } from "../Stories";
+import { getFollowing } from "../../store/session";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -17,22 +18,23 @@ const Feed = () => {
   useEffect(() => {
     (async () => {
       await dispatch(getPostsFeed());
+      // await dispatch(getFollowing(user?.id));
     })();
   }, [dispatch]);
 
   return (
     <div className={styles.feedLayout}>
       <div className={styles.feed}>
-        STORIES CAROUSEL
+        <StoryCarousel stories={""} />
         {posts?.map((post, idx) => (
           <PostFeedCard post={post} key={idx} />
         ))}
       </div>
       <div className={styles.sideSection}>
         <div className={styles.userCard}>
-          <div className={styles.userInfo}>
+          <div className={styles.userInfoContainer}>
             <ProfilePicture user={user} size={"large"} />
-            <div>
+            <div className={styles.userInfo}>
               <Link to={`/users/${user.id}`}>
                 <span className={styles.username}>{user?.username}</span>
               </Link>

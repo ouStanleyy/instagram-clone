@@ -36,11 +36,13 @@ function User() {
     };
 
   // Toggles the post modal on/off depending on the current index of the mapped posts
-  const togglePostModal = (idx) => () =>
+  const togglePostModal = (idx) => () => {
     setPostModal((state) => ({
       ...state,
       [idx]: !state[idx],
     }));
+    if (postModal[idx]) dispatch(getUserById(userId));
+  };
 
   // Maps each index of the posts as keys in the post modal state and defaults their value to "false"
   useEffect(() => {

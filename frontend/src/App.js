@@ -20,10 +20,13 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(getFollowing());
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (user) (async () => await dispatch(getFollowing()))();
+  }, [dispatch, user]);
 
   if (!loaded) {
     return null;
