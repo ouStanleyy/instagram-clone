@@ -33,11 +33,17 @@
   align-items: center;
 }
 
-.userInfo {
+.userInfoContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .username, .fullname {
