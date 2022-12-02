@@ -1,14 +1,32 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllComments } from "../../store/comments";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
+
 
 const CmContainer = ({ post }) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
   // let comments = useSelector((state) => state.posts[post?.id]?.comments);
+  const [deleteModal, setDeleteModal] = useState({});
+
+  const toggleDeleteModal = (idx) => ()=> {
+    setDeleteModal((state) => ({
+      ...state,
+      [idx]: !state[idx]
+    }));
+  };
+
+  useEffect(() => {
+    comments?.forEach((_, idx) => {
+      setDeleteModal((state) => ({
+        ...state,
+        [idx]: false,
+      }));
+    });
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -34,7 +52,7 @@ const CmContainer = ({ post }) => {
             </div>
           </div>
           {comments?.map((comment, i) => {
-            return <Comment key={i} comment={comment} />;
+            return <Comment key={i} comment={comment} toggleDeleteModal={toggleDeleteModal} deleteModal={deleteModal}/>;
           })}
         </div>
       </div>

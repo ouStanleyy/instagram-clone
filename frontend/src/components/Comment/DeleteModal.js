@@ -9,7 +9,7 @@ const DeleteModal = ({comment, onClose} )=>{
         e.preventDefault()
 
         dispatch(deleteCommentThunk(comment?.id))
-
+        onClose()
     }
 
     return (
