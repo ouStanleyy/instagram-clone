@@ -4,6 +4,7 @@
 .profileXLarge img {
   border-radius: 50%;
   overflow: hidden;
+  z-index: 1;
 }
 
 .profileSmall,
@@ -56,5 +57,5 @@ img {
   border: 2px solid transparent;
   width: calc(100% + 4px);
   height: calc(100% + 4px);
-  z-index: -2;
+  /* z-index: 0; */
 }

@@ -1,6 +1,7 @@
 .cardContainer {
-  border: 1px solid #EFEFEF;
+  border: 1px solid #DBDBDB;
   border-radius: 3px;
+  background-color: #FFFFFF;
   width: 472px;
   /* height: 472px; */
 }
