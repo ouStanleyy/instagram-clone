@@ -24,5 +24,6 @@ class Follow(db.Model):
             'id': self.id,
             'follower_id': self.follower_id,
             'following_id': self.following_id,
-            'is_pending': self.is_pending
+            'is_pending': self.is_pending,
+            'following_user': self.following.to_dict_all()
         }
