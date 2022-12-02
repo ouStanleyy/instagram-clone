@@ -1,13 +1,23 @@
 import styles from "./StoryCarousel.module.css";
 import { useSelector } from "react-redux";
+import { ProfilePicture } from "../Elements";
+import StoryItem from "./StoryItem";
 
 const StoryCarousel = () => {
   /* For now, carousel for the followings, then replace for just stories */
   const followings = useSelector((state) =>
-    Object.values(state.follows.following)
+    Object.values(state.session.following)
   );
 
-  return <div className={styles.storyCarouselContainer}></div>;
+  console.log("followings", followings);
+
+  return (
+    <div className={styles.storyCarouselContainer}>
+      {followings.map((user) => {
+        return <StoryItem user={user?.following_user} />;
+      })}
+    </div>
+  );
 };
 
 export default StoryCarousel;

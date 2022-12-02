@@ -2,7 +2,12 @@ import styles from "./ProfilePicture.module.css";
 import { Link } from "react-router-dom";
 
 // size : "small", "medium", "large", "xlarge"
-const ProfilePicture = ({ user, size = "large", onClose }) => {
+const ProfilePicture = ({
+  user,
+  size = "large",
+  onClose,
+  hasStory = false,
+}) => {
   let style;
 
   switch (size) {
@@ -21,7 +26,7 @@ const ProfilePicture = ({ user, size = "large", onClose }) => {
 
   return (
     <Link to={`/users/${user?.id}`}>
-      <div onClick={onClose} className={style}>
+      <div onClick={onClose} className={`${style} ${hasStory && styles.story}`}>
         <img
           src={
             user?.profile_picture ||

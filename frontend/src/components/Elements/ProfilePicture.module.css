@@ -1,9 +1,18 @@
+.profileSmall img,
+.profileMedium img,
+.profileLarge img,
+.profileXLarge img {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 .profileSmall,
 .profileMedium,
 .profileLarge,
 .profileXLarge {
-  border-radius: 50%;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profileXLarge {
@@ -29,4 +38,22 @@
 img {
   width: 100%;
   height: 100%;
+}
+
+.story {
+  position: relative;
+}
+
+.story::after {
+  position: absolute;
+  content: "";
+  background: linear-gradient(white, white) padding-box,
+  radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf );
+  background-size: 120% 120%;
+  background-position: center;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -2;
 }
