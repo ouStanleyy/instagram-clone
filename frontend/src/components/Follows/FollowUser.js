@@ -10,7 +10,7 @@ import styles from "./FollowUser.module.css";
 function FollowUser({ followId, currUser, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users[followId]);
-  const isCurrUser = currUser.id === followId;
+  const isCurrUser = currUser?.id === followId;
   const [loaded, setLoaded] = useState(false);
   const [userPopUp, setUserPopUp] = useState(false);
   const [overPopUp, setOverPopUp] = useState(false);

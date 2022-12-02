@@ -1,5 +1,6 @@
 
 .likeBarContainer{
+    user-select: none;
     /* border: 1px solid red; */
     /* height:120px */
 }
@@ -11,7 +12,7 @@
 }
 
 #svgUnlike{
-    
+
 }
 
 .icons {

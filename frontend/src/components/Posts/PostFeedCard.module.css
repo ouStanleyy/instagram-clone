@@ -5,6 +5,11 @@
   /* height: 472px; */
 }
 
+.postInfo{
+  /* border: 1px solid red; */
+  padding: 0 16px;
+}
+
 /* .captionContainer{
   border: 1px solid blue;
   font-size: 14px;
