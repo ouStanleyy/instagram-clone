@@ -90,7 +90,8 @@ def posts_feed():
     Use: feed page
     """
     # Get the current user's following
-    followings = Follow.query.filter_by(follower_id=current_user.id).all()
+    followings = Follow.query.filter_by(
+        follower_id=current_user.id, is_pending=False).all()
 
     # Get the posts that are not stories from followings
     posts = [Post.query.filter_by(
@@ -110,7 +111,8 @@ def stories_feed():
     Use: story carousel
     """
     # Get the current user's following
-    followings = Follow.query.filter_by(follower_id=current_user.id).all()
+    followings = Follow.query.filter_by(
+        follower_id=current_user.id, is_pending=False).all()
 
     # Get the posts that are not stories from followings
     posts = [Post.query.filter_by(

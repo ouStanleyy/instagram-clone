@@ -6,10 +6,8 @@ import StoryItem from "./StoryItem";
 const StoryCarousel = () => {
   /* For now, carousel for the followings, then replace for just stories */
   const followings = useSelector((state) =>
-    Object.values(state.session.following)
+    Object.values(state.session.following).filter((user) => !user.is_pending)
   );
-
-  console.log("followings", followings);
 
   return (
     <div className={styles.storyCarouselContainer}>
