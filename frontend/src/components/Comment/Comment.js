@@ -6,17 +6,13 @@ import { Modal } from "../../context/Modal";
 import DeleteModal from "./DeleteModal";
 import { ProfilePicture } from "../Elements";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
   const user = useSelector((state) => state.session.user);
   const owner_id = useSelector(
     (state) => state.posts[comment?.post_id]?.user_id
   );
   const is_owner = user.id == owner_id || user.id == comment?.user_id;
 
-  const [deleteModal, setDeleteModal] = useState(false);
-  const toggleDeleteModal = () => {
-    setDeleteModal((prev) => !prev);
-  };
   return (
     <>
       <div className={styles.container}>
@@ -35,7 +31,7 @@ const Comment = ({ comment }) => {
           <div className={styles.replyContainer}>
             <span className={styles.reply}>Reply</span>
             {is_owner && (
-              <button onClick={toggleDeleteModal} className={styles.moreButton}>
+              <button onClick={toggleDeleteModal(comment?.id)} className={styles.moreButton}>
                 <svg
                   aria-label="More options"
                   class="_ab6-"
@@ -55,9 +51,9 @@ const Comment = ({ comment }) => {
           </div>
         </div>
       </div>
-      {deleteModal && (
-        <Modal id="modal" onClose={toggleDeleteModal}>
-          <DeleteModal comment={comment} onClose={toggleDeleteModal} />
+      {deleteModal[comment.id] && (
+        <Modal id="modal" onClose={toggleDeleteModal(comment.id)}>
+          <DeleteModal comment={comment} onClose={toggleDeleteModal(comment.id)} />
         </Modal>
       )}
     </>

@@ -28,33 +28,37 @@ export const loadAllLikes = (post_id) => async (dispatch) => {
     const data = await response.json();
 
     const payload = {};
-
-    for (let obj of data.Likes) {
-      payload[obj.id] = obj;
+    if(data.Likes){
+      for (let obj of data.Likes) {
+        payload[obj.id] = obj;
+      }
     }
 
     dispatch(getAllLikes(payload));
 };
 
 
-export const createLike = (like, post_id) => async (dispatch) => {
+export const createLike = (post_id) => async (dispatch) => {
     const response = await fetch(`/api/posts/${post_id}/likes`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(like),
     });
-    const like = await response.json();
-    if (response.ok) {
-      dispatch(addLike(like));
-      return null;
-    } else if (response.status < 500) {
-      const data = await response.json();
-      if (data.errors) {
-        return data.errors;
-      }
-    } else {
-      return ["An error occurred. Please try again."];
+    if (response.ok){
+      dispatch(loadAllLikes(post_id))
     }
+
+    // // const like = await response.json();
+    // if (response.ok) {
+    //   dispatch(addLike(like));
+    //   return null;
+    // } else if (response.status < 500) {
+    //   const data = await response.json();
+    //   if (data.errors) {
+    //     return data.errors;
+    //   }
+    // } else {
+    //   return ["An error occurred. Please try again."];
+    // }
 };
 
 export const deleteLikeThunk = (post_id) => async (dispatch) => {
@@ -84,7 +88,7 @@ const likeReducer = (state = initialState, action) =>{
         case ADD_LIKE:
             return { ...state, [action.payload.id]: action.payload };
         case GET_All_LIKES:
-            return { ...action.payload };
+            return { ...state , ...action.payload };
         case DELETE_LIKE:
             delete newState[action.payload];
             return newState;
