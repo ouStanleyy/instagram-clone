@@ -29,6 +29,14 @@ const MediaCarousel = ({ medias }) => {
     }
   };
 
+  const isVideo = (url) => {
+    const urlParts = url.split(".");
+    const type = urlParts[urlParts.length - 1];
+    // add to allowed extensions in aws.py
+
+    return type === "mov" || type === "mp4" || type === "ogg";
+  };
+
   return (
     <div className={styles.slider}>
       {medias?.map((media, idx) => (
@@ -38,7 +46,7 @@ const MediaCarousel = ({ medias }) => {
           className={styles.slide}
           style={{ transform: `translateX(${idx * 100}%)` }}
         >
-          {media?.url.split(".")[4] === "mov" && isLoaded ? (
+          {isVideo(media?.url) ? (
             <video width="100%" height="100%" muted controls loop>
               <source src={media?.url} type={"video/mp4"} />
               {/* <source src={media?.url} type={"video/mov"} /> */}
