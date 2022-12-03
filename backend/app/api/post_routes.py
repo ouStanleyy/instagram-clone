@@ -4,6 +4,7 @@ from app.models import Post, Media, User, Follow, Comment, db
 from app.forms import PostForm, CommentForm
 from .auth_routes import validation_errors_to_error_messages
 from datetime import datetime, timedelta
+from ..aws import get_unique_filename, allowed_file, upload_file_to_s3
 
 post_routes = Blueprint("posts", __name__)
 
@@ -129,7 +130,12 @@ def create_post():
 
     Validations:
         - If story, can NOT set: caption, show_like_count, and allow_comments
+
+    Why NOT to set Content type: https://muffinman.io/blog/uploading-files-using-fetch-multipart-form-data/
     """
+
+    print("BEFORE", request.headers)
+
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -143,10 +149,25 @@ def create_post():
             show_like_count=form.data['show_like_count'],
             allow_comments=form.data['allow_comments']
         )
+        # IMAGE UPLOAD TO AWS
+        if "images" not in request.files:
+            return {"errors": "image required"}, 400
+        medias = request.files.getlist('images')
+        print("MEDIAS", medias)
 
-        medias = [Media(url=obj["url"]) for obj in form.media.data]
         for media in medias:
-            post.media.append(media)
+            if not allowed_file(media.filename):
+                return {"errors": "file type not permitted"}, 400
+            media.filename = get_unique_filename(media.filename)
+            upload = upload_file_to_s3(media)
+            if "url" not in upload:
+                return upload, 400
+            url = upload['url']
+            new_media = Media(url=url)
+            post.media.append(new_media)
+        # medias = [Media(url=obj["url"]) for obj in form.media.data]
+        # for media in medias:
+        #     post.media.append(media)
 
         db.session.add(post)
         db.session.commit()

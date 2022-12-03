@@ -68,6 +68,72 @@ users = [
         "is_verified": True,
         "is_private": True
     },
+    {
+        "username": "Maddy_daily",
+        "full_name": "Maddy Hellen",
+        "gender": "Female",
+        "email": "maddy_daily@email.com",
+        "password": "madydailypw",
+        "phone_number": "4666666666",
+        "profile_picture": "https://cdn.i-scmp.com/sites/default/files/d8/images/2020/09/07/shutterstock_410560285.jpg",
+        "is_verified": True,
+        "is_private": False
+    },
+    {
+        "username": "Jim_photogram",
+        "full_name": "Jim Harley",
+        "gender": "Male",
+        "email": "jim_photogram@email.com",
+        "password": "jimphotogrampw",
+        "phone_number": "7777777777",
+        "profile_picture": "https://static-cse.canva.com/image/129579/ShootInTheRain21.jpg",
+        "is_verified": False,
+        "is_private": False
+    },
+    {
+        "username": "Lily_tattoo",
+        "full_name": "Lily Haze",
+        "gender": "Female",
+        "email": "lily_tattoo@email.com",
+        "password": "lilytattoopw",
+        "phone_number": "8888888888",
+        "profile_picture": "https://lonestartattoo.com/wp-content/uploads/2022/04/dallas-tattoo-artist-kat.jpg",
+        "is_verified": False,
+        "is_private": False
+    },
+    {
+        "username": "Hailey_beauty",
+        "full_name": "Hailey Monroe",
+        "gender": "Female",
+        "email": "hailey_beauty@email.com",
+        "password": "haileybeautypw",
+        "phone_number": "9999999999",
+        "profile_picture": "https://www.upfluence.com/wp-content/uploads/2019/03/Top-Beauty-YouTubers-2019.jpg",
+        "is_verified": True,
+        "is_private": False
+    },
+    {
+        "username": "John_22",
+        "full_name": "John Milly",
+        "gender": "Male",
+        "email": "john_22@email.com",
+        "password": "john22pw",
+        "phone_number": "1999999999",
+        "profile_picture": "https://www.gannett-cdn.com/presto/2020/09/24/PLOU/c70cbf26-6df4-4936-ad97-28e531425ee2-USATSI_13577258.jpg",
+        "is_verified": False,
+        "is_private": False
+    },
+    {
+        "username": "Chef_Ana",
+        "full_name": "Ana Li",
+        "gender": "Female",
+        "email": "chef_ana@email.com",
+        "password": "chefanapw",
+        "phone_number": "2999999999",
+        "profile_picture": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/09/13/sous-chef-plating-garnish.jpg.rend.hgtvcom.616.462.suffix/1631578604699.jpeg",
+        "is_verified": False,
+        "is_private": False
+    },
 ]
 
 
