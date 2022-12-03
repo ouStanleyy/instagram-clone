@@ -7,6 +7,8 @@ import { isVideo } from "../../Utill";
 import DragDropSVG from "./DragDropSVG";
 import FilterItem from "./FilterItem";
 import { ProfilePicture } from "../../Elements";
+import { useHistory } from "react-router-dom";
+import filters from "./FilterItem.module.css";
 
 /* NEXT STEP:
   1. Create state for each step of post creation
@@ -34,11 +36,13 @@ const filterTypes = [
 const CreatePost = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
   const inputRef = useRef(null);
   const [files, setFiles] = useState([]);
   const [previewFiles, setPreviewFiles] = useState();
   const [page, setPage] = useState(1);
   const [filter, setFilterType] = useState("original");
+  const [caption, setCaption] = useState("");
 
   const handleOpenUpload = (e) => {
     e.preventDefault();
@@ -62,16 +66,20 @@ const CreatePost = () => {
   };
 
   const updateFilterType = (e) => {
-    console.log("updating filter", filter);
     setFilterType(e.target.value);
+  };
+
+  const updateCaption = (e) => {
+    setCaption(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = new FormData();
     Object.values(files[0]).forEach((file) => data.append("images", file));
 
-    data.append("caption", "Testing upload aws");
+    data.append("caption", caption);
     data.append("is_story", false);
     data.append("show_like_count", true);
     data.append("allow_comments", true);
@@ -79,29 +87,30 @@ const CreatePost = () => {
     const result = await dispatch(addPost(data));
 
     console.log("RESULT", result);
+    return history.push(`/users/${user.id}`);
   };
 
   const handlePreview = (e) => {
     e.stopPropagation();
     e.preventDefault();
     setPage((page) => ++page);
-    console.log("E TARGET FILES", e.target.files);
+    // console.log("E TARGET FILES", e.target.files);
     const files = Object.values(e.target.files);
-    console.log("FILES", files);
+    // console.log("FILES", files);
     const blobTypes = files.map((file) => ({
       file: new Blob([file]),
       isVideo: isVideo(file.name),
     }));
-    console.log("FILESNAME", blobTypes);
+    // console.log("FILESNAME", blobTypes);
     const objectURL = blobTypes.map(({ file, isVideo }) => {
       return {
         url: URL.createObjectURL(file),
         isVideo,
       };
     });
-    console.log("objectURL", objectURL);
+    // console.log("objectURL", objectURL);
     setPreviewFiles(objectURL);
-    console.log("FILES", previewFiles);
+    // console.log("FILES", previewFiles);
   };
 
   return (
@@ -110,7 +119,7 @@ const CreatePost = () => {
         {page > 1 && <button onClick={handlePrevPage}>Prev</button>}
         <h1>Create new post</h1>
         {page < 3 && page > 1 && <button onClick={handleNextPage}>Next</button>}
-        {page === 3 && <button>Share</button>}
+        {page === 3 && <button onClick={handleSubmit}>Share</button>}
       </div>
       <form className={styles.createPost}>
         {page === 1 && (
@@ -128,16 +137,20 @@ const CreatePost = () => {
               ref={inputRef}
               id="fileUpload"
               accept={"image/*, video/*"}
-              // onChange={handleFileUpload}
+              onInput={handleFileUpload}
               onChange={handlePreview}
               multiple
             />
           </div>
         )}
         {page >= 2 && (
-          <div className={styles.pageTwo}>
+          <div className={styles.contentContainer}>
             <div className={styles.previewImages}>
-              <MediaCarousel medias={previewFiles} isPreview={true} />
+              <MediaCarousel
+                medias={previewFiles}
+                isPreview={true}
+                filter={`${filters[filter]}`}
+              />
             </div>
             <div className={styles.options}>
               {page === 2 && (
@@ -160,7 +173,7 @@ const CreatePost = () => {
               {page === 3 && (
                 <div className={styles.pageThree}>
                   <div className={styles.userCard}>
-                    <ProfilePicture user={user} sizes={"small"} />
+                    <ProfilePicture user={user} size={"small"} />
                     {user?.username}
                   </div>
                   <textarea
@@ -168,6 +181,8 @@ const CreatePost = () => {
                     placeholder="Write a caption..."
                     maxLength={2200}
                     rows={7}
+                    value={caption}
+                    onChange={updateCaption}
                   />
                 </div>
               )}
