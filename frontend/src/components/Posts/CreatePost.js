@@ -46,14 +46,15 @@ const CreatePost = () => {
   const handlePreview = (e) => {
     e.stopPropagation();
     e.preventDefault();
+    console.log("E TARGET FILES", e.target.files);
     const files = Object.values(e.target.files);
     console.log("FILES", files);
-    const fileName = files.map((file) => ({
+    const blobTypes = files.map((file) => ({
       file: new Blob([file]),
       isVideo: isVideo(file.name),
     }));
-    console.log("FILESNAME", fileName);
-    const objectURL = fileName.map(({ file, isVideo }) => {
+    console.log("FILESNAME", blobTypes);
+    const objectURL = blobTypes.map(({ file, isVideo }) => {
       return {
         url: URL.createObjectURL(file),
         isVideo,
@@ -61,7 +62,7 @@ const CreatePost = () => {
     });
     console.log("objectURL", objectURL);
     setPreviewFiles(objectURL);
-    // console.log("FILES", previewFiles);
+    console.log("FILES", previewFiles);
   };
 
   return (
