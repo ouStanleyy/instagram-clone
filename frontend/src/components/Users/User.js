@@ -7,6 +7,7 @@ import Follows from "../Follows/Follows";
 import { PostDetailCard } from "../Posts";
 import styles from "./User.module.css";
 import { ProfilePicture } from "../Elements";
+import { isVideo } from "../Utill";
 
 function User() {
   const dispatch = useDispatch();
@@ -279,11 +280,26 @@ function User() {
                             </div>
                           </div>
                         </div>
-                        <img
-                          src={post.preview_media}
-                          alt="preview media"
-                          className={styles.previewMedia}
-                        />
+                        {isVideo(post?.preview_media) ? (
+                          <video
+                            width="100%"
+                            height="100%"
+                            muted
+                            className={styles.previewMedia}
+                          >
+                            <source
+                              src={post?.preview_media}
+                              type={"video/mp4"}
+                            />
+                            {/* <source src={media?.url} type={"video/mov"} /> */}
+                          </video>
+                        ) : (
+                          <img
+                            src={post.preview_media}
+                            alt="preview media"
+                            className={styles.previewMedia}
+                          />
+                        )}
                         {/* </Link> */}
                         {postModal[idx] && (
                           <Modal onClose={togglePostModal(idx)}>

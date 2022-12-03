@@ -1,32 +1,29 @@
 import styles from "./MediaCarousel.module.css";
 import { useState, useEffect, useRef } from "react";
+import { isVideo } from "../Utill";
 
-const MediaCarousel = ({ medias }) => {
+const MediaCarousel = ({ medias, isPreview = false }) => {
+  /* Carousel can be used as a preview carousel or actual carousel */
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
   const slides = useRef([]);
   const hideArrow = medias?.length < 2;
 
+  /* Carousel animation logic */
   useEffect(() => {
     slides.current.forEach((slide, idx) => {
       slide.style.transform = `translateX(${100 * (idx - currentSlide)}%)`;
     });
   }, [currentSlide]);
 
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  const handleSlidePrev = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide((prev) => prev - 1);
-    }
+  /* Carousel scroll buttons */
+  const handleSlidePrev = (e) => {
+    e.preventDefault();
+    if (currentSlide > 0) setCurrentSlide((prev) => prev - 1);
   };
 
-  const handleSlideNext = () => {
-    if (currentSlide < medias.length - 1) {
-      setCurrentSlide((prev) => prev + 1);
-    }
+  const handleSlideNext = (e) => {
+    e.preventDefault();
+    if (currentSlide < medias.length - 1) setCurrentSlide((prev) => prev + 1);
   };
 
   return (
@@ -38,14 +35,40 @@ const MediaCarousel = ({ medias }) => {
           className={styles.slide}
           style={{ transform: `translateX(${idx * 100}%)` }}
         >
-          {media?.url.split(".")[4] === "mov" && isLoaded ? (
+          {/* CLEAN THIS UP */}
+          {!isPreview && isVideo(media?.url) ? (
             <video width="100%" height="100%" muted controls loop>
               <source src={media?.url} type={"video/mp4"} />
-              {/* <source src={media?.url} type={"video/mov"} /> */}
+            </video>
+          ) : !isPreview && !isVideo(media?.url) ? (
+            <img src={media?.url} alt="actual" />
+          ) : isPreview && media.isVideo ? (
+            <video width="100%" height="100%" muted controls loop>
+              <source src={media?.url} type={"video/mp4"} />
             </video>
           ) : (
-            <img src={media.url} alt="testing" />
+            <img src={media?.url} alt="preview" />
           )}
+
+          {/* {isVideo(media?.url) ? (
+            <video width="100%" height="100%" muted controls loop>
+              <source src={media?.url} type={"video/mp4"} />
+            </video>
+          ) : (
+            <img src={media?.url} alt="testing" />
+          )}
+
+          {media?.isVideo ? (
+            <video width="100%" height="100%" muted controls loop>
+              <source src={media?.url} type={"video/mp4"} />
+            </video>
+          ) : (
+            <img src={media?.url} alt="testing" />
+          )} */}
+
+          {/* <video width="100%" height="100%" muted controls loop>
+            <source src={media?.url} type={"video/mp4"} />
+          </video> */}
         </div>
       ))}
       <button
