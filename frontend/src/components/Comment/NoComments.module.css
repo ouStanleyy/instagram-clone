@@ -1,0 +1,26 @@
+
+.container{
+    height: 380px;
+    max-height: 500px;
+    /* border-bottom: 1px solid rgb(183, 182, 182, 0.250); */
+    border-bottom: 1px solid #DBDBDB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.noCommentsDiv{
+    margin-bottom:10px ;
+}
+
+.noCommentsLabel{
+    font-size: 22px;
+    font-weight: 600;
+
+}
+
+.startConLabel{
+    font-size: 13px;
+    font-weight: 300;
+}

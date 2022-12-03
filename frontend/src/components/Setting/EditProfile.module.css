@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 60px;
+  padding: 32px;
+  background-color: #FFFFFF;
 }
 
 .fieldContainer {
@@ -12,23 +13,36 @@
 }
 
 .labelContainer {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: flex-end;
   padding: 0 32px;
   text-align: right;
-  width:40%;
+  width: 40%;
+}
+
+.labelContainer label {
+  font-weight: 500;
+  font-size: 16px;
+  color: #262626;
 }
 
 .inputContainer {
- border: 1px solid blue;
+ /* border: 1px solid blue; */
  padding-right: 60px;
  flex: 1;
+}
+
+.inputContainer input {
+  padding: 4px 10px;
+  font-size: 16px;
 }
 
 .inputContainer input, .inputContainer textarea{
   width: 100%;
   max-width: 335px;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
 }
 
 .inputContainer textarea {
@@ -36,4 +50,43 @@
   font-size: 16px;
   resize: vertical;
   max-height: 400px;
+}
+
+.inputContainer div {
+  color: #8E8E8E;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 6px 0;
+}
+
+.personalInfoHeader {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.buttonContainer {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0 6px;
+}
+
+.submitButton, .deactivateButton {
+  width: fit-content;
+  border: none;
+  color: #FFFFFF;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: #0095F6;
+  border-radius: 4px;
+  padding: 5px 9px;
+}
+
+.deactivateButton {
+  background-color: transparent;
+  color: #0095F6;
 }

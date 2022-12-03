@@ -1,6 +1,7 @@
 .settingContainer {
   border: 1px solid #DBDBDB;
   border-radius: 3px;
+  background-color: #FFFFFF;
   display: flex;
   max-width: 935px;
   width: 100%;
