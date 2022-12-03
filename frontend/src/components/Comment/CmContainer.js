@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
+import NoComments from "./NoComments";
 
 
 const CmContainer = ({ post }) => {
@@ -36,7 +37,12 @@ const CmContainer = ({ post }) => {
 
   return (
     <>
-      <div className={styles.cmContainer}>
+      {comments.length == 0 &&
+        <div>
+          <NoComments />
+        </div>
+      }
+      {comments.length > 0 &&<div className={styles.cmContainer}>
         <div className={styles.cmHome}>
           <div className={styles.container}>
             <div className={styles.profilePicture}>
@@ -56,6 +62,7 @@ const CmContainer = ({ post }) => {
           })}
         </div>
       </div>
+      }
     </>
   );
 };

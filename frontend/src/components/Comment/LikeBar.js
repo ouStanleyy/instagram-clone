@@ -2,9 +2,10 @@ import styles from "./LikeBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loadAllLikes, createLike, deleteLikeThunk } from "../../store/likes";
-import { getUserById } from "../../store/users";
+import { getUsers } from "../../store/users";
+import { getDate } from "../Utill";
 
-const LikeBar = ({ post, onInputClick }) => {
+const LikeBar = ({ post, onInputClick, showDate=false }) => {
   const dispatch = useDispatch();
   const alllikes = useSelector((state) => Object.values(state.likes));
   const user = useSelector((state) => state.session.user);
@@ -12,15 +13,13 @@ const LikeBar = ({ post, onInputClick }) => {
   const firstLiker = likes[0]?.username;
 
   const liked = likes?.filter(like => (like?.user_id == user?.id)&& (like?.post_id == post?.id))
-
   console.log(post)
   useEffect(() => {
     (async () => {
       await dispatch(loadAllLikes(post?.id));
-      // await dispatch(getUserById(post?.user_id))
+      // await dispatch(getUsers())
     })();
   }, [dispatch, post?.id]);
-
 
 
   const like = ()=>{
@@ -115,6 +114,12 @@ const LikeBar = ({ post, onInputClick }) => {
       </div>
 
       <div>
+        {likes.length == 0 &&(
+          <span className={styles.likesLabel}>
+          Be the first to<span className={styles.likesLabelBold}>like this</span>
+          </span>
+        )
+        }
         {likes.length > 0 && (
             likes.length > 1 ?
             <span className={styles.likesLabel}>
@@ -128,6 +133,13 @@ const LikeBar = ({ post, onInputClick }) => {
             :
             <span className={styles.likesLabel}>Liked by<span className={styles.likesLabelBold}>{firstLiker}</span></span>
         )}
+        </div>
+        <div className={styles.timeStampDiv}>
+          <span className={styles.timeStamp}>
+            {showDate && (
+             `${getDate(post?.created_at)}`
+            )}
+          </span>
         </div>
     </div>
   );

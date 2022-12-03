@@ -11,7 +11,7 @@ const NavItem = ({ type }) => {
   const profilePicture = (
     <>
       <div className={styles.profilePicture}>
-        <ProfilePicture user={user} size={"small"} />
+        <ProfilePicture user={user} size={"xsmall"} />
         {/* <img src={user?.profile_picture} alt={`${user?.full_name} profile`} /> */}
       </div>
       <span>Profile</span>

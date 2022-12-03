@@ -9,11 +9,21 @@ function Follows({ followType, userId, onClose }) {
   return (
     <div className={styles.followsContainer}>
       <h3 className={styles.title}>{followType}</h3>
-      {followType === "Followers" ? (
-        <FollowersList userId={userId} currUser={currUser} onClose={onClose} />
-      ) : (
-        <FollowingList userId={userId} currUser={currUser} onClose={onClose} />
-      )}
+      <div className={styles.listContainer}>
+        {followType === "Followers" ? (
+          <FollowersList
+            userId={userId}
+            currUser={currUser}
+            onClose={onClose}
+          />
+        ) : (
+          <FollowingList
+            userId={userId}
+            currUser={currUser}
+            onClose={onClose}
+          />
+        )}
+      </div>
     </div>
   );
 }

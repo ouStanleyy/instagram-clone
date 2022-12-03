@@ -21,7 +21,7 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
             src={comment?.user?.profile_picture}
             alt={comment?.user?.username}
             /> */}
-          <ProfilePicture user={comment?.user} size={"medium"} />
+          <ProfilePicture user={comment?.user} size={"small"} />
         </div>
         <div>
           <div className={styles.textContainer}>
@@ -31,7 +31,10 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
           <div className={styles.replyContainer}>
             <span className={styles.reply}>Reply</span>
             {is_owner && (
-              <button onClick={toggleDeleteModal(comment?.id)} className={styles.moreButton}>
+              <button
+                onClick={toggleDeleteModal(comment?.id)}
+                className={styles.moreButton}
+              >
                 <svg
                   aria-label="More options"
                   class="_ab6-"
@@ -53,7 +56,10 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
       </div>
       {deleteModal[comment.id] && (
         <Modal id="modal" onClose={toggleDeleteModal(comment.id)}>
-          <DeleteModal comment={comment} onClose={toggleDeleteModal(comment.id)} />
+          <DeleteModal
+            comment={comment}
+            onClose={toggleDeleteModal(comment.id)}
+          />
         </Modal>
       )}
     </>

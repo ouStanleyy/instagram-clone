@@ -1,0 +1,14 @@
+.ddContainer {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.ddText {
+  font-size: 22px;
+  color: #262626;
+  font-weight: 300;
+}

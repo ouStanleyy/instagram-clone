@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 8px 16px;
+  padding: 4px 16px;
 }
 
 .userDetails {
@@ -25,7 +25,7 @@
 }
 
 .userPopUp {
-  position: absolute;
+  position: fixed;
   border-radius: 10px;
   border: 1px solid #dbdbdb;
   box-shadow: 0 0 8px #8e8e8e;
@@ -33,7 +33,7 @@
   height: 350px;
   overflow: hidden;
   background-color: #ffffff;
-  margin-top: 350px;
-  margin-left: 68px;
-  z-index: 1;
+  /* margin-top: 350px;
+  margin-left: 68px; */
+  z-index: 100;
 }

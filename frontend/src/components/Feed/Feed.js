@@ -8,6 +8,7 @@ import { ProfilePicture } from "../Elements";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { StoryCarousel } from "../Stories";
+import { getFollowing } from "../../store/session";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const Feed = () => {
   useEffect(() => {
     (async () => {
       await dispatch(getPostsFeed());
+      // await dispatch(getFollowing(user?.id));
     })();
   }, [dispatch]);
 
@@ -30,9 +32,9 @@ const Feed = () => {
       </div>
       <div className={styles.sideSection}>
         <div className={styles.userCard}>
-          <div className={styles.userInfo}>
+          <div className={styles.userInfoContainer}>
             <ProfilePicture user={user} size={"large"} />
-            <div>
+            <div className={styles.userInfo}>
               <Link to={`/users/${user.id}`}>
                 <span className={styles.username}>{user?.username}</span>
               </Link>

@@ -1,6 +1,6 @@
 
 .form{
-    border-top: 1px solid #EFEFEF;
+    border-top: 1px solid #DBDBDB;
     margin-top: 10px;
     /* border: 1px solid red; */
     display: flex;
@@ -9,10 +9,10 @@
 }
 
 .cmContainer{
-    width: 400px;
-    border-bottom: 1px solid #EFEFEF;
+    /* width: 400px; */
+    border-bottom: 1px solid #DBDBDB;
     position: relative;
-    max-height: 500px;
+    /* max-height: 500px; */
     /* float:left; */
     height: 500px;
     overflow:hidden;

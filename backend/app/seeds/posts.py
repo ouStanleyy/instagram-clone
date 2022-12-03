@@ -67,6 +67,128 @@ posts = [
         "user_id": 6,
         "caption": "Dan_Demo's second post."
     },
+    {
+        "user_id": 7,
+        "caption": "Be Stylish 🎀"
+    },
+    {
+        "user_id": 7,
+        "caption": "Check this out!!!!!"
+    },
+    {
+        "user_id": 7,
+        "caption": "Fasion lifestyle"
+    },
+    {
+        "user_id": 7,
+        "caption": "New day... New style"
+    },
+    {
+        "user_id": 7,
+        "caption": "Shine everyday ⭐️"
+    },
+    {
+        "user_id": 7,
+        "caption": "How cool is this 💃🏻"
+    },
+    {
+        "user_id": 8,
+        "caption": "How cool is this!!"
+    },
+    {
+        "user_id": 8,
+        "caption": "Check this out!!!!!"
+    },
+    {
+        "user_id": 8,
+        "caption": "Photography and art 🌉"
+    },
+    {
+        "user_id": 8,
+        "caption": "What a cool location!"
+    },
+    {
+        "user_id": 8,
+        "caption": "Creative photography"
+    },
+    {
+        "user_id": 8,
+        "caption": "everyday photography"
+    },
+    {
+        "user_id": 8,
+        "caption": "Nature photography 🌄"
+    },
+    {
+        "user_id": 9,
+        "caption": "Tattoos of Human Trafficking Victims"
+    },
+    {
+        "user_id": 9,
+        "caption": "Beautiful Shoulder Tattoos"
+    },
+    {
+        "user_id": 9,
+        "caption": "Check out this hand tattoo!"
+    },
+    {
+        "user_id": 9,
+        "caption": "cute little kittys"
+    },
+    {
+        "user_id": 9,
+        "caption": "flower tattoo 🌸"
+    },
+    {
+        "user_id": 10,
+        "caption": "Blank Canvas 🎨"
+    },
+    {
+        "user_id": 10,
+        "caption": "What's in my everyday makeup bag!"
+    },
+    {
+        "user_id": 10,
+        "caption": "Life of a beauty blogger!"
+    },
+    {
+        "user_id": 10,
+        "caption": "fantasy makeup"
+    },
+    {
+        "user_id": 10,
+        "caption": "Makeup & Skin care"
+    },
+    {
+        "user_id": 11,
+        "caption": "Americam football day! 🏈"
+    },
+    {
+        "user_id": 11,
+        "caption": "Football Season"
+    },
+    {
+        "user_id": 12,
+        "caption": "Most expensive foods"
+    },
+    {
+        "user_id": 12,
+        "caption": "🍱 🥘 🥙"
+    },
+    {
+        "user_id": 12,
+        "caption": "Luxury food industry turns sour amid global coronavirus lockdowns"
+    },
+    {
+        "user_id": 12,
+        "caption": "Sushiban Express!"
+    },
+
+
+
+
+
+
 
 ]
 
