@@ -6,9 +6,20 @@ import FollowUser from "./FollowUser";
 
 function FollowingList({ userId, currUser, onClose }) {
   const dispatch = useDispatch();
+  const sessionFollows = useSelector((state) =>
+    Object.values(state.session.following)
+  );
   const following = useSelector((state) =>
     Object.values(state.follows.following)
-  ).sort(({ following_id }) => (following_id === currUser.id ? -1 : 0));
+  )
+    .sort(({ following_id }) =>
+      sessionFollows.find(
+        (follow) => follow.following_id === following_id && !follow.is_pending
+      )
+        ? -1
+        : 0
+    )
+    .sort(({ following_id }) => (following_id === currUser.id ? -1 : 0));
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
