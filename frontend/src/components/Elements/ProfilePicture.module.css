@@ -1,24 +1,33 @@
+.profileXSmall img,
 .profileSmall img,
 .profileMedium img,
 .profileLarge img,
-.profileXLarge img {
+.profileXLarge img,
+.profileXXLarge img {
   border-radius: 50%;
   overflow: hidden;
   z-index: 1;
 }
 
+.profileXSmall,
 .profileSmall,
 .profileMedium,
 .profileLarge,
-.profileXLarge {
+.profileXLarge,
+.profileXXLarge {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.profileXLarge {
+.profileXXLarge {
   width: 150px;
   height: 150px;
+}
+
+.profileXLarge {
+  width: 90px;
+  height: 90px;
 }
 
 .profileLarge {
@@ -27,11 +36,16 @@
 }
 
 .profileMedium {
+  width: 44px;
+  height: 44px;
+}
+
+.profileSmall {
   width: 32px;
   height: 32px;
 }
 
-.profileSmall{
+.profileXSmall {
   width: 24px;
   height: 24px;
 }
@@ -49,7 +63,14 @@ img {
   position: absolute;
   content: "";
   background: linear-gradient(white, white) padding-box,
-  radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf );
+    radial-gradient(
+      circle at 33% 100%,
+      #fed373 4%,
+      #f15245 30%,
+      #d92e7f 62%,
+      #9b36b7 85%,
+      #515ecf
+    );
   background-size: calc(100% + 4px) calc(100% + 4px);
   background-repeat: no-repeat;
   background-position: center;
