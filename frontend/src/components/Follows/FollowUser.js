@@ -42,7 +42,7 @@ function FollowUser({ followId, currUser, onClose }) {
           onMouseLeave={() => setOverUser(false)}
           className={styles.profilePicture}
         >
-          <ProfilePicture user={user} size={"large"} onClose={onClose} />
+          <ProfilePicture user={user} size={"medium"} onClose={onClose} />
         </div>
         <div className={styles.userDetails}>
           <p

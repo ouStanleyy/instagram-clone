@@ -1,7 +1,7 @@
 import styles from "./ProfilePicture.module.css";
 import { Link } from "react-router-dom";
 
-// size : "small", "medium", "large", "xlarge"
+// size : "xsmall", "small", "medium", "large", "xlarge", "xxlarge"
 const ProfilePicture = ({
   user,
   size = "large",
@@ -11,6 +11,9 @@ const ProfilePicture = ({
   let style;
 
   switch (size) {
+    case "xsmall":
+      style = styles.profileXSmall;
+      break;
     case "small":
       style = styles.profileSmall;
       break;
@@ -20,8 +23,11 @@ const ProfilePicture = ({
     case "large":
       style = styles.profileLarge;
       break;
-    default:
+    case "xlarge":
       style = styles.profileXLarge;
+      break;
+    default:
+      style = styles.profileXXLarge;
   }
 
   return (
