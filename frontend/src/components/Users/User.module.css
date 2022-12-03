@@ -16,6 +16,7 @@
   display: flex;
   justify-content: space-around;
   width: 65%;
+  padding: 20px;
 }
 
 .profilePicture {
@@ -80,7 +81,7 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  width: 66%;
+  width: 65%;
   border-top: 1px solid #dbdbdb;
 }
 
@@ -99,22 +100,23 @@
 .postsContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 28px;
+  width: 65%;
 }
 
 .postContainer {
   position: relative;
-  height: 308px;
-  width: 308px;
+  height: 292px;
+  width: 292px;
   /* aspect-ratio: 1/1; */
 }
 
 .previewMedia {
   position: absolute;
-  width: 308px;
-  height: 308px;
-  top: 0;
+  width: 292px;
+  height: 292px;
   object-fit: cover;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -128,8 +130,8 @@
   gap: 36px;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
-  width: 308px;
-  height: 308px;
+  width: 292px;
+  height: 292px;
   top: 0;
   bottom: 0;
   left: 0;
