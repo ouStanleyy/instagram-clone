@@ -60,3 +60,8 @@ input[type="file"] {
   height: 100%;
   padding: 24px;
 }
+
+.previewImages {
+  width: 500px;
+  height: 500px;
+}

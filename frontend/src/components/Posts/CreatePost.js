@@ -2,11 +2,22 @@ import styles from "./CreatePost.module.css";
 import { useRef, useState } from "react";
 import { addPost } from "../../store/posts";
 import { useDispatch } from "react-redux";
+import MediaCarousel from "./MediaCarousel";
+import { isVideo } from "../Utill";
 
+/* NEXT STEP:
+  1. Create state for each step of post creation
+  2. After selecting files, show preview
+  3. Change to next step
+  4. Allow filters
+  5. Show rest of form (caption, allow_comments, show_like_count)
+  6. Click "SHARE" will then handle final submission
+*/
 const CreatePost = () => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const [files, setFiles] = useState([]);
+  const [previewFiles, setPreviewFiles] = useState();
 
   const handleUpload = (e) => {
     e.preventDefault();
@@ -15,7 +26,6 @@ const CreatePost = () => {
 
   const handleFileUpload = (e) => {
     setFiles((prev) => [...prev, e.target.files]);
-    console.log("FILES", files);
   };
 
   const handleSubmit = async (e) => {
@@ -33,10 +43,31 @@ const CreatePost = () => {
     console.log("RESULT", result);
   };
 
+  const handlePreview = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const files = Object.values(e.target.files);
+    console.log("FILES", files);
+    const fileName = files.map((file) => ({
+      file: new Blob([file]),
+      isVideo: isVideo(file.name),
+    }));
+    console.log("FILESNAME", fileName);
+    const objectURL = fileName.map(({ file, isVideo }) => {
+      return {
+        url: URL.createObjectURL(file),
+        isVideo,
+      };
+    });
+    console.log("objectURL", objectURL);
+    setPreviewFiles(objectURL);
+    // console.log("FILES", previewFiles);
+  };
+
   return (
     <div className={styles.createPostContainer}>
       <h1>Create new post</h1>
-      <form className={styles.createPost} onSubmit={handleSubmit}>
+      <form className={styles.createPost}>
         <svg
           aria-label="Icon to represent media such as images or videos"
           class="_ab6-"
@@ -73,10 +104,19 @@ const CreatePost = () => {
           ref={inputRef}
           id="fileUpload"
           accept={"image/*, video/*"}
-          onChange={handleFileUpload}
+          // onChange={handleFileUpload}
+          onChange={handlePreview}
           multiple
         />
-        <button type="submit">Submit</button>
+        <div className={styles.previewImages}>
+          {/* <MediaCarousel
+            medias={previewFiles?.map((file) => ({
+              url: file,
+            }))}
+          /> */}
+          <MediaCarousel medias={previewFiles} isPreview={true} />
+        </div>
+        {/* <button type="submit">Submit</button> */}
       </form>
     </div>
   );
