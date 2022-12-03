@@ -2,9 +2,14 @@
   border: 1px solid #DBDBDB;
   border-radius: 4px;
   background: #FFFFFF;
+  max-width: 470px;
   width: 100%;
   padding: 18px;
   display: flex;
   gap: 18px;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
+
+/* .storyCarouselContainer:hover {
+  overflow-x: scroll;
+} */
