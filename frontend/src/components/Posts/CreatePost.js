@@ -1,7 +1,10 @@
 import styles from "./CreatePost.module.css";
 import { useRef, useState } from "react";
+import { addPost } from "../../store/posts";
+import { useDispatch } from "react-redux";
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
   const inputRef = useRef(null);
   const [files, setFiles] = useState([]);
 
@@ -11,14 +14,29 @@ const CreatePost = () => {
   };
 
   const handleFileUpload = (e) => {
-    setFiles((prev) => [...prev, e.target.value]);
+    setFiles((prev) => [...prev, e.target.files]);
     console.log("FILES", files);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    Object.values(files[0]).forEach((file) => data.append("images", file));
+
+    data.append("caption", "Testing upload aws");
+    data.append("is_story", false);
+    data.append("show_like_count", true);
+    data.append("allow_comments", true);
+
+    const result = await dispatch(addPost(data));
+
+    console.log("RESULT", result);
   };
 
   return (
     <div className={styles.createPostContainer}>
       <h1>Create new post</h1>
-      <form className={styles.createPost}>
+      <form className={styles.createPost} onSubmit={handleSubmit}>
         <svg
           aria-label="Icon to represent media such as images or videos"
           class="_ab6-"
@@ -54,9 +72,11 @@ const CreatePost = () => {
           type="file"
           ref={inputRef}
           id="fileUpload"
+          accept={"image/*, video/*"}
           onChange={handleFileUpload}
           multiple
         />
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 
 const MediaCarousel = ({ medias }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
   const slides = useRef([]);
   const hideArrow = medias?.length < 2;
 
@@ -11,6 +12,10 @@ const MediaCarousel = ({ medias }) => {
       slide.style.transform = `translateX(${100 * (idx - currentSlide)}%)`;
     });
   }, [currentSlide]);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
   const handleSlidePrev = () => {
     if (currentSlide > 0) {
@@ -33,7 +38,13 @@ const MediaCarousel = ({ medias }) => {
           className={styles.slide}
           style={{ transform: `translateX(${idx * 100}%)` }}
         >
-          <img src={media.url} alt="testing" />
+          {media?.url.split(".")[4] === "mov" && isLoaded ? (
+            <video width="100%" height="100%" controls preload="auto">
+              <source src={media?.url} type={"video/*"} />
+            </video>
+          ) : (
+            <img src={media.url} alt="testing" />
+          )}
         </div>
       ))}
       <button
