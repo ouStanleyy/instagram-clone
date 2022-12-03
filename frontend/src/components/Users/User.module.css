@@ -15,6 +15,7 @@
 .userHeader {
   display: flex;
   justify-content: space-around;
+  /* width: 65%; */
   width: 65%;
   max-width: 936px;
   padding: 20px;
@@ -103,6 +104,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
+  /* width: 65%; */
   width: 65%;
   max-width: 936px;
 }

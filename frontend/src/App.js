@@ -11,7 +11,7 @@ import { PostDetailCard } from "./components/Posts";
 import styles from "./App.module.css";
 import { Setting } from "./components/Setting";
 import { Feed } from "./components/Feed";
-import CreatePost from "./components/Posts/CreatePost";
+import { CreatePost } from "./components/Posts";
 
 function App() {
   const user = useSelector((state) => state.session.user);
