@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserById } from "../../store/users";
@@ -15,15 +15,35 @@ function FollowUser({ followId, currUser, onClose }) {
   const [userPopUp, setUserPopUp] = useState(false);
   const [overPopUp, setOverPopUp] = useState(false);
   const [overUser, setOverUser] = useState(false);
+  const [overProfilePic, setOverProfilePic] = useState(false);
+  const [top, setTop] = useState("");
+  const [left, setLeft] = useState("");
+  const usernameRef = useRef(null);
+  const profilePicRef = useRef(null);
 
   useEffect(() => {
     const timeout = setTimeout(
-      () => (overUser || overPopUp ? setUserPopUp(true) : setUserPopUp(false)),
+      () =>
+        overUser || overPopUp || overProfilePic
+          ? setUserPopUp(true)
+          : setUserPopUp(false),
       400
     );
 
     return () => clearTimeout(timeout);
-  }, [overUser, overPopUp]);
+  }, [overUser, overPopUp, overProfilePic]);
+
+  useEffect(() => {
+    if (userPopUp) {
+      if (overUser) {
+        setTop(usernameRef.current.getBoundingClientRect().top + 20);
+        setLeft(usernameRef.current.getBoundingClientRect().left);
+      } else if (overProfilePic) {
+        setTop(profilePicRef.current.getBoundingClientRect().top + 48);
+        setLeft(profilePicRef.current.getBoundingClientRect().left);
+      }
+    }
+  }, [userPopUp, overUser, overProfilePic]);
 
   useEffect(() => {
     (async () => {
@@ -36,39 +56,41 @@ function FollowUser({ followId, currUser, onClose }) {
 
   return (
     loaded && (
-      <div className={styles.userContainer}>
-        <div
-          onMouseEnter={() => setOverUser(true)}
-          onMouseLeave={() => setOverUser(false)}
-          className={styles.profilePicture}
-        >
-          <ProfilePicture user={user} size={"medium"} onClose={onClose} />
-        </div>
-        <div className={styles.userDetails}>
-          <p
-            onMouseEnter={() => setOverUser(true)}
-            onMouseLeave={() => setOverUser(false)}
-            onClick={onClose}
-            className={styles.username}
+      <>
+        <div className={styles.userContainer}>
+          <div
+            onMouseEnter={() => setOverProfilePic(true)}
+            onMouseLeave={() => setOverProfilePic(false)}
+            ref={profilePicRef}
+            className={styles.profilePicture}
           >
-            <Link to={`/users/${followId}`}>{user?.username}</Link>
-          </p>
-          <p className={styles.fullName}>{user?.full_name}</p>
+            <ProfilePicture user={user} size={"medium"} onClose={onClose} />
+          </div>
+          <div className={styles.userDetails}>
+            <p
+              onMouseEnter={() => setOverUser(true)}
+              onMouseLeave={() => setOverUser(false)}
+              onClick={onClose}
+              ref={usernameRef}
+              className={styles.username}
+            >
+              <Link to={`/users/${followId}`}>{user?.username}</Link>
+            </p>
+            <p className={styles.fullName}>{user?.full_name}</p>
+          </div>
+          {!isCurrUser && <FollowButton user={user} />}
         </div>
-        {!isCurrUser && (
-          // <button className={styles.followButton}>Following</button>
-          <FollowButton user={user} />
-        )}
         {userPopUp && (
           <div
             onMouseEnter={() => setOverPopUp(true)}
             onMouseLeave={() => setOverPopUp(false)}
+            style={{ top, left }}
             className={styles.userPopUp}
           >
             <UserPopUp userId={user.id} onClose={onClose} />
           </div>
         )}
-      </div>
+      </>
     )
   );
 }

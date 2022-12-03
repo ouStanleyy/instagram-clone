@@ -1,16 +1,20 @@
+.profileXSmall img,
 .profileSmall img,
 .profileMedium img,
 .profileLarge img,
-.profileXLarge img {
+.profileXLarge img,
+.profileXXLarge img {
   border-radius: 50%;
   overflow: hidden;
   z-index: 1;
 }
 
+.profileXSmall,
 .profileSmall,
 .profileMedium,
 .profileLarge,
-.profileXLarge {
+.profileXLarge,
+.profileXXLarge {
   display: flex;
   justify-content: center;
   align-items: center;
