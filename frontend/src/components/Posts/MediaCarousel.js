@@ -39,8 +39,9 @@ const MediaCarousel = ({ medias }) => {
           style={{ transform: `translateX(${idx * 100}%)` }}
         >
           {media?.url.split(".")[4] === "mov" && isLoaded ? (
-            <video width="100%" height="100%" controls preload="auto">
-              <source src={media?.url} type={"video/*"} />
+            <video width="100%" height="100%" muted controls loop>
+              <source src={media?.url} type={"video/mp4"} />
+              {/* <source src={media?.url} type={"video/mov"} /> */}
             </video>
           ) : (
             <img src={media.url} alt="testing" />
