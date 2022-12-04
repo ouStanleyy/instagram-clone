@@ -86,7 +86,7 @@ const CreatePost = () => {
 
     const result = await dispatch(addPost(data));
 
-    console.log("RESULT", result);
+    // console.log("RESULT", result);
     return history.push(`/users/${user.id}`);
   };
 
