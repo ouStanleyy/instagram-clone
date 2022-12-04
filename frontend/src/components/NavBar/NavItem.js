@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styles from "./NavItem.module.css";
 import ProfilePicture from "../Elements/ProfilePIcture";
 
-const NavItem = ({ type, showSearch }) => {
+const NavItem = ({ type, showSearch, hideSearch }) => {
   const user = useSelector((state) => state.session.user);
   const isLogo = type === "Logo" || type === "Instagram";
   const style = isLogo ? styles.logo : styles.navItem;
@@ -20,17 +20,17 @@ const NavItem = ({ type, showSearch }) => {
 
   const iconButton = (
     <>
+      {isLogo && <div className={styles.instagramLogo}>{icons["Logo"]}</div>}
       <div className={`${styles.svgContainer} ${isLogo && styles.hideSvg}`}>
         {icons[type]}
       </div>
-      {isLogo && <div className={styles.instagramLogo}>{icons["Logo"]}</div>}
       <span>{isLogo ? "" : type}</span>
     </>
   );
 
   return (
     <div
-      className={`${style} ${showSearch && styles.hideNavItem} ${
+      className={`${style} ${showSearch && !hideSearch && styles.hideNavItem} ${
         type === "Search" && styles.searchBorder
       }`}
     >

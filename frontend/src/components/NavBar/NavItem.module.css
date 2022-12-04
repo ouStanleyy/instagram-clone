@@ -35,6 +35,7 @@
 .svgContainer {
   display: flex;
   place-content: center;
+  transition: 500ms;
 }
 
 /* when navItem is hovered, target svg*/
@@ -61,7 +62,9 @@
 }
 
 .instagramLogo {
-  display: none;
+  position: fixed;
+  scale: 0;
+  transition: 300ms;
 }
 
 @media screen and (max-width: 1264px) {
@@ -76,15 +79,21 @@
   }
 }
 
-.hideNavItem .profilePicture + span,
 .hideNavItem .svgContainer + span,
 .hideNavItem .logo,
 .hideNavItem .hideSvg {
+  /* display: none; */
+  opacity: 0;
+  width: 0;
+}
+.hideNavItem .profilePicture + span {
   display: none;
 }
 
 .hideNavItem .instagramLogo {
-  display: inline-block;
+  position: static;
+  scale: 1;
+  transition: 300ms;
 }
 
 .hideNavItem.searchBorder {

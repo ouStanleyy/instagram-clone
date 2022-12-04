@@ -12,6 +12,8 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const [showMore, setShowMore] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [hideSearch, setHideSearch] = useState(false);
+  const [inactiveFn, setInactiveFn] = useState(false);
   const user = useSelector((state) => state.session.user);
   const links = [
     // { icon: "Logo", path: "/" },
@@ -47,9 +49,30 @@ const NavBar = () => {
     history.push("/");
   };
 
+  const toggleSearch = () => {
+    if (!inactiveFn) {
+      setInactiveFn(true);
+      if (showSearch) {
+        setHideSearch(true);
+        setTimeout(() => {
+          setShowSearch((state) => !state);
+          setHideSearch(false);
+          setTimeout(() => setInactiveFn(false), 150);
+        }, 300);
+      } else {
+        setShowSearch((state) => !state);
+        setTimeout(() => setInactiveFn(false), 350);
+      }
+    }
+  };
+
   return (
     <>
-      <ul className={`${styles.navBar} ${showSearch && styles.miniNavBar}`}>
+      <ul
+        className={`${styles.navBar} ${
+          showSearch && !hideSearch && styles.miniNavBar
+        }`}
+      >
         <div>
           {user &&
             links.slice(0, links.length - 1).map(({ icon, path }, idx) =>
@@ -57,9 +80,13 @@ const NavBar = () => {
                 <div
                   key={idx}
                   // className={showSearch && styles.activeSearch}
-                  onClick={() => setShowSearch((state) => !state)}
+                  onClick={toggleSearch}
                 >
-                  <NavItem type={icon} showSearch={showSearch} />
+                  <NavItem
+                    type={icon}
+                    showSearch={showSearch}
+                    hideSearch={hideSearch}
+                  />
                 </div>
               ) : (
                 <NavLink
@@ -69,7 +96,11 @@ const NavBar = () => {
                   className={styles.navLink}
                   activeClassName={styles.active}
                 >
-                  <NavItem type={icon} showSearch={showSearch} />
+                  <NavItem
+                    type={icon}
+                    showSearch={showSearch}
+                    hideSearch={hideSearch}
+                  />
                 </NavLink>
               )
             )}
@@ -106,7 +137,7 @@ const NavBar = () => {
         )}
         {!user && loggedInNav}
       </ul>
-      {/* {showSearch && <Search onClose={() => setShowSearch(false)} />} */}
+      {showSearch && <Search hideSearch={hideSearch} onClose={toggleSearch} />}
     </>
   );
 };

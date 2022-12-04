@@ -1,7 +1,11 @@
 import styles from "./Search.module.css";
 
-const Search = () => {
-  return <div className={styles.searchContainer}></div>;
+const Search = ({ hideSearch }) => {
+  return (
+    <div
+      className={`${styles.searchContainer} ${hideSearch && styles.hideSearch}`}
+    ></div>
+  );
 };
 
 export default Search;
