@@ -1,5 +1,4 @@
 // import { useRef } from "react";
-// import styles from "./EmojiWindow.module.css";
 
 const EmojiWindow = ({ emojiWindow }) => {
   //   let ref = useRef();

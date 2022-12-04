@@ -49,29 +49,11 @@ const CreatePost = () => {
     inputRef.current.click();
   };
 
-  const handleFileUpload = (e) => {
-    setFiles((prev) => [...prev, e.target.files]);
-  };
-
-  const handleNextPage = (e) => {
-    e.preventDefault();
-
-    setPage((page) => ++page);
-  };
-
-  const handlePrevPage = (e) => {
-    e.preventDefault();
-
-    setPage((page) => --page);
-  };
-
-  const updateFilterType = (e) => {
-    setFilterType(e.target.value);
-  };
-
-  const updateCaption = (e) => {
-    setCaption(e.target.value);
-  };
+  const handleFileUpload = (e) => setFiles((prev) => [...prev, e.target.files]);
+  const handleNextPage = (e) => setPage((page) => ++page);
+  const handlePrevPage = (e) => setPage((page) => --page);
+  const updateFilterType = (e) => setFilterType(e.target.value);
+  const updateCaption = (e) => setCaption(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,7 +68,6 @@ const CreatePost = () => {
 
     const result = await dispatch(addPost(data));
 
-    // console.log("RESULT", result);
     return history.push(`/users/${user.id}`);
   };
 
@@ -116,10 +97,51 @@ const CreatePost = () => {
   return (
     <div className={styles.createPostContainer}>
       <div className={styles.containerHeader}>
-        {page > 1 && <button onClick={handlePrevPage}>Prev</button>}
+        {page > 1 && (
+          <button className={styles.prevButton} onClick={handlePrevPage}>
+            <svg
+              aria-label="Back"
+              className="_ab6-"
+              color="#262626"
+              fill="#262626"
+              height="24"
+              role="img"
+              viewBox="0 0 24 24"
+              width="24"
+            >
+              <line
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                x1="2.909"
+                x2="22.001"
+                y1="12.004"
+                y2="12.004"
+              ></line>
+              <polyline
+                fill="none"
+                points="9.276 4.726 2.001 12.004 9.276 19.274"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              ></polyline>
+            </svg>
+          </button>
+        )}
         <h1>Create new post</h1>
-        {page < 3 && page > 1 && <button onClick={handleNextPage}>Next</button>}
-        {page === 3 && <button onClick={handleSubmit}>Share</button>}
+        {page < 3 && page > 1 && (
+          <button className={styles.nextButton} onClick={handleNextPage}>
+            Next
+          </button>
+        )}
+        {page === 3 && (
+          <button className={styles.submitButton} onClick={handleSubmit}>
+            Share
+          </button>
+        )}
       </div>
       <form className={styles.createPost}>
         {page === 1 && (

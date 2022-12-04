@@ -1,7 +1,5 @@
-import { NavLink } from "react-router-dom";
 import styles from "./Comment.module.css";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import { Modal } from "../../context/Modal";
 import DeleteModal from "./DeleteModal";
 import { ProfilePicture } from "../Elements";
@@ -11,7 +9,7 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
   const owner_id = useSelector(
     (state) => state.posts[comment?.post_id]?.user_id
   );
-  const is_owner = user.id == owner_id || user.id == comment?.user_id;
+  const is_owner = user.id === owner_id || user.id === comment?.user_id;
 
   return (
     <>
