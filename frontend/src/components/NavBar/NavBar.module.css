@@ -10,6 +10,7 @@
   padding: 8px 12px 20px;
   width: 244px;
   background-color: white;
+  transition: 300ms;
 }
 
 .navLink {
@@ -41,8 +42,12 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.0975);
 }
 
-@media screen and (max-width: 1264px){
+@media screen and (max-width: 1264px) {
   .navBar {
     width: 72px;
   }
+}
+
+.miniNavBar {
+  width: 72px;
 }

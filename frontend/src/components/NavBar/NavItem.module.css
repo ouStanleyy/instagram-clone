@@ -11,8 +11,8 @@
   max-height: 100%;
 }
 
-
-.navItem, .logo {
+.navItem,
+.logo {
   /* border: 1px solid green; */
   font-size: 16px;
   font-family: sans-serif;
@@ -42,12 +42,12 @@
   transform: scale(1.08);
 }
 
-.navItem:active .svgContainer svg{
+.navItem:active .svgContainer svg {
   transform: scale(1);
 }
 
 .navItem:hover {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   cursor: pointer;
   transition: 0.2s ease;
 }
@@ -55,7 +55,6 @@
 .navItem:active {
   opacity: 0.6;
 }
-
 
 .logo:hover {
   background-color: transparent;
@@ -65,11 +64,9 @@
   display: none;
 }
 
-@media screen and (max-width: 1264px){
-  .profilePicture + span, .svgContainer + span {
-    display: none;
-  }
-
+@media screen and (max-width: 1264px) {
+  .profilePicture + span,
+  .svgContainer + span,
   .logo {
     display: none;
   }
@@ -77,4 +74,22 @@
   .instagramLogo {
     display: inline-block;
   }
+}
+
+.hideNavItem .profilePicture + span,
+.hideNavItem .svgContainer + span,
+.hideNavItem .logo,
+.hideNavItem .hideSvg {
+  display: none;
+}
+
+.hideNavItem .instagramLogo {
+  display: inline-block;
+}
+
+.hideNavItem.searchBorder {
+  border: 1px solid #dbdbdb;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
 }
