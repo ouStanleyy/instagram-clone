@@ -15,7 +15,6 @@
 .userHeader {
   display: flex;
   justify-content: space-around;
-  /* width: 65%; */
   width: 65%;
   max-width: 936px;
   padding: 20px;
@@ -32,6 +31,11 @@
   flex-direction: column;
   justify-content: space-between;
   width: 65%;
+}
+
+.detailsHeader {
+  display: flex;
+  gap: 28px;
 }
 
 .username {
@@ -69,7 +73,8 @@
   align-items: center;
   gap: 28px;
   margin-top: 20px;
-  width: 66%;
+  width: 65%;
+  max-width: 936px;
   background-color: #ffffff;
   border: 1px solid #efefef;
   border-top: 1px solid #dbdbdb;
@@ -104,9 +109,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
-  /* width: 65%; */
   width: 65%;
   max-width: 936px;
+}
+
+.postsContainer > p {
+  width: 100%;
+  text-align: center;
 }
 
 .postContainer {
