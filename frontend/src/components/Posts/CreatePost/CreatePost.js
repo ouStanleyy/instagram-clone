@@ -9,6 +9,7 @@ import FilterItem from "./FilterItem";
 import { ProfilePicture } from "../../Elements";
 import { useHistory } from "react-router-dom";
 import filters from "./FilterItem.module.css";
+import filterTypes from "./filterTypes";
 
 /* NEXT STEP:
   1. Create state for each step of post creation
@@ -18,20 +19,6 @@ import filters from "./FilterItem.module.css";
   5. Show rest of form (caption, allow_comments, show_like_count)
   6. Click "SHARE" will then handle final submission
 */
-const filterTypes = [
-  "original",
-  "clarendon",
-  "gingham",
-  "moon",
-  "lark",
-  "reyes",
-  "juno",
-  "slumber",
-  "crema",
-  "ludwig",
-  "aden",
-  "perpetua",
-];
 
 const CreatePost = () => {
   const user = useSelector((state) => state.session.user);
@@ -43,6 +30,7 @@ const CreatePost = () => {
   const [page, setPage] = useState(1);
   const [filter, setFilterType] = useState("original");
   const [caption, setCaption] = useState("");
+  const [charCount, setCharCount] = useState(0);
 
   const handleOpenUpload = (e) => {
     e.preventDefault();
@@ -53,7 +41,11 @@ const CreatePost = () => {
   const handleNextPage = (e) => setPage((page) => ++page);
   const handlePrevPage = (e) => setPage((page) => --page);
   const updateFilterType = (e) => setFilterType(e.target.value);
-  const updateCaption = (e) => setCaption(e.target.value);
+  const updateCaption = (e) => {
+    setCaption(e.target.value);
+    setCharCount(e.target.value.length);
+  };
+  const updateCharCount = (e) => setCharCount(e.target.value.length);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -193,20 +185,61 @@ const CreatePost = () => {
                 </>
               )}
               {page === 3 && (
-                <div className={styles.pageThree}>
-                  <div className={styles.userCard}>
-                    <ProfilePicture user={user} size={"small"} />
-                    {user?.username}
+                <>
+                  <div className={styles.pageThree}>
+                    <div className={styles.userCard}>
+                      <ProfilePicture user={user} size={"small"} />
+                      {user?.username}
+                    </div>
+                    <div className={styles.textAreaContainer}>
+                      <textarea
+                        className={styles.caption}
+                        placeholder="Write a caption..."
+                        maxLength={2200}
+                        rows={7}
+                        value={caption}
+                        onChange={updateCaption}
+                      />
+                      <span className={styles.charCount}>
+                        {charCount} / 2200
+                      </span>
+                    </div>
                   </div>
-                  <textarea
-                    className={styles.caption}
-                    placeholder="Write a caption..."
-                    maxLength={2200}
-                    rows={7}
-                    value={caption}
-                    onChange={updateCaption}
-                  />
-                </div>
+                  <div className={styles.detailsContainer}>
+                    <details className={styles.advancedSettings}>
+                      <summary>
+                        Advanced settings
+                        <svg
+                          aria-label="Down chevron icon"
+                          className={`_ab6- ${styles.chevron}`}
+                          color="#262626"
+                          fill="#262626"
+                          height="16"
+                          role="img"
+                          viewBox="0 0 24 24"
+                          width="16"
+                        >
+                          <path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z"></path>
+                        </svg>
+                      </summary>
+
+                      <div className={styles.switchContainer}>
+                        <div className={styles.inputContainer}>
+                          <label htmlFor="showlikes">
+                            Hide like and view counts on this post
+                          </label>
+                          <input id="showlikes" type="checkbox" />
+                        </div>
+                        <div className={styles.inputContainer}>
+                          <label htmlFor="allowcomments">
+                            Turn off commenting
+                          </label>
+                          <input id="allowcomments" type="checkbox" />
+                        </div>
+                      </div>
+                    </details>
+                  </div>
+                </>
               )}
             </div>
           </div>

@@ -99,25 +99,62 @@ input[type="file"] {
 }
 
 .pageThree {
-  /* border: 1px solid red; */
+  border-bottom: 1px solid #DBDBDB;
   display: flex;
   flex-direction: column;
   padding: 16px;
 }
 
-.pageThree textarea {
+.textAreaContainer {
+  /* border: 1px solid blue; */
+  position: relative;
+}
+
+.textAreaContainer textarea {
+  /* border: 1px solid red; */
   resize: none;
   border: none;
   font-size: 16px;
   margin: 12px 0;
+  width: 100%;
 }
 
-.pageThree textarea:focus {
+.textAreaContainer textarea:focus {
   outline: none;
+}
+
+.charCount {
+  /* border: 1px solid red; */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 12px;
+  color: #262626;
 }
 
 .userCard {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.advancedSettings {
+  padding: 12px 16px;
+  user-select: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.advancedSettings > summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.advancedSettings[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.advancedSettings[open] > summary {
+  font-weight: 500;
 }

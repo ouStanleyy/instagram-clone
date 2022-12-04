@@ -26,7 +26,7 @@ const CmContainer = ({ post }) => {
         [idx]: false,
       }));
     });
-  }, [comments]);
+  }, []);
 
   useEffect(() => {
     (async () => {
