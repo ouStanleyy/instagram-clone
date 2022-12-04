@@ -8,6 +8,7 @@ import { PostDetailCard } from "../Posts";
 import styles from "./User.module.css";
 import { ProfilePicture } from "../Elements";
 import { isVideo } from "../Utill";
+import { FollowButton } from "../Follows";
 
 function User() {
   const dispatch = useDispatch();
@@ -18,7 +19,9 @@ function User() {
   );
   const isFollowing = useSelector((state) =>
     Object.values(state.session.following)
-  ).filter((follow) => follow.following_id === user?.id).length;
+  ).filter(
+    (follow) => follow.following_id === user?.id && !follow.is_pending
+  ).length;
   const [loaded, setLoaded] = useState(false);
   const [followsModal, setFollowsModal] = useState({
     show: false,
@@ -102,6 +105,7 @@ function User() {
           <div className={styles.userDetails}>
             <div className={styles.detailsHeader}>
               <p className={styles.username}>{user.username}</p>
+              {!isOwner && <FollowButton user={user} />}
             </div>
             <div className={styles.detailsStats}>
               <p>
