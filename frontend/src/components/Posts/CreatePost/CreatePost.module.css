@@ -52,6 +52,7 @@ input[type="file"] {
   cursor: pointer;
   user-select: none;
   letter-spacing: 0.4px;
+  text-align: center;
 }
 
 .uploadText:active {
@@ -81,6 +82,10 @@ input[type="file"] {
   color: #262626;
   font-weight: 500;
   font-size: 16px;
+  padding: 14px 0;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #DBDBDB;
 }
 
 .prevButton, .nextButton, .submitButton {

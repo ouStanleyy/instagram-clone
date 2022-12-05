@@ -15,10 +15,6 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
     <>
       <div className={styles.container}>
         <div className={styles.profilePicture}>
-          {/* <img
-            src={comment?.user?.profile_picture}
-            alt={comment?.user?.username}
-            /> */}
           <ProfilePicture user={comment?.user} size={"small"} />
         </div>
         <div>
@@ -35,7 +31,7 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
               >
                 <svg
                   aria-label="More options"
-                  class="_ab6-"
+                  className="_ab6-"
                   color="#262626"
                   fill="#262626"
                   height="20"
