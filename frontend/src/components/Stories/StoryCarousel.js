@@ -1,9 +1,15 @@
 import styles from "./StoryCarousel.module.css";
 import { useSelector } from "react-redux";
-import { ProfilePicture } from "../Elements";
 import StoryItem from "./StoryItem";
 import { useEffect, useRef, useState } from "react";
 
+/*
+  Bug: the scroll and client width were being calculated before all stories were rendered,
+  giving an incorrect width by the time the rest were rendered
+
+  Fix: use isLoaded and setIsLoaded to force a rerender on the child component so that it
+  is recalculated
+*/
 const StoryCarousel = () => {
   /* For now, carousel for the followings, then replace for just stories */
   const SCROLL_DISTANCE = 400;

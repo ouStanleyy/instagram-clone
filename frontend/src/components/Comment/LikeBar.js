@@ -16,6 +16,15 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
     (like) => like?.user_id == user?.id && like?.post_id == post?.id
   );
 
+  // const handleShare = (e) => {
+  //   e.preventDefault();
+  //   // const url = window.location.href.split(".com/");
+  //   // url[1] = `/posts/${post.id}`;
+  //   const url = `http://localhost:3000/posts/${post.id}`;
+  //   navigator.clipboard.writeText(url);
+  //   console.log("HERE", url);
+  // };
+
   useEffect(() => {
     (async () => {
       await dispatch(loadAllLikes(post?.id));
@@ -87,6 +96,7 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
           ></path>
         </svg>
         <svg
+          // onClick={handleShare}
           id={styles.svg}
           aria-label="Share Post"
           class="_ab6-"
