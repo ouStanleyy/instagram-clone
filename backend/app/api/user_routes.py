@@ -103,3 +103,15 @@ def follow_user(user_id):
     db.session.commit()
 
     return follow.to_dict()
+
+
+@user_routes.route('/search')
+@login_required
+def user_search():
+    """
+    Queries for users with provided search parameters and returns them in a list of user dictionaries
+    """
+    filter_ = request.args.get('username')
+    users = User.query.filter(User.username.ilike(f'%{filter_}%')).all()
+
+    return {'users': [user.to_dict_all() for user in users]}
