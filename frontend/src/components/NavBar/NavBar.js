@@ -20,7 +20,7 @@ const NavBar = () => {
     { icon: "Instagram", path: "/" },
     { icon: "Home", path: "/" },
     { icon: "Search", path: "/search" },
-    { icon: "Explore", path: "/users" },
+    { icon: "Explore", path: "/explore" },
     { icon: "Messages", path: "/messages" },
     { icon: "Notifications", path: "/notifications" },
     { icon: "Create", path: "/create" },

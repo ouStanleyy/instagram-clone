@@ -12,6 +12,7 @@ import styles from "./App.module.css";
 import { Setting } from "./components/Setting";
 import { Feed } from "./components/Feed";
 import { CreatePost } from "./components/Posts";
+import { Explore } from "./components/Explore";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -44,8 +45,8 @@ function App() {
           <SignUpForm />
         </Route>
         <div className={styles.innerBody}>
-          <ProtectedRoute path="/users" exact={true}>
-            <UsersList />
+          <ProtectedRoute path="/explore" exact={true}>
+            <Explore />
           </ProtectedRoute>
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
