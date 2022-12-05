@@ -11,8 +11,8 @@
   max-height: 100%;
 }
 
-
-.navItem, .logo {
+.navItem,
+.logo {
   /* border: 1px solid green; */
   font-size: 16px;
   font-family: sans-serif;
@@ -35,6 +35,7 @@
 .svgContainer {
   display: flex;
   place-content: center;
+  transition: 500ms;
 }
 
 /* when navItem is hovered, target svg*/
@@ -42,12 +43,12 @@
   transform: scale(1.08);
 }
 
-.navItem:active .svgContainer svg{
+.navItem:active .svgContainer svg {
   transform: scale(1);
 }
 
 .navItem:hover {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   cursor: pointer;
   transition: 0.2s ease;
 }
@@ -56,20 +57,19 @@
   opacity: 0.6;
 }
 
-
 .logo:hover {
   background-color: transparent;
 }
 
 .instagramLogo {
-  display: none;
+  position: fixed;
+  scale: 0;
+  transition: 300ms;
 }
 
-@media screen and (max-width: 1264px){
-  .profilePicture + span, .svgContainer + span {
-    display: none;
-  }
-
+@media screen and (max-width: 1264px) {
+  .profilePicture + span,
+  .svgContainer + span,
   .logo {
     display: none;
   }
@@ -77,4 +77,29 @@
   .instagramLogo {
     display: inline-block;
   }
+}
+
+.hideNavItem .logo,
+.hideNavItem .hideSvg {
+  /* display: none; */
+  opacity: 0;
+  width: 0;
+}
+
+.hideNavItem .svgContainer + span,
+.hideNavItem .profilePicture + span {
+  display: none;
+}
+
+.hideNavItem .instagramLogo {
+  position: static;
+  scale: 1;
+  transition: 300ms;
+}
+
+.hideNavItem.searchBorder {
+  border: 1px solid #dbdbdb;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
 }
