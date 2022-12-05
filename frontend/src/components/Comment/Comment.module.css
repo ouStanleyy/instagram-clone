@@ -28,7 +28,9 @@
     font-family: sans-serif;
     display: flex;
     gap: 14px;
-    margin: 20px;
+    margin-left: 20px;
+    margin-top: 12px;
+    /* margin: 20px; */
     border-radius: 24px;
 }
 
@@ -46,10 +48,12 @@
 
 .textContainer{
     width: 320px;
-    height: 35px;
-    display: flex;
-    /* flex-wrap: wrap; */
-    /* gap: 10px; */
+
+}
+.captionContainer{
+  width: 320px;
+  margin-bottom: 35px;
+
 }
 
 .username{
@@ -62,7 +66,17 @@
   font-size: 13px;
   color:#262626;
   margin-left: 5px;
+  word-wrap: break-word;
 }
+
+/* .caption{
+  font-size: 13px;
+  color:#262626;
+  margin-left: 5px;
+  word-wrap: break-word;
+  display: block;
+  margin-bottom: 30px;
+} */
 
 .reply{
   text-decoration: none;
@@ -73,6 +87,7 @@
 
 .replyContainer{
   display: flex;
+  margin-top: 12px;
 }
 
 .moreButton{
