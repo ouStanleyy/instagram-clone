@@ -112,6 +112,6 @@ def user_search():
     Queries for users with provided search parameters and returns them in a list of user dictionaries
     """
     filter_ = request.args.get('username')
-    users = User.query.filter(User.username.ilike(f'%{filter_}%')).all()
+    users = User.query.filter(User.username.ilike(f'%{filter_}%')).all() if filter_ else []
 
     return {'users': [user.to_dict_all() for user in users]}

@@ -49,6 +49,12 @@
   opacity: 0.9;
 }
 
+.searchResults {
+  max-height: 100%;
+  margin-bottom: auto;
+  padding: 24px 0;
+}
+
 @keyframes slideIn {
   from {
     width: 0;
