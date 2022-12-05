@@ -12,30 +12,48 @@
     user-select: none;
 }
 
+#svg :hover{
+    cursor: pointer;
+}
+
 .icons {
     /* border: 1px solid red; */
     margin: 10px 0;
 }
 
 .likesLabelDiv{
-    /* border: 1px solid red; */
-    /* margin-top: 20px; */
-    /* margin-left: 15px; */
+    display: flex;
 }
 
 .likesLabel{
+    display: flex;
     font-weight: 400;
     font-size: 14px;
+    height: 22px;
+    align-self: center;
+    align-items: center;
 }
 .likesLabelBold{
     font-weight: 500;
     margin-left: 4px;
+    margin-right: 4px;
+    /* align-self: center; */
 }
 .timeStampDiv{
-    margin-top: 8px;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .timeStamp {
     font-size: 12px;
     color: #8E8E8E;
+
+}
+
+.profileSmall{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+    align-self: center;
 }
