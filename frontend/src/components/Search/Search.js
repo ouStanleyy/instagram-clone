@@ -19,13 +19,14 @@ const Search = ({ hideSearch }) => {
   };
 
   useEffect(() => {
+    let timeout;
     (async () => {
       try {
         await dispatch(searchUsers(searchVal));
       } catch (err) {}
+      timeout = setTimeout(() => setLoaded(true), 500);
     })();
 
-    const timeout = setTimeout(() => setLoaded(true), 500);
     return () => clearTimeout(timeout);
   }, [dispatch, searchVal]);
 
