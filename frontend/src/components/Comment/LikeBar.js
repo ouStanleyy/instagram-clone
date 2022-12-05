@@ -1,20 +1,23 @@
 import styles from "./LikeBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { loadAllLikes, createLike, deleteLikeThunk } from "../../store/likes";
-import { getUsers } from "../../store/users";
 import { getDate } from "../Utill";
+import LikesModal from "./LikesModal";
+import {Modal} from "../../context/Modal";
+import FollowersList from "../Follows/FollowersList";
+import { getlikeUsers } from "../../store/likeUsers";
 
 const LikeBar = ({ post, onInputClick, showDate = false }) => {
   const dispatch = useDispatch();
-  const alllikes = useSelector((state) => Object.values(state.likes));
+  const allLikes = useSelector((state) => Object.values(state.likes));
   const user = useSelector((state) => state.session.user);
-  const likes = alllikes?.filter((like) => like?.post_id == post?.id);
+  const likes = allLikes?.filter(like => like?.post_id == post?.id)
   const firstLiker = likes[0]?.username;
+  const firstLiker_pp = likes[0]?.profile_picture
+  const liked = likes?.filter(like => (like?.user_id == user?.id)&& (like?.post_id == post?.id))
 
-  const liked = likes?.filter(
-    (like) => like?.user_id == user?.id && like?.post_id == post?.id
-  );
+  const [likesModal, setLikesModal] = useState(false)
 
   // const handleShare = (e) => {
   //   e.preventDefault();
@@ -28,7 +31,7 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
   useEffect(() => {
     (async () => {
       await dispatch(loadAllLikes(post?.id));
-      // await dispatch(getUsers())
+
     })();
   }, [dispatch, post?.id]);
 
@@ -39,6 +42,12 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
   const unlike = () => {
     dispatch(deleteLikeThunk(post?.id));
   };
+
+  const toggleLikesModal = (e) =>{
+    e.preventDefault()
+    e.stopPropagation()
+    setLikesModal(state => !state )
+  }
 
   return (
     <div className={styles.likeBarContainer}>
@@ -128,34 +137,64 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
       </div>
 
       <div>
-        {likes.length == 0 && (
-          <span className={styles.likesLabel}>
-            Be the first to
-            <span className={styles.likesLabelBold}>like this</span>
-          </span>
+        {likes.length == 0 &&(
+          <div className={styles.likesLabelDiv}>
+            <span className={styles.likesLabel}>
+            Be the first to<span className={styles.likesLabelBold}>like this</span>
+            </span>
+          </div>
         )}
-        {likes.length > 0 &&
-          (likes.length > 1 ? (
-            <span className={styles.likesLabel}>
-              Liked by
-              <span className={styles.likesLabelBold}>{firstLiker}</span> and
-              <span className={styles.likesLabelBold}>
-                {likes.length - 1}
-              </span>{" "}
-              others
-            </span>
-          ) : (
-            <span className={styles.likesLabel}>
-              Liked by
-              <span className={styles.likesLabelBold}>{firstLiker}</span>
-            </span>
-          ))}
-      </div>
-      <div className={styles.timeStampDiv}>
-        <span className={styles.timeStamp}>
-          {showDate && `${getDate(post?.created_at)}`}
-        </span>
-      </div>
+        {likes.length > 0 && (
+            likes.length > 1 ?
+            <div className={styles.likesLabelDiv}>
+              <span className={styles.likesLabel}>
+                <span>
+                  <img
+                  className={styles.profileSmall}
+                  onClick={toggleLikesModal}
+                  src={firstLiker_pp}/>
+                </span>
+                Liked by<span className={styles.likesLabelBold}>{firstLiker}</span>{" "}
+                and
+                <span className={styles.likesLabelBold}>
+                  {likes.length - 1}
+                </span>{" "}
+                others
+              </span>
+              </div>
+            :
+            <div className={styles.likesLabelDiv}>
+              <span className={styles.likesLabel}>
+                <span>
+                  <img
+                  className={styles.profileSmall}
+                  onClick={toggleLikesModal}
+                  src={firstLiker_pp}/>
+
+                </span>
+                Liked by<span className={styles.likesLabelBold}>{firstLiker}</span>
+              </span>
+            </div>
+
+        )}
+        </div>
+        <div className={styles.timeStampDiv}>
+          <span className={styles.timeStamp}>
+            {showDate && (
+             `${getDate(post?.created_at)}`
+            )}
+          </span>
+        </div>
+        { likesModal && (
+          <Modal onClose={toggleLikesModal}>
+            <LikesModal
+            likes={likes}
+            onClose={toggleLikesModal}
+            currUser={user}
+            />
+
+          </Modal>
+        )}
     </div>
   );
 };

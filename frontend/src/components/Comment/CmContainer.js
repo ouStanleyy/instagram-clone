@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
-import NoComments from "./NoComments";
+
 
 const CmContainer = ({ post }) => {
   const dispatch = useDispatch();
@@ -36,9 +36,23 @@ const CmContainer = ({ post }) => {
 
   return (
     <>
-      {comments.length === 0 && (
-        <div>
-          <NoComments />
+      {comments.length == 0 &&(
+        <div className={styles.cmContainer}>
+          <div
+          className={styles.noCmContainer}
+            >
+            <div
+            className={styles.noCommentsDiv}>
+                <span
+                className={styles.noCommentsLabel}
+                >No comments yet.</span>
+            </div>
+            <div>
+                <span
+                className={styles.startConLabel}
+                >Start the conversation.</span>
+            </div>
+          </div>
         </div>
       )}
       {comments.length > 0 && (
