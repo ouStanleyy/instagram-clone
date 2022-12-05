@@ -79,13 +79,14 @@
   }
 }
 
-.hideNavItem .svgContainer + span,
 .hideNavItem .logo,
 .hideNavItem .hideSvg {
   /* display: none; */
   opacity: 0;
   width: 0;
 }
+
+.hideNavItem .svgContainer + span,
 .hideNavItem .profilePicture + span {
   display: none;
 }
