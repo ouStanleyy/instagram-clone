@@ -1,0 +1,14 @@
+.exploreItemContainer {
+  width: 292px;
+  height: 292px;
+  object-position: center;
+  background-color: black;
+  position: relative;
+}
+
+.multiImage {
+  position: absolute;
+  padding: 12px;
+  top: 0;
+  right: 0;
+}

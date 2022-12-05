@@ -52,9 +52,3 @@
 .miniNavBar {
   width: 72px;
 }
-
-@media screen and (max-width: 560px) {
-  .navBar {
-    display: none;
-  }
-}
