@@ -11,7 +11,7 @@
 .containerHeader {
   border-bottom: 1px solid #DBDBDB;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 12px;
 }
@@ -21,8 +21,9 @@
   font-size: 16px;
   font-weight: 500;
   text-align: center;
+  width: 100%;
+  padding: 6px 0;
 }
-
 
 .pageOne {
   /* border: 1px solid green; */
@@ -82,6 +83,19 @@ input[type="file"] {
   font-size: 16px;
 }
 
+.prevButton, .nextButton, .submitButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 56px;
+}
+
+.nextButton, .submitButton {
+  color: #0095F6;
+  font-weight: 500;
+  font-size: 14px;
+}
+
 .filtersContainer {
   /* border: 1px solid red; */
   width: auto;
@@ -129,7 +143,7 @@ input[type="file"] {
   bottom: 0;
   right: 0;
   font-size: 12px;
-  color: #262626;
+  color: #C9C9C9;
 }
 
 .userCard {
@@ -138,11 +152,18 @@ input[type="file"] {
   gap: 12px;
 }
 
+.username {
+  font-weight: 500;
+  font-size: 16px;
+  color: #262626;
+}
+
 .advancedSettings {
   padding: 12px 16px;
   user-select: none;
   cursor: pointer;
   font-size: 16px;
+  border-bottom: 1px solid #DBDBDB;
 }
 
 .advancedSettings > summary {
@@ -151,10 +172,31 @@ input[type="file"] {
   justify-content: space-between;
 }
 
-.advancedSettings[open] .chevron {
+.chevron {
   transform: rotate(180deg);
+}
+
+.advancedSettings[open] {
+  border: none;
+}
+
+.advancedSettings[open] .chevron {
+  transform: rotate(0deg);
 }
 
 .advancedSettings[open] > summary {
   font-weight: 500;
+}
+
+.switchContainer {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
 }

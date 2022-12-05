@@ -189,7 +189,7 @@ const CreatePost = () => {
                   <div className={styles.pageThree}>
                     <div className={styles.userCard}>
                       <ProfilePicture user={user} size={"small"} />
-                      {user?.username}
+                      <span className={styles.username}>{user?.username}</span>
                     </div>
                     <div className={styles.textAreaContainer}>
                       <textarea
@@ -200,9 +200,7 @@ const CreatePost = () => {
                         value={caption}
                         onChange={updateCaption}
                       />
-                      <span className={styles.charCount}>
-                        {charCount} / 2200
-                      </span>
+                      <span className={styles.charCount}>{charCount}/2200</span>
                     </div>
                   </div>
                   <div className={styles.detailsContainer}>
@@ -211,7 +209,7 @@ const CreatePost = () => {
                         Advanced settings
                         <svg
                           aria-label="Down chevron icon"
-                          className={`_ab6- ${styles.chevron}`}
+                          class={`_ab6- ${styles.chevron}`}
                           color="#262626"
                           fill="#262626"
                           height="16"
@@ -222,7 +220,6 @@ const CreatePost = () => {
                           <path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z"></path>
                         </svg>
                       </summary>
-
                       <div className={styles.switchContainer}>
                         <div className={styles.inputContainer}>
                           <label htmlFor="showlikes">
@@ -230,12 +227,14 @@ const CreatePost = () => {
                           </label>
                           <input id="showlikes" type="checkbox" />
                         </div>
+                        <div className={styles.toggleSwitch}></div>
                         <div className={styles.inputContainer}>
                           <label htmlFor="allowcomments">
                             Turn off commenting
                           </label>
                           <input id="allowcomments" type="checkbox" />
                         </div>
+                        <div className={styles.toggleSwitch}></div>
                       </div>
                     </details>
                   </div>
