@@ -17,6 +17,10 @@
     margin: 10px 0;
 }
 
+.icons svg {
+    cursor: pointer;
+}
+
 .likesLabelDiv{
     /* border: 1px solid red; */
     /* margin-top: 20px; */
