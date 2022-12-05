@@ -15,10 +15,6 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
     <>
       <div className={styles.container}>
         <div className={styles.profilePicture}>
-          {/* <img
-            src={comment?.user?.profile_picture}
-            alt={comment?.user?.username}
-            /> */}
           <ProfilePicture user={comment?.user} size={"small"} />
         </div>
         <div>

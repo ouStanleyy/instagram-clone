@@ -11,6 +11,7 @@
   width: 472px;
   background-color: white;
   animation: slideIn 300ms ease-out;
+  z-index: 4;
 }
 
 .hideSearch {

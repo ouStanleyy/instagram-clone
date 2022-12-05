@@ -11,7 +11,7 @@
   width: 244px;
   background-color: white;
   transition: 300ms;
-  z-index: 1;
+  z-index: 10;
 }
 
 .navLink {
