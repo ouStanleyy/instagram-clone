@@ -66,38 +66,6 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-
-  // return (
-  //   <BrowserRouter>
-  //     <div className={styles.pageLayout}>
-  //       <div className={styles.nav}>
-  //         <Route path="/">{user ? <NavBar /> : <Splash />}</Route>
-  //       </div>
-  //       <div className={styles.contentBody}>
-  //         <Switch>
-  //           <Route path="/" exact={true}>
-  //             feed
-  //           </Route>
-  //           <ProtectedRoute path="/users" exact={true}>
-  //             <UsersList />
-  //           </ProtectedRoute>
-  //           <ProtectedRoute path="/users/:userId" exact={true}>
-  //             <User />
-  //           </ProtectedRoute>
-  //           <Route path="/account">
-  //             <Setting />
-  //           </Route>
-  //           <Route path="/posts" exact={true}>
-  //             <h1>Post</h1>
-  //           </Route>
-  //           <Route path="/posts/:postId" exact={true}>
-  //             <PostDetailCard />
-  //           </Route>
-  //         </Switch>
-  //       </div>
-  //     </div>
-  //   </BrowserRouter>
-  // );
 }
 
 export default App;
