@@ -2,7 +2,7 @@ import styles from "./MediaCarousel.module.css";
 import { useState, useEffect, useRef } from "react";
 import { isVideo } from "../Utill";
 
-const MediaCarousel = ({ medias, isPreview = false }) => {
+const MediaCarousel = ({ medias, filter = "", isPreview = false }) => {
   /* Carousel can be used as a preview carousel or actual carousel */
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = useRef([]);
@@ -41,13 +41,13 @@ const MediaCarousel = ({ medias, isPreview = false }) => {
               <source src={media?.url} type={"video/mp4"} />
             </video>
           ) : !isPreview && !isVideo(media?.url) ? (
-            <img src={media?.url} alt="actual" />
+            <img src={media?.url} alt="actual" className={filter} />
           ) : isPreview && media.isVideo ? (
             <video width="100%" height="100%" muted controls loop>
               <source src={media?.url} type={"video/mp4"} />
             </video>
           ) : (
-            <img src={media?.url} alt="preview" />
+            <img src={media?.url} alt="preview" className={filter} />
           )}
 
           {/* {isVideo(media?.url) ? (
