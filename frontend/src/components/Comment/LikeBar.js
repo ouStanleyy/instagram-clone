@@ -22,7 +22,7 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
   //   // url[1] = `/posts/${post.id}`;
   //   const url = `http://localhost:3000/posts/${post.id}`;
   //   navigator.clipboard.writeText(url);
-  //   console.log("HERE", url);
+  //   console.log("HERE", window.location.hostname);
   // };
 
   useEffect(() => {

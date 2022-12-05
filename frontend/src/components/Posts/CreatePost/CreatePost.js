@@ -31,6 +31,8 @@ const CreatePost = () => {
   const [filter, setFilterType] = useState("original");
   const [caption, setCaption] = useState("");
   const [charCount, setCharCount] = useState(0);
+  const [turnOffComments, setTurnOffComments] = useState(false);
+  const [hideLikeCount, setHideLikeCount] = useState(false);
 
   const handleOpenUpload = (e) => {
     e.preventDefault();
@@ -45,7 +47,8 @@ const CreatePost = () => {
     setCaption(e.target.value);
     setCharCount(e.target.value.length);
   };
-  const updateCharCount = (e) => setCharCount(e.target.value.length);
+  const handleTurnOffComments = (e) => setTurnOffComments((prev) => !prev);
+  const handleHideLikeCount = (e) => setHideLikeCount((prev) => !prev);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,8 +58,8 @@ const CreatePost = () => {
 
     data.append("caption", caption);
     data.append("is_story", false);
-    data.append("show_like_count", true);
-    data.append("allow_comments", true);
+    data.append("show_like_count", !hideLikeCount);
+    data.append("allow_comments", !turnOffComments);
 
     const result = await dispatch(addPost(data));
 
@@ -222,19 +225,31 @@ const CreatePost = () => {
                       </summary>
                       <div className={styles.switchContainer}>
                         <div className={styles.inputContainer}>
-                          <label htmlFor="showlikes">
-                            Hide like and view counts on this post
-                          </label>
-                          <input id="showlikes" type="checkbox" />
+                          <span>Hide like and view counts on this post</span>
+                          <input
+                            id="showlikes"
+                            type="checkbox"
+                            checked={hideLikeCount}
+                            onChange={handleHideLikeCount}
+                          />
+                          <label
+                            htmlFor="showlikes"
+                            className={styles.toggleSwitch}
+                          ></label>
                         </div>
-                        <div className={styles.toggleSwitch}></div>
                         <div className={styles.inputContainer}>
-                          <label htmlFor="allowcomments">
-                            Turn off commenting
-                          </label>
-                          <input id="allowcomments" type="checkbox" />
+                          <span>Turn off commenting</span>
+                          <input
+                            id="allowcomments"
+                            type="checkbox"
+                            checked={turnOffComments}
+                            onChange={handleTurnOffComments}
+                          />
+                          <label
+                            htmlFor="allowcomments"
+                            className={styles.toggleSwitch}
+                          ></label>
                         </div>
-                        <div className={styles.toggleSwitch}></div>
                       </div>
                     </details>
                   </div>
