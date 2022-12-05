@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUsers } from "../../store/users";
-import { ProfilePicture } from "../Elements";
+import { LoadingSpinner, magnifier } from "../Elements";
 import styles from "./Search.module.css";
 import SearchUser from "./SearchUser";
 
@@ -10,15 +10,23 @@ const Search = ({ hideSearch }) => {
   const searchResults = useSelector((state) =>
     Object.values(state.users.searchResults)
   );
-  const [searchVal, setSearchVal] = useState("");
+  const [searchVal, setSearchVal] = useState(``);
+  const [loaded, setLoaded] = useState(true);
+
+  const updateSearchVal = (e) => {
+    setLoaded(false);
+    setSearchVal(e.target.value);
+  };
 
   useEffect(() => {
     (async () => {
       try {
         await dispatch(searchUsers(searchVal));
       } catch (err) {}
-      // setLoaded(true);
     })();
+
+    const timeout = setTimeout(() => setLoaded(true), 500);
+    return () => clearTimeout(timeout);
   }, [dispatch, searchVal]);
 
   return (
@@ -27,18 +35,36 @@ const Search = ({ hideSearch }) => {
     >
       <div className={styles.searchHeader}>
         <h2>Search</h2>
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchVal}
-          onChange={(e) => setSearchVal(e.target.value)}
-          className={styles.searchInput}
-        />
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchVal}
+            onChange={updateSearchVal}
+            className={styles.searchInput}
+          />
+          {loaded ? (
+            <span
+              onClick={() => setSearchVal("")}
+              className={`material-symbols-outlined ${styles.cancelButton}`}
+            >
+              cancel
+            </span>
+          ) : (
+            <div className={styles.loadingCancelSpinner}>
+              <LoadingSpinner />
+            </div>
+          )}
+        </div>
       </div>
       <div className={styles.searchResults}>
-        {searchResults.map((result) => (
-          <SearchUser user={result} />
-        ))}
+        {loaded ? (
+          searchResults.map((result) => <SearchUser user={result} />)
+        ) : (
+          <div className={styles.loadingSpinner}>
+            <LoadingSpinner />
+          </div>
+        )}
       </div>
     </div>
   );
