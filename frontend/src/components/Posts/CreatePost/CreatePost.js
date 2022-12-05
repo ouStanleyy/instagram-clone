@@ -20,6 +20,12 @@ import filterTypes from "./filterTypes";
   6. Click "SHARE" will then handle final submission
 */
 
+/* SAVING A FILTER PER IMAGE:
+  1. State for current image
+  2. State for saving image setting of each image
+  3. Button in media carousel will update the current image index
+  4. Filter inputs will save the filter at
+*/
 const CreatePost = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();

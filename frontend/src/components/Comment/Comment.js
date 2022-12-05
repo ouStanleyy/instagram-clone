@@ -35,7 +35,7 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
               >
                 <svg
                   aria-label="More options"
-                  class="_ab6-"
+                  className="_ab6-"
                   color="#262626"
                   fill="#262626"
                   height="20"

@@ -52,6 +52,7 @@ input[type="file"] {
   cursor: pointer;
   user-select: none;
   letter-spacing: 0.4px;
+  text-align: center;
 }
 
 .uploadText:active {
