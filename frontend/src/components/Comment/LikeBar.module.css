@@ -21,6 +21,10 @@
     margin: 10px 0;
 }
 
+.icons svg {
+    cursor: pointer;
+}
+
 .likesLabelDiv{
     display: flex;
 }

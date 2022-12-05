@@ -1,4 +1,4 @@
-import { iphone, phoneImages } from "./images";
+import { iphone } from "./images";
 import { useState, useEffect } from "react";
 import {
   screenshot1,

@@ -5,7 +5,7 @@
   align-items: flex-start;
   gap: 32px;
   margin-left: 244px;
-  padding-top: 48px;
+  padding: 48px 0;
 }
 
 .feed {
@@ -66,4 +66,14 @@
   font-weight: 500;
   font-size: 12px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+  .sideSection {
+    display: none;
+  }
+
+  .feedLayout {
+    margin-left: 72px;
+  }
 }
