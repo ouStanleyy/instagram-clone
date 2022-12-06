@@ -6,11 +6,16 @@ import styles from "./UsersList.module.css";
 import { ProfilePicture } from "../Elements";
 import SuggestionItem from "./SuggestionItem";
 import { getRandomSuggestion } from "../Utill";
+import { getFollowing } from "../../store/session";
 
 function UsersList() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const users = useSelector((state) => Object.values(state.users));
+  const following = useSelector((state) =>
+    Object.values(state.session.following)
+  );
+
   const [loaded, setLoaded] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
 
@@ -18,13 +23,14 @@ function UsersList() {
     (async () => {
       try {
         await dispatch(getUsers());
+        await dispatch(getFollowing());
         setLoaded(true);
       } catch (err) {}
     })();
   }, []);
 
   useEffect(() => {
-    setSuggestions(getRandomSuggestion(user, users));
+    setSuggestions(getRandomSuggestion(user, users, following));
   }, [loaded]);
 
   return (

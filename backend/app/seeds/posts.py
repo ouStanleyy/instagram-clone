@@ -257,22 +257,6 @@ posts = [
     },
     {
         "user_id": 15,
-        "caption": "Connor explains destructuring tricks"
-    },
-    {
-        "user_id": 15,
-        "caption": "Fastest way to check even and odds"
-    },
-    {
-        "user_id": 15,
-        "caption": "Copy and paste to the finish line"
-    },
-    {
-        "user_id": 15,
-        "caption": "We all started somewhere"
-    },
-    {
-        "user_id": 15,
         "caption": "Yup"
     },
 ]

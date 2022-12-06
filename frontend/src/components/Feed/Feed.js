@@ -8,9 +8,12 @@ import { ProfilePicture } from "../Elements";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { StoryCarousel } from "../Stories";
+import { logout } from "../../store/session";
+import { useHistory } from "react-router-dom";
 // import { getFollowing } from "../../store/session";
 
 const Feed = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const user = useSelector((state) => state.session.user);
@@ -19,6 +22,11 @@ const Feed = () => {
   useEffect(() => {
     dispatch(getPostsFeed(page));
   }, [dispatch]);
+
+  const handleLogout = async (e) => {
+    await dispatch(logout());
+    history.push("/");
+  };
 
   return (
     <div className={styles.feedLayout}>
@@ -39,7 +47,9 @@ const Feed = () => {
               <div className={styles.fullname}>{user?.full_name}</div>
             </div>
           </div>
-          <div className={styles.switchButton}>Switch</div>
+          <div className={styles.switchButton} onClick={handleLogout}>
+            Switch
+          </div>
         </div>
         <UsersList />
         <Footer />
