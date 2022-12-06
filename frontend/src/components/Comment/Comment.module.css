@@ -83,6 +83,7 @@
   color: #8E8E8E;
   font-size: 13px;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .replyContainer{
@@ -94,12 +95,11 @@
   align-self: center;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .inputContainer{
-  /* border-top: 1px solid rgb(183, 182, 182, 0.250); */
-  /* border: 1px solid blue; */
-  /* width: 400px; */
+
   height: 50px;
   display: flex;
   position: relative;
@@ -110,13 +110,6 @@
   margin-left: 16px;
   align-self: center;
 }
-
-/* .emojiIcon{
-  margin-left: 10px;
-  width:30px;
-  height: 30px;
-  background-color: transparent;
-} */
 
 .commentInput{
   width:300px;
@@ -143,18 +136,12 @@
 
 .noCmContainer{
   height: 100%;
-  /* max-height: 500px; */
-  /* border-bottom: 1px solid rgb(183, 182, 182, 0.250); */
-  /* border-bottom: 1px solid #DBDBDB; */
+
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-
-/* .noCommentsDiv{
-  margin-bottom:10px ;
-} */
 
 .noCommentsLabel{
   font-size: 22px;

@@ -5,11 +5,13 @@ import { getUsers } from "../../store/users";
 import styles from "./UsersList.module.css";
 import { ProfilePicture } from "../Elements";
 import SuggestionItem from "./SuggestionItem";
+import { getFollowing } from "../../store/session";
 
 function UsersList() {
   const dispatch = useDispatch();
   const users = useSelector((state) => Object.values(state.users));
   const [loaded, setLoaded] = useState(false);
+
 
   useEffect(() => {
     (async () => {

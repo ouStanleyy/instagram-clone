@@ -5,8 +5,9 @@ import styles from "./Comment.module.css";
 // import styleSvg from "../NavBar/NavItem.module.css";
 import EmojiWindow from "./EmojiWindow";
 // import CommentsForm from "./CmContainer";
+// import { createReply } from "../../store/replies";
 
-const InputContainer = ({ post, cmInputRef }) => {
+const InputContainer = ({ post, cmInputRef}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const { id } = user;
@@ -16,12 +17,19 @@ const InputContainer = ({ post, cmInputRef }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const payload = { comment, user_id: id };
 
     dispatch(createComment(payload, post.id));
+
     setComment("");
   };
+
+  // const handleComment = (e)=>{
+  //   setComment({
+  //     comment: e.target.value
+
+  //   })
+  // }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -50,6 +58,7 @@ const InputContainer = ({ post, cmInputRef }) => {
           <EmojiWindow emojiWindow={emojiWindow} />
         </div>
         <input
+
           className={styles.commentInput}
           placeholder="Add a comment..."
           value={comment}

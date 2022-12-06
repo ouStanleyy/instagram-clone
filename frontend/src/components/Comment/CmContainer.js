@@ -6,7 +6,7 @@ import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
 
 
-const CmContainer = ({ post }) => {
+const CmContainer = ({ post, cmInputRef }) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
   // let comments = useSelector((state) => state.posts[post?.id]?.comments);
@@ -78,6 +78,7 @@ const CmContainer = ({ post }) => {
                   comment={comment}
                   toggleDeleteModal={toggleDeleteModal}
                   deleteModal={deleteModal}
+                  cmInputRef = {cmInputRef}
                 />
               );
             })}
