@@ -12,6 +12,7 @@ function UsersList() {
   const user = useSelector((state) => state.session.user);
   const users = useSelector((state) => Object.values(state.users));
   const [loaded, setLoaded] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -20,14 +21,18 @@ function UsersList() {
         setLoaded(true);
       } catch (err) {}
     })();
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    setSuggestions(getRandomSuggestion(user, users));
+  }, [loaded]);
 
   return (
     loaded && (
       <div className={styles.suggestionContainer}>
         <h3 className={styles.suggestionHeader}>Suggestions For You</h3>
         <ul className={styles.suggestions}>
-          {getRandomSuggestion(user, users)?.map((user) => {
+          {suggestions?.map((user) => {
             return <SuggestionItem user={user} key={user.id} />;
           })}
         </ul>
