@@ -22,14 +22,12 @@ function UsersList() {
     })();
   }, [dispatch]);
 
-  const suggestions = getRandomSuggestion(user, users);
-
   return (
     loaded && (
       <div className={styles.suggestionContainer}>
         <h3 className={styles.suggestionHeader}>Suggestions For You</h3>
         <ul className={styles.suggestions}>
-          {suggestions?.map((user) => {
+          {getRandomSuggestion(user, users)?.map((user) => {
             return <SuggestionItem user={user} key={user.id} />;
           })}
         </ul>
