@@ -8,7 +8,7 @@ import { ProfilePicture } from "../Elements";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { StoryCarousel } from "../Stories";
-import { getFollowing } from "../../store/session";
+// import { getFollowing } from "../../store/session";
 
 const Feed = () => {
   const dispatch = useDispatch();

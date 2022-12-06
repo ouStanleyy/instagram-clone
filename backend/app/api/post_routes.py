@@ -49,7 +49,7 @@ def posts():
     Validations:
         - Exclude: Current User's Post, Stories, Current Followings, and Private User Posts
 
-    Use: discovery page
+    Use: explore page
     """
 
     posts = Post.query.filter(Post.user.has(User.is_private == False),

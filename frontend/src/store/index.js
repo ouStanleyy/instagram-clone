@@ -7,6 +7,7 @@ import comments from "./comments";
 import follows from "./follows";
 import likes from "./likes";
 import stories from "./stories";
+import likeUsers from "./likeUsers"
 
 const rootReducer = combineReducers({
   session,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   follows,
   likes,
   stories,
+  likeUsers
 });
 
 let enhancer;

@@ -1,7 +1,5 @@
-import { NavLink } from "react-router-dom";
 import styles from "./Comment.module.css";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import { Modal } from "../../context/Modal";
 import DeleteModal from "./DeleteModal";
 import { ProfilePicture } from "../Elements";
@@ -11,17 +9,13 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
   const owner_id = useSelector(
     (state) => state.posts[comment?.post_id]?.user_id
   );
-  const is_owner = user.id == owner_id || user.id == comment?.user_id;
+  const is_owner = user.id === owner_id || user.id === comment?.user_id;
 
   return (
     <>
       <div className={styles.container}>
         <div className={styles.profilePicture}>
-          {/* <img
-            src={comment?.user?.profile_picture}
-            alt={comment?.user?.username}
-            /> */}
-          <ProfilePicture user={comment?.user} size={"medium"} />
+          <ProfilePicture user={comment?.user} size={"small"} />
         </div>
         <div>
           <div className={styles.textContainer}>
@@ -31,10 +25,13 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
           <div className={styles.replyContainer}>
             <span className={styles.reply}>Reply</span>
             {is_owner && (
-              <button onClick={toggleDeleteModal(comment?.id)} className={styles.moreButton}>
+              <button
+                onClick={toggleDeleteModal(comment?.id)}
+                className={styles.moreButton}
+              >
                 <svg
                   aria-label="More options"
-                  class="_ab6-"
+                  className="_ab6-"
                   color="#262626"
                   fill="#262626"
                   height="20"
@@ -53,7 +50,10 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
       </div>
       {deleteModal[comment.id] && (
         <Modal id="modal" onClose={toggleDeleteModal(comment.id)}>
-          <DeleteModal comment={comment} onClose={toggleDeleteModal(comment.id)} />
+          <DeleteModal
+            comment={comment}
+            onClose={toggleDeleteModal(comment.id)}
+          />
         </Modal>
       )}
     </>

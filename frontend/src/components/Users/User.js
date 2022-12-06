@@ -8,6 +8,7 @@ import { PostDetailCard } from "../Posts";
 import styles from "./User.module.css";
 import { ProfilePicture } from "../Elements";
 import { isVideo } from "../Utill";
+import { FollowButton } from "../Follows";
 
 function User() {
   const dispatch = useDispatch();
@@ -18,7 +19,9 @@ function User() {
   );
   const isFollowing = useSelector((state) =>
     Object.values(state.session.following)
-  ).filter((follow) => follow.following_id === user?.id).length;
+  ).filter(
+    (follow) => follow.following_id === user?.id && !follow.is_pending
+  ).length;
   const [loaded, setLoaded] = useState(false);
   const [followsModal, setFollowsModal] = useState({
     show: false,
@@ -102,6 +105,7 @@ function User() {
           <div className={styles.userDetails}>
             <div className={styles.detailsHeader}>
               <p className={styles.username}>{user.username}</p>
+              {!isOwner && <FollowButton user={user} />}
             </div>
             <div className={styles.detailsStats}>
               <p>
@@ -299,6 +303,22 @@ function User() {
                             alt="preview media"
                             className={styles.previewMedia}
                           />
+                        )}
+                        {post.num_of_media > 1 && (
+                          <div className={styles.multiImage}>
+                            <svg
+                              aria-label="Carousel"
+                              // class="_ab6-"
+                              color="#ffffff"
+                              fill="#ffffff"
+                              height="22"
+                              role="img"
+                              viewBox="0 0 48 48"
+                              width="22"
+                            >
+                              <path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h13.4c5.7 0 10.3-4.6 10.3-10.3V18.5c0-1.6-.7-3.1-1.8-4.1-.5-.4-1.2 0-1.2.6z"></path>
+                            </svg>
+                          </div>
                         )}
                         {/* </Link> */}
                         {postModal[idx] && (

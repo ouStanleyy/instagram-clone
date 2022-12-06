@@ -16,6 +16,8 @@
   display: flex;
   justify-content: space-around;
   width: 65%;
+  max-width: 936px;
+  padding: 20px;
 }
 
 .profilePicture {
@@ -29,6 +31,11 @@
   flex-direction: column;
   justify-content: space-between;
   width: 65%;
+}
+
+.detailsHeader {
+  display: flex;
+  gap: 28px;
 }
 
 .username {
@@ -66,7 +73,8 @@
   align-items: center;
   gap: 28px;
   margin-top: 20px;
-  width: 66%;
+  width: 65%;
+  max-width: 936px;
   background-color: #ffffff;
   border: 1px solid #efefef;
   border-top: 1px solid #dbdbdb;
@@ -80,7 +88,8 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  width: 66%;
+  width: 65%;
+  max-width: 936px;
   border-top: 1px solid #dbdbdb;
 }
 
@@ -99,25 +108,40 @@
 .postsContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 28px;
+  width: 65%;
+  max-width: 936px;
+}
+
+.postsContainer > p {
+  width: 100%;
+  text-align: center;
 }
 
 .postContainer {
   position: relative;
-  height: 308px;
-  width: 308px;
+  height: 292px;
+  width: 292px;
   /* aspect-ratio: 1/1; */
 }
 
 .previewMedia {
   position: absolute;
-  width: 308px;
-  height: 308px;
-  top: 0;
+  width: 292px;
+  height: 292px;
   object-fit: cover;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.multiImage {
+  position: absolute;
+  text-align: right;
+  width: 100%;
+  padding: 8px;
+  z-index: 1;
 }
 
 .postDetails {
@@ -128,8 +152,8 @@
   gap: 36px;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
-  width: 308px;
-  height: 308px;
+  width: 292px;
+  height: 292px;
   top: 0;
   bottom: 0;
   left: 0;
@@ -145,7 +169,7 @@
 }
 
 .postDetails:hover {
-  z-index: 1;
+  z-index: 2;
 }
 
 .previewMedia:hover {
