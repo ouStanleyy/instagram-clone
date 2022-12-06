@@ -91,14 +91,14 @@ def posts_feed():
     Use: feed page
     """
     page = request.args.get('page', 1, type=int)
-    size = 10
+    SIZE = 25 if page == 0 else 8
 
     posts = Post.query\
         .join(User, Post.user_id == User.id)\
         .join(Follow, Follow.following_id == User.id)\
         .filter(Follow.follower_id == current_user.id,
                 Follow.is_pending == False, Post.is_story == False)\
-        .paginate(page=page, per_page=size)
+        .paginate(page=page, per_page=SIZE)
 
     return {"Posts": [post.to_dict_feed() for post in posts.items]}
 
