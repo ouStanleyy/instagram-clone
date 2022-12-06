@@ -22,17 +22,19 @@ const loadPostExplore = (posts) => ({
 });
 
 // THUNKS
-export const getPostsFeed = () => async (dispatch) => {
-  const res = await fetch("/api/posts/following");
-  const { Posts: posts } = await res.json();
+export const getPostsFeed =
+  (page = 1) =>
+  async (dispatch) => {
+    const res = await fetch(`/api/posts/following?${page}`);
+    const { Posts: posts } = await res.json();
 
-  if (res.ok) {
-    const normalizedData = {};
-    posts.forEach((post) => (normalizedData[post.id] = post));
-    dispatch(loadPostsFeed(normalizedData));
-    return posts;
-  }
-};
+    if (res.ok) {
+      const normalizedData = {};
+      posts.forEach((post) => (normalizedData[post.id] = post));
+      dispatch(loadPostsFeed(normalizedData));
+      return posts;
+    }
+  };
 
 export const getPostsExplore = () => async (dispatch) => {
   const res = await fetch("/api/posts/");
@@ -73,7 +75,7 @@ export const addPost = (formData) => async (dispatch) => {
 const postsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_POSTS_FEED:
-      return { ...action.posts };
+      return { ...state, ...action.posts };
     case LOAD_POST_DETAILS:
       return {
         ...state,
@@ -81,17 +83,6 @@ const postsReducer = (state = {}, action) => {
       };
     case LOAD_POST_EXPLORE:
       return { ...action.posts };
-    // case ADD_COMMENT:
-    //   return {
-    //     ...state,
-    //     [action.payload.post_id]: {
-    //       ...state[action.payload.post_id],
-    //       comments: [
-    //         ...state[action.payload.post_id].comments,
-    //         ...action.payload,
-    //       ],
-    //     },
-    //   };
     default:
       return state;
   }

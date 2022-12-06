@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsFeed } from "../../store/posts";
 import { PostFeedCard } from "../Posts";
@@ -12,14 +12,12 @@ import { StoryCarousel } from "../Stories";
 
 const Feed = () => {
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
   const user = useSelector((state) => state.session.user);
   const posts = useSelector((state) => Object.values(state?.posts));
 
   useEffect(() => {
-    (async () => {
-      await dispatch(getPostsFeed());
-      // await dispatch(getFollowing(user?.id));
-    })();
+    dispatch(getPostsFeed(page));
   }, [dispatch]);
 
   return (
