@@ -12,6 +12,7 @@ function UsersList() {
   const user = useSelector((state) => state.session.user);
   const users = useSelector((state) => Object.values(state.users));
   const [loaded, setLoaded] = useState(false);
+  const [suggestions, setSuggestions] = useState([])
 
 
   useEffect(() => {
@@ -21,9 +22,12 @@ function UsersList() {
         setLoaded(true);
       } catch (err) {}
     })();
-  }, [dispatch]);
+  }, []);
 
-  const suggestions = getRandomSuggestion(user, users);
+  useEffect(()=>{
+    setSuggestions(getRandomSuggestion(user, users))
+  },[loaded])
+
 
   return (
     loaded && (
