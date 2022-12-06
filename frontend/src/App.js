@@ -13,6 +13,7 @@ import { Setting } from "./components/Setting";
 import { Feed } from "./components/Feed";
 import { CreatePost } from "./components/Posts";
 import { Explore } from "./components/Explore";
+import { Messages } from "./components/Messages";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -51,6 +52,9 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
+          <Route path="/messages" exact={true}>
+            <Messages />
+          </Route>
           <Route path="/create" exact={true}>
             <CreatePost />
           </Route>

@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+from flask_socketio import SocketIO, emit
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
@@ -46,6 +47,9 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
+
+# Creates an instance of SocketIO
+sio = SocketIO(app, cors_allowed_origins='*')
 
 
 # Since we are deploying with Docker and Flask,
@@ -105,3 +109,31 @@ def not_found(e):
     Any unknown URLs that return a 404 error will return the page that bootstraps the React application
     """
     return app.send_static_file('index.html')
+
+
+@sio.on("connect")
+def connected():
+    """event listener when client connects to the server"""
+    print(request.args.get('room'))
+    print("client has connected")
+    sio.server.enter_room(request.sid, request.args.get('room'))
+    emit("connect",{"data":f"id: {request.sid} is connected"})
+
+@sio.on('data')
+def handle_message(data):
+    """event listener when client types a message"""
+    print("data from the front end: ",data['message'], data['room'])
+    emit('data',{'data':data['message'],'id':request.sid},room=data['room'])
+    # emit(event,{'data':data,'id':request.sid},broadcast=True)
+
+@sio.on("disconnect")
+def disconnected():
+    """event listener when client disconnects to the server"""
+    print("user disconnected")
+    sio.server.leave_room(request.sid, request.args.get('room'))
+    emit("disconnect",f"user {request.sid} disconnected",broadcast=True)
+
+def app_run():
+    sio.run(app, debug=True, port=5000)
+
+app.app_run = app_run
