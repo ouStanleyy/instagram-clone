@@ -388,22 +388,6 @@ medias = [
     },
     {
         "post_id": 63,
-        "url": "https://v16m-webapp.tiktokcdn-us.com/a056508324332112b8c176bf25977d78/638efe56/video/tos/useast5/tos-useast5-ve-0068c001-tx/f9ab0e7c1f2f476d81c8d1041127be55/?a=1988&ch=0&cr=0&dr=0&lr=tiktok_m&cd=0%7C0%7C1%7C0&cv=1&br=588&bt=294&cs=0&ds=3&ft=ebtHKH-qMyq8ZNAeThe2NKidfl7Gb&mime_type=video_mp4&qs=0&rc=NTM6OmczaDY6aTppNWdpaEBpajxoNzk6Zmg8ZzMzZzczNEAyMS8wMC1eXmIxXjQ1YjVjYSNgcDNycjRnazNgLS1kMS9zcw%3D%3D&l=20221206023231663ABAB0AB2824001F09",
-    },
-    {
-        "post_id": 64,
-        "url": "https://v16m-webapp.tiktokcdn-us.com/e65e650a23552294f2714a31d8ba475f/638efee4/video/tos/useast5/tos-useast5-pve-0068-tx/c8b28610bd184408b457d230d3bb685b/?a=1988&ch=0&cr=0&dr=0&lr=tiktok_m&cd=0%7C0%7C1%7C0&cv=1&br=596&bt=298&cs=0&ds=3&ft=ebtHKH-qMyq8ZRjeThe2Nm6Dfl7Gb&mime_type=video_mp4&qs=0&rc=ZWhkOTplZzxpNWczODM4NEBpam43amU6ZjlmZDMzZzczNEBeM19hNTNhXmAxLmM2L18wYSMuXmRwcjQwYWxgLS1kMS9zcw%3D%3D&l=202212060234493397792145207C0017AB",
-    },
-    {
-        "post_id": 65,
-        "url": "https://v16m-webapp.tiktokcdn-us.com/8155445494c63d2541b8a90565814192/638efeed/video/tos/alisg/tos-alisg-pve-0037c001/63033563a0174acf91cd58410ef7605a/?a=1988&ch=0&cr=0&dr=0&lr=tiktok_m&cd=0%7C0%7C1%7C0&cv=1&br=1904&bt=952&cs=0&ds=3&ft=ebtHKH-qMyq8ZaEeThe2NiD-fl7Gb&mime_type=video_mp4&qs=0&rc=M2U2ZDs7N2U3Mzk2aGQ7OkBpamhwOjo6ZjZoZjMzODczNEA2YTY0Li8zXl8xLy02Ni4yYSMzYi9zcjRnLmlgLS1kMS1zcw%3D%3D&l=20221206023546327608FDA72D02001D91",
-    },
-    {
-        "post_id": 66,
-        "url": "https://v16m-webapp.tiktokcdn-us.com/8788224810a5ef43aada0d826b9e1e6e/638f0057/video/tos/useast2a/tos-useast2a-ve-0068c004/921dc18515504979a9e8623720f1ea6f/?a=1988&ch=0&cr=0&dr=0&lr=tiktok_m&cd=0%7C0%7C1%7C0&cv=1&br=4532&bt=2266&cs=0&ds=3&ft=ebtHKH-qMyq8ZvneThe2Nbm~fl7Gb&mime_type=video_mp4&qs=0&rc=NGc4Z2U0PGdnaWU4NGhpZUBpM3g0d2U6ZjplOTMzNzczM0BiYWAvY2JfNTUxNTMxMzJjYSNqazBjcjRnLWJgLS1kMTZzcw%3D%3D&l=20221206024145EFCB99FF73BBAE0020F8",
-    },
-    {
-        "post_id": 67,
         "url": "https://www.multidots.com/wp-content/uploads/2020/01/code-quality-standard.png?quality=90",
     },
 
