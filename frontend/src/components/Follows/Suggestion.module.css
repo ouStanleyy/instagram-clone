@@ -1,0 +1,15 @@
+.followButton, .followingButton {
+    font-size: 13px;
+    border: none;
+    background:transparent;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.followButton {
+    color: #0095F6;
+}
+
+.followingButton {
+    color: black;
+}

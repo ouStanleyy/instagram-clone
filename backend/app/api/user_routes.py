@@ -28,7 +28,7 @@ def user(user_id):
 
     if (not user_id == current_user.id
         and user['is_private']
-        and not Follow.query.filter_by(follower_id=current_user.id, following_id=user_id, is_pending=False).first()):
+            and not Follow.query.filter_by(follower_id=current_user.id, following_id=user_id, is_pending=False).first()):
         user.pop('posts')
 
     return user
@@ -71,7 +71,8 @@ def follows_of_user(user_id):
     Query for all follows of the specified user by id and returns them in a list of follow dictionaries
     """
     user = User.query.get_or_404(user_id)
-    follows = Follow.query.filter(or_(Follow.follower_id==user_id, Follow.following_id==user_id)).all()
+    follows = Follow.query.filter(
+        or_(Follow.follower_id == user_id, Follow.following_id == user_id)).all()
 
     if user_id == current_user.id:
         return {'Follows': [follow.to_dict() for follow in follows]}
@@ -97,7 +98,8 @@ def follow_user(user_id):
         if current_user.id == follower.follower_id:
             return {'message': f'{"Request is already pending" if follower.is_pending else "You are already a follower" }'}, 400
 
-    follow = Follow(follower_id=current_user.id, following_id=user.id, is_pending=user.is_private)
+    follow = Follow(follower_id=current_user.id,
+                    following_id=user.id, is_pending=user.is_private)
 
     db.session.add(follow)
     db.session.commit()
@@ -112,6 +114,7 @@ def user_search():
     Queries for users with provided search parameters and returns them in a list of user dictionaries
     """
     filter_ = request.args.get('username')
-    users = User.query.filter(User.username.ilike(f'%{filter_}%')).all() if filter_ else []
+    users = User.query.filter(User.username.ilike(
+        f'%{filter_}%')).all() if filter_ else []
 
     return {'users': [user.to_dict_all() for user in users]}

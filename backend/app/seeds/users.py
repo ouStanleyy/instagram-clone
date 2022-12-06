@@ -64,7 +64,7 @@ users = [
         "email": "daniel_demo@email.com",
         "password": "danieldemopw",
         "phone_number": "6666666666",
-        "profile_picture": "",
+        "profile_picture": "http://pm1.narvii.com/6460/919983fe40e4d60ad41aee4b53a2c51dd5699d42_00.jpg",
         "is_verified": True,
         "is_private": True
     },
