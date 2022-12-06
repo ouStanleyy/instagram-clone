@@ -5,6 +5,7 @@ import EditProfile from "./EditProfile";
 import { Footer } from "../Feed";
 
 const Setting = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
 
   return (

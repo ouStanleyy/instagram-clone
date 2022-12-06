@@ -34,4 +34,4 @@ const DeleteModal = ({comment, onClose} )=>{
     )
 }
 
-export default DeleteModal
+export default DeleteModal;

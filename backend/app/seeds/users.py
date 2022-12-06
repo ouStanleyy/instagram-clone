@@ -134,6 +134,42 @@ users = [
         "is_verified": False,
         "is_private": False
     },
+    {
+        "username": "kobebyrant",
+        "full_name": "Kobe Bryant",
+        "bio": "One of the greatest basketball players and scorers of all time, Bryant won five NBA championships, was an 18-time All-Star, a 15-time member of the All-NBA Team, a 12-time member of the All-Defensive Team, the 2008 NBA Most Valuable Player (MVP), and a two-time NBA Finals MVP.",
+        "gender": "Male",
+        "email": "kobebyrant@email.com",
+        "password": "kobebyrantpw",
+        "phone_number": "7892341234",
+        "profile_picture": "https://image.cnbcfm.com/api/v1/image/101524695-457220551.jpg?v=1395781183&w=929&h=523&vtcrop=y",
+        "is_verified": True,
+        "is_private": False
+    },
+    {
+        "username": "archdigest",
+        "full_name": "Architectural Digest",
+        "bio": "The International Design Authority. \nTap the link below to read more about any photo. \nJust kidding, there's no link.",
+        "gender": "Male",
+        "email": "archdigest@email.com",
+        "password": "archdigestpw",
+        "phone_number": "7892309834",
+        "profile_picture": "data:image/png;base64,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",
+        "is_verified": True,
+        "is_private": False
+    },
+    {
+        "username": "codemonkey",
+        "full_name": "Tips and tricks",
+        "bio": "Just coding tricks",
+        "gender": "Male",
+        "email": "codemonkey@email.com",
+        "password": "codemonkeypw",
+        "phone_number": "7892229834",
+        "profile_picture": "https://s3.amazonaws.com/rails-camp-tutorials/blog/programming+memes/programming-or-googling.jpg",
+        "is_verified": True,
+        "is_private": False
+    },
 ]
 
 

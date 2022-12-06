@@ -1,26 +1,27 @@
-import { NavLink } from "react-router-dom";
 import styles from "./Comment.module.css";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import { Modal } from "../../context/Modal";
 import DeleteModal from "./DeleteModal";
 import { ProfilePicture } from "../Elements";
 
-const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
+const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef }) => {
   const user = useSelector((state) => state.session.user);
   const owner_id = useSelector(
     (state) => state.posts[comment?.post_id]?.user_id
   );
-  const is_owner = user.id == owner_id || user.id == comment?.user_id;
+  const is_owner = user.id === owner_id || user.id === comment?.user_id;
+  // setReplyUsername(comment?.user?.username)
+
+  const handleReply = (e)=>{
+    e.preventDefault()
+    cmInputRef.current.focus()
+    cmInputRef.current.value = `@${comment?.user?.username} `
+  }
 
   return (
     <>
       <div className={styles.container}>
         <div className={styles.profilePicture}>
-          {/* <img
-            src={comment?.user?.profile_picture}
-            alt={comment?.user?.username}
-            /> */}
           <ProfilePicture user={comment?.user} size={"small"} />
         </div>
         <div>
@@ -29,7 +30,10 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
             <span className={styles.comment}>{comment?.comment}</span>
           </div>
           <div className={styles.replyContainer}>
-            <span className={styles.reply}>Reply</span>
+            <span
+            className={styles.reply}
+            onClick={handleReply}
+            >Reply</span>
             {is_owner && (
               <button
                 onClick={toggleDeleteModal(comment?.id)}
@@ -37,7 +41,7 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal }) => {
               >
                 <svg
                   aria-label="More options"
-                  class="_ab6-"
+                  className="_ab6-"
                   color="#262626"
                   fill="#262626"
                   height="20"

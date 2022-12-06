@@ -4,8 +4,9 @@ import { Modal } from "../../context/Modal";
 import { followUser, getFollowing } from "../../store/session";
 import styles from "./FollowButton.module.css";
 import UnfollowModal from "./UnfollowModal";
+import suggestionStyles from "./Suggestion.module.css"
 
-function FollowButton({ user }) {
+function FollowButton({ user, isSuggestion = false}) {
   const dispatch = useDispatch();
   const follow = useSelector((state) =>
     Object.values(state.session.following)
@@ -37,7 +38,7 @@ function FollowButton({ user }) {
     loaded && (
       <>
         <button
-          className={styles[isFollowing ? "followingButton" : "followButton"]}
+          className={`${!isSuggestion && styles[isFollowing ? "followingButton" : "followButton"]} ${isSuggestion && suggestionStyles[isFollowing ? "followingButton" : "followButton"]}`}
           onClick={isFollowing ? followingHandler : followHandler}
         >
           {isFollowing

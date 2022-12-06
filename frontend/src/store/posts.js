@@ -1,9 +1,9 @@
-import { ADD_COMMENT } from "./comments";
+// import { ADD_COMMENT } from "./comments";
 
 // constants
 const LOAD_POSTS_FEED = "posts/LOAD_POSTS_FEED";
 const LOAD_POST_DETAILS = "posts/LOAD_POST_DETAILS";
-const CREATE_POST = "posts/CREATE_POST";
+const LOAD_POST_EXPLORE = "posts/LOAD_POST_EXPLORE";
 
 // ACTION
 const loadPostsFeed = (posts) => ({
@@ -16,9 +16,9 @@ const loadPostDetails = (post) => ({
   post,
 });
 
-const createPost = (post) => ({
-  type: CREATE_POST,
-  post,
+const loadPostExplore = (posts) => ({
+  type: LOAD_POST_EXPLORE,
+  posts,
 });
 
 // THUNKS
@@ -30,6 +30,18 @@ export const getPostsFeed = () => async (dispatch) => {
     const normalizedData = {};
     posts.forEach((post) => (normalizedData[post.id] = post));
     dispatch(loadPostsFeed(normalizedData));
+    return posts;
+  }
+};
+
+export const getPostsExplore = () => async (dispatch) => {
+  const res = await fetch("/api/posts/");
+  const { Posts: posts } = await res.json();
+
+  if (res.ok) {
+    const normalizedData = {};
+    posts.forEach((post) => (normalizedData[post.id] = post));
+    dispatch(loadPostExplore(normalizedData));
     return posts;
   }
 };
@@ -48,9 +60,6 @@ export const addPost = (formData) => async (dispatch) => {
   const res = await fetch(`/api/posts/`, {
     method: "POST",
     body: formData,
-    // headers: {
-    //   "Content-Type": "multipart/form-data",
-    // },
   });
 
   const post = await res.json();
@@ -70,6 +79,8 @@ const postsReducer = (state = {}, action) => {
         ...state,
         [action.post.id]: { ...state[action.post.id], ...action.post },
       };
+    case LOAD_POST_EXPLORE:
+      return { ...action.posts };
     // case ADD_COMMENT:
     //   return {
     //     ...state,
