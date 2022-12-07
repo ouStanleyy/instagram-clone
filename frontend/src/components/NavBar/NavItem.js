@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styles from "./NavItem.module.css";
 import ProfilePicture from "../Elements/ProfilePIcture";
 
-const NavItem = ({ type, showSearch, hideSearch }) => {
+const NavItem = ({ type, showSearch, hideSearch, showNotification, hideNotification }) => {
   const user = useSelector((state) => state.session.user);
   const isLogo = type === "Logo" || type === "Instagram";
   const style = isLogo ? styles.logo : styles.navItem;
@@ -32,7 +32,10 @@ const NavItem = ({ type, showSearch, hideSearch }) => {
     <div
       className={`${style} ${showSearch && !hideSearch && styles.hideNavItem} ${
         type === "Search" && styles.searchBorder
+      }  ${showNotification && !hideNotification && styles.hideNavItem} ${
+        type === "Notifications" && styles.searchBorder
       }`}
+
     >
       {type === "Profile" ? profilePicture : iconButton}
     </div>
