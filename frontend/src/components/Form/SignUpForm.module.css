@@ -42,6 +42,7 @@
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .inputContainer input:focus {
@@ -49,10 +50,47 @@
   outline: none;
 }
 
-.submitButton:hover {
-  cursor: pointer;
-}
-
 .submitButton:active {
   opacity: 0.7;
+}
+
+.disabled {
+  opacity: 0.7;
+  cursor: auto;
+}
+
+.icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  user-select: none;
+}
+
+.error {
+  color: #EE2D3E;
+}
+
+.error:hover .errorMessage {
+  visibility: visible;
+}
+
+.errorMessage {
+  visibility: hidden;
+  position: absolute;
+  font-size: 12px;
+  top: 6px;
+}
+
+.hasNotSubmitted {
+  display: none;
+}
+
+.replayIcon {
+  position: absolute;
+  color: #0095F6;
+  top: 6px;
+  right: 28px;
+  cursor: pointer;
+  user-select: none;
 }

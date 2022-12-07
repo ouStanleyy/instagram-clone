@@ -7,7 +7,7 @@ import EmojiWindow from "./EmojiWindow";
 // import CommentsForm from "./CmContainer";
 // import { createReply } from "../../store/replies";
 
-const InputContainer = ({ post, cmInputRef}) => {
+const InputContainer = ({ post, cmInputRef }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const { id } = user;
@@ -38,7 +38,7 @@ const InputContainer = ({ post, cmInputRef}) => {
           <svg
             className={styles.emojiIcon}
             aria-label="Emoji"
-            class="_ab6-"
+            // className="_ab6-"
             color="#262626"
             fill="#262626"
             height="24"
@@ -55,10 +55,12 @@ const InputContainer = ({ post, cmInputRef}) => {
             onClick={() => setEmojiWindow((prev) => !prev)}
             src="https://cdn2.iconfinder.com/data/icons/instagram-outline/19/15-512.png"
           /> */}
-          <EmojiWindow emojiWindow={emojiWindow} />
+          <EmojiWindow
+            emojiWindow={emojiWindow}
+            setEmojiWindow={setEmojiWindow}
+          />
         </div>
         <input
-
           className={styles.commentInput}
           placeholder="Add a comment..."
           value={comment}

@@ -5,7 +5,6 @@ import Comment from "./Comment";
 import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
 
-
 const CmContainer = ({ post, cmInputRef }) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
@@ -36,21 +35,16 @@ const CmContainer = ({ post, cmInputRef }) => {
 
   return (
     <>
-      {comments.length == 0 &&(
+      {comments.length === 0 && (
         <div className={styles.cmContainer}>
-          <div
-          className={styles.noCmContainer}
-            >
-            <div
-            className={styles.noCommentsDiv}>
-                <span
-                className={styles.noCommentsLabel}
-                >No comments yet.</span>
+          <div className={styles.noCmContainer}>
+            <div className={styles.noCommentsDiv}>
+              <span className={styles.noCommentsLabel}>No comments yet.</span>
             </div>
             <div>
-                <span
-                className={styles.startConLabel}
-                >Start the conversation.</span>
+              <span className={styles.startConLabel}>
+                Start the conversation.
+              </span>
             </div>
           </div>
         </div>
@@ -78,7 +72,7 @@ const CmContainer = ({ post, cmInputRef }) => {
                   comment={comment}
                   toggleDeleteModal={toggleDeleteModal}
                   deleteModal={deleteModal}
-                  cmInputRef = {cmInputRef}
+                  cmInputRef={cmInputRef}
                 />
               );
             })}
