@@ -6,6 +6,7 @@ import styles from "./NavBar.module.css";
 import MoreItem from "./MoreItem";
 import { logout } from "../../store/session";
 import Search from "../Search/Search";
+import Notification from "../Notification/Notification"
 
 const NavBar = () => {
   const history = useHistory();
@@ -14,6 +15,10 @@ const NavBar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [hideSearch, setHideSearch] = useState(false);
   const [inactiveFn, setInactiveFn] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [hideNotification, setHideNotification] = useState(false);
+  const [inactiveNotif, setInactiveNotif] = useState(false);
+
   const user = useSelector((state) => state.session.user);
   const links = [
     // { icon: "Logo", path: "/" },
@@ -66,6 +71,23 @@ const NavBar = () => {
     }
   };
 
+  const toggleNotification = () => {
+    if (!inactiveNotif) {
+      setInactiveNotif(true);
+      if (showNotification) {
+        setHideNotification(true);
+        setTimeout(() => {
+          setShowNotification((state) => !state);
+          setHideNotification(false);
+          setTimeout(() => setInactiveNotif(false), 150);
+        }, 300);
+      } else {
+        setShowNotification((state) => !state);
+        setTimeout(() => setInactiveNotif(false), 350);
+      }
+    }
+  };
+
   return (
     <>
       <ul
@@ -86,9 +108,25 @@ const NavBar = () => {
                     type={icon}
                     showSearch={showSearch}
                     hideSearch={hideSearch}
+                    showNotification={showNotification}
+                    hideNotification={hideNotification}
                   />
                 </div>
-              ) : (
+              ) :
+              (icon === "Notifications" ? (
+                <div
+                key={idx}
+                onClick={toggleNotification}
+              >
+                <NavItem
+                  type={icon}
+                  showNotification={showNotification}
+                  hideNotification={hideNotification}
+                  showSearch={showSearch}
+                  hideSearch={hideSearch}
+                />
+              </div>
+              ):(
                 <NavLink
                   key={idx}
                   to={path}
@@ -100,8 +138,11 @@ const NavBar = () => {
                     type={icon}
                     showSearch={showSearch}
                     hideSearch={hideSearch}
+                    showNotification={showNotification}
+                    hideNotification={hideNotification}
                   />
                 </NavLink>
+              )
               )
             )}
         </div>
@@ -138,6 +179,7 @@ const NavBar = () => {
         {!user && loggedInNav}
       </ul>
       {showSearch && <Search hideSearch={hideSearch} onClose={toggleSearch} />}
+      {showNotification && <Notification hideNotification={hideNotification} onClose={toggleNotification} />}
     </>
   );
 };
