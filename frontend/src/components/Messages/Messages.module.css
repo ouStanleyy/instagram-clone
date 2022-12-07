@@ -1,0 +1,25 @@
+.messagesContainer {
+  display: flex;
+  width: 936px;
+  height: 94vh;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+}
+
+.messagesList {
+  display: flex;
+  flex-direction: column;
+  width: 352px;
+  border-right: 1px solid #dbdbdb;
+}
+
+.sessionUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid #dbdbdb;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}

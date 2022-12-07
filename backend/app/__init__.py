@@ -13,6 +13,7 @@ from .api.like_routes import like_routes
 from .api.comment_routes import comment_routes
 from .api.follow_routes import follow_routes
 from .api.reply_routes import reply_routes
+from .api.room_routes import room_routes
 # from .api.message_routes import message_routes
 from .seeds import seed_commands
 from .config import Config
@@ -41,6 +42,7 @@ app.register_blueprint(
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
 app.register_blueprint(follow_routes, url_prefix='/api/follows')
 app.register_blueprint(reply_routes, url_prefix='/api/replies')
+app.register_blueprint(room_routes, url_prefix='/api/rooms')
 # app.register_blueprint(message_routes, url_prefix='/api/session/messages')
 db.init_app(app)
 Migrate(app, db)
@@ -114,16 +116,17 @@ def not_found(e):
 @sio.on("connect")
 def connected():
     """event listener when client connects to the server"""
-    print(request.args.get('room'))
-    print("client has connected")
+    # print(request.args.get('room'))
+    # print("client has connected")
+    # print(request.sid)
     sio.server.enter_room(request.sid, request.args.get('room'))
-    emit("connect",{"data":f"id: {request.sid} is connected"})
+    emit("connect",{"sid": request.sid})
 
-@sio.on('data')
+@sio.on('message')
 def handle_message(data):
     """event listener when client types a message"""
     print("data from the front end: ",data['message'], data['room'])
-    emit('data',{'data':data['message'],'id':request.sid},room=data['room'])
+    emit('message',{'message':data['message'],'sid':request.sid},room=data['room'])
     # emit(event,{'data':data,'id':request.sid},broadcast=True)
 
 @sio.on("disconnect")

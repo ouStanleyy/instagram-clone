@@ -52,8 +52,8 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
-          <Route path="/messages" exact={true}>
-            <Messages />
+          <Route path="/messages">
+            <Messages user={user} />
           </Route>
           <Route path="/create" exact={true}>
             <CreatePost />
