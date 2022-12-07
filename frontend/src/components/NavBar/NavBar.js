@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useState } from "react";
 import NavItem from "./NavItem";
 import styles from "./NavBar.module.css";

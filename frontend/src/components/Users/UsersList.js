@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getUsers } from "../../store/users";
 import styles from "./UsersList.module.css";
-import { ProfilePicture } from "../Elements";
 import SuggestionItem from "./SuggestionItem";
 import { getRandomSuggestion } from "../Utill";
 import { getFollowing } from "../../store/session";
@@ -27,7 +25,7 @@ function UsersList() {
         setLoaded(true);
       } catch (err) {}
     })();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setSuggestions(getRandomSuggestion(user, users, following));

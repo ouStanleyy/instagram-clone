@@ -67,7 +67,7 @@ const CreatePost = () => {
     data.append("show_like_count", !hideLikeCount);
     data.append("allow_comments", !turnOffComments);
 
-    const result = await dispatch(addPost(data));
+    await dispatch(addPost(data));
 
     return history.push(`/users/${user.id}`);
   };

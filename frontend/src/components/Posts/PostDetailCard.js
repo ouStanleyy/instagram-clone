@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "../../store/posts";
 import { useParams } from "react-router-dom";
@@ -11,10 +11,6 @@ const PostDetailCard = (props) => {
   const dispatch = useDispatch();
   const cmInputRef = useRef(null);
   const { postId } = useParams();
-  // const [comment, setComment] = useState({
-  //   comment :"",
-  //   comment_id: ""
-  // })
   const post = useSelector(
     (state) => state.posts[props.postId ? props.postId : postId]
   );
@@ -34,7 +30,7 @@ const PostDetailCard = (props) => {
       <MediaCarousel medias={post?.media} />
       <div className={styles.info}>
         <PostHeader user={post?.user} />
-        <CmContainer post={post} cmInputRef={cmInputRef}/>
+        <CmContainer post={post} cmInputRef={cmInputRef} />
         <div className={styles.likes}>
           <LikeBar
             post={post}

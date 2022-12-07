@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/session";
 import styles from "./SignUpForm.module.css";
 
 const SignUpForm = () => {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [disableSubmit, setDisableSubmit] = useState(true);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const updateEmail = (e) => setEmail(e.target.value);
   const updateUsername = (e) => setUsername(e.target.value);
@@ -18,14 +20,48 @@ const SignUpForm = () => {
   const updatePassword = (e) => setPassword(e.target.value);
   const updateRepeatPassword = (e) => setRepeatPassword(e.target.value);
 
+  useEffect(() => {
+    if (
+      email.length &&
+      username.length &&
+      password.length &&
+      repeatPassword.length
+    ) {
+      setDisableSubmit(false);
+    } else {
+      setDisableSubmit(true);
+    }
+  }, [email, fullName, username, password, repeatPassword, errors]);
+
   const handleSignup = async (e) => {
+    setHasSubmitted(true);
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password, fullName));
+
       if (data) {
-        setErrors(data);
+        const errors = {};
+        data.forEach((error) => {
+          const [key, value] = error.split(" : ");
+          errors[key] = value;
+        });
+        setErrors(errors);
       }
+    } else {
+      errors.repeatPassword = "Password does not match";
+      setErrors(errors);
     }
+  };
+
+  const handleRandomUsername = (e) => {
+    e.preventDefault();
+    const rootUsername = email.split("@")[0];
+    const NUM_OF_PLACEHOLDER = 4;
+    const randomNum = Math.floor(
+      Math.random() * Math.pow(10, NUM_OF_PLACEHOLDER)
+    );
+
+    setUsername(rootUsername + randomNum);
   };
 
   return (
@@ -42,6 +78,24 @@ const SignUpForm = () => {
           value={email}
           onChange={updateEmail}
         />
+        {errors?.email ? (
+          <span
+            className={`material-symbols-outlined ${styles.icon} ${
+              styles.error
+            } ${!hasSubmitted && styles.hasNotSubmitted}`}
+          >
+            cancel
+            <span className={styles.errorMessage}>{errors.email}</span>
+          </span>
+        ) : (
+          <span
+            className={`material-symbols-outlined ${styles.icon} ${
+              !hasSubmitted && styles.hasNotSubmitted
+            }`}
+          >
+            check_circle
+          </span>
+        )}
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="fullname">Full Name</label>
@@ -62,6 +116,32 @@ const SignUpForm = () => {
           value={username}
           onChange={updateUsername}
         />
+        {errors?.username ? (
+          <>
+            <span
+              onClick={handleRandomUsername}
+              className={`material-symbols-outlined ${styles.replayIcon}`}
+            >
+              replay
+            </span>
+            <span
+              className={`material-symbols-outlined ${styles.icon} ${
+                styles.error
+              } ${!hasSubmitted && styles.hasNotSubmitted}`}
+            >
+              cancel
+              <span className={styles.errorMessage}>{errors.username}</span>
+            </span>
+          </>
+        ) : (
+          <span
+            className={`material-symbols-outlined ${styles.icon} ${
+              !hasSubmitted && styles.hasNotSubmitted
+            }`}
+          >
+            check_circle
+          </span>
+        )}
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="password">Password</label>
@@ -72,6 +152,24 @@ const SignUpForm = () => {
           value={password}
           onChange={updatePassword}
         />
+        {errors?.password ? (
+          <span
+            className={`material-symbols-outlined ${styles.icon} ${
+              styles.error
+            } ${!hasSubmitted && styles.hasNotSubmitted}`}
+          >
+            cancel
+            <span className={styles.errorMessage}>{errors.password}</span>
+          </span>
+        ) : (
+          <span
+            className={`material-symbols-outlined ${styles.icon} ${
+              !hasSubmitted && styles.hasNotSubmitted
+            }`}
+          >
+            check_circle
+          </span>
+        )}
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="repeatPassword">Repeat Password</label>
@@ -82,8 +180,30 @@ const SignUpForm = () => {
           value={repeatPassword}
           onChange={updateRepeatPassword}
         />
+        {errors?.repeatPassword ? (
+          <span
+            className={`material-symbols-outlined ${styles.icon} ${
+              styles.error
+            } ${!hasSubmitted && styles.hasNotSubmitted}`}
+          >
+            cancel
+            <span className={styles.errorMessage}>{errors.repeatPassword}</span>
+          </span>
+        ) : (
+          <span
+            className={`material-symbols-outlined ${styles.icon} ${
+              !hasSubmitted && styles.hasNotSubmitted
+            }`}
+          >
+            check_circle
+          </span>
+        )}
       </div>
-      <button className={styles.submitButton} type="submit">
+      <button
+        className={`${styles.submitButton} ${disableSubmit && styles.disabled}`}
+        type="submit"
+        disabled={disableSubmit}
+      >
         Sign up
       </button>
     </form>
