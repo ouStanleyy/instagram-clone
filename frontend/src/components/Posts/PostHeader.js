@@ -1,31 +1,9 @@
 import styles from "./PostHeader.module.css";
 import ProfilePicture from "../Elements/ProfilePIcture";
 import { Link } from "react-router-dom";
+import { getDateDiff } from "../Utill";
 
 const PostHeader = ({ user, createdAt }) => {
-  const getDateDiff = (createdAt) => {
-    const today = new Date();
-    const created = new Date(createdAt);
-    const minsDiff = (today - created) / 1000 / 60;
-    const hoursDiff = minsDiff / 60;
-    const dayDiff = hoursDiff / 24;
-    const weekDiff = dayDiff / 7;
-
-    let result;
-
-    if (minsDiff <= 60) {
-      result = `${Math.floor(minsDiff)}m`;
-    } else if (hoursDiff <= 24) {
-      result = `${Math.floor(hoursDiff)}h`;
-    } else if (dayDiff <= 7) {
-      result = `${Math.floor(dayDiff)}d`;
-    } else {
-      result = `${Math.floor(weekDiff)}w`;
-    }
-
-    return result;
-  };
-
   return (
     <div className={styles.headerContainer}>
       <div className={styles.profile}>
@@ -50,7 +28,7 @@ const PostHeader = ({ user, createdAt }) => {
       <button className={styles.moreButton}>
         <svg
           aria-label="More options"
-          class="_ab6-"
+          // class="_ab6-"
           color="#262626"
           fill="#262626"
           height="24"

@@ -11,10 +11,6 @@ const PostDetailCard = (props) => {
   const dispatch = useDispatch();
   const cmInputRef = useRef(null);
   const { postId } = useParams();
-  // const [comment, setComment] = useState({
-  //   comment :"",
-  //   comment_id: ""
-  // })
   const post = useSelector(
     (state) => state.posts[props.postId ? props.postId : postId]
   );

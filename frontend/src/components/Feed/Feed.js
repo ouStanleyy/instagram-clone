@@ -17,6 +17,7 @@ const Feed = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [isLoaded, setIsLoaded] = useState(false);
   const user = useSelector((state) => state.session.user);
   const following = useSelector((state) =>
     Object.values(state.session.following)
@@ -29,6 +30,7 @@ const Feed = () => {
     dispatch(getPostsFeed(page));
     const onScroll = debounce(handleScrollFetch, 100);
     document.addEventListener("scroll", onScroll);
+    setIsLoaded(true);
 
     return () => document.removeEventListener("scroll", onScroll);
   }, [dispatch]);
@@ -55,35 +57,38 @@ const Feed = () => {
     fetchMorePosts();
   };
 
-  return following.length > 0 ? (
-    <div className={styles.feedLayout}>
-      <div className={styles.feed}>
-        <StoryCarousel stories={""} />
-        {posts?.map((post, idx) => (
-          <PostFeedCard post={post} key={idx} />
-        ))}
-      </div>
-      <div className={styles.sideSection}>
-        <div className={styles.userCard}>
-          <div className={styles.userInfoContainer}>
-            <ProfilePicture user={user} size={"large"} />
-            <div className={styles.userInfo}>
-              <Link to={`/users/${user.id}`}>
-                <span className={styles.username}>{user?.username}</span>
-              </Link>
-              <div className={styles.fullname}>{user?.full_name}</div>
+  return (
+    isLoaded &&
+    (following.length > 0 ? (
+      <div className={styles.feedLayout}>
+        <div className={styles.feed}>
+          <StoryCarousel stories={""} />
+          {posts?.map((post, idx) => (
+            <PostFeedCard post={post} key={idx} />
+          ))}
+        </div>
+        <div className={styles.sideSection}>
+          <div className={styles.userCard}>
+            <div className={styles.userInfoContainer}>
+              <ProfilePicture user={user} size={"large"} />
+              <div className={styles.userInfo}>
+                <Link to={`/users/${user.id}`}>
+                  <span className={styles.username}>{user?.username}</span>
+                </Link>
+                <div className={styles.fullname}>{user?.full_name}</div>
+              </div>
+            </div>
+            <div className={styles.switchButton} onClick={handleLogout}>
+              Switch
             </div>
           </div>
-          <div className={styles.switchButton} onClick={handleLogout}>
-            Switch
-          </div>
+          <UsersList />
+          <Footer />
         </div>
-        <UsersList />
-        <Footer />
       </div>
-    </div>
-  ) : (
-    <NoFollowing />
+    ) : (
+      <NoFollowing />
+    ))
   );
 };
 
