@@ -1,33 +1,39 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { acceptFollowing } from "../../store/follows"
-import { unfollowUser } from "../../store/session"
+import { deleteFollowing } from "../../store/follows"
 import { getUserById } from "../../store/users"
 import { ProfilePicture } from "../Elements"
 import styles from "./FollowerUser.module.css"
 
-const FollowerUser = ({follow_id, follower_id}) =>{
+const FollowerUser = ({followId, followerId}) =>{
 
     const dispatch = useDispatch()
-    const user = useSelector((state)=> state.users[follower_id])
-    const followers = useSelector((state)=> Object.values(state.follows.followers))
-
+    const user = useSelector((state)=> state.users[followerId])
+    // const followers = useSelector((state)=> Object.values(state.follows.followers))
+    
     useEffect(() => {
         (async () => {
           try {
-            await dispatch(getUserById(follower_id));
+            await dispatch(getUserById(followerId));
           } catch (err) {}
         })();
-      }, [dispatch, follower_id]);
+      }, [dispatch, followerId]);
 
     const handleConfirm = (e)=> {
         e.preventDefault()
-        dispatch(acceptFollowing(follow_id))
+        dispatch(acceptFollowing(followId))
     }
+
+    // const handleDeleteHelper = (e)=>{
+    //     e.preventDefault()
+    //     setFollowId(followId)
+    //     handleDelete()
+    // }
 
     const handleDelete = (e)=>{
         e.preventDefault()
-        dispatch(unfollowUser(follow_id))
+        dispatch(deleteFollowing(followId))
     }
 
     return (

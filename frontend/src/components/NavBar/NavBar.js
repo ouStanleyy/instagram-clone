@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavItem from "./NavItem";
 import styles from "./NavBar.module.css";
 import MoreItem from "./MoreItem";
 import { logout } from "../../store/session";
+import { getFollowers } from "../../store/follows";
 import Search from "../Search/Search";
 import Notification from "../Notification/Notification"
 
@@ -20,6 +21,11 @@ const NavBar = () => {
   const [inactiveNotif, setInactiveNotif] = useState(false);
 
   const user = useSelector((state) => state.session.user);
+
+  const followers = useSelector((state)=> Object.values(state.follows.followers))
+  const pendingFollowers = followers.filter(follower => follower?.is_pending == true)
+  const hasNotification = pendingFollowers.length > 0
+
   const links = [
     // { icon: "Logo", path: "/" },
     { icon: "Instagram", path: "/" },
@@ -48,6 +54,14 @@ const NavBar = () => {
     </>
   );
 
+  useEffect(() => {
+    (async () => {
+      try {
+        await dispatch(getFollowers(user?.id));
+      } catch (err) {}
+    })();
+}, [dispatch, user?.id]);
+
   const handleShowMore = (e) => setShowMore((prev) => !prev);
   const handleLogout = async (e) => {
     await dispatch(logout());
@@ -65,6 +79,9 @@ const NavBar = () => {
           setTimeout(() => setInactiveFn(false), 150);
         }, 300);
       } else {
+        setShowNotification(false)
+        setHideNotification(false)
+        setInactiveNotif(false)
         setShowSearch((state) => !state);
         setTimeout(() => setInactiveFn(false), 350);
       }
@@ -79,11 +96,18 @@ const NavBar = () => {
         setTimeout(() => {
           setShowNotification((state) => !state);
           setHideNotification(false);
-          setTimeout(() => setInactiveNotif(false), 150);
+
+          setTimeout(() =>
+          {setInactiveNotif(false)
+          }, 150);
         }, 300);
       } else {
+        setShowSearch(false)
+        setHideSearch(false)
+        setInactiveFn(false)
         setShowNotification((state) => !state);
         setTimeout(() => setInactiveNotif(false), 350);
+
       }
     }
   };
@@ -92,7 +116,8 @@ const NavBar = () => {
     <>
       <ul
         className={`${styles.navBar} ${
-          showSearch && !hideSearch && styles.miniNavBar
+          showSearch && !hideSearch && styles.miniNavBar}
+          // ${ showNotification && !hideNotification && styles.miniNavBar}
         }`}
       >
         <div>
@@ -108,6 +133,7 @@ const NavBar = () => {
                     type={icon}
                     showSearch={showSearch}
                     hideSearch={hideSearch}
+                    hasNotification={hasNotification}
                     showNotification={showNotification}
                     hideNotification={hideNotification}
                   />
@@ -122,6 +148,7 @@ const NavBar = () => {
                   type={icon}
                   showNotification={showNotification}
                   hideNotification={hideNotification}
+                  hasNotification={hasNotification}
                   showSearch={showSearch}
                   hideSearch={hideSearch}
                 />
@@ -138,6 +165,7 @@ const NavBar = () => {
                     type={icon}
                     showSearch={showSearch}
                     hideSearch={hideSearch}
+                    hasNotification={hasNotification}
                     showNotification={showNotification}
                     hideNotification={hideNotification}
                   />
@@ -179,7 +207,7 @@ const NavBar = () => {
         {!user && loggedInNav}
       </ul>
       {showSearch && <Search hideSearch={hideSearch} onClose={toggleSearch} />}
-      {showNotification && <Notification hideNotification={hideNotification} onClose={toggleNotification} />}
+      {showNotification && <Notification hideNotification={hideNotification} onClose={toggleNotification} pendingFollowers={pendingFollowers} />}
     </>
   );
 };

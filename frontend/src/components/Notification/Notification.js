@@ -1,17 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFollowers } from "../../store/follows";
 import FollowerUser from "./FollowerUser";
 import styles from "./Notification.module.css"
 
 
-const Notification = ({hideNotification})=>{
+
+const Notification = ({hideNotification, pendingFollowers})=>{
 
     const dispatch = useDispatch()
     const user = useSelector((state)=>state.session.user)
-    const followers = useSelector((state)=> Object.values(state.follows.followers))
-    const pendingFollowers = followers.filter(follower => follower?.is_pending == true)
-
 
     useEffect(() => {
         (async () => {
@@ -19,7 +17,7 @@ const Notification = ({hideNotification})=>{
             await dispatch(getFollowers(user?.id));
           } catch (err) {}
         })();
-      }, [dispatch, user?.id]);
+    }, [dispatch, user?.id]);
 
 
     return(
@@ -29,10 +27,10 @@ const Notification = ({hideNotification})=>{
             <div className={styles.notifHeader}>
                 <span
                 className={styles.notifLabel}
-                >Notification</span>
+                >Notifications</span>
             </div>
             {pendingFollowers.map((follow)=>{
-                return <FollowerUser follow_id={follow?.id} follower_id={follow?.follower_id}/>
+                return <FollowerUser followId={follow?.id} followerId={follow?.follower_id}/>
             })}
 
         </div>
