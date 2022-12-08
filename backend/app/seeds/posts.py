@@ -355,6 +355,110 @@ posts = [
         "user_id": 8,
         "caption": "Simba"
     },
+    {
+        "user_id": 18,
+        "caption": "lumberjack beard combover"
+    },
+    {
+        "user_id": 10,
+        "caption": "My hair came out great"
+    },
+    {
+        "user_id": 9,
+        "caption": "Travis Scott tattoos"
+    },
+    {
+        "user_id": 8,
+        "caption": "Black and whites"
+    },
+    {
+        "user_id": 6,
+        "caption": "When you ask me how my project is going"
+    },
+    {
+        "user_id": 4,
+        "caption": "beamer boyzz"
+    },
+    {
+        "user_id": 4,
+        "caption": "but she's worth it"
+    },
+    {
+        "user_id": 3,
+        "caption": "That Yi Long Musk"
+    },
+    {
+        "user_id": 18,
+        "caption": "more beards"
+    },
+    {
+        "user_id": 18,
+        "caption": "too much beard"
+    },
+    {
+        "user_id": 18,
+        "caption": "bearded dragon"
+    },
+    {
+        "user_id": 19,
+        "caption": "The rise of skywalker Millennium falcon"
+    },
+    {
+        "user_id": 19,
+        "caption": "Lego Boutique store"
+    },
+    {
+        "user_id": 5,
+        "caption": "dog from doge coin"
+    },
+    {
+        "user_id": 19,
+        "caption": "famiy"
+    },
+    {
+        "user_id": 9,
+        "caption": "some line work"
+    },
+    {
+        "user_id": 20,
+        "caption": "Launching a brand new marketing agency. Why is it as a designer that working on your own brand is infinitely more difficult than working on someone else's? This is technically v2 as we rushed to get a MVP site up and running. Looking forward to getting this design finalized so we can replace v1 with v2! 🤘🏼 Check us out at https://bendyourmarketing.com/"
+    },
+    {
+        "user_id": 20,
+        "caption": "Fig jam"
+    },
+    {
+        "user_id": 20,
+        "caption": "Fig jam 2"
+    },
+    {
+        "user_id": 20,
+        "caption": "Top 9 Marks"
+    },
+    {
+        "user_id": 13,
+        "caption": "Iconic"
+    },
+    {
+        "user_id": 13,
+        "caption": "March 3, 1997"
+    },
+    {
+        "user_id": 13,
+        "caption": "June 14, 2000 - NBA Finals Game 4"
+    },
+    {
+        "user_id": 20,
+        "caption": "Cozy Three.js by Roman Klco"
+    },
+    {
+        "user_id": 19,
+        "caption": "Friends Lego Set"
+    },
+    {
+        "user_id": 17,
+        "caption": "This Nike Air Force 1 Low Is Giving Cappuccino"
+    },
 ]
 
 
