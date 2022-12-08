@@ -171,6 +171,11 @@
   cursor: pointer;
 }
 
+.disableSubmit {
+  opacity: 0.7;
+  cursor: auto;
+}
+
 .doneButton {
   border: none;
   border-radius: 6px;

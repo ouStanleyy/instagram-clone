@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./EditProfile.module.css";
 import { ProfilePicture } from "../Elements";
@@ -6,6 +6,7 @@ import { editProfile, deleteProfile } from "../../store/session";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import { normalizeErrors } from "../Utill";
+import SuccessPopup from "./SuccessPopup";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,8 @@ const EditProfile = () => {
   const [showModal, setShowModal] = useState(false);
   const [showGenderModal, setShowGenderModal] = useState(false);
   const [errors, setErrors] = useState({});
-  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const updateProfilePicture = (e) => setProfilePicture(e.target.value);
   const updateFullName = (e) => setFullName(e.target.value);
@@ -29,9 +31,11 @@ const EditProfile = () => {
   const updateBio = (e) => setBio(e.target.value);
   const updateEmail = (e) => setEmail(e.target.value);
   const updatePhoneNumber = (e) => setPhoneNumber(e.target.value);
-  const updateGender = (e) => {
-    console.log("CLICKED", e);
-    setGender(e.target.value);
+  const updateGender = (e) => setGender(e.target.value);
+  const enableSubmit = (e) => {
+    console.log("ENABLING BUTTON");
+    setDisableSubmit(false);
+    console.log(disableSubmit);
   };
 
   const deactivateProfile = async () => {
@@ -67,11 +71,21 @@ const EditProfile = () => {
     if (res) {
       const errors = normalizeErrors(res);
       setErrors(errors);
+      setSuccess(false);
+      console.log(errors);
     } else {
       setErrors({});
+      setSuccess(true);
+      setDisableSubmit(true);
     }
-    console.log(errors);
   };
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
   const deactivateModal = (
     <div className={styles.deactivateModalContainer}>
@@ -85,7 +99,7 @@ const EditProfile = () => {
   );
 
   const genderModal = (
-    <div className={styles.genderModalContainer}>
+    <div className={styles.genderModalContainer} onChange={enableSubmit}>
       <h3>Gender</h3>
       <div className={styles.genderOptions}>
         <label htmlFor="gender">
@@ -130,7 +144,11 @@ const EditProfile = () => {
 
   return (
     <>
-      <form className={styles.editProfileForm} onSubmit={handleSubmit}>
+      <form
+        className={styles.editProfileForm}
+        onSubmit={handleSubmit}
+        onChange={enableSubmit}
+      >
         <div className={styles.fieldContainer}>
           <div className={styles.labelContainer}>
             <ProfilePicture user={user} size={"medium"} />
@@ -212,9 +230,7 @@ const EditProfile = () => {
             />
             {errors?.email && (
               <span
-                className={`material-symbols-outlined ${styles.icon} ${
-                  styles.error
-                } ${!hasSubmitted && styles.hasNotSubmitted}`}
+                className={`material-symbols-outlined ${styles.icon} ${styles.error} ${styles.hasNotSubmitted}`}
               >
                 cancel
                 <span className={styles.errorMessage}>{errors.email}</span>
@@ -234,6 +250,16 @@ const EditProfile = () => {
               maxLength={10}
               onChange={updatePhoneNumber}
             />
+            {errors?.phone_number && (
+              <span
+                className={`material-symbols-outlined ${styles.icon} ${styles.error} ${styles.hasNotSubmitted}`}
+              >
+                cancel
+                <span className={styles.errorMessage}>
+                  {errors.phone_number}
+                </span>
+              </span>
+            )}
           </div>
         </div>
         <div className={styles.fieldContainer}>
@@ -250,7 +276,13 @@ const EditProfile = () => {
         <div className={styles.fieldContainer}>
           <div className={styles.labelContainer}></div>
           <div className={styles.buttonContainer}>
-            <button className={styles.submitButton} type="submit">
+            <button
+              className={`${styles.submitButton} ${
+                disableSubmit && styles.disableSubmit
+              }`}
+              type="submit"
+              disabled={disableSubmit}
+            >
               Submit
             </button>
             <button className={styles.deactivateButton} onClick={toggleModal}>
@@ -263,6 +295,7 @@ const EditProfile = () => {
       {showGenderModal && (
         <Modal onClose={toggleGenderModal}>{genderModal}</Modal>
       )}
+      {success && <SuccessPopup />}
     </>
   );
 };

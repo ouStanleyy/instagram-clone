@@ -44,9 +44,11 @@ def validate_gender(form, field):
 class UpdateProfileForm(FlaskForm):
     username = StringField(
         'username', validators=[optional, DataRequired(), Length(max=30), username_exists])
-    email = StringField('email', validators=[optional, DataRequired(), Email(), Length(max=255), email_exists])
+    email = StringField('email', validators=[
+                        optional, DataRequired(), Email(), Length(max=255), email_exists])
     full_name = StringField("full_name")
-    phone_number = StringField('phone_number', validators=[optional, Length(min=10, max=10)])
+    phone_number = StringField('phone_number', validators=[
+                               optional, Length(min=10, max=10, message="Invalid phone number.")])
     gender = StringField('gender', validators=[optional, validate_gender])
     bio = StringField('bio', validators=[Length(max=150)])
     is_private = BooleanField('is_private')
