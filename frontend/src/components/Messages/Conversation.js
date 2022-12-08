@@ -55,7 +55,7 @@ const Conversation = ({ sessionUser, rooms }) => {
 
     socket.on("connect", (data) => {
       if (data) {
-        console.log("sid", data);
+        // console.log("sid", data);
         setSid(data?.sid);
       }
     });

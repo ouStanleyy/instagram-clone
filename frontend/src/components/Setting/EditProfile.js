@@ -68,7 +68,7 @@ const EditProfile = () => {
       const errors = normalizeErrors(res);
       setErrors(errors);
       setSuccess(false);
-      console.log(errors);
+      // console.log(errors);
     } else {
       setErrors({});
       setSuccess(true);

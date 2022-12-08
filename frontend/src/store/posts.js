@@ -117,6 +117,29 @@ export const getMorePostsExplore = () => async (dispatch) => {
   }
 };
 
+export const updatePost = (postId, formData) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: "PUT",
+    body: formData,
+  });
+  const data = await res.json();
+
+  if (res.ok) {
+    dispatch(loadPostDetails(data));
+  }
+};
+
+export const deletePost = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    // console.log("OK");
+    return res;
+  }
+};
+
 const postsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_POSTS_FEED:

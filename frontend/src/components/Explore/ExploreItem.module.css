@@ -1,9 +1,14 @@
 .exploreItemContainer {
+  /* border: 1px solid red; */
   width: 292px;
   height: 292px;
-  object-position: center;
   background-color: black;
   position: relative;
+}
+
+.exploreItemContainer img,
+.exploreItemContainer video {
+  object-fit: cover;
 }
 
 .multiImage {
