@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import login_required, current_user
 from app.models import User, Follow, db
-from app.forms import UpdateProfileForm
+from app.forms import UpdateProfileForm, ChangePasswordForm
 from sqlalchemy import or_
 from .auth_routes import validation_errors_to_error_messages
 
@@ -47,6 +47,26 @@ def update_user_profile():
         for key, val in form.data.items():
             if val:
                 setattr(current_user, key, val)
+        db.session.commit()
+        return current_user.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@user_routes.route('/profile/password', methods=['PUT'])
+@login_required
+def change_password():
+    """
+    Change current user's password
+    """
+
+    form = ChangePasswordForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        for key, val in form.data.items():
+            if key == "new_password":
+                setattr(current_user, "password", val)
         db.session.commit()
         return current_user.to_dict()
 

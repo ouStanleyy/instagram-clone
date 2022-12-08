@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./Setting.module.css";
 import { NavLink, Route, Switch } from "react-router-dom";
 import EditProfile from "./EditProfile";
+import ChangePassword from "./ChangePassword";
 import { Footer } from "../Feed";
 
 const Setting = () => {
@@ -32,7 +33,9 @@ const Setting = () => {
             <Route path="/account/edit">
               <EditProfile />
             </Route>
-            <Route path="/account/password">Password</Route>
+            <Route path="/account/password">
+              <ChangePassword />
+            </Route>
           </Switch>
         </div>
       </div>
