@@ -69,7 +69,7 @@ const Messages = () => {
           <Link key={room.id} to={`/messages/${room.id}`}>
             <div className={styles.userContainer}>
               <div className={styles.profilePicture}>
-                <ProfilePicture user={room.user} size={"medium"} />
+                <ProfilePicture user={room.user} size={"large"} />
               </div>
               <div className={styles.userDetails}>
                 <p className={styles.username}>{room.user?.username}</p>

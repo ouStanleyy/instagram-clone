@@ -2,6 +2,27 @@
   min-height: 60px;
   width: 584px;
   border-bottom: 1px solid #dbdbdb;
+  padding-left: 24px;
+}
+
+.userContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: fit-content;
+}
+
+.userDetails {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.fullName {
+  font-weight: 500;
+  width: max-content;
 }
 
 .conversationWrapper {
@@ -20,6 +41,19 @@
 
 .conversation * {
   overflow-anchor: none;
+}
+
+.messageWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.timestamp {
+  align-self: center;
+  font-size: 12px;
+  line-height: 16px;
+  color: #8e8e8e;
+  padding: 24px;
 }
 
 .message {
