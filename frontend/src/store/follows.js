@@ -64,14 +64,16 @@ export const acceptFollowing = (followId) => async (dispatch) =>{
   }
 }
 
-// export const deleteFollowing = (followId) => async (dispatch) =>{
-//   const res = await fetch(`api/follows/${followId}`,{
-//     method:"DELETE"
-//   })
-//   if(res.ok){
-//     dispatch(deleteFollow(followId))
-//   }
-// }
+export const deleteFollowing = (followId) => async (dispatch) =>{
+  const res = await fetch(`api/follows/${followId}`,{
+    method:"DELETE",
+    headers: { "Content-Type": "application/json" },
+  })
+  if(res.ok){
+    dispatch(deleteFollow(followId))
+  }
+}
+
 
 const followsReducer = (state = { followers: {}, following: {} }, action) => {
 
@@ -90,6 +92,10 @@ const followsReducer = (state = { followers: {}, following: {} }, action) => {
       return {...state,
         followers: { ...state.followers, [action.followId]: {...state.followers[action.followId], is_pending:false}}
       }
+    case DELETE_FOLLOW:
+      const newState = { ...state, followers: { ...state.followers } };
+      delete newState.followers[action.followId];
+      return newState;
     default:
       return state;
   }

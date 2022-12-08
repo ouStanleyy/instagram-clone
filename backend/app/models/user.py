@@ -34,24 +34,17 @@ class User(db.Model, UserMixin):
     is_verified = db.Column(db.Boolean, nullable=False, default=False)
     is_private = db.Column(db.Boolean, nullable=False, default=False)
 
-    posts = db.relationship("Post", back_populates="user",
-                            cascade="all, delete-orphan")
-    comments = db.relationship(
-        "Comment", back_populates="user", cascade="all, delete-orphan")
-    replies = db.relationship(
-        "Reply", back_populates="user", cascade="all, delete-orphan")
-    likes = db.relationship("Like", back_populates="user",
-                            cascade="all, delete-orphan")
-    views = db.relationship("View", back_populates="user",
-                            cascade="all, delete-orphan")
-    followers = db.relationship("Follow", foreign_keys="Follow.following_id",
-                                back_populates="following", cascade="all, delete-orphan")
-    followings = db.relationship("Follow", foreign_keys="Follow.follower_id",
-                                 back_populates="follower", cascade="all, delete-orphan")
-    senders = db.relationship("Message", foreign_keys="Message.recipient_id",
-                              back_populates="recipient", cascade="all, delete-orphan")
-    recipients = db.relationship("Message", foreign_keys="Message.sender_id",
-                                 back_populates="sender", cascade="all, delete-orphan")
+    posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan")
+    replies = db.relationship("Reply", back_populates="user", cascade="all, delete-orphan")
+    likes = db.relationship("Like", back_populates="user", cascade="all, delete-orphan")
+    views = db.relationship("View", back_populates="user", cascade="all, delete-orphan")
+    followers = db.relationship("Follow", foreign_keys="Follow.following_id", back_populates="following", cascade="all, delete-orphan")
+    followings = db.relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower", cascade="all, delete-orphan")
+    # senders = db.relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient", cascade="all, delete-orphan")
+    # recipients = db.relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan")
+    rooms = db.relationship("Room", secondary="room_user", back_populates="users")
+    messages = db.relationship("Message", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):

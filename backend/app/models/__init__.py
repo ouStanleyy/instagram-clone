@@ -8,6 +8,7 @@ from .media import Media
 from .message import Message
 from .reply import Reply
 from .view import View
+from .room import Room
 
 
 # """create_users_table

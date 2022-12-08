@@ -4,19 +4,17 @@ import styles from "./SearchUser.module.css";
 
 function SearchUser({ user }) {
   return (
-    <>
-      <Link to={`/users/${user.id}`}>
-        <div className={styles.userContainer}>
-          <div className={styles.profilePicture}>
-            <ProfilePicture user={user} size={"medium"} />
-          </div>
-          <div className={styles.userDetails}>
-            <p className={styles.username}>{user?.username}</p>
-            <p className={styles.fullName}>{user?.full_name}</p>
-          </div>
+    <Link to={`/users/${user.id}`}>
+      <div className={styles.userContainer}>
+        <div className={styles.profilePicture}>
+          <ProfilePicture user={user} size={"medium"} />
         </div>
-      </Link>
-    </>
+        <div className={styles.userDetails}>
+          <p className={styles.username}>{user?.username}</p>
+          <p className={styles.fullName}>{user?.full_name}</p>
+        </div>
+      </div>
+    </Link>
   );
 }
 

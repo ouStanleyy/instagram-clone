@@ -13,6 +13,7 @@ import { Setting } from "./components/Setting";
 import { Feed } from "./components/Feed";
 import { CreatePost } from "./components/Posts";
 import { Explore } from "./components/Explore";
+import { Messages } from "./components/Messages";
 import { Notification } from "./components/Notification";
 
 function App() {
@@ -36,39 +37,40 @@ function App() {
   }
 
   return (
-    loaded && (
-      <BrowserRouter>
-        {user && <NavBar />}
-        <Switch>
-          <Route path="/" exact={true}>
-            {user ? <Feed /> : <Splash />}
+    <BrowserRouter>
+      {user && <NavBar />}
+      <Switch>
+        <Route path="/" exact={true}>
+          {user ? <Feed /> : <Splash />}
+        </Route>
+        <Route path="/sign-up" exact={true}>
+          <SignUpForm />
+        </Route>
+        <div className={styles.innerBody}>
+          <ProtectedRoute path="/explore" exact={true}>
+            <Explore />
+          </ProtectedRoute>
+          <ProtectedRoute path="/users/:userId" exact={true}>
+            <User />
+          </ProtectedRoute>
+          <Route path="/messages">
+            <Messages user={user} />
           </Route>
-          <Route path="/sign-up" exact={true}>
-            <SignUpForm />
+          <Route path="/create" exact={true}>
+            <CreatePost />
           </Route>
-          <div className={styles.innerBody}>
-            <ProtectedRoute path="/explore" exact={true}>
-              <Explore />
-            </ProtectedRoute>
-            <ProtectedRoute path="/users/:userId" exact={true}>
-              <User />
-            </ProtectedRoute>
-            <Route path="/create" exact={true}>
-              <CreatePost />
-            </Route>
-            <Route path="/account">
-              <Setting />
-            </Route>
-            <Route path="/posts" exact={true}>
-              <h1>Post</h1>
-            </Route>
-            <Route path="/posts/:postId" exact={true}>
-              <PostDetailCard />
-            </Route>
-          </div>
-        </Switch>
-      </BrowserRouter>
-    )
+          <Route path="/account">
+            <Setting />
+          </Route>
+          <Route path="/posts" exact={true}>
+            <h1>Post</h1>
+          </Route>
+          <Route path="/posts/:postId" exact={true}>
+            <PostDetailCard />
+          </Route>
+        </div>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

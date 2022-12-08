@@ -60,7 +60,9 @@ const Search = ({ hideSearch }) => {
       </div>
       <div className={styles.searchResults}>
         {loaded ? (
-          searchResults.map((result) => <SearchUser user={result} />)
+          searchResults.map((result) => (
+            <SearchUser key={result.id} user={result} />
+          ))
         ) : (
           <div className={styles.loadingSpinner}>
             <LoadingSpinner />

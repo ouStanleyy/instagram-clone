@@ -28,7 +28,7 @@ def seed():
         db.session.execute(f"TRUNCATE table {SCHEMA}.follows RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.replies RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.media RESTART IDENTITY CASCADE;")
-        db.session.execute(f"TRUNCATE table {SCHEMA}.messages RESTART IDENTITY CASCADE;")
+        # db.session.execute(f"TRUNCATE table {SCHEMA}.messages RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.views RESTART IDENTITY CASCADE;")
         # Add a truncate command here for every table that will be seeded.
         db.session.commit()
@@ -40,7 +40,7 @@ def seed():
     seed_follows()
     seed_replies()
     seed_media()
-    seed_messages()
+    # seed_messages()
     seed_views()
     # Add other seed functions here
 
@@ -55,6 +55,6 @@ def undo():
     undo_follows()
     undo_replies()
     undo_media()
-    undo_messages()
+    # undo_messages()
     undo_views()
     # Add other undo functions here
