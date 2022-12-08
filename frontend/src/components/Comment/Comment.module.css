@@ -91,8 +91,9 @@
   margin-top: 12px;
 }
 
+
 .moreButton{
-  align-self: center;
+  align-content: center;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -136,7 +137,6 @@
 
 .noCmContainer{
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,4 +152,12 @@
 .startConLabel{
   font-size: 13px;
   font-weight: 300;
+}
+
+.viewReplies{
+  text-decoration: none;
+  color: #8E8E8E;
+  font-size: 13px;
+  margin-left: 10px;
+  cursor: pointer;
 }

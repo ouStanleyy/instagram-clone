@@ -28,6 +28,8 @@ const Notification = ({hideNotification, pendingFollowers})=>{
                 className={styles.notifLabel}
                 >Notifications</span>
             </div>
+            {!pendingFollowers.length && <p className={styles.noNotifications}>
+                 No New Notifications </p>}
             {pendingFollowers.map((follow)=>{
                 return <FollowerUser followId={follow?.id} followerId={follow?.follower_id}/>
             })}

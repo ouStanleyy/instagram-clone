@@ -1,15 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllComments } from "../../store/comments";
+import { loadReplies } from "../../store/replies";
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
 
-const CmContainer = ({ post, cmInputRef }) => {
+const CmContainer = ({ post, cmInputRef, setCommentIdState }) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
+  const allReplies = useSelector((state)=> Object.values(state.replies))
   // let comments = useSelector((state) => state.posts[post?.id]?.comments);
   const [deleteModal, setDeleteModal] = useState({});
+  // const [commentId, setCommentId] = useState(0)
 
   const toggleDeleteModal = (idx) => () => {
     setDeleteModal((state) => ({
@@ -32,6 +35,13 @@ const CmContainer = ({ post, cmInputRef }) => {
       await dispatch(loadAllComments(post?.id));
     })();
   }, [dispatch, post?.id]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     await dispatch(loadReplies(commentId));
+  //   })();
+  // }, [dispatch, commentId]);
+
 
   return (
     <>
@@ -73,6 +83,7 @@ const CmContainer = ({ post, cmInputRef }) => {
                   toggleDeleteModal={toggleDeleteModal}
                   deleteModal={deleteModal}
                   cmInputRef={cmInputRef}
+                  setCommentIdState={setCommentIdState}
                 />
               );
             })}

@@ -7,7 +7,6 @@ const NavItem = ({ type, showSearch, hideSearch, showNotification, hideNotificat
   const user = useSelector((state) => state.session.user);
   const isLogo = type === "Logo" || type === "Instagram";
   const style = isLogo ? styles.logo : styles.navItem;
-  console.log(hasNotification)
   const profilePicture = (
     <>
       <div className={styles.profilePicture}>
@@ -35,7 +34,6 @@ const NavItem = ({ type, showSearch, hideSearch, showNotification, hideNotificat
                   ${type === "Search" && !showNotification && styles.searchBorder}
                   ${showNotification && !hideNotification && styles.hideNavItem}
                   ${type === "Notifications" && !showSearch && styles.notifBorder}
-
 
       `}
     >

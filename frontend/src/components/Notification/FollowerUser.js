@@ -11,7 +11,7 @@ const FollowerUser = ({followId, followerId}) =>{
     const dispatch = useDispatch()
     const user = useSelector((state)=> state.users[followerId])
     // const followers = useSelector((state)=> Object.values(state.follows.followers))
-    
+
     useEffect(() => {
         (async () => {
           try {
@@ -24,13 +24,7 @@ const FollowerUser = ({followId, followerId}) =>{
         e.preventDefault()
         dispatch(acceptFollowing(followId))
     }
-
-    // const handleDeleteHelper = (e)=>{
-    //     e.preventDefault()
-    //     setFollowId(followId)
-    //     handleDelete()
-    // }
-
+    
     const handleDelete = (e)=>{
         e.preventDefault()
         dispatch(deleteFollowing(followId))
