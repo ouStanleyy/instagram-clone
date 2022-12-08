@@ -21,7 +21,7 @@ const Conversation = ({ sessionUser, rooms }) => {
     new Date().toDateString() === new Date(date).toDateString();
 
   const isOverHour = (newDate, oldDate) =>
-    (new Date(newDate) - new Date(oldDate)) / 1000 / 60 > 5;
+    (new Date(newDate) - new Date(oldDate)) / 1000 / 60 > 15;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,7 +90,6 @@ const Conversation = ({ sessionUser, rooms }) => {
     ) : (
       <>
         <div className={styles.convoHeader}>
-          {/* <SearchUser user={room?.user} /> */}
           <Link className={styles.userContainer} to={`/users/${room.user.id}`}>
             <div className={styles.profilePicture}>
               <ProfilePicture user={room.user} size={"xsmall"} />
@@ -104,7 +103,8 @@ const Conversation = ({ sessionUser, rooms }) => {
           <div className={styles.conversation}>
             {oldMessages.map(({ id, message, user_id, time_sent }, idx) => (
               <div className={styles.messageWrapper} key={id}>
-                {isOverHour(time_sent, oldMessages[idx - 1]?.time_sent) && (
+                {(isOverHour(time_sent, oldMessages[idx - 1]?.time_sent) ||
+                  !idx) && (
                   <h4 className={styles.timestamp}>
                     {!isToday(time_sent) &&
                       new Date(time_sent).toLocaleDateString("en-US", {
@@ -118,15 +118,23 @@ const Conversation = ({ sessionUser, rooms }) => {
                     })}
                   </h4>
                 )}
-                <p
-                  className={`${styles.message} ${
-                    user_id === sessionUser.id
-                      ? styles.outgoing
-                      : styles.incoming
-                  }`}
-                >
-                  {message}
-                </p>
+                <div className={styles.messageBubbles}>
+                  <div className={styles.profilePic}>
+                    {user_id !== sessionUser.id &&
+                      user_id !== oldMessages[idx + 1]?.user_id && (
+                        <ProfilePicture user={room.user} size="xsmall" />
+                      )}
+                  </div>
+                  <p
+                    className={`${styles.message} ${
+                      user_id === sessionUser.id
+                        ? styles.outgoing
+                        : styles.incoming
+                    }`}
+                  >
+                    {message}
+                  </p>
+                </div>
               </div>
             ))}
             {/* {messages.map((data, idx) => (

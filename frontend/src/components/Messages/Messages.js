@@ -13,7 +13,15 @@ const Messages = () => {
   // const [loading, setLoading] = useState(true);
   // const [buttonStatus, setButtonStatus] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
-  const rooms = useSelector((state) => Object.values(state.rooms));
+  const rooms = useSelector((state) => Object.values(state.rooms)).sort(
+    (a, b) =>
+      a.messages.length && b.messages.length
+        ? new Date(b.messages[b.messages.length - 1].time_sent) -
+          new Date(a.messages[a.messages.length - 1].time_sent)
+        : a.messages.length
+        ? -1
+        : +1
+  );
 
   // const handleClick = () => {
   //   if (buttonStatus === false) {
