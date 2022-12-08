@@ -41,7 +41,6 @@ const ChangePassword = () => {
 
       if (res) {
         const errors = normalizeErrors(res);
-        console.log("ERRORS", errors);
         setErrors(errors);
         setSuccess(false);
       } else {
@@ -132,6 +131,7 @@ const ChangePassword = () => {
           </button>
         </div>
       </form>
+      {success && <SuccessPopup message={"Password Updated."} />}
     </>
   );
 };

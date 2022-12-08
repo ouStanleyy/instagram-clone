@@ -1,7 +1,7 @@
 import styles from "./SuccessPopup.module.css";
 
-const SuccessPopup = () => {
-  return <div className={styles.popupContainer}>Profile Saved.</div>;
+const SuccessPopup = ({ message }) => {
+  return <div className={styles.popupContainer}>{message}</div>;
 };
 
 export default SuccessPopup;

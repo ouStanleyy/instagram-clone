@@ -291,7 +291,7 @@ const EditProfile = () => {
       {showGenderModal && (
         <Modal onClose={toggleGenderModal}>{genderModal}</Modal>
       )}
-      {success && <SuccessPopup />}
+      {success && <SuccessPopup message={"Profile Saved."} />}
     </>
   );
 };
