@@ -32,11 +32,7 @@ const EditProfile = () => {
   const updateEmail = (e) => setEmail(e.target.value);
   const updatePhoneNumber = (e) => setPhoneNumber(e.target.value);
   const updateGender = (e) => setGender(e.target.value);
-  const enableSubmit = (e) => {
-    console.log("ENABLING BUTTON");
-    setDisableSubmit(false);
-    console.log(disableSubmit);
-  };
+  const enableSubmit = (e) => setDisableSubmit(false);
 
   const deactivateProfile = async () => {
     await dispatch(deleteProfile());

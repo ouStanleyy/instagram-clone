@@ -31,11 +31,6 @@ const removeFollow = (followId) => ({
   followId,
 });
 
-const updateUser = (user) => ({
-  type: UPDATE_USER,
-  user,
-});
-
 // THUNKS
 export const authenticate = () => async (dispatch) => {
   const response = await fetch("/api/auth/", {
@@ -150,6 +145,31 @@ export const editProfile =
       }
     } else {
       return ["An error occurred. Please try again."];
+    }
+  };
+
+export const updatePassword =
+  ({ oldPassword, newPassword }) =>
+  async (dispatch) => {
+    const res = await fetch("/api/users/profile/password", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        old_password: oldPassword,
+        new_password: newPassword,
+      }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(setUser(data));
+    } else {
+      const data = await res.json();
+      if (data.errors) {
+        return data.errors;
+      }
     }
   };
 

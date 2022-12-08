@@ -4,7 +4,8 @@ import styles from "./EditProfile.module.css";
 import stylesPassword from "./ChangePassword.module.css";
 import { useState, useEffect } from "react";
 import SuccessPopup from "./SuccessPopup";
-import { editProfile } from "../../store/session";
+import { editProfile, updatePassword } from "../../store/session";
+import { normalizeErrors } from "../Utill";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
@@ -15,12 +16,11 @@ const ChangePassword = () => {
   const [disableButton, setDisableButton] = useState(true);
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
-  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const updateOldPassword = (e) => setOldPassword(e.target.value);
   const updateNewPassword = (e) => setNewPassword(e.target.value);
   const updateConfirmPassword = (e) => setConfirmPassword(e.target.value);
-  const enableSubmit = (e) => setDisableSubmit(false);
+  const enableButton = (e) => setDisableButton(false);
 
   useEffect(() => {
     if (oldPassword.length && newPassword.length && confirmPassword.length) {
@@ -28,20 +28,44 @@ const ChangePassword = () => {
     }
   }, [oldPassword, newPassword, confirmPassword]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (newPassword === confirmPassword) {
-      const data = {
-        oldPassword,
-        newPassword,
-      };
+      const res = await dispatch(
+        updatePassword({
+          oldPassword,
+          newPassword,
+        })
+      );
+
+      if (res) {
+        const errors = normalizeErrors(res);
+        console.log("ERRORS", errors);
+        setErrors(errors);
+        setSuccess(false);
+      } else {
+        setErrors({});
+        setSuccess(true);
+        setDisableButton(true);
+      }
     }
   };
 
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
   return (
     <>
-      <form className={stylesPassword.changePasswordForm}>
+      <form
+        className={stylesPassword.changePasswordForm}
+        onChange={enableButton}
+        onSubmit={handleSubmit}
+      >
         <div
           className={`${styles.fieldContainer} ${stylesPassword.profileContainer}`}
         >
