@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Switch, Route } from "react-router-dom";
 import { getRooms } from "../../store/rooms";
-import DirectMessage from "./DirectMessage";
+import Conversation from "./Conversation";
 import { ProfilePicture } from "../Elements";
 import styles from "./Messages.module.css";
 
@@ -82,7 +82,7 @@ const Messages = () => {
       <div className={styles.convoContainer}>
         <Switch>
           <Route path="/messages/:roomId" exact={true}>
-            <DirectMessage />
+            <Conversation sessionUser={sessionUser} rooms={rooms} />
           </Route>
         </Switch>
       </div>
