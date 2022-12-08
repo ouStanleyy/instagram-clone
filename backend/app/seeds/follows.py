@@ -136,6 +136,21 @@ follows = [
         "following_id": 12,
         "is_pending": False
     },
+    {
+        "follower_id": 1,
+        "following_id": 13,
+        "is_pending": False
+    },
+    {
+        "follower_id": 1,
+        "following_id": 12,
+        "is_pending": False
+    },
+    {
+        "follower_id": 15,
+        "following_id": 1,
+        "is_pending": True
+    },
 ]
 
 # Adds a demo user, you can add other users here if you want
