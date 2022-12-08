@@ -51,6 +51,19 @@ def posts():
 
     Use: explore page
     """
+    # page = request.args.get('page', 1, type=int)
+    # SIZE = 48 if page == 0 else 15
+
+    # posts = Post.query\
+    #     .join(User, Post.user_id == User.id)\
+    #     .join(Follow, Follow.following_id == User.id)\
+    #     .filter(Follow.follower_id != User.id,
+    #             User.is_private == False,
+    #             Post.user_id != current_user.id,
+    #             Post.is_story == False)\
+    #     .paginate(page=page, per_page=SIZE)
+
+    # return {"Posts": [post.to_dict_discovery() for post in posts.items]}
 
     posts = Post.query.filter(Post.user.has(User.is_private == False),
                               Post.user_id != current_user.id,
@@ -90,15 +103,28 @@ def posts_feed():
 
     Use: feed page
     """
-    # Get the current user's following
-    followings = Follow.query.filter_by(
-        follower_id=current_user.id, is_pending=False).all()
+    page = request.args.get('page', 1, type=int)
+    SIZE = 25 if page == 0 else 8
 
-    # Get the posts that are not stories from followings
-    posts = [Post.query.filter_by(
-        user_id=following.following_id, is_story=False).all() for following in followings]
+    posts = Post.query\
+        .join(User, Post.user_id == User.id)\
+        .join(Follow, Follow.following_id == User.id)\
+        .filter(Follow.follower_id == current_user.id,
+                Follow.is_pending == False, Post.is_story == False)\
+        .order_by(Post.id.desc())\
+        .paginate(page=page, per_page=SIZE)
 
-    return {"Posts": [post.to_dict_feed() for sub_post in posts for post in sub_post]}
+    return {"Posts": [post.to_dict_feed() for post in posts.items]}
+
+    # # Get the current user's following
+    # followings = Follow.query.filter_by(
+    #     follower_id=current_user.id, is_pending=False).all()
+
+    # # Get the posts that are not stories from followings
+    # posts = [Post.query.filter_by(
+    #     user_id=following.following_id, is_story=False).all() for following in followings]
+
+    # return {"Posts": [post.to_dict_feed() for sub_post in posts for post in sub_post]}
 
 
 @post_routes.route("/following/stories")

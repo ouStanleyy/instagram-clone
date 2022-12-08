@@ -102,9 +102,15 @@ function User() {
             className={styles.profilePicture}
           /> */}
           <ProfilePicture user={user} size={"XLarge"} />
+
           <div className={styles.userDetails}>
             <div className={styles.detailsHeader}>
-              <p className={styles.username}>{user.username}</p>
+              <p className={styles.username}>
+                {user.username}
+                {user?.is_verified && (
+                  <span className={`material-symbols-outlined`}>verified</span>
+                )}
+              </p>
               {!isOwner && <FollowButton user={user} />}
             </div>
             <div className={styles.detailsStats}>

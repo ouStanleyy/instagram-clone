@@ -17,6 +17,7 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(credential, password));
+
     if (data) {
       setErrors(data);
     }
@@ -50,6 +51,12 @@ const LoginForm = () => {
       <button className={styles.loginButton} type="submit">
         Log in
       </button>
+      {errors.length > 0 && (
+        <div className={styles.invalidLogin}>
+          <div> Sorry, your password was incorrect. </div>
+          <div>Please double-check your password.</div>
+        </div>
+      )}
     </form>
   );
 };

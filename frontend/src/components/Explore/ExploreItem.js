@@ -19,7 +19,7 @@ const ExploreItem = ({ post }) => {
               <source src={post?.preview_media} type={"video/mp4"} />
             </video>
           ) : (
-            <img src={post?.preview_media} />
+            <img src={post?.preview_media} alt={post?.caption} />
           )}
           {post?.num_of_media > 1 && (
             <div className={styles.multiImage}>

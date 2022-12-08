@@ -2,8 +2,10 @@
 
 // constants
 const LOAD_POSTS_FEED = "posts/LOAD_POSTS_FEED";
+const LOAD_MORE_POSTS_FEED = "posts/LOAD_MORE_POSTS_FEED";
+const LOAD_POSTS_EXPLORE = "posts/LOAD_POST_EXPLORE";
+// const LOAD_MORE_POSTS_EXPLORE = "posts/LOAD_MORE_POST_EXPLORE";
 const LOAD_POST_DETAILS = "posts/LOAD_POST_DETAILS";
-const LOAD_POST_EXPLORE = "posts/LOAD_POST_EXPLORE";
 
 // ACTION
 const loadPostsFeed = (posts) => ({
@@ -16,32 +18,45 @@ const loadPostDetails = (post) => ({
   post,
 });
 
-const loadPostExplore = (posts) => ({
-  type: LOAD_POST_EXPLORE,
+const loadPostsExplore = (posts) => ({
+  type: LOAD_POSTS_EXPLORE,
+  posts,
+});
+
+const loadMorePostsFeed = (posts) => ({
+  type: LOAD_MORE_POSTS_FEED,
+  posts,
+});
+
+const loadMorePostsExplore = (posts) => ({
+  type: LOAD_MORE_POSTS_FEED,
   posts,
 });
 
 // THUNKS
-export const getPostsFeed = () => async (dispatch) => {
-  const res = await fetch("/api/posts/following");
-  const { Posts: posts } = await res.json();
+export const getPostsFeed =
+  (page = 1) =>
+  async (dispatch) => {
+    const res = await fetch(`/api/posts/following?page=${page}`);
+    const { Posts: posts } = await res.json();
 
-  if (res.ok) {
-    const normalizedData = {};
-    posts.forEach((post) => (normalizedData[post.id] = post));
-    dispatch(loadPostsFeed(normalizedData));
-    return posts;
-  }
-};
+    if (res.ok) {
+      const normalizedData = {};
+      posts.forEach((post) => (normalizedData[post.id] = post));
+      dispatch(loadPostsFeed(normalizedData));
+      return posts;
+    }
+  };
 
 export const getPostsExplore = () => async (dispatch) => {
-  const res = await fetch("/api/posts/");
+  // const res = await fetch(`/api/posts/?page=${page}`);
+  const res = await fetch(`/api/posts/`);
   const { Posts: posts } = await res.json();
 
   if (res.ok) {
     const normalizedData = {};
     posts.forEach((post) => (normalizedData[post.id] = post));
-    dispatch(loadPostExplore(normalizedData));
+    dispatch(loadPostsExplore(normalizedData));
     return posts;
   }
 };
@@ -62,11 +77,43 @@ export const addPost = (formData) => async (dispatch) => {
     body: formData,
   });
 
-  const post = await res.json();
+  await res.json();
 
   if (res.ok) {
-    console.log("WORKED");
     return;
+  }
+};
+
+export const getMorePostsFeed = (page) => async (dispatch) => {
+  const res = await fetch(`/api/posts/following?page=${page}`);
+  const { Posts: posts } = await res.json();
+
+  if (res.ok) {
+    const normalizedData = {};
+    posts.forEach((post) => (normalizedData[post.id] = post));
+    dispatch(loadMorePostsFeed(normalizedData));
+    return;
+  } else {
+    return {
+      message: "failed to load more posts",
+    };
+  }
+};
+
+export const getMorePostsExplore = () => async (dispatch) => {
+  // const res = await fetch(`/api/posts/?page=${page}`);
+  const res = await fetch(`/api/posts/`);
+  const { Posts: posts } = await res.json();
+
+  if (res.ok) {
+    const normalizedData = {};
+    posts.forEach((post) => (normalizedData[post.id] = post));
+    dispatch(loadMorePostsExplore(normalizedData));
+    return;
+  } else {
+    return {
+      message: "failed to load more posts",
+    };
   }
 };
 
@@ -74,24 +121,17 @@ const postsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_POSTS_FEED:
       return { ...action.posts };
+    case LOAD_MORE_POSTS_FEED:
+      return { ...state, ...action.posts };
     case LOAD_POST_DETAILS:
       return {
         ...state,
         [action.post.id]: { ...state[action.post.id], ...action.post },
       };
-    case LOAD_POST_EXPLORE:
+    case LOAD_POSTS_EXPLORE:
       return { ...action.posts };
-    // case ADD_COMMENT:
-    //   return {
-    //     ...state,
-    //     [action.payload.post_id]: {
-    //       ...state[action.payload.post_id],
-    //       comments: [
-    //         ...state[action.payload.post_id].comments,
-    //         ...action.payload,
-    //       ],
-    //     },
-    //   };
+    // case LOAD_MORE_POSTS_EXPLORE:
+    //   return { ...state, ...action.posts };
     default:
       return state;
   }

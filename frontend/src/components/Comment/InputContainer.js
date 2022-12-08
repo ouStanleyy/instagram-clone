@@ -5,6 +5,7 @@ import styles from "./Comment.module.css";
 // import styleSvg from "../NavBar/NavItem.module.css";
 import EmojiWindow from "./EmojiWindow";
 // import CommentsForm from "./CmContainer";
+// import { createReply } from "../../store/replies";
 
 const InputContainer = ({ post, cmInputRef }) => {
   const dispatch = useDispatch();
@@ -16,12 +17,19 @@ const InputContainer = ({ post, cmInputRef }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const payload = { comment, user_id: id };
 
     dispatch(createComment(payload, post.id));
+
     setComment("");
   };
+
+  // const handleComment = (e)=>{
+  //   setComment({
+  //     comment: e.target.value
+
+  //   })
+  // }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -30,7 +38,7 @@ const InputContainer = ({ post, cmInputRef }) => {
           <svg
             className={styles.emojiIcon}
             aria-label="Emoji"
-            class="_ab6-"
+            // className="_ab6-"
             color="#262626"
             fill="#262626"
             height="24"
@@ -47,7 +55,10 @@ const InputContainer = ({ post, cmInputRef }) => {
             onClick={() => setEmojiWindow((prev) => !prev)}
             src="https://cdn2.iconfinder.com/data/icons/instagram-outline/19/15-512.png"
           /> */}
-          <EmojiWindow emojiWindow={emojiWindow} />
+          <EmojiWindow
+            emojiWindow={emojiWindow}
+            setEmojiWindow={setEmojiWindow}
+          />
         </div>
         <input
           className={styles.commentInput}

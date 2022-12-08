@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUsers } from "../../store/users";
-import { LoadingSpinner, magnifier } from "../Elements";
+import { LoadingSpinner } from "../Elements";
 import styles from "./Search.module.css";
 import SearchUser from "./SearchUser";
 

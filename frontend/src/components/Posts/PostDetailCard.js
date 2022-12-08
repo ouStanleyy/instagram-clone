@@ -30,7 +30,7 @@ const PostDetailCard = (props) => {
       <MediaCarousel medias={post?.media} />
       <div className={styles.info}>
         <PostHeader user={post?.user} />
-        <CmContainer post={post} />
+        <CmContainer post={post} cmInputRef={cmInputRef} />
         <div className={styles.likes}>
           <LikeBar
             post={post}

@@ -4,6 +4,7 @@ const REMOVE_USER = "session/REMOVE_USER";
 const LOAD_FOLLOWING = "session/LOAD_FOLLOWING";
 const ADD_FOLLOW = "session/ADD_FOLLOW";
 const REMOVE_FOLLOW = "session/REMOVE_FOLLOW";
+const UPDATE_USER = "session/UPDATE_USER";
 
 // ACTION
 const setUser = (user) => ({
@@ -28,6 +29,11 @@ const addFollow = (follow) => ({
 const removeFollow = (followId) => ({
   type: REMOVE_FOLLOW,
   followId,
+});
+
+const updateUser = (user) => ({
+  type: UPDATE_USER,
+  user,
 });
 
 // THUNKS
@@ -113,6 +119,50 @@ export const signUp =
       return ["An error occurred. Please try again."];
     }
   };
+
+export const editProfile =
+  ({ profilePicture, fullName, username, bio, email, phoneNumber, gender }) =>
+  async (dispatch) => {
+    const res = await fetch(`/api/users/profile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        profile_picture: profilePicture,
+        full_name: fullName,
+        username,
+        bio,
+        email,
+        phone_number: phoneNumber,
+        gender,
+      }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(setUser(data));
+      return null;
+    } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occurred. Please try again."];
+    }
+  };
+
+export const deleteProfile = () => async (dispatch) => {
+  const res = await fetch(`/api/users/profile`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(removeUser());
+    return { message: "Deleted Profile" };
+  }
+};
 
 export const getFollowing = () => async (dispatch, getState) => {
   const { id } = getState().session.user;
