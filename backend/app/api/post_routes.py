@@ -111,7 +111,7 @@ def posts_feed():
         .join(Follow, Follow.following_id == User.id)\
         .filter(Follow.follower_id == current_user.id,
                 Follow.is_pending == False, Post.is_story == False)\
-        .order_by(Post.created_at.desc())\
+        .order_by(Post.id.desc())\
         .paginate(page=page, per_page=SIZE)
 
     return {"Posts": [post.to_dict_feed() for post in posts.items]}

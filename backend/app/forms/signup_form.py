@@ -33,10 +33,10 @@ def username_no_space(form, field):
 
 class SignUpForm(FlaskForm):
     username = StringField(
-        'username', validators=[DataRequired(), username_no_space, Length(min=5, max=30, message="Username must be between 5-30 characters"), username_exists])
+        'username', validators=[DataRequired(), Length(min=5, max=30, message="Username must be between 5-30 characters"), username_exists, username_no_space])
     email = StringField('email', validators=[
                         DataRequired(), Email(), user_exists])
-    full_name = StringField("full_name", validators=[DataRequired(), Length(
+    full_name = StringField("full_name", validators=[Length(
         max=30, message="Fullname may not be longer than 30 characters"), ])
     password = StringField('password', validators=[DataRequired(), Length(
         min=6, max=15, message="Password must be between 6-15 characters long")])

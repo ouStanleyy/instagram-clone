@@ -6,7 +6,7 @@ import styles from "./NavBar.module.css";
 import MoreItem from "./MoreItem";
 import { logout } from "../../store/session";
 import Search from "../Search/Search";
-import Notification from "../Notification/Notification"
+import Notification from "../Notification/Notification";
 
 const NavBar = () => {
   const history = useHistory();
@@ -112,21 +112,17 @@ const NavBar = () => {
                     hideNotification={hideNotification}
                   />
                 </div>
-              ) :
-              (icon === "Notifications" ? (
-                <div
-                key={idx}
-                onClick={toggleNotification}
-              >
-                <NavItem
-                  type={icon}
-                  showNotification={showNotification}
-                  hideNotification={hideNotification}
-                  showSearch={showSearch}
-                  hideSearch={hideSearch}
-                />
-              </div>
-              ):(
+              ) : icon === "Notifications" ? (
+                <div key={idx} onClick={toggleNotification}>
+                  <NavItem
+                    type={icon}
+                    showNotification={showNotification}
+                    hideNotification={hideNotification}
+                    showSearch={showSearch}
+                    hideSearch={hideSearch}
+                  />
+                </div>
+              ) : (
                 <NavLink
                   key={idx}
                   to={path}
@@ -142,7 +138,6 @@ const NavBar = () => {
                     hideNotification={hideNotification}
                   />
                 </NavLink>
-              )
               )
             )}
         </div>
@@ -171,7 +166,6 @@ const NavBar = () => {
               <NavLink to="#" exact={true} className={styles.navLink}>
                 <MoreItem type="Log Out" onClick={handleLogout} />
               </NavLink>
-              {/* <LogoutButton style={styles.navLink} /> */}
             </div>
             <NavItem type="More" />
           </div>
@@ -179,7 +173,12 @@ const NavBar = () => {
         {!user && loggedInNav}
       </ul>
       {showSearch && <Search hideSearch={hideSearch} onClose={toggleSearch} />}
-      {showNotification && <Notification hideNotification={hideNotification} onClose={toggleNotification} />}
+      {showNotification && (
+        <Notification
+          hideNotification={hideNotification}
+          onClose={toggleNotification}
+        />
+      )}
     </>
   );
 };

@@ -24,6 +24,8 @@ const Feed = () => {
   );
   const posts = useSelector((state) => Object.values(state?.posts));
 
+  const orderedPosts = posts?.sort((a, b) => b.id - a.id);
+
   // For first mount only, grab inital pages
   // Add debounce to allow only the latest event to trigger dispatch
   useEffect(() => {
@@ -63,9 +65,9 @@ const Feed = () => {
       <div className={styles.feedLayout}>
         <div className={styles.feed}>
           <StoryCarousel stories={""} />
-          {posts?.map((post, idx) => (
-            <PostFeedCard post={post} key={idx} />
-          ))}
+          {orderedPosts?.map((post, idx) => {
+            return <PostFeedCard post={post} key={idx} />;
+          })}
         </div>
         <div className={styles.sideSection}>
           <div className={styles.userCard}>

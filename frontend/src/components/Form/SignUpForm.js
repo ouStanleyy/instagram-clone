@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/session";
 import styles from "./SignUpForm.module.css";
+import { normalizeErrors } from "../Utill";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState({});
@@ -25,7 +26,8 @@ const SignUpForm = () => {
       email.length &&
       username.length &&
       password.length &&
-      repeatPassword.length
+      repeatPassword.length &&
+      password === repeatPassword
     ) {
       setDisableSubmit(false);
     } else {
@@ -40,23 +42,17 @@ const SignUpForm = () => {
       const data = await dispatch(signUp(username, email, password, fullName));
 
       if (data) {
-        const errors = {};
-        data.forEach((error) => {
-          const [key, value] = error.split(" : ");
-          errors[key] = value;
-        });
+        const errors = normalizeErrors(data);
         setErrors(errors);
       }
-    } else {
-      errors.repeatPassword = "Password does not match";
-      setErrors(errors);
     }
   };
 
   const handleRandomUsername = (e) => {
     e.preventDefault();
     const rootUsername = email.split("@")[0];
-    const NUM_OF_PLACEHOLDER = 4;
+    // const NUM_OF_PLACEHOLDER = 4;
+    const NUM_OF_PLACEHOLDER = Math.floor(Math.random() * 4 + 2);
     const randomNum = Math.floor(
       Math.random() * Math.pow(10, NUM_OF_PLACEHOLDER)
     );
@@ -77,6 +73,8 @@ const SignUpForm = () => {
           type="text"
           value={email}
           onChange={updateEmail}
+          maxLength={64}
+          className={hasSubmitted && styles.inputHasSubmitted}
         />
         {errors?.email ? (
           <span
@@ -102,9 +100,12 @@ const SignUpForm = () => {
         <input
           id="fullname"
           name="fullname"
+          placeholder="(Optional)"
           type="text"
+          maxLength={30}
           value={fullName}
           onChange={updateFullName}
+          className={hasSubmitted && styles.inputHasSubmitted}
         />
       </div>
       <div className={styles.inputContainer}>
@@ -114,6 +115,7 @@ const SignUpForm = () => {
           name="username"
           type="text"
           value={username}
+          maxLength={30}
           onChange={updateUsername}
         />
         {errors?.username ? (
@@ -151,6 +153,8 @@ const SignUpForm = () => {
           type="password"
           value={password}
           onChange={updatePassword}
+          maxLength={15}
+          className={hasSubmitted && styles.inputHasSubmitted}
         />
         {errors?.password ? (
           <span
@@ -179,6 +183,8 @@ const SignUpForm = () => {
           type="password"
           value={repeatPassword}
           onChange={updateRepeatPassword}
+          maxLength={15}
+          className={hasSubmitted && styles.inputHasSubmitted}
         />
         {errors?.repeatPassword ? (
           <span

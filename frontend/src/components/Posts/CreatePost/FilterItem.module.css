@@ -6,14 +6,14 @@
   align-items: center;
 }
 
-[type=radio] {
+.filterItemContainer [type=radio] {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-[type=radio]:checked + .imageContainer {
+.filterItemContainer [type=radio]:checked + .imageContainer {
   outline: 2px solid #0395F6;
 }
 
