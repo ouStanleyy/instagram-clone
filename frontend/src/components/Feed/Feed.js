@@ -66,7 +66,6 @@ const Feed = () => {
         <div className={styles.feed}>
           <StoryCarousel stories={""} />
           {orderedPosts?.map((post, idx) => {
-            console.log("CAROUSEL", post.id);
             return <PostFeedCard post={post} key={idx} />;
           })}
         </div>

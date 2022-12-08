@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/session";
 import styles from "./SignUpForm.module.css";
+import { normalizeErrors } from "../Utill";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState({});
@@ -39,14 +40,9 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password, fullName));
-      console.log("HERE", data);
 
       if (data) {
-        const errors = {};
-        data.forEach((error) => {
-          const [key, value] = error.split(" : ");
-          errors[key] = value;
-        });
+        const errors = normalizeErrors(data);
         setErrors(errors);
       }
     }
