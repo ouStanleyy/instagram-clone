@@ -7,7 +7,7 @@ import MoreItem from "./MoreItem";
 import { logout } from "../../store/session";
 import { getFollowers } from "../../store/follows";
 import Search from "../Search/Search";
-import Notification from "../Notification/Notification"
+import Notification from "../Notification/Notification";
 
 const NavBar = () => {
   const history = useHistory();
@@ -117,11 +117,12 @@ const NavBar = () => {
       <ul
         className={`${styles.navBar} ${
           showSearch && !hideSearch && styles.miniNavBar}
-          // ${ showNotification && !hideNotification && styles.miniNavBar}
-        }`}
+          ${ showNotification && !hideNotification && styles.miniNavBar}
+        `}
       >
         <div>
           {user &&
+
             links.slice(0, links.length - 1).map(({ icon, path }, idx) =>
               icon === "Search" ? (
                 <div
@@ -173,6 +174,7 @@ const NavBar = () => {
               )
               )
             )}
+
         </div>
         {user && (
           <div className={styles.moreLink} onClick={handleShowMore}>
@@ -199,7 +201,6 @@ const NavBar = () => {
               <NavLink to="#" exact={true} className={styles.navLink}>
                 <MoreItem type="Log Out" onClick={handleLogout} />
               </NavLink>
-              {/* <LogoutButton style={styles.navLink} /> */}
             </div>
             <NavItem type="More" />
           </div>
@@ -211,5 +212,6 @@ const NavBar = () => {
     </>
   );
 };
+
 
 export default NavBar;

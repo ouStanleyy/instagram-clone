@@ -36,11 +36,12 @@ const StoryCarousel = () => {
     <>
       <div className={styles.storyCarouselContainer} ref={scrollRef}>
         <div className={styles.storyList}>
-          {followings.map((user) => {
+          {followings.map((user, idx) => {
             return (
               <StoryItem
                 user={user?.following_user}
                 setIsLoaded={setIsLoaded}
+                key={idx}
               />
             );
           })}

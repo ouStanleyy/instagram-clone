@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFollowers } from "../../store/follows";
 import FollowerUser from "./FollowerUser";
-import styles from "./Notification.module.css"
-
+import styles from "./Notification.module.css";
 
 
 const Notification = ({hideNotification, pendingFollowers})=>{

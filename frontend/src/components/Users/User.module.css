@@ -41,6 +41,14 @@
 .username {
   font-size: 28px;
   font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.username span {
+  color: #3897F0;
 }
 
 .detailsStats {

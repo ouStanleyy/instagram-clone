@@ -39,7 +39,7 @@ medias = [
     },
     {
         "post_id": 7,
-        "url": "https://i.pinimg.com/736x/b2/27/84/b22784a8d7f94fbb0b132ca138be1cdf--style-instagram-instagram-posts.jpg",
+        "url": "https://nypost.com/wp-content/uploads/sites/2/2021/12/chinese-elon-musk2.jpg?quality=75&strip=all",
     },
     {
         "post_id": 8,
@@ -389,6 +389,242 @@ medias = [
     {
         "post_id": 63,
         "url": "https://www.multidots.com/wp-content/uploads/2020/01/code-quality-standard.png?quality=90",
+    },
+    {
+        "post_id": 63,
+        "url": "https://images7.memedroid.com/images/UPLOADED808/6368782c7bef3.jpeg",
+    },
+    {
+        "post_id": 64,
+        "url": "https://i.pinimg.com/originals/8b/74/db/8b74db48aecf7f948d1a9c41743ed8bb.jpg",
+    },
+    {
+        "post_id": 65,
+        "url": "https://media-exp1.licdn.com/dms/image/C5622AQEyn5kYlxGz-w/feedshare-shrink_2048_1536/0/1661520557100?e=2147483647&v=beta&t=r6HRgLIgk6FiQmCEynnj2MDSBWNkrUCtE6UyhVxvj5M",
+    },
+    {
+        "post_id": 66,
+        "url": "https://media-exp1.licdn.com/dms/image/C5622AQFARn-TytJrDQ/feedshare-shrink_480/0/1660306491989?e=2147483647&v=beta&t=Qxv-lrw8TL4YtM-hbW4jGOFfd1-G9ueO62qGMtH_9X4",
+    },
+    {
+        "post_id": 67,
+        "url": "http://images7.memedroid.com/images/UPLOADED867/62d4f870aa98b.jpeg",
+    },
+    {
+        "post_id": 67,
+        "url": "https://cdn4.visualstories.com/officialrajdeepsingh/images/1/14424134/14424134-928_90b73dcd76b0d8ec6b400cd9e869a359.png",
+    },
+    {
+        "post_id": 68,
+        "url": "https://coursereport-s3-production.global.ssl.fastly.net/rich/rich_files/rich_files/5497/original/7-tips-before-you-learn-to-code.png",
+    },
+    {
+        "post_id": 69,
+        "url": "https://i.pinimg.com/736x/e5/af/f0/e5aff0825a13b7dfeed184368d511f01.jpg",
+    },
+    {
+        "post_id": 70,
+        "url": "https://res.cloudinary.com/practicaldev/image/fetch/s--ij_hqKUb--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://github.com/damiancipolat/js_vs_memes/blob/master/doc/mind_js.jpg%3Fraw%3Dtrue",
+    },
+    {
+        "post_id": 71,
+        "url": "https://i.pinimg.com/564x/33/38/a8/3338a87664d342edb53fcf70aef72986.jpg",
+    },
+    {
+        "post_id": 71,
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgKMN7ip4PJX4nvrMZbIuUulSzxY3l-yE-tA&usqp=CAU",
+    },
+    {
+        "post_id": 71,
+        "url": "https://cdn.memegenerator.es/descargar/12331123",
+    },
+    {
+        "post_id": 72,
+        "url": "https://origympersonaltrainercourses.co.uk/files/img_cache/2124/450_450__1554970272_wokroutmeme6.jpg",
+    },
+    {
+        "post_id": 73,
+        "url": "https://www.wellandgood.com/wp-content/uploads/2019/12/Stocksy-cooking-for-one-Andrey-Pavlov.jpeg",
+    },
+    {
+        "post_id": 74,
+        "url": "https://modernhealthmonk.com/wp-content/uploads/2015/08/grunting-at-gym.jpg",
+    },
+    {
+        "post_id": 75,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/11/Concepts-Nike-SB-Dunk-Low-Orange-Lobster-4.jpg",
+    },
+    {
+        "post_id": 75,
+        "url": "https://sneakerbardetroit.com/wp-content/uploads/2022/07/Concepts-Nike-SB-Dunk-Low-Orange-Lobster-FD8776-800-Release-Date-On-Feet.jpg",
+    },
+    {
+        "post_id": 75,
+        "url": "https://houseofheat.co/app/uploads/2022/06/concepts-nike-dunk-low-orange-lobster-release-date-10.jpg",
+    },
+    {
+        "post_id": 76,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-dunk-low-womens-ice-blue-barely-volt-dd1503-123-4.jpg",
+    },
+    {
+        "post_id": 76,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-dunk-low-womens-ice-blue-barely-volt-dd1503-123-3.jpg",
+    },
+    {
+        "post_id": 76,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-dunk-low-womens-ice-blue-barely-volt-dd1503-123-5.jpg",
+    },
+    {
+        "post_id": 76,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-dunk-low-womens-ice-blue-barely-volt-dd1503-123-7.jpg",
+    },
+    {
+        "post_id": 76,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-dunk-low-womens-ice-blue-barely-volt-dd1503-123-1.jpg",
+    },
+    {
+        "post_id": 76,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-dunk-low-womens-ice-blue-barely-volt-dd1503-123-2.jpg",
+    },
+    {
+        "post_id": 77,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-air-force-1-patchwork-fb4957-111-4.jpg",
+    },
+    {
+        "post_id": 77,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-air-force-1-patchwork-fb4957-111-1.jpg",
+    },
+    {
+        "post_id": 77,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-air-force-1-patchwork-fb4957-111-8.jpg",
+    },
+    {
+        "post_id": 77,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-air-force-1-patchwork-fb4957-111-11.jpg",
+    },
+    {
+        "post_id": 78,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-cortez-sail-aloe-vera-pale-vanilla-FD0728-133-7.jpg",
+    },
+    {
+        "post_id": 78,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-cortez-sail-aloe-vera-pale-vanilla-FD0728-133-8.jpg",
+    },
+    {
+        "post_id": 78,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-cortez-sail-aloe-vera-pale-vanilla-FD0728-133-2.jpg",
+    },
+    {
+        "post_id": 78,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-cortez-sail-aloe-vera-pale-vanilla-FD0728-133-4.jpg",
+    },
+    {
+        "post_id": 78,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-cortez-sail-aloe-vera-pale-vanilla-FD0728-133-3.jpg",
+    },
+    {
+        "post_id": 79,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-blazer-mid-77-white-peach-FD0287-100-8.jpg",
+    },
+    {
+        "post_id": 79,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-blazer-mid-77-white-peach-FD0287-100-6.jpg",
+    },
+    {
+        "post_id": 79,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-blazer-mid-77-white-peach-FD0287-100-2.jpg",
+    },
+    {
+        "post_id": 79,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-blazer-mid-77-white-peach-FD0287-100-3.jpg",
+    },
+    {
+        "post_id": 79,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/nike-blazer-mid-77-white-peach-FD0287-100-7.jpg",
+    },
+    {
+        "post_id": 80,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/jordan-series-01-dear-imagination-FD4325-171-4.jpg",
+    },
+    {
+        "post_id": 80,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/jordan-series-01-dear-imagination-FD4325-171-3.jpg",
+    },
+    {
+        "post_id": 80,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/jordan-series-01-dear-imagination-FD4325-171-6.jpg",
+    },
+    {
+        "post_id": 80,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/jordan-series-01-dear-imagination-FD4325-171-8.jpg",
+    },
+    {
+        "post_id": 81,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/jordan-legacy-312-year-of-the-rabbit-6.jpg",
+    },
+    {
+        "post_id": 81,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/jordan-legacy-312-year-of-the-rabbit-2.jpg?w=1140",
+    },
+    {
+        "post_id": 81,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/jordan-legacy-312-year-of-the-rabbit-1.jpg?w=1140",
+    },
+    {
+        "post_id": 81,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/12/jordan-legacy-312-year-of-the-rabbit-5.jpg?w=1140",
+    },
+    {
+        "post_id": 82,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/11/nike-air-force-1-shadow-pastel-multi-color-FJ0735-100-1.jpg",
+    },
+    {
+        "post_id": 82,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/11/nike-air-force-1-shadow-pastel-multi-color-FJ0735-100-7.jpg",
+    },
+    {
+        "post_id": 82,
+        "url": "https://sneakernews.com/wp-content/uploads/2022/11/nike-air-force-1-shadow-pastel-multi-color-FJ0735-100-2.jpg",
+    },
+    {
+        "post_id": 83,
+        "url": "https://media.architecturaldigest.com/photos/634ee4aba8f3f42b54e9ba9a/master/w_2580%2Cc_limit/Alpine%2520Shelter%2520Skuta%2520by%2520OFIS%2520Architects%2520__%2520Harvard%2520GSD%2520__%2520AKT%2520II_photo%2520%25E2%2594%25AC%25C2%25AE%2520Janez%2520Martincic.jpg",
+    },
+    {
+        "post_id": 83,
+        "url": "https://media.architecturaldigest.com/photos/634ee4ae71ea5ab8b1a71c0f/master/w_1920%2Cc_limit/Cliff%2520House%2520by%2520Modscape%2520%25C2%25A9Modscape%2520.jpg",
+    },
+    {
+        "post_id": 83,
+        "url": "https://media.architecturaldigest.com/photos/634ee4b0ad68993731cfd874/master/w_1920%2Cc_limit/Concrete%2520House%2520by%2520Maria%25C2%25A6%25C3%2587%2520Castello%25C2%25A6%25C3%25BC%2520+%2520Jose%25C2%25A6%25C3%25BC%2520Antonio%2520Molina_photo%2520-%25C2%25AE%2520Maria%25C2%25A6%25C3%2587%2520Castello%25C2%25A6%25C3%25BC.jpg",
+    },
+    {
+        "post_id": 84,
+        "url": "https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/HB4AT3D3IMI6TMPTWIZ74WAR54.jpg",
+    },
+    {
+        "post_id": 84,
+        "url": "https://ultimastatus.com/wp-content/uploads/2021/06/dog-love-quotes-3.jpg",
+    },
+    {
+        "post_id": 85,
+        "url": "https://images.squarespace-cdn.com/content/v1/5999b55abe6594fce2334596/1560180575998-1UNAZVRZSY8VSEMKTJFR/Photographs+of+New+York+City.jpg",
+    },
+    {
+        "post_id": 85,
+        "url": "https://www.thewholeworldisaplayground.com/wp-content/uploads/2018/06/New-York-City-Best-Instagram-Spots-8.webp",
+    },
+    {
+        "post_id": 86,
+        "url": "https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?cs=srgb&dl=pexels-pixabay-247431.jpg&fm=jpg",
+    },
+    {
+        "post_id": 87,
+        "url": "https://imageio.forbes.com/specials-images/imageserve/60bb9a03824a727e00a753d1/A-lion-cub-playing-on-the-carcass-of-a-giraffe-/960x0.jpg?format=jpg&width=960",
+    },
+    {
+        "post_id": 87,
+        "url": "https://www.viewbug.com/media/mediafiles/2013/06/02/3589143_large1300.jpg",
     },
 
 

@@ -1,0 +1,24 @@
+.noFollowingContainer {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 244px;
+  gap: 16px;
+  padding: 32px 0;
+}
+
+.noFollowingContainer span {
+  font-size: 18px;
+}
+
+.noFollowingContainer span a {
+  color: #0395F6;
+}
+
+@media screen and (max-width: 1244px) {
+  .noFollowingContainer {
+    margin-left: 72px;
+  }
+}

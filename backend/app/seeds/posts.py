@@ -32,7 +32,7 @@ posts = [
     },
     {
         "user_id": 3,
-        "caption": "Bobbie_Demo's first post."
+        "caption": "We don't look alike"
     },
     {
         "user_id": 3,
@@ -258,6 +258,102 @@ posts = [
     {
         "user_id": 15,
         "caption": "Yup"
+    },
+    {
+        "user_id": 15,
+        "caption": "Google knows all"
+    },
+    {
+        "user_id": 15,
+        "caption": "I'm a weekend developer"
+    },
+    {
+        "user_id": 15,
+        "caption": "Me on my first technical interview"
+    },
+    {
+        "user_id": 15,
+        "caption": "When I handover my buggy feature to stan"
+    },
+    {
+        "user_id": 15,
+        "caption": "Here's an actual tip"
+    },
+    {
+        "user_id": 15,
+        "caption": "Think before you code"
+    },
+    {
+        "user_id": 15,
+        "caption": "that's javascript"
+    },
+    {
+        "user_id": 4,
+        "caption": "Evolution of bmw"
+    },
+    {
+        "user_id": 16,
+        "caption": "Trying to find the right song"
+    },
+    {
+        "user_id": 12,
+        "caption": "Salt is not seasoning"
+    },
+    {
+        "user_id": 16,
+        "caption": "I can't lift unless everyone is watching"
+    },
+    {
+        "user_id": 17,
+        "caption": "Orange lobster Dunks releasing Tomorrow at Noon"
+    },
+    {
+        "user_id": 17,
+        "caption": "The Nike Dunk Low Appears In “Ice Blue” Styling For Women"
+    },
+    {
+        "user_id": 17,
+        "caption": "The Nike Air Force 1 Closes Out 2022 With A Patchwork Outfit"
+    },
+    {
+        "user_id": 17,
+        "caption": "The Nike Cortez Receives A Soothing Treatment Of 'Aloe Vera'"
+    },
+    {
+        "user_id": 17,
+        "caption": "Peach Hues Clothe The Nike Blazer Mid ’77"
+    },
+    {
+        "user_id": 17,
+        "caption": "The Jordan Series .01 'Dear Imagination' Features Marbling Details"
+    },
+    {
+        "user_id": 17,
+        "caption": "Official Images Of The Jordan Legacy 312 'Year Of The Rabbit'"
+    },
+    {
+        "user_id": 17,
+        "caption": "Spring Is In Season With The Pastel Hues Of The Nike Air Force 1 Shadow"
+    },
+    {
+        "user_id": 14,
+        "caption": "9 Stunning Homes Built Into Cliffs"
+    },
+    {
+        "user_id": 5,
+        "caption": "Doggy"
+    },
+    {
+        "user_id": 8,
+        "caption": "DUMBO"
+    },
+    {
+        "user_id": 8,
+        "caption": "DUMBO"
+    },
+    {
+        "user_id": 8,
+        "caption": "Simba"
     },
 ]
 

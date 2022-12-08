@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SignUpForm from "./components/auth/SignUpForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import NavBar from "./components/NavBar/NavBar";
-import { UsersList, User } from "./components/Users";
+import { User } from "./components/Users";
 import { authenticate, getFollowing } from "./store/session";
 import Splash from "./components/Splash/Splash";
 import { PostDetailCard } from "./components/Posts";
@@ -13,7 +13,7 @@ import { Setting } from "./components/Setting";
 import { Feed } from "./components/Feed";
 import { CreatePost } from "./components/Posts";
 import { Explore } from "./components/Explore";
-import {Notification} from "./components/Notification";
+import { Notification } from "./components/Notification";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -36,37 +36,39 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      {user && <NavBar />}
-      <Switch>
-        <Route path="/" exact={true}>
-          {user ? <Feed /> : <Splash />}
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <div className={styles.innerBody}>
-          <ProtectedRoute path="/explore" exact={true}>
-            <Explore />
-          </ProtectedRoute>
-          <ProtectedRoute path="/users/:userId" exact={true}>
-            <User />
-          </ProtectedRoute>
-          <Route path="/create" exact={true}>
-            <CreatePost />
+    loaded && (
+      <BrowserRouter>
+        {user && <NavBar />}
+        <Switch>
+          <Route path="/" exact={true}>
+            {user ? <Feed /> : <Splash />}
           </Route>
-          <Route path="/account">
-            <Setting />
+          <Route path="/sign-up" exact={true}>
+            <SignUpForm />
           </Route>
-          <Route path="/posts" exact={true}>
-            <h1>Post</h1>
-          </Route>
-          <Route path="/posts/:postId" exact={true}>
-            <PostDetailCard />
-          </Route>
-        </div>
-      </Switch>
-    </BrowserRouter>
+          <div className={styles.innerBody}>
+            <ProtectedRoute path="/explore" exact={true}>
+              <Explore />
+            </ProtectedRoute>
+            <ProtectedRoute path="/users/:userId" exact={true}>
+              <User />
+            </ProtectedRoute>
+            <Route path="/create" exact={true}>
+              <CreatePost />
+            </Route>
+            <Route path="/account">
+              <Setting />
+            </Route>
+            <Route path="/posts" exact={true}>
+              <h1>Post</h1>
+            </Route>
+            <Route path="/posts/:postId" exact={true}>
+              <PostDetailCard />
+            </Route>
+          </div>
+        </Switch>
+      </BrowserRouter>
+    )
   );
 }
 

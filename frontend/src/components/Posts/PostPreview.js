@@ -16,7 +16,7 @@ const PostPreview = ({ post }) => {
         <NavLink to={`/users/${post?.user_id}`} className={styles.username}>
           {post?.user?.username}
         </NavLink>
-        <span className={styles.caption}>{post?.caption}</span>
+        {post?.caption}
       </div>
       <div className={styles.captionContainer}>
         <NavLink
