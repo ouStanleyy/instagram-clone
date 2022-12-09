@@ -1,12 +1,15 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUsers } from "../../store/users";
 import { LoadingSpinner } from "../Elements";
-import styles from "./Search.module.css";
-import SearchUser from "./SearchUser";
+import styles from "./NewMessage.module.css";
+import { ProfilePicture } from "../Elements";
+import { createNewRoom } from "../../store/rooms";
+import { useHistory } from "react-router-dom";
 
-const Search = ({ hideSearch, searchRef, refSearchBar }) => {
+const NewMessage = ({ onClose }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const searchResults = useSelector((state) =>
     Object.values(state.users.searchResults)
   );
@@ -16,6 +19,14 @@ const Search = ({ hideSearch, searchRef, refSearchBar }) => {
   const updateSearchVal = (e) => {
     setLoaded(false);
     setSearchVal(e.target.value);
+  };
+
+  const handleClick = (userId) => async () => {
+    try {
+      const roomId = await dispatch(createNewRoom(userId));
+      onClose();
+      history.push(`/messages/${roomId}`);
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -31,39 +42,35 @@ const Search = ({ hideSearch, searchRef, refSearchBar }) => {
   }, [dispatch, searchVal]);
 
   return (
-    <div
-      ref={searchRef}
-      className={`${styles.searchContainer} ${hideSearch && styles.hideSearch}`}
-    >
+    <div className={styles.searchContainer}>
       <div className={styles.searchHeader}>
-        <h2>Search</h2>
+        <h2>New message</h2>
         <div className={styles.inputContainer}>
+          <label>To:</label>
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search..."
             value={searchVal}
             onChange={updateSearchVal}
             className={styles.searchInput}
-            ref={refSearchBar}
           />
-          {loaded ? (
-            <span
-              onClick={() => setSearchVal("")}
-              className={`material-symbols-outlined ${styles.cancelButton}`}
-            >
-              cancel
-            </span>
-          ) : (
-            <div className={styles.loadingCancelSpinner}>
-              <LoadingSpinner />
-            </div>
-          )}
         </div>
       </div>
       <div className={styles.searchResults}>
         {loaded ? (
           searchResults.map((result) => (
-            <SearchUser key={result.id} user={result} />
+            <div
+              className={styles.userContainer}
+              onClick={handleClick(result.id)}
+            >
+              <div className={styles.profilePicture}>
+                <ProfilePicture user={result} size={"large"} />
+              </div>
+              <div className={styles.userDetails}>
+                <p className={styles.username}>{result.username}</p>
+                <p className={styles.fullName}>{result.full_name}</p>
+              </div>
+            </div>
           ))
         ) : (
           <div className={styles.loadingSpinner}>
@@ -75,4 +82,4 @@ const Search = ({ hideSearch, searchRef, refSearchBar }) => {
   );
 };
 
-export default Search;
+export default NewMessage;

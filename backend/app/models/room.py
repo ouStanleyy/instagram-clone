@@ -7,6 +7,9 @@ room_user = db.Table('room_user',
     db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
 )
 
+if environment == "production":
+    room_user.schema = SCHEMA
+
 
 class Room(db.Model):
     '''

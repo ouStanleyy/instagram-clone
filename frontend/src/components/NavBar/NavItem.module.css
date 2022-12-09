@@ -114,15 +114,14 @@ svg {
   height: 48px;
 }
 
-.redCircle{
+.redCircle {
   background-color: red;
   border: 1px solid white;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   z-index: 12;
-  position:absolute;
+  position: absolute;
   margin-bottom: 12px;
   margin-left: 15px;
 }
-
