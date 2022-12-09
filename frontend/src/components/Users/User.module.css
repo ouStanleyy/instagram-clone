@@ -41,6 +41,14 @@
 .username {
   font-size: 28px;
   font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.username span {
+  color: #3897F0;
 }
 
 .detailsStats {
@@ -105,12 +113,20 @@
   letter-spacing: 1px;
 }
 
-.postsContainer {
+/* .postsContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
   width: 65%;
   max-width: 936px;
+} */
+
+.postsContainer {
+  /* border: 1px solid red; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+
 }
 
 .postsContainer > p {
@@ -118,11 +134,16 @@
   text-align: center;
 }
 
+/* .postContainer {
+  position: relative;
+  height: 292px;
+  width: 292px;
+} */
+
 .postContainer {
   position: relative;
   height: 292px;
   width: 292px;
-  /* aspect-ratio: 1/1; */
 }
 
 .previewMedia {
@@ -174,4 +195,16 @@
 
 .previewMedia:hover {
   z-index: -1;
+}
+
+@media screen and (max-width:1264px) {
+  .postsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width:800px) {
+  .postsContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

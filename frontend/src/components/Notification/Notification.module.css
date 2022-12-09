@@ -1,0 +1,59 @@
+.notifContainer {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    border-right: 1px solid #dbdbdb;
+    box-shadow: 12px 0 20px -8px #dbdbdb;
+    border-radius: 16px;
+    position: fixed;
+    height: 100vh;
+    padding-left: 72px;
+    width: 472px;
+    background-color: white;
+    animation: slideIn 300ms ease-out;
+    z-index: 4;
+  }
+
+  .hideNotification {
+    animation: slideOut 300ms ease-out;
+  }
+
+  .notifHeader {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    padding-left: 20px;
+    border-bottom: 1px solid #dbdbdb;
+  }
+
+  .notifLabel{
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .noNotifications{
+      margin-left: 30px;
+      margin-top: 30px;
+      font-size: 22;
+      font-weight: 500;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(-110%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-110%);
+    }
+  }

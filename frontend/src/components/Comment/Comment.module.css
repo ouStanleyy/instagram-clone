@@ -1,7 +1,7 @@
 
 .form{
     border-top: 1px solid #DBDBDB;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     /* border: 1px solid red; */
     display: flex;
     justify-content: space-between;
@@ -9,7 +9,7 @@
 }
 
 .cmContainer{
-    /* width: 400px; */
+    /* width: auto; */
     border-bottom: 1px solid #DBDBDB;
     position: relative;
     /* max-height: 500px; */
@@ -28,7 +28,9 @@
     font-family: sans-serif;
     display: flex;
     gap: 14px;
-    margin: 20px;
+    margin-left: 20px;
+    margin-top: 12px;
+    /* margin: 20px; */
     border-radius: 24px;
 }
 
@@ -46,10 +48,12 @@
 
 .textContainer{
     width: 320px;
-    height: 35px;
-    display: flex;
-    /* flex-wrap: wrap; */
-    /* gap: 10px; */
+
+}
+.captionContainer{
+  width: 320px;
+  margin-bottom: 35px;
+
 }
 
 .username{
@@ -62,30 +66,43 @@
   font-size: 13px;
   color:#262626;
   margin-left: 5px;
+  word-wrap: break-word;
 }
+
+/* .caption{
+  font-size: 13px;
+  color:#262626;
+  margin-left: 5px;
+  word-wrap: break-word;
+  display: block;
+  margin-bottom: 30px;
+} */
 
 .reply{
   text-decoration: none;
   color: #8E8E8E;
   font-size: 13px;
   margin-left: 10px;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .replyContainer{
   display: flex;
+  margin-top: 12px;
 }
 
+
 .moreButton{
-  align-self: center;
+  align-content: center;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .inputContainer{
-  /* border-top: 1px solid rgb(183, 182, 182, 0.250); */
-  /* border: 1px solid blue; */
-  /* width: 400px; */
-  height: 55px;
+
+  height: 50px;
   display: flex;
   position: relative;
 }
@@ -95,13 +112,6 @@
   margin-left: 16px;
   align-self: center;
 }
-
-/* .emojiIcon{
-  margin-left: 10px;
-  width:30px;
-  height: 30px;
-  background-color: transparent;
-} */
 
 .commentInput{
   width:300px;
@@ -124,4 +134,44 @@
 
 .disablePost {
   opacity: 0.6;
+}
+
+.noCmContainer{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.noCommentsLabel{
+  font-size: 22px;
+  font-weight: 600;
+
+}
+
+.startConLabel{
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.viewHideDiv{
+  display: flex;
+}
+
+.viewReplies{
+  text-decoration: none;
+  color: #8E8E8E;
+  font-size: 13px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.line{
+  width: 24px;
+  height: 1px;
+  border-bottom: 1px solid #8E8E8E;
+  margin: 8px;
+  align-self: center;
 }

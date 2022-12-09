@@ -4,12 +4,51 @@
   background: #FFFFFF;
   max-width: 470px;
   width: 100%;
+  max-height: 128px;
+  overflow-x: hidden;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+.storyList {
   padding: 18px;
   display: flex;
   gap: 18px;
-  overflow-x: scroll;
+
 }
 
-/* .storyCarouselContainer:hover {
-  overflow-x: scroll;
-} */
+.arrowContainer {
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 36px;
+  left: 0%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  max-width: 470px;
+  width: 100%;
+  max-height: 128px;
+  user-select: none;
+}
+
+.leftArrow, .rightArrow {
+  cursor: pointer;
+  z-index: 4;
+  opacity: 1;
+  color: #d8d8d8;
+  top: 2rem;
+}
+
+.leftArrow {
+  transform: rotate(90deg);
+}
+
+.rightArrow{
+  transform: rotate(-90deg);
+}
+
+.hideArrow {
+  visibility: hidden;
+  pointer-events: none;
+}

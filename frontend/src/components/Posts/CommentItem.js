@@ -20,7 +20,7 @@ const CommentItem = ({ comment }) => {
       <div className={styles.like}>
         <svg
           aria-label="Like"
-          class="_ab6-"
+          className="_ab6-"
           color="#262626"
           fill="#262626"
           height="12"
