@@ -225,9 +225,10 @@ function User() {
                 </div>
               </div>
             </div>
+            {!user.num_of_posts && <p>No Posts Yet</p>}
             <div className={styles.postsContainer}>
               {!user.num_of_posts ? (
-                <p>No Posts Yet</p>
+                <p></p>
               ) : (
                 user?.posts
                   ?.filter((post) => !post.is_story)

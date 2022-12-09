@@ -2,6 +2,7 @@ from app.models import db, User, Post, environment, SCHEMA
 
 users = [
     {
+        # 1
         "username": "Demo_User",
         "full_name": "Demo User",
         "gender": "Prefer not to say",
@@ -13,6 +14,7 @@ users = [
         "is_private": True
     },
     {
+        # 2
         "username": "Marnie_Demo",
         "full_name": "Marnie Demo",
         "gender": "Prefer not to say",
@@ -24,6 +26,7 @@ users = [
         "is_private": False
     },
     {
+        # 3
         "username": "Yi_long_Ma",
         "full_name": "Not Elon",
         "gender": "Prefer not to say",
@@ -36,8 +39,9 @@ users = [
         "is_private": False
     },
     {
-        "username": "Stan_Demo",
-        "full_name": "Stanley Demo",
+        # 4
+        "username": "Stanley_Ou",
+        "full_name": "Stanley Ou",
         "gender": "Male",
         "email": "stanley_demo@email.com",
         "password": "stanleydemopw",
@@ -47,6 +51,7 @@ users = [
         "is_private": True
     },
     {
+        # 5
         "username": "Rey_Demo",
         "full_name": "Reyhaneh Demo",
         "gender": "Female",
@@ -59,8 +64,9 @@ users = [
         "is_private": False
     },
     {
-        "username": "Dan_Demo",
-        "full_name": "Daniel Demo",
+        # 6
+        "username": "Daniel_Wong",
+        "full_name": "Daniel Wong",
         "gender": "Male",
         "email": "daniel_demo@email.com",
         "password": "danieldemopw",
@@ -81,6 +87,7 @@ users = [
         "is_private": False
     },
     {
+        # 8
         "username": "Jim_photogram",
         "full_name": "Jim Harley",
         "gender": "Male",
@@ -93,6 +100,7 @@ users = [
         "is_private": False
     },
     {
+        # 9
         "username": "Lily_tattoo",
         "full_name": "Lily Haze",
         "gender": "Female",
@@ -104,6 +112,7 @@ users = [
         "is_private": False
     },
     {
+        # 10
         "username": "Hailey_beauty",
         "full_name": "Hailey Monroe",
         "gender": "Female",
@@ -115,6 +124,7 @@ users = [
         "is_private": False
     },
     {
+        # 11
         "username": "John_22",
         "full_name": "John Milly",
         "gender": "Male",
@@ -126,6 +136,7 @@ users = [
         "is_private": False
     },
     {
+        # 12
         "username": "Chef_Ana",
         "full_name": "Ana Li",
         "gender": "Female",
@@ -138,6 +149,7 @@ users = [
         "is_private": False
     },
     {
+        # 13
         "username": "kobebyrant",
         "full_name": "Kobe Bryant",
         "bio": "One of the greatest basketball players and scorers of all time, Bryant won five NBA championships, was an 18-time All-Star, a 15-time member of the All-NBA Team, a 12-time member of the All-Defensive Team, the 2008 NBA Most Valuable Player (MVP), and a two-time NBA Finals MVP.",
@@ -150,6 +162,7 @@ users = [
         "is_private": False
     },
     {
+        # 14
         "username": "archdigest",
         "full_name": "Architectural Digest",
         "bio": "The International Design Authority. \nTap the link below to read more about any photo. \nJust kidding, there's no link.",
@@ -162,6 +175,7 @@ users = [
         "is_private": False
     },
     {
+        # 15
         "username": "codemonkey",
         "full_name": "Tips and tricks",
         "bio": "Just coding tricks",
@@ -174,6 +188,7 @@ users = [
         "is_private": False
     },
     {
+        # 16
         "username": "fitnessgram",
         "full_name": "Annoying Gym Rat",
         "bio": "· Go to the gym ✔️\n· Take up the gym equipment ✔️\n · Take photos ✔️\n",
@@ -186,6 +201,7 @@ users = [
         "is_private": False
     },
     {
+        # 17
         "username": "sneakernews",
         "full_name": "Sneaker News",
         "bio": "The Official Instagram account of SneakerNews.com",
@@ -194,6 +210,45 @@ users = [
         "password": "sneakernewspw",
         "phone_number": "7892229842",
         "profile_picture": "data:image/png;base64,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",
+        "is_verified": True,
+        "is_private": False
+    },
+    {
+        # 18
+        "username": "beardstock",
+        "full_name": "Stock Photo of a guy with a beard",
+        "bio": "Beard, man bun, comb over etc.",
+        "gender": "Male",
+        "email": "beardstock@email.com",
+        "password": "beardstockpw",
+        "phone_number": "7823229842",
+        "profile_picture": "https://media.istockphoto.com/id/682380970/photo/giggling-young-man-with-large-fuzzy-beard.jpg?b=1&s=170667a&w=0&k=20&c=W1ELDl5V--Cre5G8gcpuSXbSsAbin3o2-dx4Whh9Fe4=",
+        "is_verified": False,
+        "is_private": True
+    },
+    {
+        # 19
+        "username": "lego",
+        "full_name": "LEGO",
+        "bio": "Hello! You made it to the official #LEGO Instagram - where everything is awesome!",
+        "gender": "Prefer not to say",
+        "email": "lego@email.com",
+        "password": "legopw",
+        "phone_number": "1233229842",
+        "profile_picture": "https://www.lego.com/static/favicon/lego-logo-512.png",
+        "is_verified": True,
+        "is_private": False
+    },
+    {
+        # 20
+        "username": "dribbble",
+        "full_name": "Dribbble",
+        "bio": "Dribbble \n🌎 Join a global community of creators.\n✏️ Dribbble is the world’s leading destination for designers to learn, share, grow, and get hired.",
+        "gender": "Prefer not to say",
+        "email": "dribbble@email.com",
+        "password": "dribbblepw",
+        "phone_number": "1633229842",
+        "profile_picture": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1491483494/iz2sdw2biuq7iyafx4oq.png",
         "is_verified": True,
         "is_private": False
     },

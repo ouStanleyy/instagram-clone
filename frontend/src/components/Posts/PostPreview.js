@@ -3,10 +3,14 @@ import styles from "./PostPreview.module.css";
 import { NavLink } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import PostDetailCard from "./PostDetailCard";
+import { useSelector } from "react-redux";
 
 const PostPreview = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
-  const commentPreview = post?.comments?.[post?.comments?.length - 1];
+  const comments = useSelector((state) => Object.values(state?.comments));
+  const commentPreview = comments
+    ?.reverse()
+    ?.find((comment) => comment.post_id === post?.id);
 
   const handleToggleModal = () => setShowModal((prev) => !prev);
 

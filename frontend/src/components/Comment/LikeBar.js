@@ -55,7 +55,7 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
           <svg
             id={styles.svg}
             aria-label="Like"
-            class="_ab6-"
+            // class="_ab6-"
             color="#262626"
             fill="#262626"
             height="24"
@@ -71,7 +71,7 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
           <svg
             id={styles.svg}
             aria-label="Unlike"
-            class="_ab6-"
+            // class="_ab6-"
             color="#ed4956"
             fill="#ed4956"
             height="24"
@@ -86,7 +86,7 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
         <svg
           id={styles.svg}
           aria-label="Comment"
-          class="_ab6-"
+          // class="_ab6-"
           color="#262626"
           fill="#262626"
           height="24"
@@ -107,7 +107,7 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
           // onClick={handleShare}
           id={styles.svg}
           aria-label="Share Post"
-          class="_ab6-"
+          // class="_ab6-"
           color="#262626"
           fill="#262626"
           height="24"

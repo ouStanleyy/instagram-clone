@@ -218,7 +218,7 @@ const CreatePost = () => {
                         Advanced settings
                         <svg
                           aria-label="Down chevron icon"
-                          class={`_ab6- ${styles.chevron}`}
+                          className={`_ab6- ${styles.chevron}`}
                           color="#262626"
                           fill="#262626"
                           height="16"
