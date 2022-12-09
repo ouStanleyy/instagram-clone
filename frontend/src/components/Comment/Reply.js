@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux"
 import { ProfilePicture } from "../Elements"
 import styles from "./Reply.module.css"
+import ReplyDeleteModal from "./ReplyDeleteModal"
 
-const Reply = ({reply})=>{
+const Reply = ({reply, replyDeleteModal, toggleReplyDeleteModal})=>{
     const user = useSelector((state)=> state.likeUsers[reply?.user_id])
     console.log(user)
 
@@ -17,6 +18,14 @@ const Reply = ({reply})=>{
                 >{user.username}</p>
                 <p>{reply.reply}</p>
              </div>
+             {deleteModal[reply.id] && (
+            <Modal id="modal" onClose={toggleReplyDeleteModal(reply.id)}>
+            <ReplyDeleteModal
+                reply={reply}
+                onClose={toggleReplyDeleteModal(reply.id)}
+            />
+            </Modal>
+            )}
         </div>
     )
 

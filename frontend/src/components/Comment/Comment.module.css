@@ -90,6 +90,7 @@
 .replyContainer{
   display: flex;
   margin-top: 12px;
+  height:30px;
 }
 
 

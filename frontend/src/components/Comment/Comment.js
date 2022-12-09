@@ -95,7 +95,8 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setComme
               }
         </div>
       </div>
-      {showReply && <ReplyContainer replies={replies}/> }
+      {showReply && <ReplyContainer
+      replies={replies}/> }
       {deleteModal[comment.id] && (
         <Modal id="modal" onClose={toggleDeleteModal(comment.id)}>
           <DeleteModal
