@@ -20,7 +20,6 @@ def create_room():
     """
     Creates a new room for current user and user specified by id
     """
-    print(request.json)
     user = User.query.get_or_404(request.json['user_id'])
     room = Room()
 

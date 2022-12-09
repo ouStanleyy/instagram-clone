@@ -5,13 +5,12 @@ import { Link, Switch, Route } from "react-router-dom";
 import { getRooms } from "../../store/rooms";
 import Conversation from "./Conversation";
 import { ProfilePicture } from "../Elements";
+import NewMessage from "./NewMessage";
+import { Modal } from "../../context/Modal";
 import styles from "./Messages.module.css";
 
 const Messages = () => {
   const dispatch = useDispatch();
-  // const [sioInstance, setSioInstance] = useState("");
-  // const [loading, setLoading] = useState(true);
-  // const [buttonStatus, setButtonStatus] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
   const rooms = useSelector((state) => Object.values(state.rooms)).sort(
     (a, b) =>
@@ -22,14 +21,11 @@ const Messages = () => {
         ? -1
         : +1
   );
+  const [newMessageModal, setNewMessageModal] = useState(false);
 
-  // const handleClick = () => {
-  //   if (buttonStatus === false) {
-  //     setButtonStatus(true);
-  //   } else {
-  //     setButtonStatus(false);
-  //   }
-  // };
+  const toggleNewMessageModal = () => {
+    setNewMessageModal((state) => !state);
+  };
 
   useEffect(() => {
     (async () => {
@@ -40,38 +36,55 @@ const Messages = () => {
     })();
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (buttonStatus === true) {
-  //     const socket = io("http://127.0.0.1:5000/", {
-  //       transports: ["websocket"],
-  //       cors: {
-  //         origin: "http://localhost:3000/",
-  //       },
-  //       query: `room=${user.id}`,
-  //     });
-
-  //     setSioInstance(socket);
-
-  //     socket.on("connect", (data) => {
-  //       console.log(data);
-  //     });
-
-  //     setLoading(false);
-
-  //     socket.on("disconnect", (data) => {
-  //       console.log(data);
-  //     });
-
-  //     return function cleanup() {
-  //       socket.disconnect();
-  //     };
-  //   }
-  // }, [buttonStatus]);
-
   return (
     <div className={styles.messagesContainer}>
       <div className={styles.messagesList}>
-        <h3 className={styles.sessionUser}>{sessionUser.username}</h3>
+        <div className={styles.messagesListHeader}>
+          <h3 className={styles.sessionUser}>{sessionUser.username}</h3>
+          <div
+            className={styles.newConvoButton}
+            onClick={toggleNewMessageModal}
+          >
+            <svg
+              aria-label="New message"
+              // class="_ab6-"
+              color="#262626"
+              fill="#262626"
+              height="24"
+              role="img"
+              viewBox="0 0 24 24"
+              width="24"
+            >
+              <path
+                d="M12.202 3.203H5.25a3 3 0 0 0-3 3V18.75a3 3 0 0 0 3 3h12.547a3 3 0 0 0 3-3v-6.952"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+              <path
+                d="M10.002 17.226H6.774v-3.228L18.607 2.165a1.417 1.417 0 0 1 2.004 0l1.224 1.225a1.417 1.417 0 0 1 0 2.004Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+              <line
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                x1="16.848"
+                x2="20.076"
+                y1="3.924"
+                y2="7.153"
+              ></line>
+            </svg>
+          </div>
+        </div>
         <h3 className={styles.title}>Messages</h3>
         {rooms.map((room) => (
           <Link key={room.id} to={`/messages/${room.id}`}>
@@ -94,14 +107,11 @@ const Messages = () => {
           </Route>
         </Switch>
       </div>
-      {/* {!buttonStatus ? (
-        <button onClick={handleClick}>turn chat on</button>
-      ) : (
-        <>
-        <button onClick={handleClick}>turn chat off</button>
-        <div>{!loading && <DirectMessage socket={sioInstance} />}</div>
-        </>
-      )} */}
+      {newMessageModal && (
+        <Modal onClose={toggleNewMessageModal}>
+          <NewMessage onClose={toggleNewMessageModal} />
+        </Modal>
+      )}
     </div>
   );
 };
