@@ -1,6 +1,19 @@
-.reply{
+.replyDiv{
+    display: flex;
     font-size: 13px;
     color:#262626;
-    margin-left: 15px;
+    margin-left: 60px;
     word-wrap: break-word;
+    gap:12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.replyText{
+    display: flex;
+}
+
+.username{
+    font-weight: 600;
+    margin-right: 5px;
 }

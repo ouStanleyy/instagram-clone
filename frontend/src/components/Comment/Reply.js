@@ -1,13 +1,23 @@
+import { useSelector } from "react-redux"
+import { ProfilePicture } from "../Elements"
 import styles from "./Reply.module.css"
 
 const Reply = ({reply})=>{
-    console.log(reply)
+    const user = useSelector((state)=> state.likeUsers[reply?.user_id])
+    console.log(user)
+
     return(
-        <p
-        className={styles.reply}
+        <div
+        className={styles.replyDiv}
         >
-            {reply.reply}
-        </p>
+             <ProfilePicture user={user} size={"small"} />
+             <div className={styles.replyText}>
+                <p
+                className={styles.username}
+                >{user.username}</p>
+                <p>{reply.reply}</p>
+             </div>
+        </div>
     )
 
 }

@@ -11,11 +11,11 @@ const LikesModal = ({ likes, onClose, currUser }) => {
   const userIds = likes.map((like) => like.user_id);
   const likeUsers = users.filter((user) => userIds.includes(user.id));
 
-  useEffect(() => {
-    (async () => {
-      await dispatch(getlikeUsers());
-    })();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   (async () => {
+  //     await dispatch(getlikeUsers());
+  //   })();
+  // }, [dispatch]);
 
   return (
     <>

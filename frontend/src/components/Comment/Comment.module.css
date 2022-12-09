@@ -84,6 +84,7 @@
   font-size: 13px;
   margin-left: 10px;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .replyContainer{
@@ -154,10 +155,23 @@
   font-weight: 300;
 }
 
+.viewHideDiv{
+  display: flex;
+}
+
 .viewReplies{
   text-decoration: none;
   color: #8E8E8E;
   font-size: 13px;
   margin-left: 10px;
   cursor: pointer;
+  font-weight: 500;
+}
+
+.line{
+  width: 24px;
+  height: 1px;
+  border-bottom: 1px solid #8E8E8E;
+  margin: 8px;
+  align-self: center;
 }

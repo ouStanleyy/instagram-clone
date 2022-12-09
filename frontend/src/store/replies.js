@@ -22,12 +22,13 @@ export const createReply = (reply, comment_id) => async (dispatch) => {
     body: JSON.stringify(reply),
   });
   const newReply = await response.json();
-  if(response.ok){
-    dispatch(loadReplies(comment_id))
+  // if(response.ok){
+  //   dispatch(loadReplies(comment_id))
+  // }
+  if (response.ok) {
+    dispatch(addReply(newReply));
+    return null;
   }
-  // if (response.ok) {
-  //   dispatch(addReply(newReply));
-  //   return null;
   // } else if (response.status < 500) {
   //   const data = await response.json();
   //   if (data.errors) {

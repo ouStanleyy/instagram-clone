@@ -6,13 +6,10 @@ import Comment from "./Comment";
 import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
 
-const CmContainer = ({ post, cmInputRef, setCommentIdState }) => {
+const CmContainer = ({ post, cmInputRef, setCommentIdState, value, setValue }) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
-  const allReplies = useSelector((state)=> Object.values(state.replies))
-  // let comments = useSelector((state) => state.posts[post?.id]?.comments);
   const [deleteModal, setDeleteModal] = useState({});
-  // const [commentId, setCommentId] = useState(0)
 
   const toggleDeleteModal = (idx) => () => {
     setDeleteModal((state) => ({
@@ -36,12 +33,6 @@ const CmContainer = ({ post, cmInputRef, setCommentIdState }) => {
     })();
   }, [dispatch, post?.id]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     await dispatch(loadReplies(commentId));
-  //   })();
-  // }, [dispatch, commentId]);
-
 
   return (
     <>
@@ -63,12 +54,10 @@ const CmContainer = ({ post, cmInputRef, setCommentIdState }) => {
         <div className={styles.cmContainer}>
           <div className={styles.cmHome}>
             <div className={styles.container}>
-              <div className={styles.profilePicture}>
-                {/* <img
-                src={post?.user?.profile_picture}
-                alt={post?.user?.username}
-              /> */}
-                <ProfilePicture user={post?.user} size={"medium"} />
+              <div
+              // className={styles.profilePicture}
+              >
+                <ProfilePicture user={post?.user} size={"small"} />
               </div>
               <div className={styles.captionContainer}>
                 <span className={styles.username}>{post?.user?.username}</span>
@@ -84,6 +73,8 @@ const CmContainer = ({ post, cmInputRef, setCommentIdState }) => {
                   deleteModal={deleteModal}
                   cmInputRef={cmInputRef}
                   setCommentIdState={setCommentIdState}
+                  value={value}
+                  setValue={setValue}
                 />
               );
             })}

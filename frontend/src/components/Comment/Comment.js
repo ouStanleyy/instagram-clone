@@ -8,7 +8,7 @@ import { loadReplies } from "../../store/replies";
 import ReplyContainer from "./ReplyContainer";
 
 
-const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setCommentIdState}) => {
+const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setCommentIdState, value, setValue}) => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const allReplies = useSelector((state)=> Object.values(state.replies))
@@ -16,16 +16,24 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setComme
   const owner_id = useSelector((state) => state.posts[comment?.post_id]?.user_id);
   const is_owner = user.id === owner_id || user.id === comment?.user_id;
   const [showReply, setshowReply] = useState(false)
-  // setCommentId(comment?.id)
+
+
   useEffect(() => {
     (async () => {
       await dispatch(loadReplies(comment?.id));
     })();
   }, [dispatch, comment?.id]);
 
+  useEffect(()=>{
+    if(cmInputRef || value){
+      cmInputRef.current.value = value
+    }
+  },[value])
+
   const handleReply = (e)=>{
     e.preventDefault()
-    cmInputRef.current.value = `@${comment?.user?.username} `
+    cmInputRef.current.value =`@${comment?.user?.username} `
+    setValue(`@${comment?.user?.username} `)
     cmInputRef.current.focus()
     setCommentIdState(comment?.id)
   }
@@ -37,7 +45,9 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setComme
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.profilePicture}>
+        <div
+        // className={styles.profilePicture}
+        >
           <ProfilePicture user={comment?.user} size={"small"} />
         </div>
         <div>
@@ -72,16 +82,17 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setComme
                 </svg>
               </button>
             )}
-            <div>
+          </div>
               {
-                replies.length > 0 &&
+              replies.length > 0 &&
+              <div className={styles.viewHideDiv}>
+                <span className={styles.line}></span>
                 <span
                 onClick={toggleViewReplies}
                 className={styles.viewReplies}
-                >{showReply ? "Hide replies" : "View replies"}</span>
+                >{showReply ? "Hide replies" : `View replies (${replies.length})`}</span>
+              </div>
               }
-            </div>
-          </div>
         </div>
       </div>
       {showReply && <ReplyContainer replies={replies}/> }
