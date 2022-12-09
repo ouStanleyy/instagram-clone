@@ -265,7 +265,7 @@ def get_comments(post_id):
         - Post must belong to Public User or Following
     """
     post = Post.query.get_or_404(post_id)
-    return {"Comments": [comment.to_dict() for comment in post.comments]}
+    return {"Comments": [comment.to_dict_replies() for comment in post.comments]}
 
 
 @post_routes.route("/<int:post_id>/comments", methods=["POST"])

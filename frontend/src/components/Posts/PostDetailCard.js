@@ -4,6 +4,7 @@ import { getPostById } from "../../store/posts";
 import { useParams } from "react-router-dom";
 import MediaCarousel from "./MediaCarousel";
 import PostHeader from "./PostHeader";
+import { getlikeUsers } from "../../store/likeUsers";
 import styles from "./PostDetailCard.module.css";
 import { InputContainer, CmContainer, LikeBar } from "../Comment";
 import PostOptionModal from "./PostOptionModal";
@@ -12,6 +13,8 @@ import { EditPost } from "./EditPost";
 
 const PostDetailCard = (props) => {
   const dispatch = useDispatch();
+  const [commentIdState, setCommentIdState] = useState(0)
+  const [value, setValue] = useState("")
   const cmInputRef = useRef(null);
   const { postId } = useParams();
   const post = useSelector(
@@ -27,6 +30,12 @@ const PostDetailCard = (props) => {
   useEffect(() => {
     (async () => {
       await dispatch(getPostById(props.postId ? props.postId : postId));
+    })();
+  }, [dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(getlikeUsers());
     })();
   }, [dispatch]);
 
@@ -49,7 +58,7 @@ const PostDetailCard = (props) => {
             toggleOptionModal={toggleOptionModal}
             toggleEditModal={toggleEditModal}
           />
-          <CmContainer post={post} cmInputRef={cmInputRef} />
+          <CmContainer post={post} cmInputRef={cmInputRef} setCommentIdState={setCommentIdState} value={value} setValue={setValue}/>
           <div className={styles.likes}>
             <LikeBar
               post={post}
@@ -57,7 +66,7 @@ const PostDetailCard = (props) => {
               showDate={true}
             />
           </div>
-          <InputContainer post={post} cmInputRef={cmInputRef} />
+          <InputContainer post={post} cmInputRef={cmInputRef} commentIdState={commentIdState} setCommentIdState={setCommentIdState} setValue={setValue} />
         </div>
       </div>
       {showOptionModal && (

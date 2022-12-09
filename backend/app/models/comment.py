@@ -32,3 +32,13 @@ class Comment(db.Model):
             'comment': self.comment,
             'user': self.user.to_dict_all()
         }
+
+    def to_dict_replies(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'post_id': self.post_id,
+            'comment': self.comment,
+            'user': self.user.to_dict_all(),
+            'num_of_replies': len(self.replies)
+        }

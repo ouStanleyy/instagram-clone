@@ -14,7 +14,6 @@ const NavItem = ({
   const user = useSelector((state) => state.session.user);
   const isLogo = type === "Logo" || type === "Instagram";
   const style = isLogo ? styles.logo : styles.navItem;
-  // console.log(hasNotification);
   const profilePicture = (
     <>
       <div className={styles.profilePicture}>
@@ -52,7 +51,6 @@ const NavItem = ({
                     !showSearch &&
                     styles.notifBorder
                   }
-
 
       `}
     >

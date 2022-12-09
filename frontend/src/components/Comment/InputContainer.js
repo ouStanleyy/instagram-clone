@@ -2,34 +2,30 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { createComment } from "../../store/comments";
 import styles from "./Comment.module.css";
-// import styleSvg from "../NavBar/NavItem.module.css";
 import EmojiWindow from "./EmojiWindow";
-// import CommentsForm from "./CmContainer";
-// import { createReply } from "../../store/replies";
+import { createReply } from "../../store/replies";
 
-const InputContainer = ({ post, cmInputRef }) => {
+
+const InputContainer = ({ post, cmInputRef, commentIdState, setCommentIdState, setValue }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const { id } = user;
   const [comment, setComment] = useState("");
-  // const [errors, setErrors] = useState([]);
   const [emojiWindow, setEmojiWindow] = useState(true);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const payload = { comment, user_id: id };
-
-    dispatch(createComment(payload, post.id));
-
+    if(commentIdState){
+      const payload = { reply: comment, user_id: id };
+      dispatch(createReply(payload, commentIdState))
+      setCommentIdState(0)
+      setValue("")
+    }else{
+      const payload = { comment, user_id: id };
+      dispatch(createComment(payload, post.id));
+    }
     setComment("");
   };
-
-  // const handleComment = (e)=>{
-  //   setComment({
-  //     comment: e.target.value
-
-  //   })
-  // }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
