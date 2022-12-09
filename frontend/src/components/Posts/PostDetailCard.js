@@ -63,7 +63,7 @@ const PostDetailCard = (props) => {
       {showOptionModal && (
         <Modal onClose={toggleOptionModal}>
           <PostOptionModal
-            postId={post.id}
+            post={post}
             toggleOptionModal={toggleOptionModal}
             toggleEditModal={toggleEditModal}
           />

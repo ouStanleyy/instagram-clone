@@ -6,9 +6,6 @@ import ChangePassword from "./ChangePassword";
 import { Footer } from "../Feed";
 
 const Setting = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
-
   return (
     <>
       <div className={styles.settingContainer}>

@@ -1,4 +1,4 @@
-// import { ADD_COMMENT } from "./comments";
+import { ADD_COMMENT } from "./comments";
 
 // constants
 const LOAD_POSTS_FEED = "posts/LOAD_POSTS_FEED";
@@ -31,6 +31,12 @@ const loadMorePostsFeed = (posts) => ({
 const loadMorePostsExplore = (posts) => ({
   type: LOAD_MORE_POSTS_FEED,
   posts,
+});
+
+const addCommentToPost = (postId, comment) => ({
+  type: ADD_COMMENT,
+  postId,
+  comment,
 });
 
 // THUNKS
@@ -139,6 +145,10 @@ export const deletePost = (postId) => async (dispatch) => {
     return res;
   }
 };
+
+// export const addCommentToPost = (postId, comment) => async (dispatch) => {
+//   const res = await fetch("/api/");
+// };
 
 const postsReducer = (state = {}, action) => {
   switch (action.type) {

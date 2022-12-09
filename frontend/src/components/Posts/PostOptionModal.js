@@ -2,22 +2,19 @@ import styles from "./PostOptionModal.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updatePost, deletePost } from "../../store/posts";
-import Modal from "../../context/Modal";
-import { EditPost } from "./EditPost";
-import { useState } from "react";
+import { unfollowUser } from "../../store/session";
 
-const PostOptionModal = ({ postId, toggleOptionModal, toggleEditModal }) => {
+const PostOptionModal = ({ post, toggleOptionModal, toggleEditModal }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const post = useSelector((state) => state.posts[postId]);
-  const isOwner = post?.user_id === user.id;
-  // const [showEditModal, setShowEditModal] = useState(false);
+  const follow = useSelector((state) =>
+    Object.values(state.session.following).find(
+      ({ following_id }) => following_id === post.user_id
+    )
+  );
 
-  // const toggleEdit = () => {
-  //   // toggleModal();
-  //   setShowEditModal((prev) => !prev);
-  // };
+  const isOwner = post?.user_id === user.id;
 
   const redirectToPost = (e) => {
     e.preventDefault();
@@ -48,6 +45,11 @@ const PostOptionModal = ({ postId, toggleOptionModal, toggleEditModal }) => {
     history.push("/");
   };
 
+  const handleUnfollow = () => {
+    dispatch(unfollowUser(follow.id));
+    toggleOptionModal();
+  };
+
   return isOwner ? (
     <>
       <div className={styles.postOptionContainer}>
@@ -67,7 +69,9 @@ const PostOptionModal = ({ postId, toggleOptionModal, toggleEditModal }) => {
     </>
   ) : (
     <div className={styles.postOptionContainer}>
-      <div className={styles.redButton}>Unfollow</div>
+      <div className={styles.redButton} onClick={handleUnfollow}>
+        Unfollow
+      </div>
       <div onClick={redirectToPost}>Go to post</div>
       <div>Copy link</div>
       <div onClick={toggleOptionModal}>Cancel</div>

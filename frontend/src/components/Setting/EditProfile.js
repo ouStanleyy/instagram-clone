@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./EditProfile.module.css";
 import { ProfilePicture } from "../Elements";
@@ -13,6 +13,7 @@ const EditProfile = () => {
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const [profilePicture, setProfilePicture] = useState(user?.profile_picture);
+  // const [profilePicture, setProfilePicture] = useState("");
   const [fullName, setFullName] = useState(user?.full_name);
   const [username, setUsername] = useState(user?.username);
   const [bio, setBio] = useState(user?.bio);
@@ -24,6 +25,7 @@ const EditProfile = () => {
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(true);
+  const inputRef = useRef(null);
 
   const updateProfilePicture = (e) => setProfilePicture(e.target.value);
   const updateFullName = (e) => setFullName(e.target.value);
@@ -33,6 +35,7 @@ const EditProfile = () => {
   const updatePhoneNumber = (e) => setPhoneNumber(e.target.value);
   const updateGender = (e) => setGender(e.target.value);
   const enableSubmit = (e) => setDisableSubmit(false);
+  // const updateProfilePicture = (e) => setProfilePicture(e.target.value);
 
   const deactivateProfile = async () => {
     await dispatch(deleteProfile());
@@ -68,7 +71,6 @@ const EditProfile = () => {
       const errors = normalizeErrors(res);
       setErrors(errors);
       setSuccess(false);
-      // console.log(errors);
     } else {
       setErrors({});
       setSuccess(true);
@@ -157,6 +159,22 @@ const EditProfile = () => {
               value={profilePicture}
               onChange={updateProfilePicture}
             />
+            {/* <label
+              htmlFor="fileUpload"
+              // onClick={handleOpenUpload}
+              className={styles.uploadText}
+            >
+              Change profile photo
+            </label>
+            <input
+              type="file"
+              ref={inputRef}
+              id="fileUpload"
+              accept={"image/*"}
+              // onInput={handleFileUpload}
+              // onChange={handlePreview}
+              // multiple
+            /> */}
           </div>
         </div>
         <div className={styles.fieldContainer}>
