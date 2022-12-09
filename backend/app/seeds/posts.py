@@ -32,7 +32,7 @@ posts = [
     },
     {
         "user_id": 3,
-        "caption": "Bobbie_Demo's first post."
+        "caption": "We don't look alike"
     },
     {
         "user_id": 3,
@@ -257,23 +257,207 @@ posts = [
     },
     {
         "user_id": 15,
-        "caption": "Connor explains destructuring tricks"
-    },
-    {
-        "user_id": 15,
-        "caption": "Fastest way to check even and odds"
-    },
-    {
-        "user_id": 15,
-        "caption": "Copy and paste to the finish line"
-    },
-    {
-        "user_id": 15,
-        "caption": "We all started somewhere"
-    },
-    {
-        "user_id": 15,
         "caption": "Yup"
+    },
+    {
+        "user_id": 15,
+        "caption": "Google knows all"
+    },
+    {
+        "user_id": 15,
+        "caption": "I'm a weekend developer"
+    },
+    {
+        "user_id": 15,
+        "caption": "Me on my first technical interview"
+    },
+    {
+        "user_id": 15,
+        "caption": "When I handover my buggy feature to stan"
+    },
+    {
+        "user_id": 15,
+        "caption": "Here's an actual tip"
+    },
+    {
+        "user_id": 15,
+        "caption": "Think before you code"
+    },
+    {
+        "user_id": 15,
+        "caption": "that's javascript"
+    },
+    {
+        "user_id": 4,
+        "caption": "Evolution of bmw"
+    },
+    {
+        "user_id": 16,
+        "caption": "Trying to find the right song"
+    },
+    {
+        "user_id": 12,
+        "caption": "Salt is not seasoning"
+    },
+    {
+        "user_id": 16,
+        "caption": "I can't lift unless everyone is watching"
+    },
+    {
+        "user_id": 17,
+        "caption": "Orange lobster Dunks releasing Tomorrow at Noon"
+    },
+    {
+        "user_id": 17,
+        "caption": "The Nike Dunk Low Appears In “Ice Blue” Styling For Women"
+    },
+    {
+        "user_id": 17,
+        "caption": "The Nike Air Force 1 Closes Out 2022 With A Patchwork Outfit"
+    },
+    {
+        "user_id": 17,
+        "caption": "The Nike Cortez Receives A Soothing Treatment Of 'Aloe Vera'"
+    },
+    {
+        "user_id": 17,
+        "caption": "Peach Hues Clothe The Nike Blazer Mid ’77"
+    },
+    {
+        "user_id": 17,
+        "caption": "The Jordan Series .01 'Dear Imagination' Features Marbling Details"
+    },
+    {
+        "user_id": 17,
+        "caption": "Official Images Of The Jordan Legacy 312 'Year Of The Rabbit'"
+    },
+    {
+        "user_id": 17,
+        "caption": "Spring Is In Season With The Pastel Hues Of The Nike Air Force 1 Shadow"
+    },
+    {
+        "user_id": 14,
+        "caption": "9 Stunning Homes Built Into Cliffs"
+    },
+    {
+        "user_id": 5,
+        "caption": "Doggy"
+    },
+    {
+        "user_id": 8,
+        "caption": "DUMBO"
+    },
+    {
+        "user_id": 8,
+        "caption": "DUMBO"
+    },
+    {
+        "user_id": 8,
+        "caption": "Simba"
+    },
+    {
+        "user_id": 18,
+        "caption": "lumberjack beard combover"
+    },
+    {
+        "user_id": 10,
+        "caption": "My hair came out great"
+    },
+    {
+        "user_id": 9,
+        "caption": "Travis Scott tattoos"
+    },
+    {
+        "user_id": 8,
+        "caption": "Black and whites"
+    },
+    {
+        "user_id": 6,
+        "caption": "When you ask me how my project is going"
+    },
+    {
+        "user_id": 4,
+        "caption": "beamer boyzz"
+    },
+    {
+        "user_id": 4,
+        "caption": "but she's worth it"
+    },
+    {
+        "user_id": 3,
+        "caption": "That Yi Long Musk"
+    },
+    {
+        "user_id": 18,
+        "caption": "more beards"
+    },
+    {
+        "user_id": 18,
+        "caption": "too much beard"
+    },
+    {
+        "user_id": 18,
+        "caption": "bearded dragon"
+    },
+    {
+        "user_id": 19,
+        "caption": "The rise of skywalker Millennium falcon"
+    },
+    {
+        "user_id": 19,
+        "caption": "Lego Boutique store"
+    },
+    {
+        "user_id": 5,
+        "caption": "dog from doge coin"
+    },
+    {
+        "user_id": 19,
+        "caption": "famiy"
+    },
+    {
+        "user_id": 9,
+        "caption": "some line work"
+    },
+    {
+        "user_id": 20,
+        "caption": "Launching a brand new marketing agency. Why is it as a designer that working on your own brand is infinitely more difficult than working on someone else's? This is technically v2 as we rushed to get a MVP site up and running. Looking forward to getting this design finalized so we can replace v1 with v2! 🤘🏼 Check us out at https://bendyourmarketing.com/"
+    },
+    {
+        "user_id": 20,
+        "caption": "Fig jam"
+    },
+    {
+        "user_id": 20,
+        "caption": "Fig jam 2"
+    },
+    {
+        "user_id": 20,
+        "caption": "Top 9 Marks"
+    },
+    {
+        "user_id": 13,
+        "caption": "Iconic"
+    },
+    {
+        "user_id": 13,
+        "caption": "March 3, 1997"
+    },
+    {
+        "user_id": 13,
+        "caption": "June 14, 2000 - NBA Finals Game 4"
+    },
+    {
+        "user_id": 20,
+        "caption": "Cozy Three.js by Roman Klco"
+    },
+    {
+        "user_id": 19,
+        "caption": "Friends Lego Set"
+    },
+    {
+        "user_id": 17,
+        "caption": "This Nike Air Force 1 Low Is Giving Cappuccino"
     },
 ]
 

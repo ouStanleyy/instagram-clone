@@ -1,0 +1,54 @@
+.userContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 4px 24px;
+    margin-top: 5px;
+  }
+
+  .userDetails {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .username {
+    font-weight: 500;
+    width: max-content;
+    cursor: pointer;
+  }
+
+  .fullName {
+    color: #8e8e8e;
+    width: max-content;
+  }
+
+  .buttonContainer{
+    display: flex;
+    gap: 8px;
+  }
+
+  .confirmButton{
+    background-color: #0095f6;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    height: 28px;
+    padding: 0 14px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .deleteButton{
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    height: 28px;
+    padding: 0 14px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+  }

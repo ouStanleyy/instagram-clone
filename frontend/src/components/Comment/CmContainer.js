@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllComments } from "../../store/comments";
+import { loadReplies } from "../../store/replies";
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
 
-
-const CmContainer = ({ post, cmInputRef }) => {
+const CmContainer = ({ post, cmInputRef, setCommentIdState, value, setValue }) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
-  // let comments = useSelector((state) => state.posts[post?.id]?.comments);
   const [deleteModal, setDeleteModal] = useState({});
 
   const toggleDeleteModal = (idx) => () => {
@@ -34,23 +33,19 @@ const CmContainer = ({ post, cmInputRef }) => {
     })();
   }, [dispatch, post?.id]);
 
+
   return (
     <>
-      {comments.length == 0 &&(
+      {comments.length === 0 && (
         <div className={styles.cmContainer}>
-          <div
-          className={styles.noCmContainer}
-            >
-            <div
-            className={styles.noCommentsDiv}>
-                <span
-                className={styles.noCommentsLabel}
-                >No comments yet.</span>
+          <div className={styles.noCmContainer}>
+            <div className={styles.noCommentsDiv}>
+              <span className={styles.noCommentsLabel}>No comments yet.</span>
             </div>
             <div>
-                <span
-                className={styles.startConLabel}
-                >Start the conversation.</span>
+              <span className={styles.startConLabel}>
+                Start the conversation.
+              </span>
             </div>
           </div>
         </div>
@@ -59,12 +54,10 @@ const CmContainer = ({ post, cmInputRef }) => {
         <div className={styles.cmContainer}>
           <div className={styles.cmHome}>
             <div className={styles.container}>
-              <div className={styles.profilePicture}>
-                {/* <img
-                src={post?.user?.profile_picture}
-                alt={post?.user?.username}
-              /> */}
-                <ProfilePicture user={post?.user} size={"medium"} />
+              <div
+              // className={styles.profilePicture}
+              >
+                <ProfilePicture user={post?.user} size={"small"} />
               </div>
               <div className={styles.captionContainer}>
                 <span className={styles.username}>{post?.user?.username}</span>
@@ -78,7 +71,10 @@ const CmContainer = ({ post, cmInputRef }) => {
                   comment={comment}
                   toggleDeleteModal={toggleDeleteModal}
                   deleteModal={deleteModal}
-                  cmInputRef = {cmInputRef}
+                  cmInputRef={cmInputRef}
+                  setCommentIdState={setCommentIdState}
+                  value={value}
+                  setValue={setValue}
                 />
               );
             })}

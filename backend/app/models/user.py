@@ -29,7 +29,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_picture = db.Column(db.String)
     phone_number = db.Column(db.String(10), unique=True)
-    gender = db.Column(db.Enum("Male", "Female", "Non-binary", "Prefer not to say", name='gender'), nullable=False, default="Prefer not to say")
+    gender = db.Column(db.Enum("Male", "Female", "Non-binary", "Prefer not to say",
+                       name='gender'), nullable=False, default="Prefer not to say")
     is_verified = db.Column(db.Boolean, nullable=False, default=False)
     is_private = db.Column(db.Boolean, nullable=False, default=False)
 
@@ -40,8 +41,10 @@ class User(db.Model, UserMixin):
     views = db.relationship("View", back_populates="user", cascade="all, delete-orphan")
     followers = db.relationship("Follow", foreign_keys="Follow.following_id", back_populates="following", cascade="all, delete-orphan")
     followings = db.relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower", cascade="all, delete-orphan")
-    senders = db.relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient", cascade="all, delete-orphan")
-    recipients = db.relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan")
+    # senders = db.relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient", cascade="all, delete-orphan")
+    # recipients = db.relationship("Message", foreign_keys="Message.sender_id", back_populates="sender", cascade="all, delete-orphan")
+    rooms = db.relationship("Room", secondary="room_user", back_populates="users")
+    messages = db.relationship("Message", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):

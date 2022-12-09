@@ -102,9 +102,15 @@ function User() {
             className={styles.profilePicture}
           /> */}
           <ProfilePicture user={user} size={"XLarge"} />
+
           <div className={styles.userDetails}>
             <div className={styles.detailsHeader}>
-              <p className={styles.username}>{user.username}</p>
+              <p className={styles.username}>
+                {user.username}
+                {user?.is_verified && (
+                  <span className={`material-symbols-outlined`}>verified</span>
+                )}
+              </p>
               {!isOwner && <FollowButton user={user} />}
             </div>
             <div className={styles.detailsStats}>
@@ -219,9 +225,10 @@ function User() {
                 </div>
               </div>
             </div>
+            {!user.num_of_posts && <p>No Posts Yet</p>}
             <div className={styles.postsContainer}>
               {!user.num_of_posts ? (
-                <p>No Posts Yet</p>
+                <p></p>
               ) : (
                 user?.posts
                   ?.filter((post) => !post.is_story)

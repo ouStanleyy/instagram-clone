@@ -67,7 +67,7 @@ const CreatePost = () => {
     data.append("show_like_count", !hideLikeCount);
     data.append("allow_comments", !turnOffComments);
 
-    const result = await dispatch(addPost(data));
+    await dispatch(addPost(data));
 
     return history.push(`/users/${user.id}`);
   };
@@ -218,7 +218,7 @@ const CreatePost = () => {
                         Advanced settings
                         <svg
                           aria-label="Down chevron icon"
-                          class={`_ab6- ${styles.chevron}`}
+                          className={`_ab6- ${styles.chevron}`}
                           color="#262626"
                           fill="#262626"
                           height="16"

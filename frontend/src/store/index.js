@@ -7,8 +7,9 @@ import comments from "./comments";
 import follows from "./follows";
 import likes from "./likes";
 import stories from "./stories";
-import likeUsers from "./likeUsers"
-import replies from "./replies"
+import likeUsers from "./likeUsers";
+import rooms from "./rooms";
+import replies from "./replies";
 
 const rootReducer = combineReducers({
   session,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   likes,
   stories,
   likeUsers,
-  replies
+  rooms,
+  replies,
 });
 
 let enhancer;

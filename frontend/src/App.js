@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SignUpForm from "./components/auth/SignUpForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import NavBar from "./components/NavBar/NavBar";
-import { UsersList, User } from "./components/Users";
+import { User } from "./components/Users";
 import { authenticate, getFollowing } from "./store/session";
 import Splash from "./components/Splash/Splash";
 import { PostDetailCard } from "./components/Posts";
@@ -13,6 +13,7 @@ import { Setting } from "./components/Setting";
 import { Feed } from "./components/Feed";
 import { CreatePost } from "./components/Posts";
 import { Explore } from "./components/Explore";
+import { Messages } from "./components/Messages";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -51,6 +52,9 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
+          <Route path="/messages">
+            <Messages user={user} />
+          </Route>
           <Route path="/create" exact={true}>
             <CreatePost />
           </Route>

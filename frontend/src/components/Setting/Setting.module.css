@@ -5,6 +5,7 @@
   display: flex;
   max-width: 935px;
   width: 100%;
+  margin-bottom: 32px;
 }
 
 .settingNav {

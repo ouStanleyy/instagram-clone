@@ -1,7 +1,7 @@
 from flask import Blueprint, request, redirect, url_for
 from flask_login import login_required, current_user
 from app.models import Post, Media, User, Follow, Comment, db
-from app.forms import PostForm, CommentForm
+from app.forms import PostForm, CommentForm, PostUpdateForm
 from .auth_routes import validation_errors_to_error_messages
 from datetime import datetime, timedelta
 from ..aws import get_unique_filename, allowed_file, upload_file_to_s3
@@ -51,6 +51,19 @@ def posts():
 
     Use: explore page
     """
+    # page = request.args.get('page', 1, type=int)
+    # SIZE = 48 if page == 0 else 15
+
+    # posts = Post.query\
+    #     .join(User, Post.user_id == User.id)\
+    #     .join(Follow, Follow.following_id == User.id)\
+    #     .filter(Follow.follower_id != User.id,
+    #             User.is_private == False,
+    #             Post.user_id != current_user.id,
+    #             Post.is_story == False)\
+    #     .paginate(page=page, per_page=SIZE)
+
+    # return {"Posts": [post.to_dict_discovery() for post in posts.items]}
 
     posts = Post.query.filter(Post.user.has(User.is_private == False),
                               Post.user_id != current_user.id,
@@ -90,15 +103,28 @@ def posts_feed():
 
     Use: feed page
     """
-    # Get the current user's following
-    followings = Follow.query.filter_by(
-        follower_id=current_user.id, is_pending=False).all()
+    page = request.args.get('page', 1, type=int)
+    SIZE = 25 if page == 0 else 8
 
-    # Get the posts that are not stories from followings
-    posts = [Post.query.filter_by(
-        user_id=following.following_id, is_story=False).all() for following in followings]
+    posts = Post.query\
+        .join(User, Post.user_id == User.id)\
+        .join(Follow, Follow.following_id == User.id)\
+        .filter(Follow.follower_id == current_user.id,
+                Follow.is_pending == False, Post.is_story == False)\
+        .order_by(Post.id.desc())\
+        .paginate(page=page, per_page=SIZE)
 
-    return {"Posts": [post.to_dict_feed() for sub_post in posts for post in sub_post]}
+    return {"Posts": [post.to_dict_feed() for post in posts.items]}
+
+    # # Get the current user's following
+    # followings = Follow.query.filter_by(
+    #     follower_id=current_user.id, is_pending=False).all()
+
+    # # Get the posts that are not stories from followings
+    # posts = [Post.query.filter_by(
+    #     user_id=following.following_id, is_story=False).all() for following in followings]
+
+    # return {"Posts": [post.to_dict_feed() for sub_post in posts for post in sub_post]}
 
 
 @post_routes.route("/following/stories")
@@ -134,8 +160,6 @@ def create_post():
     Why NOT to set Content type: https://muffinman.io/blog/uploading-files-using-fetch-multipart-form-data/
     """
 
-    print("BEFORE", request.headers)
-
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -153,7 +177,6 @@ def create_post():
         if "images" not in request.files:
             return {"errors": "image required"}, 400
         medias = request.files.getlist('images')
-        print("MEDIAS", medias)
 
         for media in medias:
             if not allowed_file(media.filename):
@@ -187,19 +210,28 @@ def edit_post(post_id):
 
     FrontEnd: Uses the same form as create a post
     """
-
     post = Post.query.get_or_404(post_id)
 
+    # if post.user_id == current_user.id and not post.is_story:
+    #     form = PostForm()
+    #     form['csrf_token'].data = request.cookies['csrf_token']
+    #     if form.validate_on_submit():
+    #         post.caption = form.data['caption']
+    #         post.show_like_count = form.data['show_like_count']
+    #         post.allow_comments = form.data['allow_comments']
+    #         db.session.commit()
+    #         return {"message": "Succesfully updated"}
+    # return redirect(url_for("auth.unauthorized"))
     if post.user_id == current_user.id and not post.is_story:
-        form = PostForm()
+        form = PostUpdateForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            post.caption = form.data['caption']
-            post.show_like_count = form.data['show_like_count']
-            post.allow_comments = form.data['allow_comments']
+            for key, val in form.data.items():
+                if val is not None:
+                    setattr(post, key, val)
             db.session.commit()
-            return {"message": "Succesfully updated"}
-    return redirect(url_for("auth.unauthorized"))
+            return post.to_dict_detail()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @post_routes.route("/<int:post_id>", methods=["DELETE"])
@@ -233,7 +265,7 @@ def get_comments(post_id):
         - Post must belong to Public User or Following
     """
     post = Post.query.get_or_404(post_id)
-    return {"Comments": [comment.to_dict() for comment in post.comments]}
+    return {"Comments": [comment.to_dict_replies() for comment in post.comments]}
 
 
 @post_routes.route("/<int:post_id>/comments", methods=["POST"])

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUsers } from "../../store/users";
-import { LoadingSpinner, magnifier } from "../Elements";
+import { LoadingSpinner } from "../Elements";
 import styles from "./Search.module.css";
 import SearchUser from "./SearchUser";
 
-const Search = ({ hideSearch }) => {
+const Search = ({ hideSearch, searchRef, refSearchBar }) => {
   const dispatch = useDispatch();
   const searchResults = useSelector((state) =>
     Object.values(state.users.searchResults)
@@ -32,6 +32,7 @@ const Search = ({ hideSearch }) => {
 
   return (
     <div
+      ref={searchRef}
       className={`${styles.searchContainer} ${hideSearch && styles.hideSearch}`}
     >
       <div className={styles.searchHeader}>
@@ -43,6 +44,7 @@ const Search = ({ hideSearch }) => {
             value={searchVal}
             onChange={updateSearchVal}
             className={styles.searchInput}
+            ref={refSearchBar}
           />
           {loaded ? (
             <span
@@ -60,7 +62,9 @@ const Search = ({ hideSearch }) => {
       </div>
       <div className={styles.searchResults}>
         {loaded ? (
-          searchResults.map((result) => <SearchUser user={result} />)
+          searchResults.map((result) => (
+            <SearchUser key={result.id} user={result} />
+          ))
         ) : (
           <div className={styles.loadingSpinner}>
             <LoadingSpinner />

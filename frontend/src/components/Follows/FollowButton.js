@@ -27,11 +27,12 @@ function FollowButton({ user, isSuggestion = false}) {
 
   useEffect(() => {
     (async () => {
-      try {
-        await dispatch(getFollowing());
-        setLoaded(true);
-      } catch (err) {}
+        try {
+          await dispatch(getFollowing());
+          setLoaded(true);
+        } catch (err) {}
     })();
+
   }, [dispatch]);
 
   return (
