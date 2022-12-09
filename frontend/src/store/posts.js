@@ -1,4 +1,4 @@
-// import { ADD_COMMENT } from "./comments";
+import { ADD_COMMENT } from "./comments";
 
 // constants
 const LOAD_POSTS_FEED = "posts/LOAD_POSTS_FEED";
@@ -31,6 +31,12 @@ const loadMorePostsFeed = (posts) => ({
 const loadMorePostsExplore = (posts) => ({
   type: LOAD_MORE_POSTS_FEED,
   posts,
+});
+
+const addCommentToPost = (postId, comment) => ({
+  type: ADD_COMMENT,
+  postId,
+  comment,
 });
 
 // THUNKS
@@ -116,6 +122,33 @@ export const getMorePostsExplore = () => async (dispatch) => {
     };
   }
 };
+
+export const updatePost = (postId, formData) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: "PUT",
+    body: formData,
+  });
+  const data = await res.json();
+
+  if (res.ok) {
+    dispatch(loadPostDetails(data));
+  }
+};
+
+export const deletePost = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    // console.log("OK");
+    return res;
+  }
+};
+
+// export const addCommentToPost = (postId, comment) => async (dispatch) => {
+//   const res = await fetch("/api/");
+// };
 
 const postsReducer = (state = {}, action) => {
   switch (action.type) {

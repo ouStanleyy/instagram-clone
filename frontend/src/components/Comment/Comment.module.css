@@ -84,6 +84,7 @@
   font-size: 13px;
   margin-left: 10px;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .replyContainer{
@@ -91,8 +92,9 @@
   margin-top: 12px;
 }
 
+
 .moreButton{
-  align-self: center;
+  align-content: center;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -136,7 +138,6 @@
 
 .noCmContainer{
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,4 +153,25 @@
 .startConLabel{
   font-size: 13px;
   font-weight: 300;
+}
+
+.viewHideDiv{
+  display: flex;
+}
+
+.viewReplies{
+  text-decoration: none;
+  color: #8E8E8E;
+  font-size: 13px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.line{
+  width: 24px;
+  height: 1px;
+  border-bottom: 1px solid #8E8E8E;
+  margin: 8px;
+  align-self: center;
 }

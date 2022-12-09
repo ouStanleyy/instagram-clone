@@ -22,17 +22,21 @@ export const createReply = (reply, comment_id) => async (dispatch) => {
     body: JSON.stringify(reply),
   });
   const newReply = await response.json();
+  // if(response.ok){
+  //   dispatch(loadReplies(comment_id))
+  // }
   if (response.ok) {
     dispatch(addReply(newReply));
     return null;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ["An error occurred. Please try again."];
   }
+  // } else if (response.status < 500) {
+  //   const data = await response.json();
+  //   if (data.errors) {
+  //     return data.errors;
+  //   }
+  // } else {
+  //   return ["An error occurred. Please try again."];
+  // }
 };
 
 export const loadReplies = (comment_id) => async (dispatch) => {
@@ -40,9 +44,10 @@ export const loadReplies = (comment_id) => async (dispatch) => {
   const data = await response.json();
 
   const payload = {};
-
-  for (let obj of data.Replies) {
-    payload[obj.id] = obj;
+  if(data.Replies){
+    for (let obj of data.Replies) {
+      payload[obj.id] = obj;
+    }
   }
 
   dispatch(getReplies(payload));
@@ -55,7 +60,7 @@ const replyReducer = (state = initialState, action) => {
     case ADD_REPLY:
       return { ...state, [action.payload.id]: action.payload };
     case GET_REPLIES:
-      return { ...action.payload };
+      return {...state, ...action.payload };
     default:
       return state;
   }

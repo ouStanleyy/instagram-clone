@@ -35,7 +35,7 @@
   margin: 30%;
 }
 
-input[type="file"] {
+.pageOne input[type="file"] {
   display: none;
   pointer-events: none;
 }
@@ -206,15 +206,15 @@ input[type="file"] {
   justify-content: space-between;
 }
 
-input[type="checkbox"] {
+.inputContainer input[type="checkbox"] {
   visibility: hidden;
 }
 
-input[type="checkbox"]:checked + .toggleSwitch {
+.inputContainer input[type="checkbox"]:checked + .toggleSwitch {
   background: #0095F6;
 }
 
-input[type="checkbox"]:checked + .toggleSwitch:after {
+.inputContainer input[type="checkbox"]:checked + .toggleSwitch:after {
   left: calc(100% - 3px);
   transform: translateX(-100%);
 }

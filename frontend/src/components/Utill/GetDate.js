@@ -16,8 +16,9 @@ const getDate = (createdAt) => {
   ];
   const month = created.getMonth();
   const date = created.getDate();
+  const year = created.getFullYear();
 
-  let result = `${months[month]} ${date}`;
+  let result = `${months[month]} ${date} ${year}`;
 
   return result;
 };

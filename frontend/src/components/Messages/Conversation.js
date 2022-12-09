@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Redirect, useParams, Link } from "react-router-dom";
 import { getRooms } from "../../store/rooms";
 import { ProfilePicture } from "../Elements";
@@ -58,7 +58,7 @@ const Conversation = ({ sessionUser, rooms }) => {
 
     socket.on("connect", (data) => {
       if (data) {
-        console.log("sid", data);
+        // console.log("sid", data);
         setSid(data?.sid);
       }
     });

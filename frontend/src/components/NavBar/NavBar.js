@@ -22,6 +22,7 @@ const NavBar = () => {
   const searchRef = useRef(null);
   const searchIconRef1 = useRef(null);
   const searchIconRef2 = useRef(null);
+  const refSearchBar = useRef(null);
   const user = useSelector((state) => state.session.user);
   const followers = useSelector((state) =>
     Object.values(state.follows.followers)
@@ -87,7 +88,10 @@ const NavBar = () => {
         setHideNotification(false);
         setInactiveNotif(false);
         setShowSearch((state) => !state);
-        setTimeout(() => setInactiveFn(false), 350);
+        setTimeout(() => {
+          setInactiveFn(false);
+          refSearchBar?.current?.focus();
+        }, 350);
       }
     }
   };
@@ -225,6 +229,7 @@ const NavBar = () => {
           searchRef={searchRef}
           hideSearch={hideSearch}
           onClose={toggleSearch}
+          refSearchBar={refSearchBar}
         />
       )}
       {showNotification && (
