@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsFeed, getMorePostsFeed } from "../../store/posts";
 import { PostFeedCard } from "../Posts";
@@ -23,7 +23,6 @@ const Feed = () => {
     Object.values(state.session.following)
   );
   const posts = useSelector((state) => Object.values(state?.posts));
-
   const orderedPosts = posts?.sort((a, b) => b.id - a.id);
 
   // For first mount only, grab inital pages

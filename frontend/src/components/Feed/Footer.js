@@ -15,14 +15,14 @@ const Footer = () => {
       <div>
         {linkedIn.map((link, idx) => {
           return (
-            <>
-              <a key={idx} href={link.link} className={styles.nameLinks}>
+            <span key={idx}>
+              <a href={link.link} className={styles.nameLinks}>
                 {link.name}
               </a>
               {idx < linkedIn.length - 1 && (
                 <span className={styles.dot}>·</span>
               )}
-            </>
+            </span>
           );
         })}
       </div>

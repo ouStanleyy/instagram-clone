@@ -1,7 +1,7 @@
 from flask import Blueprint, request, redirect, url_for
 from flask_login import login_required, current_user
 from app.models import Post, Media, User, Follow, Comment, db
-from app.forms import PostForm, CommentForm
+from app.forms import PostForm, CommentForm, PostUpdateForm
 from .auth_routes import validation_errors_to_error_messages
 from datetime import datetime, timedelta
 from ..aws import get_unique_filename, allowed_file, upload_file_to_s3
@@ -160,8 +160,6 @@ def create_post():
     Why NOT to set Content type: https://muffinman.io/blog/uploading-files-using-fetch-multipart-form-data/
     """
 
-    print("BEFORE", request.headers)
-
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -179,7 +177,6 @@ def create_post():
         if "images" not in request.files:
             return {"errors": "image required"}, 400
         medias = request.files.getlist('images')
-        print("MEDIAS", medias)
 
         for media in medias:
             if not allowed_file(media.filename):
@@ -213,19 +210,28 @@ def edit_post(post_id):
 
     FrontEnd: Uses the same form as create a post
     """
-
     post = Post.query.get_or_404(post_id)
 
+    # if post.user_id == current_user.id and not post.is_story:
+    #     form = PostForm()
+    #     form['csrf_token'].data = request.cookies['csrf_token']
+    #     if form.validate_on_submit():
+    #         post.caption = form.data['caption']
+    #         post.show_like_count = form.data['show_like_count']
+    #         post.allow_comments = form.data['allow_comments']
+    #         db.session.commit()
+    #         return {"message": "Succesfully updated"}
+    # return redirect(url_for("auth.unauthorized"))
     if post.user_id == current_user.id and not post.is_story:
-        form = PostForm()
+        form = PostUpdateForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            post.caption = form.data['caption']
-            post.show_like_count = form.data['show_like_count']
-            post.allow_comments = form.data['allow_comments']
+            for key, val in form.data.items():
+                if val is not None:
+                    setattr(post, key, val)
             db.session.commit()
-            return {"message": "Succesfully updated"}
-    return redirect(url_for("auth.unauthorized"))
+            return post.to_dict_detail()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @post_routes.route("/<int:post_id>", methods=["DELETE"])

@@ -14,7 +14,6 @@ import { Feed } from "./components/Feed";
 import { CreatePost } from "./components/Posts";
 import { Explore } from "./components/Explore";
 import { Messages } from "./components/Messages";
-import { Notification } from "./components/Notification";
 
 function App() {
   const user = useSelector((state) => state.session.user);

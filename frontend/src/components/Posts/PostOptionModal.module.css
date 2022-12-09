@@ -1,0 +1,40 @@
+.postOptionContainer {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  animation: onShow 150ms ease;
+}
+
+.postOptionContainer div {
+  border-bottom: 1px solid #DBDBDB;
+  background-color: #FFFFFF;
+  font-size: 14px;
+  padding: 12px 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.redButton {
+  color: #ED4956;
+  font-weight: 600;
+}
+
+.postOptionContainer div:active {
+  background-color: #E5E5E5;
+  user-select: none;
+}
+
+@keyframes onShow {
+  from {
+    opacity: 0;
+    scale: 1.2;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
