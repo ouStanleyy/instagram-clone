@@ -124,16 +124,17 @@ def upgrade():
     )
     # ### end Alembic commands ###
     if environment == "production":
+        op.execute(f"ALTER TABLE rooms SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE follows SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE room_user SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE media SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE views SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE replies SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE rooms SET SCHEMA {SCHEMA};")
 
 
 def downgrade():
