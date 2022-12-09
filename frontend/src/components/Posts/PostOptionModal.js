@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { updatePost, deletePost } from "../../store/posts";
 import { unfollowUser } from "../../store/session";
 
-const PostOptionModal = ({ post, toggleOptionModal, toggleEditModal }) => {
+const PostOptionModal = ({ post, toggleOptionModal, toggleEditModal, setHideLikeCount=false, setTurnOffComment=false}) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
@@ -30,12 +30,14 @@ const PostOptionModal = ({ post, toggleOptionModal, toggleEditModal }) => {
       formData.append("show_like_count", !post?.show_like_count);
       formData.append("allow_comments", post?.allow_comments);
       await dispatch(updatePost(post?.id, formData));
+      setHideLikeCount((state)=>!state)
     }
 
     if (e.target.id === "comments") {
       formData.append("allow_comments", !post?.allow_comments);
       formData.append("show_like_count", post?.show_like_count);
       await dispatch(updatePost(post?.id, formData));
+      setTurnOffComment((state) => !state)
     }
   };
 

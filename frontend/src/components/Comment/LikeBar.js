@@ -6,7 +6,7 @@ import { getDate } from "../Utill";
 import LikesModal from "./LikesModal";
 import { Modal } from "../../context/Modal";
 
-const LikeBar = ({ post, onInputClick, showDate = false }) => {
+const LikeBar = ({ post, onInputClick, showDate = false, hideLikeCount }) => {
   const dispatch = useDispatch();
   const allLikes = useSelector((state) => Object.values(state.likes));
   const user = useSelector((state) => state.session.user);
@@ -158,9 +158,9 @@ const LikeBar = ({ post, onInputClick, showDate = false }) => {
                 </span>
                 Liked by
                 <span className={styles.likesLabelBold}>{firstLiker}</span> and
-                <span className={styles.likesLabelBold}>
+                {!hideLikeCount && <span className={styles.likesLabelBold}>
                   {likes.length - 1}
-                </span>{" "}
+                </span>}{" "}
                 others
               </span>
             </div>

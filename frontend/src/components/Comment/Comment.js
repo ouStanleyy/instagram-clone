@@ -56,31 +56,33 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setComme
             <span className={styles.comment}>{comment?.comment}</span>
           </div>
           <div className={styles.replyContainer}>
-            <span
+            <p
             className={styles.reply}
             onClick={handleReply}
             >Reply
-            </span>
+            </p>
             {is_owner && (
-              <button
-                onClick={toggleDeleteModal(comment?.id)}
-                className={styles.moreButton}
-              >
-                <svg
-                  aria-label="More options"
-                  className="_ab6-"
-                  color="#262626"
-                  fill="#262626"
-                  height="20"
-                  role="img"
-                  viewBox="0 0 24 24"
-                  width="20"
+              <div  className={styles.buttonDiv}>
+                <button
+                  onClick={toggleDeleteModal(comment?.id)}
+                  className={styles.moreButton}
                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="6" cy="12" r="1"></circle>
-                  <circle cx="18" cy="12" r="1"></circle>
-                </svg>
-              </button>
+                  <svg
+                    aria-label="More options"
+                    className="_ab6-"
+                    color="#262626"
+                    fill="#262626"
+                    height="20"
+                    role="img"
+                    viewBox="0 0 24 18"
+                    width="20"
+                  >
+                    <circle cx="12" cy="12" r="1"></circle>
+                    <circle cx="6" cy="12" r="1"></circle>
+                    <circle cx="18" cy="12" r="1"></circle>
+                  </svg>
+                </button>
+              </div>
             )}
           </div>
               {
@@ -96,6 +98,7 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setComme
         </div>
       </div>
       {showReply && <ReplyContainer
+      comment = {comment}
       replies={replies}/> }
       {deleteModal[comment.id] && (
         <Modal id="modal" onClose={toggleDeleteModal(comment.id)}>

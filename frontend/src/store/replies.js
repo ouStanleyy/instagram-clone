@@ -16,7 +16,7 @@ const getReplies = (replies) => {
 };
 const deleteReply = (reply_id) => {
   return {
-    type: DELETE_COMMENT,
+    type: DELETE_REPLY,
     payload: reply_id,
   };
 };

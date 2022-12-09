@@ -22,6 +22,8 @@ const PostDetailCard = (props) => {
   );
   const [showOptionModal, setShowOptionModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [hideLikeCount, setHideLikeCount] = useState(false)
+  const [turnOffComment, setTurnOffComment] = useState(false)
 
   const isStory = post?.is_story;
 
@@ -58,15 +60,30 @@ const PostDetailCard = (props) => {
             toggleOptionModal={toggleOptionModal}
             toggleEditModal={toggleEditModal}
           />
-          <CmContainer post={post} cmInputRef={cmInputRef} setCommentIdState={setCommentIdState} value={value} setValue={setValue}/>
+          <CmContainer
+            post={post}
+            cmInputRef={cmInputRef}
+            setCommentIdState={setCommentIdState}
+            value={value}
+            setValue={setValue}
+            turnOffComment={turnOffComment}
+            />
           <div className={styles.likes}>
             <LikeBar
               post={post}
               onInputClick={handleInputFocus}
               showDate={true}
+              hideLikeCount={hideLikeCount}
             />
           </div>
-          <InputContainer post={post} cmInputRef={cmInputRef} commentIdState={commentIdState} setCommentIdState={setCommentIdState} setValue={setValue} />
+          <InputContainer
+            post={post}
+            cmInputRef={cmInputRef}
+            commentIdState={commentIdState}
+            setCommentIdState={setCommentIdState}
+            setValue={setValue}
+            turnOffComment={turnOffComment}
+            />
         </div>
       </div>
       {showOptionModal && (
@@ -75,6 +92,8 @@ const PostDetailCard = (props) => {
             post={post}
             toggleOptionModal={toggleOptionModal}
             toggleEditModal={toggleEditModal}
+            setHideLikeCount = {setHideLikeCount}
+            setTurnOffComment = {setTurnOffComment}
           />
         </Modal>
       )}
