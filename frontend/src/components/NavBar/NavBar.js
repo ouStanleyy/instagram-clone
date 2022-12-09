@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Link, useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import NavItem from "./NavItem";
 import styles from "./NavBar.module.css";
 import MoreItem from "./MoreItem";
@@ -19,13 +19,17 @@ const NavBar = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [hideNotification, setHideNotification] = useState(false);
   const [inactiveNotif, setInactiveNotif] = useState(false);
-
+  const searchRef = useRef(null);
+  const searchIconRef1 = useRef(null);
+  const searchIconRef2 = useRef(null);
   const user = useSelector((state) => state.session.user);
-
-  const followers = useSelector((state)=> Object.values(state.follows.followers))
-  const pendingFollowers = followers.filter(follower => follower?.is_pending == true)
-  const hasNotification = pendingFollowers.length > 0
-
+  const followers = useSelector((state) =>
+    Object.values(state.follows.followers)
+  );
+  const pendingFollowers = followers.filter(
+    (follower) => follower?.is_pending == true
+  );
+  const hasNotification = pendingFollowers.length > 0;
   const links = [
     // { icon: "Logo", path: "/" },
     { icon: "Instagram", path: "/" },
@@ -60,7 +64,7 @@ const NavBar = () => {
         await dispatch(getFollowers(user?.id));
       } catch (err) {}
     })();
-}, [dispatch, user?.id]);
+  }, [dispatch, user?.id]);
 
   const handleShowMore = (e) => setShowMore((prev) => !prev);
   const handleLogout = async (e) => {
@@ -79,9 +83,9 @@ const NavBar = () => {
           setTimeout(() => setInactiveFn(false), 150);
         }, 300);
       } else {
-        setShowNotification(false)
-        setHideNotification(false)
-        setInactiveNotif(false)
+        setShowNotification(false);
+        setHideNotification(false);
+        setInactiveNotif(false);
         setShowSearch((state) => !state);
         setTimeout(() => setInactiveFn(false), 350);
       }
@@ -97,40 +101,55 @@ const NavBar = () => {
           setShowNotification((state) => !state);
           setHideNotification(false);
 
-          setTimeout(() =>
-          {setInactiveNotif(false)
+          setTimeout(() => {
+            setInactiveNotif(false);
           }, 150);
         }, 300);
       } else {
-        setShowSearch(false)
-        setHideSearch(false)
-        setInactiveFn(false)
+        setShowSearch(false);
+        setHideSearch(false);
+        setInactiveFn(false);
         setShowNotification((state) => !state);
         setTimeout(() => setInactiveNotif(false), 350);
-
       }
     }
   };
 
+  useEffect(() => {
+    if (searchRef.current) {
+      const toggle = (e) => {
+        console.log(e.target.parentNode.parentNode);
+        if (
+          searchRef.current !== e.target &&
+          searchIconRef1.current !==
+            e.target.parentNode.parentNode.parentNode &&
+          searchIconRef2.current !== e.target.parentNode.parentNode
+        )
+          toggleSearch();
+      };
+
+      document.addEventListener("click", toggle);
+      return () => document.removeEventListener("click", toggle);
+    }
+  }, [searchRef.current, inactiveFn]);
+
   return (
     <>
       <ul
+        ref={searchIconRef1}
         className={`${styles.navBar} ${
-          showSearch && !hideSearch && styles.miniNavBar}
-          ${ showNotification && !hideNotification && styles.miniNavBar}
+          showSearch && !hideSearch && styles.miniNavBar
+        }
+          ${showNotification && !hideNotification && styles.miniNavBar}
         `}
       >
         <div>
           {user &&
-
             links.slice(0, links.length - 1).map(({ icon, path }, idx) =>
               icon === "Search" ? (
-                <div
-                  key={idx}
-                  // className={showSearch && styles.activeSearch}
-                  onClick={toggleSearch}
-                >
+                <div key={idx} onClick={toggleSearch}>
                   <NavItem
+                    searchRef={searchIconRef2}
                     type={icon}
                     showSearch={showSearch}
                     hideSearch={hideSearch}
@@ -139,22 +158,18 @@ const NavBar = () => {
                     hideNotification={hideNotification}
                   />
                 </div>
-              ) :
-              (icon === "Notifications" ? (
-                <div
-                key={idx}
-                onClick={toggleNotification}
-              >
-                <NavItem
-                  type={icon}
-                  showNotification={showNotification}
-                  hideNotification={hideNotification}
-                  hasNotification={hasNotification}
-                  showSearch={showSearch}
-                  hideSearch={hideSearch}
-                />
-              </div>
-              ):(
+              ) : icon === "Notifications" ? (
+                <div key={idx} onClick={toggleNotification}>
+                  <NavItem
+                    type={icon}
+                    showNotification={showNotification}
+                    hideNotification={hideNotification}
+                    hasNotification={hasNotification}
+                    showSearch={showSearch}
+                    hideSearch={hideSearch}
+                  />
+                </div>
+              ) : (
                 <NavLink
                   key={idx}
                   to={path}
@@ -172,9 +187,7 @@ const NavBar = () => {
                   />
                 </NavLink>
               )
-              )
             )}
-
         </div>
         {user && (
           <div className={styles.moreLink} onClick={handleShowMore}>
@@ -207,11 +220,22 @@ const NavBar = () => {
         )}
         {!user && loggedInNav}
       </ul>
-      {showSearch && <Search hideSearch={hideSearch} onClose={toggleSearch} />}
-      {showNotification && <Notification hideNotification={hideNotification} onClose={toggleNotification} pendingFollowers={pendingFollowers} />}
+      {showSearch && (
+        <Search
+          searchRef={searchRef}
+          hideSearch={hideSearch}
+          onClose={toggleSearch}
+        />
+      )}
+      {showNotification && (
+        <Notification
+          hideNotification={hideNotification}
+          onClose={toggleNotification}
+          pendingFollowers={pendingFollowers}
+        />
+      )}
     </>
   );
 };
-
 
 export default NavBar;

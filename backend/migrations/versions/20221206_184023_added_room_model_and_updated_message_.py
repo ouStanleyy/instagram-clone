@@ -8,6 +8,10 @@ Create Date: 2022-12-06 18:40:23.921677
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
 revision = '5048d0bce572'
@@ -38,6 +42,8 @@ def upgrade():
     op.drop_column('messages', 'recipient_id')
     op.drop_column('messages', 'sender_id')
     # ### end Alembic commands ###
+    op.execute(f"ALTER TABLE rooms SET SCHEMA {SCHEMA};")
+
 
 
 def downgrade():

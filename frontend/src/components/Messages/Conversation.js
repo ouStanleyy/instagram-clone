@@ -44,13 +44,15 @@ const Conversation = ({ sessionUser, rooms }) => {
   }, [sid, dispatch, oldMessages]);
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000/", {
-      transports: ["websocket"],
-      cors: {
-        origin: "http://localhost:3000/",
-      },
-      query: `room=${roomId}`,
-    });
+    // const socket = io("http://127.0.0.1:5000/", {
+    //   transports: ["websocket"],
+    //   cors: {
+    //     origin: "http://localhost:3000/",
+    //   },
+    //   query: `room=${roomId}`,
+    // });
+
+    const socket = io({ query: `room=${roomId}` });
 
     setSio(socket);
 

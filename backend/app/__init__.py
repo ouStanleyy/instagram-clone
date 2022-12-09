@@ -51,7 +51,17 @@ Migrate(app, db)
 CORS(app)
 
 # Creates an instance of SocketIO
-sio = SocketIO(app, cors_allowed_origins='*')
+origins = []
+
+if os.environ.get('FLASK_ENV') == 'production':
+    origins = [
+        'https://instagram-clone-6n2p.onrender.com',
+        'http://instagram-clone-6n2p.onrender.com',
+    ]
+else:
+    origins = '*'
+
+sio = SocketIO(app, cors_allowed_origins=origins)
 
 
 # Since we are deploying with Docker and Flask,

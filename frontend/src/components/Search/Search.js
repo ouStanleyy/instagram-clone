@@ -5,7 +5,7 @@ import { LoadingSpinner } from "../Elements";
 import styles from "./Search.module.css";
 import SearchUser from "./SearchUser";
 
-const Search = ({ hideSearch }) => {
+const Search = ({ hideSearch, searchRef }) => {
   const dispatch = useDispatch();
   const searchResults = useSelector((state) =>
     Object.values(state.users.searchResults)
@@ -32,6 +32,7 @@ const Search = ({ hideSearch }) => {
 
   return (
     <div
+      ref={searchRef}
       className={`${styles.searchContainer} ${hideSearch && styles.hideSearch}`}
     >
       <div className={styles.searchHeader}>
