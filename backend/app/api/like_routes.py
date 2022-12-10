@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, jsonify
 from app.models import db, Like, Post, Follow, User
 from flask_login import current_user, login_user, login_required
 from .post_routes import authorized_follower
@@ -49,7 +49,7 @@ def like(post_id):
         )
         db.session.add(like)
         db.session.commit()
-        return {"message": "Successfully liked"}
+        return jsonify({"message": "Successfully liked"})
     return redirect(url_for("auth.unauthorized"))
 
 
