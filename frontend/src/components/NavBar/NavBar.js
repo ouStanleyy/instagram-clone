@@ -19,10 +19,11 @@ const NavBar = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [hideNotification, setHideNotification] = useState(false);
   const [inactiveNotif, setInactiveNotif] = useState(false);
+  const searchRef = useRef(null);
+  const searchIconRef1 = useRef(null);
+  const searchIconRef2 = useRef(null);
   const refSearchBar = useRef(null);
-
   const user = useSelector((state) => state.session.user);
-
   const followers = useSelector((state) =>
     Object.values(state.follows.followers)
   );
@@ -30,7 +31,6 @@ const NavBar = () => {
     (follower) => follower?.is_pending == true
   );
   const hasNotification = pendingFollowers.length > 0;
-
   const links = [
     // { icon: "Logo", path: "/" },
     { icon: "Instagram", path: "/" },
@@ -119,9 +119,27 @@ const NavBar = () => {
     }
   };
 
+  useEffect(() => {
+    if (searchRef.current) {
+      const toggle = (e) => {
+        if (
+          searchRef.current !== e.target &&
+          searchIconRef1.current !==
+            e.target.parentNode.parentNode.parentNode &&
+          searchIconRef2.current !== e.target.parentNode.parentNode
+        )
+          toggleSearch();
+      };
+
+      document.addEventListener("click", toggle);
+      return () => document.removeEventListener("click", toggle);
+    }
+  }, [searchRef.current, inactiveFn]);
+
   return (
     <>
       <ul
+        ref={searchIconRef1}
         className={`${styles.navBar} ${
           showSearch && !hideSearch && styles.miniNavBar
         }
@@ -132,12 +150,9 @@ const NavBar = () => {
           {user &&
             links.slice(0, links.length - 1).map(({ icon, path }, idx) =>
               icon === "Search" ? (
-                <div
-                  key={idx}
-                  // className={showSearch && styles.activeSearch}
-                  onClick={toggleSearch}
-                >
+                <div key={idx} onClick={toggleSearch}>
                   <NavItem
+                    searchRef={searchIconRef2}
                     type={icon}
                     showSearch={showSearch}
                     hideSearch={hideSearch}
@@ -219,6 +234,7 @@ const NavBar = () => {
       </ul>
       {showSearch && (
         <Search
+          searchRef={searchRef}
           hideSearch={hideSearch}
           onClose={toggleSearch}
           refSearchBar={refSearchBar}
