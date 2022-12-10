@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import styles from "./Comment.module.css";
 import { ProfilePicture } from "../Elements";
+import Caption from "./Caption";
 
-const CmContainer = ({ post, cmInputRef, setCommentIdState, value, setValue }) => {
+const CmContainer = ({ post, cmInputRef, setCommentIdState, value, setValue, turnOffComment=false }) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
   const [deleteModal, setDeleteModal] = useState({});
@@ -36,34 +37,30 @@ const CmContainer = ({ post, cmInputRef, setCommentIdState, value, setValue }) =
 
   return (
     <>
-      {comments.length === 0 && (
-        <div className={styles.cmContainer}>
-          <div className={styles.noCmContainer}>
-            <div className={styles.noCommentsDiv}>
-              <span className={styles.noCommentsLabel}>No comments yet.</span>
-            </div>
-            <div>
-              <span className={styles.startConLabel}>
-                Start the conversation.
-              </span>
+    <div className={styles.cmContainer}>
+      {turnOffComment &&
+        <Caption post={post}/>
+      }
+      {comments.length === 0 &&  !turnOffComment && (
+        <div>
+          <Caption post={post}/>
+          {/* <div className={styles.Cmcontainer}> */}
+            <div className={styles.noCmContainer}>
+              <div className={styles.noCommentsDiv}>
+                <span className={styles.noCommentsLabel}>No comments yet.</span>
+              </div>
+              <div>
+                <span className={styles.startConLabel}>
+                  Start the conversation.
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+          // </div>
       )}
-      {comments.length > 0 && (
-        <div className={styles.cmContainer}>
+      {comments.length > 0 &&  !turnOffComment && (
           <div className={styles.cmHome}>
-            <div className={styles.container}>
-              <div
-              // className={styles.profilePicture}
-              >
-                <ProfilePicture user={post?.user} size={"small"} />
-              </div>
-              <div className={styles.captionContainer}>
-                <span className={styles.username}>{post?.user?.username}</span>
-                <span className={styles.comment}>{post?.caption}</span>
-              </div>
-            </div>
+          <Caption post={post}/>
             {comments?.map((comment, i) => {
               return (
                 <Comment
@@ -79,8 +76,9 @@ const CmContainer = ({ post, cmInputRef, setCommentIdState, value, setValue }) =
               );
             })}
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
     </>
   );
 };
