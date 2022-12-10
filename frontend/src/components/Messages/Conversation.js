@@ -6,7 +6,7 @@ import { getRooms } from "../../store/rooms";
 import { ProfilePicture } from "../Elements";
 import styles from "./Conversation.module.css";
 
-const Conversation = ({ sessionUser, rooms }) => {
+const Conversation = ({ sessionUser, rooms, setRoomId }) => {
   const dispatch = useDispatch();
   const { roomId } = useParams();
   const room = rooms.find((room) => room.id === parseInt(roomId));
@@ -84,6 +84,8 @@ const Conversation = ({ sessionUser, rooms }) => {
       } catch (err) {}
     })();
   }, [dispatch, roomId]);
+
+  useEffect(() => setRoomId(roomId), [roomId]);
 
   return (
     rooms.length > 0 &&

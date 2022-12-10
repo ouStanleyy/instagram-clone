@@ -58,6 +58,7 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("CLICKED SUBMIT");
 
     const data = new FormData();
     Object.values(files[0]).forEach((file) => data.append("images", file));

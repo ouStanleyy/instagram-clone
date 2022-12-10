@@ -22,6 +22,7 @@ const Messages = () => {
         : +1
   );
   const [newMessageModal, setNewMessageModal] = useState(false);
+  const [roomId, setRoomId] = useState("");
 
   const toggleNewMessageModal = () => {
     setNewMessageModal((state) => !state);
@@ -88,7 +89,11 @@ const Messages = () => {
         <h3 className={styles.title}>Messages</h3>
         {rooms.map((room) => (
           <Link key={room.id} to={`/messages/${room.id}`}>
-            <div className={styles.userContainer}>
+            <div
+              className={`${styles.userContainer} ${
+                roomId && room.id === parseInt(roomId) && styles.activeUser
+              }`}
+            >
               <div className={styles.profilePicture}>
                 <ProfilePicture user={room.user} size={"large"} />
               </div>
@@ -103,7 +108,11 @@ const Messages = () => {
       <div className={styles.convoContainer}>
         <Switch>
           <Route path="/messages/:roomId" exact={true}>
-            <Conversation sessionUser={sessionUser} rooms={rooms} />
+            <Conversation
+              sessionUser={sessionUser}
+              rooms={rooms}
+              setRoomId={setRoomId}
+            />
           </Route>
         </Switch>
       </div>
