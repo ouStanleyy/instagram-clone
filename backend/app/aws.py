@@ -4,16 +4,16 @@ import os
 import uuid
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
-S3_LOCATION = f"http://{BUCKET_NAME}.s3.us-east-1.amazonaws.com/"
+S3_LOCATION = f"http://{BUCKET_NAME}.s3.amazonaws.com/"
 ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", "mov", "mp4"}
 
 s3 = boto3.client(
     "s3",
     aws_access_key_id=os.environ.get("S3_KEY"),
-    aws_secret_access_key=os.environ.get("S3_SECRET"),
-    region_name=os.environ.get("AWS_DEFAULT_REGION")
+    aws_secret_access_key=os.environ.get("S3_SECRET")
 )
 
+# region_name=os.environ.get("AWS_DEFAULT_REGION")
 
 def allowed_file(filename):
     return "." in filename and \
