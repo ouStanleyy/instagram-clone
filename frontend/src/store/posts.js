@@ -87,6 +87,8 @@ export const addPost = (formData) => async (dispatch) => {
 
   if (res.ok) {
     return;
+  } else {
+    console.log("Broke in addPOst");
   }
 };
 
