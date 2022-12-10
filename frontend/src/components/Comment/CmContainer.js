@@ -1,13 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllComments } from "../../store/comments";
-import { loadReplies } from "../../store/replies";
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import styles from "./Comment.module.css";
-import { ProfilePicture } from "../Elements";
 import Caption from "./Caption";
 
-const CmContainer = ({ post, cmInputRef, setCommentIdState, value, setValue, turnOffComment=false }) => {
+const CmContainer = ({ post, cmInputRef, setCommentIdState, value, setValue, turnOffComment}) => {
   const dispatch = useDispatch();
   let comments = useSelector((state) => Object.values(state.comments));
   const [deleteModal, setDeleteModal] = useState({});

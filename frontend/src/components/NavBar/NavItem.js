@@ -39,7 +39,7 @@ const NavItem = ({
 
   return (
     <div
-      className={`${style} ${showSearch && !hideSearch && styles.hideNavItem}
+      className={`${style} ${showSearch && !hideSearch && styles.hideNavItem }
                   ${
                     type === "Search" &&
                     !showNotification &&

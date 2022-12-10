@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from app.models import Post, Media, User, Follow, Comment, db
 from app.forms import PostForm, CommentForm, PostUpdateForm
@@ -250,7 +250,7 @@ def delete_post(post_id):
     if post.user_id == current_user.id:
         db.session.delete(post)
         db.session.commit()
-        return {"message": "Successfully deleted"}
+        return jsonify({"message": "Successfully deleted"})
     return redirect("../auth/unauthorized")
 
 
