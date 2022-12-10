@@ -122,7 +122,6 @@ const NavBar = () => {
   useEffect(() => {
     if (searchRef.current) {
       const toggle = (e) => {
-        console.log(e.target.parentNode.parentNode);
         if (
           searchRef.current !== e.target &&
           searchIconRef1.current !==
