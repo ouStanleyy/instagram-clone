@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { ProfilePicture } from "../Elements";
 import styles from "./SearchUser.module.css";
 
-function SearchUser({ user }) {
+function SearchUser({ user, onClose }) {
   return (
     <Link to={`/users/${user.id}`}>
-      <div className={styles.userContainer}>
+      <div onClick={onClose} className={styles.userContainer}>
         <div className={styles.profilePicture}>
           <ProfilePicture user={user} size={"medium"} />
         </div>
