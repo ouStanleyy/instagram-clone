@@ -184,8 +184,7 @@ def create_post():
                 return {"errors": "file type not permitted"}, 400
             # media.filename = get_unique_filename(media.filename)
             print("MEDIA", media)
-            with open(media.filename, "rb") as file:
-                upload = upload_file_to_s3(media.stream.read, os.environ.get("S3_BUCKET"))
+            upload = upload_file_to_s3(media, os.environ.get("S3_BUCKET"))
             if "url" not in upload:
                 return upload, 400
             url = upload['url']

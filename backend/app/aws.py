@@ -10,11 +10,11 @@ BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"http://{BUCKET_NAME}.s3.amazonaws.com/"
 ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", "mov", "mp4"}
 
-s3 = boto3.client(
-    "s3",
-    aws_access_key_id=os.environ.get("S3_KEY"),
-    aws_secret_access_key=os.environ.get("S3_SECRET")
-)
+# s3 = boto3.client(
+#     "s3",
+#     aws_access_key_id=os.environ.get("S3_KEY"),
+#     aws_secret_access_key=os.environ.get("S3_SECRET")
+# )
 
 
 def allowed_file(filename):
@@ -71,7 +71,7 @@ def get_unique_filename(filename):
 # import os
 
 
-def upload_file_to_s3(file_name, bucket, object_name=None):
+def upload_file_to_s3(file_storage, bucket, object_name=None):
     """Upload a file to an S3 bucket
 
     :param file_name: File to upload
@@ -82,14 +82,21 @@ def upload_file_to_s3(file_name, bucket, object_name=None):
 
     # If S3 object_name was not specified, use file_name
     if object_name is None:
-        object_name = os.path.basename(file_name)
+        object_name = os.path.basename(file_storage.filename)
 
     # Upload the file
     s3_client = boto3.client('s3',
                     aws_access_key_id=os.environ.get("S3_KEY"),
                     aws_secret_access_key=os.environ.get("S3_SECRET"))
     try:
-        response = s3_client.upload_fileobj(file_name, bucket, object_name)
+        # file = file_storage.read()
+        s3_client.upload_fileobj(file_storage, bucket, object_name, ExtraArgs={
+                "ACL": "public-read",
+                "ContentType": file_storage.content_type
+            })
+
     except ClientError as e:
         logging.error(e)
         return False
+
+    return {"url": f"{S3_LOCATION}{file_storage.filename}"}
