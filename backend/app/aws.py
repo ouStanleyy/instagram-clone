@@ -71,7 +71,7 @@ def get_unique_filename(filename):
 # import os
 
 
-def upload_file_to_s3(file_storage, bucket, object_name=None):
+def upload_file_to_s3(file_path, bucket, object_name=None):
     """Upload a file to an S3 bucket
 
     :param file_name: File to upload
@@ -89,9 +89,13 @@ def upload_file_to_s3(file_storage, bucket, object_name=None):
                     aws_access_key_id=os.environ.get("S3_KEY"),
                     aws_secret_access_key=os.environ.get("S3_SECRET"))
     try:
-        response = s3_client.upload_file("/opt/render/project/src/frontend/public/assets/", bucket, object_name)
+        # absolute_path = os.path.dirname(__file__)
+        # path_pwd = os.path.dirname(os.path.dirname(absolute_path)) + "/frontend/public/assets/" + file_storage.filename
+        print("AWS PY", file_path)
+        response = s3_client.upload_file(file_path, bucket, object_name)
+        os.remove(file_path)
     except ClientError as e:
         logging.error(e)
         return False
 
-    return {"url": f"{S3_LOCATION}{file_storage.filename}"}
+    return {"url": f"{S3_LOCATION}{os.path.basename(file_path)}"}
