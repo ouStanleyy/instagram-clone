@@ -2,6 +2,9 @@ import boto3
 import botocore
 import os
 import uuid
+import logging
+from botocore.exceptions import ClientError
+
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"http://{BUCKET_NAME}.s3.amazonaws.com/"
@@ -43,20 +46,48 @@ def get_unique_filename(filename):
 
 #     return {"url": f"{S3_LOCATION}{file.filename}"}
 
-def upload_file_to_s3(file, acl="public-read"):
-    try:
-        s3.upload_file(
-            file,
-            BUCKET_NAME,
-            file.filename,
-            ExtraArgs={
-                "ACL": acl,
-                "ContentType": file.content_type
-            }
-        )
-    except Exception as e:
-        # in case the our s3 upload fails
-        print('failed to upload')
-        return {"errors": str(e)}
+# def upload_file_to_s3(file, acl="public-read"):
+#     print("FILE NAMe", type(file.filename))
+#     try:
+#         s3.upload_file(
+#             file,
+#             BUCKET_NAME,
+#             file.filename,
+#             ExtraArgs={
+#                 "ACL": acl,
+#                 "ContentType": file.content_type
+#             }
+#         )
+#     except Exception as e:
+#         # in case the our s3 upload fails
+#         print('failed to upload')
+#         return {"errors": str(e)}
 
-    return {"url": f"{S3_LOCATION}{file.filename}"}
+#     return {"url": f"{S3_LOCATION}{file.filename}"}
+
+# import logging
+# import boto3
+# from botocore.exceptions import ClientError
+# import os
+
+
+def upload_file_to_s3(file_name, bucket, object_name=None):
+    """Upload a file to an S3 bucket
+
+    :param file_name: File to upload
+    :param bucket: Bucket to upload to
+    :param object_name: S3 object name. If not specified then file_name is used
+    :return: True if file was uploaded, else False
+    """
+
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = os.path.basename(file_name)
+
+    # Upload the file
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.upload_file(file_name, bucket, object_name)
+    except ClientError as e:
+        logging.error(e)
+        return False
