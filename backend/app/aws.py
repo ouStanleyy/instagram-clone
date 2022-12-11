@@ -89,7 +89,7 @@ def upload_file_to_s3(file_storage, bucket, object_name=None):
                     aws_access_key_id=os.environ.get("S3_KEY"),
                     aws_secret_access_key=os.environ.get("S3_SECRET"))
     try:
-        response = s3_client.upload_file("/opt/render/project/src/frontend/public/assets", bucket, object_name)
+        response = s3_client.upload_file("/opt/render/project/src/frontend/public/assets/", bucket, object_name)
     except ClientError as e:
         logging.error(e)
         return False
