@@ -183,10 +183,15 @@ def create_post():
             if not allowed_file(media.filename):
                 return {"errors": "file type not permitted"}, 400
             # media.filename = get_unique_filename(media.filename)
-            media.save("/opt/render/project/src/frontend/public/assets/" + media.filename)
+            absolute_path = os.path.dirname(__file__)
+            relative_path = "/frontend/public/assets/"
+            print("TESTING PWD", os.path.dirname(os.path.dirname(os.path.dirname(absolute_path))))
+
+            file_path = os.path.dirname(os.path.dirname(os.path.dirname(absolute_path))) + "/frontend/public/assets/" + media.filename
+            media.save(file_path)
             # media.save("/Users/dawwong/Desktop/App_Academy/instagram-clone/frontend/public/assets/" + media.filename)
             print("MEDIA", media)
-            upload = upload_file_to_s3(media, os.environ.get("S3_BUCKET"), object_name=media.filename)
+            upload = upload_file_to_s3(file_path, os.environ.get("S3_BUCKET"), object_name=media.filename)
             if "url" not in upload:
                 return upload, 400
             url = upload['url']
