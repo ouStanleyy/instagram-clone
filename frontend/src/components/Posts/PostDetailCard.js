@@ -4,7 +4,6 @@ import { getPostById } from "../../store/posts";
 import { useParams } from "react-router-dom";
 import MediaCarousel from "./MediaCarousel";
 import PostHeader from "./PostHeader";
-import { getlikeUsers } from "../../store/likeUsers";
 import styles from "./PostDetailCard.module.css";
 import { InputContainer, CmContainer, LikeBar } from "../Comment";
 import PostOptionModal from "./PostOptionModal";
@@ -33,12 +32,6 @@ const PostDetailCard = (props) => {
     })();
   }, [dispatch]);
 
-  useEffect(() => {
-    (async () => {
-      await dispatch(getlikeUsers());
-    })();
-  }, [dispatch]);
-
   const toggleOptionModal = () => setShowOptionModal((prev) => !prev);
   const toggleEditModal = () => {
     setShowEditModal((prev) => !prev);
@@ -58,15 +51,30 @@ const PostDetailCard = (props) => {
             toggleOptionModal={toggleOptionModal}
             toggleEditModal={toggleEditModal}
           />
-          <CmContainer post={post} cmInputRef={cmInputRef} setCommentIdState={setCommentIdState} value={value} setValue={setValue}/>
+          <CmContainer
+            post={post}
+            cmInputRef={cmInputRef}
+            setCommentIdState={setCommentIdState}
+            value={value}
+            setValue={setValue}
+            turnOffComment = {!post?.allow_comments}
+            />
           <div className={styles.likes}>
             <LikeBar
               post={post}
               onInputClick={handleInputFocus}
               showDate={true}
+              hideLikeCount={!post?.show_like_count}
             />
           </div>
-          <InputContainer post={post} cmInputRef={cmInputRef} commentIdState={commentIdState} setCommentIdState={setCommentIdState} setValue={setValue} />
+          <InputContainer
+            post={post}
+            cmInputRef={cmInputRef}
+            commentIdState={commentIdState}
+            setCommentIdState={setCommentIdState}
+            setValue={setValue}
+            turnOffComment={!post?.allow_comments}
+            />
         </div>
       </div>
       {showOptionModal && (

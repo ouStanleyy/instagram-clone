@@ -20,8 +20,8 @@ const NavBar = () => {
   const [hideNotification, setHideNotification] = useState(false);
   const [inactiveNotif, setInactiveNotif] = useState(false);
   const searchRef = useRef(null);
-  const searchIconRef1 = useRef(null);
-  const searchIconRef2 = useRef(null);
+  const notifRef = useRef(null);
+  const moreRef = useRef(null);
   const refSearchBar = useRef(null);
   const user = useSelector((state) => state.session.user);
   const followers = useSelector((state) =>
@@ -79,7 +79,7 @@ const NavBar = () => {
       if (showSearch) {
         setHideSearch(true);
         setTimeout(() => {
-          setShowSearch((state) => !state);
+          setShowSearch(false);
           setHideSearch(false);
           setTimeout(() => setInactiveFn(false), 150);
         }, 300);
@@ -87,7 +87,7 @@ const NavBar = () => {
         setShowNotification(false);
         setHideNotification(false);
         setInactiveNotif(false);
-        setShowSearch((state) => !state);
+        setShowSearch(true);
         setTimeout(() => {
           setInactiveFn(false);
           refSearchBar?.current?.focus();
@@ -102,7 +102,7 @@ const NavBar = () => {
       if (showNotification) {
         setHideNotification(true);
         setTimeout(() => {
-          setShowNotification((state) => !state);
+          setShowNotification(false);
           setHideNotification(false);
 
           setTimeout(() => {
@@ -113,7 +113,7 @@ const NavBar = () => {
         setShowSearch(false);
         setHideSearch(false);
         setInactiveFn(false);
-        setShowNotification((state) => !state);
+        setShowNotification(true);
         setTimeout(() => setInactiveNotif(false), 350);
       }
     }
@@ -122,12 +122,7 @@ const NavBar = () => {
   useEffect(() => {
     if (searchRef.current) {
       const toggle = (e) => {
-        if (
-          searchRef.current !== e.target &&
-          searchIconRef1.current !==
-            e.target.parentNode.parentNode.parentNode &&
-          searchIconRef2.current !== e.target.parentNode.parentNode
-        )
+        if (searchRef.current && !searchRef.current.contains(e.target))
           toggleSearch();
       };
 
@@ -136,10 +131,30 @@ const NavBar = () => {
     }
   }, [searchRef.current, inactiveFn]);
 
+  useEffect(() => {
+    if (notifRef.current) {
+      const toggle = (e) => {
+        if (notifRef.current && !notifRef.current.contains(e.target))
+          toggleNotification();
+      };
+
+      document.addEventListener("click", toggle);
+      return () => document.removeEventListener("click", toggle);
+    }
+  }, [inactiveNotif, notifRef.current]);
+
+  useEffect(() => {
+    const toggle = (e) => {
+      if (!moreRef.current.contains(e.target)) setShowMore(false);
+    };
+
+    document.addEventListener("click", toggle);
+    return () => document.removeEventListener("click", toggle);
+  }, [moreRef.current]);
+
   return (
     <>
       <ul
-        ref={searchIconRef1}
         className={`${styles.navBar} ${
           showSearch && !hideSearch && styles.miniNavBar
         }
@@ -152,7 +167,6 @@ const NavBar = () => {
               icon === "Search" ? (
                 <div key={idx} onClick={toggleSearch}>
                   <NavItem
-                    searchRef={searchIconRef2}
                     type={icon}
                     showSearch={showSearch}
                     hideSearch={hideSearch}
@@ -193,7 +207,11 @@ const NavBar = () => {
             )}
         </div>
         {user && (
-          <div className={styles.moreLink} onClick={handleShowMore}>
+          <div
+            ref={moreRef}
+            className={styles.moreLink}
+            onClick={handleShowMore}
+          >
             <div
               className={showMore ? styles.moreDropDown : styles.hideDropDown}
               id="menu-dropdown"
@@ -218,7 +236,14 @@ const NavBar = () => {
                 <MoreItem type="Log Out" onClick={handleLogout} />
               </NavLink>
             </div>
-            <NavItem type="More" />
+            <NavItem
+              type="More"
+              showSearch={showSearch}
+              hideSearch={hideSearch}
+              hasNotification={hasNotification}
+              showNotification={showNotification}
+              hideNotification={hideNotification}
+            />
           </div>
         )}
         {!user && loggedInNav}
@@ -233,6 +258,7 @@ const NavBar = () => {
       )}
       {showNotification && (
         <Notification
+          notifRef={notifRef}
           hideNotification={hideNotification}
           onClose={toggleNotification}
           pendingFollowers={pendingFollowers}

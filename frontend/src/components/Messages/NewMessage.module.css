@@ -18,7 +18,21 @@
   min-height: 100px;
 }
 
-.searchHeader > h2 {
+.headerContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.svgContainer {
+  position: absolute;
+  left: 16px;
+  cursor: pointer;
+}
+
+.headerContainer > h2 {
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;

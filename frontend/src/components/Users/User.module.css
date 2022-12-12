@@ -48,7 +48,19 @@
 }
 
 .username span {
-  color: #3897F0;
+  color: #3897f0;
+}
+
+.messageButton {
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  height: 28px;
+  padding: 0 14px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: -16px;
 }
 
 .detailsStats {
@@ -126,7 +138,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
-
 }
 
 .postsContainer > p {
@@ -197,13 +208,13 @@
   z-index: -1;
 }
 
-@media screen and (max-width:1264px) {
+@media screen and (max-width: 1264px) {
   .postsContainer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
   .postsContainer {
     grid-template-columns: repeat(1, 1fr);
   }

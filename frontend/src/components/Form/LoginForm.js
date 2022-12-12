@@ -22,6 +22,16 @@ const LoginForm = () => {
       setErrors(data);
     }
   };
+  
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const demoUser = 'Demo_User'
+    const demoPassword = 'demouserpw'
+    const data = await dispatch(login(demoUser, demoPassword));
+    if (data) {
+      setErrors(data);
+    }
+  };
 
   return (
     <form onSubmit={handleLogin} className={styles.formContainer}>
@@ -50,6 +60,9 @@ const LoginForm = () => {
       </div>
       <button className={styles.loginButton} type="submit">
         Log in
+      </button>
+      <button className={styles.loginButton} type="submit" onClick={demoLogin}>
+        Demo Log in
       </button>
       {errors.length > 0 && (
         <div className={styles.invalidLogin}>

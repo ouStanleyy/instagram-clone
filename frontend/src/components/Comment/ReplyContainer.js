@@ -1,7 +1,25 @@
 import Reply from "./Reply"
+import { useState, useEffect } from "react";
 
 
-const ReplyContainer = ({replies}) =>{
+const ReplyContainer = ({replies, comment}) =>{
+  const [replyDeleteModal, setReplyDeleteModal] = useState({});
+
+  const toggleReplyDeleteModal = (idx) => () => {
+    setReplyDeleteModal((state) => ({
+      ...state,
+      [idx]: !state[idx],
+    }));
+  };
+
+  useEffect(() => {
+    replies?.forEach((_, idx) => {
+      setReplyDeleteModal((state) => ({
+        ...state,
+        [idx]: false,
+      }));
+    });
+  }, []);
 
     return (
         <>
@@ -10,6 +28,9 @@ const ReplyContainer = ({replies}) =>{
                 <Reply
                 key={i}
                 reply={reply}
+                comment ={comment}
+                replyDeleteModal={replyDeleteModal}
+                toggleReplyDeleteModal={toggleReplyDeleteModal}
                 />
               )
             })

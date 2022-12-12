@@ -36,6 +36,7 @@ const PostOptionModal = ({ post, toggleOptionModal, toggleEditModal }) => {
       formData.append("allow_comments", !post?.allow_comments);
       formData.append("show_like_count", post?.show_like_count);
       await dispatch(updatePost(post?.id, formData));
+
     }
   };
 
