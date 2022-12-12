@@ -5,6 +5,7 @@ import { loadAllLikes, createLike, deleteLikeThunk } from "../../store/likes";
 import { getDate } from "../Utill";
 import LikesModal from "./LikesModal";
 import { Modal } from "../../context/Modal";
+import { ProfilePicture } from "../Elements";
 
 const LikeBar = ({ post, onInputClick, showDate = false, hideLikeCount }) => {
   const dispatch = useDispatch();
@@ -152,8 +153,11 @@ const LikeBar = ({ post, onInputClick, showDate = false, hideLikeCount }) => {
                   <img
                     className={styles.profileSmall}
                     onClick={toggleLikesModal}
-                    src={firstLiker_pp}
-                    alt={"pfp"}
+                    src={
+                      firstLiker_pp ||
+                      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/680px-Default_pfp.svg.png?20220226140232"
+                    }
+                    alt={"profile"}
                   />
                 </span>
                 Liked by
@@ -168,11 +172,14 @@ const LikeBar = ({ post, onInputClick, showDate = false, hideLikeCount }) => {
             <div className={styles.likesLabelDiv}>
               <span className={styles.likesLabel}>
                 <span>
-                  <img
+                <img
                     className={styles.profileSmall}
                     onClick={toggleLikesModal}
-                    src={firstLiker_pp}
-                    alt={"small pfp"}
+                    src={
+                      firstLiker_pp ||
+                      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/680px-Default_pfp.svg.png?20220226140232"
+                    }
+                    alt={"profile"}
                   />
                 </span>
                 Liked by

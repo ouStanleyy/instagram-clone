@@ -9,20 +9,20 @@ import { createReply } from "../../store/replies";
 const InputContainer = ({ post, cmInputRef, commentIdState, setCommentIdState, setValue, turnOffComment=false }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const { id } = user;
+  // const { id } = user;
   const [comment, setComment] = useState("");
   const [emojiWindow, setEmojiWindow] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(commentIdState){
-      const payload = { reply: comment, user_id: id };
+      const payload = { reply: comment, user_id:user?.id };
       dispatch(createReply(payload, commentIdState))
       setCommentIdState(0)
       setValue("")
     }else{
-      const payload = { comment, user_id: id };
-      dispatch(createComment(payload, post.id));
+      const payload = { comment, user_id:user?.id };
+      dispatch(createComment(payload, post?.id));
     }
     setComment("");
   };

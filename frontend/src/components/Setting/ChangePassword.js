@@ -4,7 +4,7 @@ import styles from "./EditProfile.module.css";
 import stylesPassword from "./ChangePassword.module.css";
 import { useState, useEffect } from "react";
 import SuccessPopup from "./SuccessPopup";
-import { editProfile, updatePassword } from "../../store/session";
+import { updatePassword } from "../../store/session";
 import { normalizeErrors } from "../Utill";
 
 const ChangePassword = () => {
