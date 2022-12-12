@@ -5,7 +5,7 @@ import ReplyDeleteModal from "./ReplyDeleteModal"
 import { Modal } from "../../context/Modal"
 
 const Reply = ({reply,comment, replyDeleteModal, toggleReplyDeleteModal})=>{
-    const user = useSelector((state)=> state.likeUsers[reply?.user_id])
+    const user = useSelector((state)=> state.users[reply?.user_id])
     const currUser = useSelector((state) => state.session.user);
     const post_owner_id = useSelector((state) => state.posts[comment?.post_id]?.user_id);
     const is_owner = currUser.id === post_owner_id || currUser.id === reply?.user_id;

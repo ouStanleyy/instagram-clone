@@ -4,7 +4,6 @@ import { getPostById } from "../../store/posts";
 import { useParams } from "react-router-dom";
 import MediaCarousel from "./MediaCarousel";
 import PostHeader from "./PostHeader";
-import { getlikeUsers } from "../../store/likeUsers";
 import styles from "./PostDetailCard.module.css";
 import { InputContainer, CmContainer, LikeBar } from "../Comment";
 import PostOptionModal from "./PostOptionModal";
@@ -30,12 +29,6 @@ const PostDetailCard = (props) => {
   useEffect(() => {
     (async () => {
       await dispatch(getPostById(props.postId ? props.postId : postId));
-    })();
-  }, [dispatch]);
-
-  useEffect(() => {
-    (async () => {
-      await dispatch(getlikeUsers());
     })();
   }, [dispatch]);
 
