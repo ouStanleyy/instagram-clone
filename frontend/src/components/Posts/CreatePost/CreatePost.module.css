@@ -101,6 +101,20 @@
   font-size: 14px;
 }
 
+.submitButton {
+  position: relative;
+}
+
+.fileTypeError {
+  position: absolute;
+  top: 0;
+  left: 70px;
+  width: 100px;
+  color: red;
+  cursor: auto;
+  /* border: 1px solid red; */
+}
+
 .filtersContainer {
   /* border: 1px solid red; */
   width: auto;

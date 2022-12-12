@@ -39,6 +39,7 @@ const CreatePost = () => {
   const [charCount, setCharCount] = useState(0);
   const [turnOffComments, setTurnOffComments] = useState(false);
   const [hideLikeCount, setHideLikeCount] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleOpenUpload = (e) => {
     e.preventDefault();
@@ -58,20 +59,24 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("CLICKED SUBMIT");
 
-    const data = new FormData();
-    Object.values(files[0]).forEach((file) => data.append("images", file));
+    try {
+      const data = new FormData();
+      Object.values(files[0]).forEach((file) => data.append("images", file));
 
-    data.append("caption", caption);
-    data.append("is_story", false);
-    data.append("show_like_count", !hideLikeCount);
-    data.append("allow_comments", !turnOffComments);
+      data.append("caption", caption);
+      data.append("is_story", false);
+      data.append("show_like_count", !hideLikeCount);
+      data.append("allow_comments", !turnOffComments);
 
-    await dispatch(addPost(data));
-
-    return history.push(`/users/${user.id}`);
+      await dispatch(addPost(data));
+      return history.push(`/users/${user.id}`);
+    } catch (e) {
+      // console.log("HERE", e.message);
+      setErrors({ error: e.message });
+    }
   };
+  // console.log("ERROR", errors);
 
   const handlePreview = (e) => {
     e.stopPropagation();
@@ -140,8 +145,17 @@ const CreatePost = () => {
           </button>
         )}
         {page === 3 && (
-          <button className={styles.submitButton} onClick={handleSubmit}>
+          <button
+            className={styles.submitButton}
+            onClick={handleSubmit}
+            disabled={errors.error}
+          >
             Share
+            {errors.error && (
+              <span className={styles.fileTypeError}>
+                File Type Not Allowed!
+              </span>
+            )}
           </button>
         )}
       </div>

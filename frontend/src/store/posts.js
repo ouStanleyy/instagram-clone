@@ -82,13 +82,12 @@ export const addPost = (formData) => async (dispatch) => {
   });
 
   const data = await res.json();
-
-  if (res.ok) {
-    return;
-  } else {
-    console.log("Broke in addPOst");
-    console.log(data.errors);
-    console.log("DATA", data);
+  if (data.errors) {
+    // console.log("DATA ERROR", data.errors);
+    const err = new Error();
+    err.message = data.errors;
+    // console.log("ERER", err);
+    throw err;
   }
 };
 
