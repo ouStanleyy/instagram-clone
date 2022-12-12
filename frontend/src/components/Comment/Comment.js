@@ -12,9 +12,9 @@ const Comment = ({ comment, toggleDeleteModal, deleteModal, cmInputRef, setComme
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const allReplies = useSelector((state)=> Object.values(state.replies))
-  const replies = allReplies.filter((reply) => reply.comment_id === comment?.id)
+  const replies = allReplies.filter((reply) => reply?.comment_id === comment?.id)
   const owner_id = useSelector((state) => state.posts[comment?.post_id]?.user_id);
-  const is_owner = user.id === owner_id || user.id === comment?.user_id;
+  const is_owner = user?.id === owner_id || user?.id === comment?.user_id;
   const [showReply, setshowReply] = useState(false)
 
 

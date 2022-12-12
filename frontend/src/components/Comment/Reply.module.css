@@ -15,7 +15,7 @@
 
 .replyText{
     word-wrap:break-word;
-    /* word-break: break-all; */
+    word-break: break-all;
     display: flex;
     flex-direction: column;
     margin-right: 20px;
