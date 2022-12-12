@@ -105,7 +105,6 @@ A clone of a popular social media platform, [Instagram](instagram.com). Users on
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
-My first full stack project is an attempt to clone the main functionalities of MeetUp.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -121,9 +120,7 @@ My first full stack project is an attempt to clone the main functionalities of M
 * [![Express.js][Express.js]][Express-url]
 * [![React][React.js]][React-url]
 * [![Node.js][Node.js]][Node-url]
-* [![Sequelize][Sequelize.js]][Sequelize-url]
 * [![SQLite][SQLite]][SQLite-url]
-* [![Heroku][Heroku]][Heroku-url]
 * [![NPM][NPM]][NPM-url]
 * [![Git][Git]][Git-url]
 * [![Github][Github]][Github-url]
@@ -188,15 +185,15 @@ _For more examples, please refer to the [Documentation]("https://github.com/Dani
 
 Users can: 
 
--[X] Create a post (photos and videos) with the use of AWS to handle media storage
--[X] Send instant messages to each other with the use of the socket.io library
--[X] Edit their profile's information (bio, phone number, password, gender, etc)
--[X] Get a random list of suggested users to follow (public profiles)
--[X] Edit their post (turning off comments, allowing like counts to show, and changing caption)
--[X] Search for other users with auto suggestion
--[X] Reply to other user's comments
--[X] Infinitely scroll through their feed
--[X] Get notifications of pending follow requests
+- [X] Create a post (photos and videos) with the use of AWS to handle media storage
+- [X] Send instant messages to each other with the use of the socket.io library
+- [X] Edit their profile's information (bio, phone number, password, gender, etc)
+- [X] Get a random list of suggested users to follow (public profiles)
+- [X] Edit their post (turning off comments, allowing like counts to show, and changing caption)
+- [X] Search for other users with auto suggestion
+- [X] Reply to other user's comments
+- [X] Infinitely scroll through their feed
+- [X] Get notifications of pending follow requests
 
 <!-- See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
