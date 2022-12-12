@@ -1,5 +1,5 @@
 import styles from "./ProfilePicture.module.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // size : "xsmall", "small", "medium", "large", "xlarge", "xxlarge"
 const ProfilePicture = ({
@@ -9,7 +9,6 @@ const ProfilePicture = ({
   hasStory = false,
   path = "",
 }) => {
-  const location = useLocation();
   let style;
 
   switch (size) {

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import NavItem from "./NavItem";
 import styles from "./NavBar.module.css";
@@ -27,9 +27,7 @@ const NavBar = () => {
   const followers = useSelector((state) =>
     Object.values(state.follows.followers)
   );
-  const pendingFollowers = followers.filter(
-    (follower) => follower?.is_pending == true
-  );
+  const pendingFollowers = followers.filter((follower) => follower?.is_pending);
   const hasNotification = pendingFollowers.length > 0;
   const links = [
     // { icon: "Logo", path: "/" },

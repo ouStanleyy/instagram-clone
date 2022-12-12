@@ -52,21 +52,21 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true}>
             <User />
           </ProtectedRoute>
-          <Route path="/messages">
+          <ProtectedRoute path="/messages">
             <Messages user={user} />
-          </Route>
-          <Route path="/create" exact={true}>
+          </ProtectedRoute>
+          <ProtectedRoute path="/create" exact={true}>
             <CreatePost />
-          </Route>
-          <Route path="/account">
+          </ProtectedRoute>
+          <ProtectedRoute path="/account">
             <Setting />
-          </Route>
-          <Route path="/posts" exact={true}>
+          </ProtectedRoute>
+          <ProtectedRoute path="/posts" exact={true}>
             <h1>Post</h1>
-          </Route>
-          <Route path="/posts/:postId" exact={true}>
+          </ProtectedRoute>
+          <ProtectedRoute path="/posts/:postId" exact={true}>
             <PostDetailCard />
-          </Route>
+          </ProtectedRoute>
         </div>
       </Switch>
     </BrowserRouter>

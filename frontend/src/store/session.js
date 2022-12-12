@@ -4,7 +4,6 @@ const REMOVE_USER = "session/REMOVE_USER";
 const LOAD_FOLLOWING = "session/LOAD_FOLLOWING";
 const ADD_FOLLOW = "session/ADD_FOLLOW";
 const REMOVE_FOLLOW = "session/REMOVE_FOLLOW";
-const UPDATE_USER = "session/UPDATE_USER";
 
 // ACTION
 const setUser = (user) => ({
