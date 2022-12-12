@@ -135,7 +135,7 @@ def connected():
 @sio.on('message')
 def handle_message(data):
     """event listener when client types a message"""
-    print("data from the front end: ",data['message'], data['room'])
+    # print("data from the front end: ",data['message'], data['room'])
     db.session.add(Message(user_id=data['uid'], room_id=data['room'], message=data['message']))
     db.session.commit()
     emit('message',{'message':data['message'],'sid':request.sid},room=data['room'])
@@ -144,7 +144,7 @@ def handle_message(data):
 @sio.on("disconnect")
 def disconnected():
     """event listener when client disconnects to the server"""
-    print("user disconnected")
+    # print("user disconnected")
     sio.server.leave_room(request.sid, request.args.get('room'))
     emit("disconnect",f"user {request.sid} disconnected",broadcast=True)
 

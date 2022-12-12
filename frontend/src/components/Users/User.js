@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import { getUserById } from "../../store/users";
 import Follows from "../Follows/Follows";
@@ -9,9 +9,11 @@ import styles from "./User.module.css";
 import { ProfilePicture } from "../Elements";
 import { isVideo } from "../Utill";
 import { FollowButton } from "../Follows";
+import { createNewRoom } from "../../store/rooms";
 
 function User() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { userId } = useParams();
   const user = useSelector((state) => state.users[userId]);
   const isOwner = useSelector(
@@ -46,6 +48,13 @@ function User() {
       [idx]: !state[idx],
     }));
     if (postModal[idx]) dispatch(getUserById(userId));
+  };
+
+  const handleMessageClick = async () => {
+    try {
+      const roomId = await dispatch(createNewRoom(userId));
+      history.push(`/messages/${roomId}`);
+    } catch (err) {}
   };
 
   // Maps each index of the posts as keys in the post modal state and defaults their value to "false"
@@ -111,7 +120,19 @@ function User() {
                   <span className={`material-symbols-outlined`}>verified</span>
                 )}
               </p>
-              {!isOwner && <FollowButton user={user} />}
+              {!isOwner && (
+                <>
+                  <FollowButton user={user} />
+                  {(!user.is_private || isFollowing > 0) && (
+                    <button
+                      className={styles.messageButton}
+                      onClick={handleMessageClick}
+                    >
+                      Message
+                    </button>
+                  )}
+                </>
+              )}
             </div>
             <div className={styles.detailsStats}>
               <p>

@@ -35,7 +35,7 @@ const Conversation = ({ sessionUser, rooms, setRoomId }) => {
     if (sio) {
       sio.once("message", (data) => {
         if (data) {
-          if (sid) console.log("compare", sid === data?.sid);
+          // if (sid) console.log("compare", sid === data?.sid);
           dispatch(getRooms());
           // setMessages([...messages, data]);
         }
@@ -85,7 +85,10 @@ const Conversation = ({ sessionUser, rooms, setRoomId }) => {
     })();
   }, [dispatch, roomId]);
 
-  useEffect(() => setRoomId(roomId), [roomId]);
+  useEffect(() => {
+    setRoomId(roomId);
+    return () => setRoomId("");
+  }, [roomId]);
 
   return (
     rooms.length > 0 &&
