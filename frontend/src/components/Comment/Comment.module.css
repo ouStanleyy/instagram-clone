@@ -1,19 +1,14 @@
 
 .form{
     border-top: 1px solid #DBDBDB;
-    /* margin-top: 10px; */
-    /* border: 1px solid red; */
     display: flex;
     justify-content: space-between;
-    /* width: 400px; */
+    /* width: 100%; */
 }
 
 .cmContainer{
-    /* width: auto; */
     border-bottom: 1px solid #DBDBDB;
     position: relative;
-    /* max-height: 500px; */
-    /* float:left; */
     height: 500px;
     overflow:hidden;
     overflow-y:auto;
@@ -30,7 +25,6 @@
     gap: 14px;
     margin-left: 20px;
     margin-top: 12px;
-    /* margin: 20px; */
     border-radius: 24px;
 }
 
@@ -39,7 +33,7 @@
     height: 30px;
     border-radius: 50%;
     overflow: hidden;
-  }
+}
 
 .profilePicture img {
     max-width: 100%;
@@ -47,11 +41,11 @@
 }
 
 .textContainer{
-    width: 320px;
+    width: 300px;
 
 }
 .captionContainer{
-  width: 320px;
+  width: 307px;
   margin-bottom: 35px;
 
 }
@@ -67,6 +61,8 @@
   color:#262626;
   margin-left: 5px;
   word-wrap: break-word;
+  /* word-break: break-all; */
+  /* padding-right: 30px; */
 }
 
 /* .caption{
@@ -85,23 +81,29 @@
   margin-left: 10px;
   cursor: pointer;
   font-weight: 500;
+  align-self: center;
+
 }
 
 .replyContainer{
   display: flex;
-  margin-top: 12px;
+  margin: 8px;
+  height:30px;
 }
 
-
 .moreButton{
-  align-content: center;
+  height: 10px;
   border: none;
   background-color: transparent;
   cursor: pointer;
 }
 
-.inputContainer{
+.buttonDiv{
+  align-self: center;
+}
 
+.inputContainer{
+  width: 100%;
   height: 50px;
   display: flex;
   position: relative;
@@ -114,7 +116,7 @@
 }
 
 .commentInput{
-  width:300px;
+  width: calc(100% - 90px);
   border: none;
   outline: none;
   background-color: transparent;
@@ -122,7 +124,7 @@
 
 .postComment {
   width:50px;
-  height: 42px;
+  /* height: 42px; */
   align-self: center;
   color:rgb(53, 149, 246);
   font-size: 14px;
@@ -130,6 +132,7 @@
   border: none;
   font-weight:500;
   cursor: pointer;
+  justify-self: flex-end;
 }
 
 .disablePost {
@@ -137,11 +140,12 @@
 }
 
 .noCmContainer{
-  height: 100%;
+  height: 260px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
 }
 
 .noCommentsLabel{

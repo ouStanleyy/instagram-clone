@@ -236,7 +236,14 @@ const NavBar = () => {
                 <MoreItem type="Log Out" onClick={handleLogout} />
               </NavLink>
             </div>
-            <NavItem type="More" />
+            <NavItem
+              type="More"
+              showSearch={showSearch}
+              hideSearch={hideSearch}
+              hasNotification={hasNotification}
+              showNotification={showNotification}
+              hideNotification={hideNotification}
+            />
           </div>
         )}
         {!user && loggedInNav}

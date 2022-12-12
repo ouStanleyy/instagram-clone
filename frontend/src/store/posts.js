@@ -83,10 +83,14 @@ export const addPost = (formData) => async (dispatch) => {
     body: formData,
   });
 
-  await res.json();
+  const data = await res.json();
 
   if (res.ok) {
     return;
+  } else {
+    console.log("Broke in addPOst");
+    console.log(data.errors);
+    console.log("DATA", data);
   }
 };
 

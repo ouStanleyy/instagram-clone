@@ -1,21 +1,13 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getlikeUsers } from "../../store/likeUsers";
+
+import { useSelector } from "react-redux";
 import LikerUser from "./LikerUser";
 import styles from "../Follows/Follows.module.css";
 
 const LikesModal = ({ likes, onClose, currUser }) => {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => Object.values(state.likeUsers));
+  const users = useSelector((state) => Object.values(state.users));
   // const currUser = useSelector(state => state.session.user)
   const userIds = likes.map((like) => like.user_id);
   const likeUsers = users.filter((user) => userIds.includes(user.id));
-
-  // useEffect(() => {
-  //   (async () => {
-  //     await dispatch(getlikeUsers());
-  //   })();
-  // }, [dispatch]);
 
   return (
     <>
@@ -31,11 +23,6 @@ const LikesModal = ({ likes, onClose, currUser }) => {
                 onClose={onClose}
               />
             );
-            // return <FollowUser
-            //     key={user?.id}
-            //     followId={user?.id}
-            //     currUser={currUser}
-            //     onClose={onClose} />
           })}
         </div>
       </div>

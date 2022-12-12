@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, redirect, url_for
+from flask import Blueprint, jsonify, request, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from app.models import User, Follow, db
 from app.forms import UpdateProfileForm, ChangePasswordForm
@@ -81,7 +81,7 @@ def delete_user_profile():
     """
     db.session.delete(current_user)
     db.session.commit()
-    return {'message': 'Successfully deleted'}
+    return jsonify({'message': 'Successfully deleted'})
 
 
 @user_routes.route('/<int:user_id>/follows')
