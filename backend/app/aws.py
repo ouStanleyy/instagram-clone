@@ -88,9 +88,11 @@ def upload_file_to_s3(file_storage, bucket, object_name=None):
     s3_client = boto3.client('s3',
                     aws_access_key_id=os.environ.get("S3_KEY"),
                     aws_secret_access_key=os.environ.get("S3_SECRET"))
+
+    # print("S3 BUCKETS",s3_client.list_buckets())
     try:
-        # file = file_storage.read()
-        s3_client.upload_fileobj(file_storage, bucket, object_name, ExtraArgs={
+        file = open(file_storage.filename, "rb").read()
+        s3_client.upload_file(file, bucket, object_name, ExtraArgs={
                 "ACL": "public-read",
                 "ContentType": file_storage.content_type
             })
