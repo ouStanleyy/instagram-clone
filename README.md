@@ -2,12 +2,12 @@
 
 ## Description
 
-A clone of a popular social media platform, [MeetUp](meetup.com). Users on Meetup may host live/virtual events, organize groups, and meet like-minded peers based on interests, hobbies, professions, and more. 
+A clone of a popular social media platform, [Instagram](instagram.com). Users on Instagram can share posts (videos and photos) to their network of followers. 
 
 ## Table of Contents:
 
-- [API Documentation](https://github.com/Daniel-Wong94/meetup_Project/wiki/API-Documentation)
-- [DB Schema](https://github.com/Daniel-Wong94/meetup_Project/wiki/DB-Schema) -->
+- [API Documentation](https://github.com/ouStanleyy/instagram-clone/wiki/API-Documentation)
+- [DB Schema](https://github.com/ouStanleyy/instagram-clone/wiki/Database-Schema) -->
 
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
@@ -42,13 +42,13 @@ A clone of a popular social media platform, [MeetUp](meetup.com). Users on Meetu
 <br />
 <div align="center">
   <a href="https://https://github.com/Daniel-Wong94/meetup_Project">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/Meetup.png" alt="Logo" width="80" height="80">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Meetup Clone</h3>
+<h3 align="center">Instantgram (Instagram Clone)</h3>
 
   <p align="center">
-    A clone of a popular social media platform, <a href="meetup.com">MeetUp</a>. Users on Meetup may host live/virtual events, organize groups, and meet like-minded peers based on interests, hobbies, professions, and more. 
+    A clone of a popular social media platform, <a href="instagram.com">Instagram</a>. Users on Meetup may host live/virtual events, organize groups, and meet like-minded peers based on interests, hobbies, professions, and more. 
     <br />
     <!-- <a href="https://upload.wikimedia.org/wikipedia/commons/1/10/Meetup.png"><strong>Explore the docs »</strong></a> -->
     <br />
