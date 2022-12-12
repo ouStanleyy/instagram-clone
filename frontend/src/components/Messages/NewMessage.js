@@ -44,7 +44,41 @@ const NewMessage = ({ onClose }) => {
   return (
     <div className={styles.searchContainer}>
       <div className={styles.searchHeader}>
-        <h2>New message</h2>
+        <div className={styles.headerContainer}>
+          <div className={styles.svgContainer} onClick={onClose}>
+            <svg
+              aria-label="Close"
+              // class="_ab6-"
+              color="#262626"
+              fill="#262626"
+              height="18"
+              role="img"
+              viewBox="0 0 24 24"
+              width="18"
+            >
+              <polyline
+                fill="none"
+                points="20.643 3.357 12 12 3.353 20.647"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="3"
+              ></polyline>
+              <line
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="3"
+                x1="20.649"
+                x2="3.354"
+                y1="20.649"
+                y2="3.354"
+              ></line>
+            </svg>
+          </div>
+          <h2>New message</h2>
+        </div>
         <div className={styles.inputContainer}>
           <label>To:</label>
           <input

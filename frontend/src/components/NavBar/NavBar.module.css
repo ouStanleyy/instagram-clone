@@ -29,9 +29,9 @@
 }
 
 .hideDropDown {
-  visibility: hidden;
+  display: none;
   pointer-events: none;
-  /* display: none; */
+  user-select: none;
 }
 
 .moreDropDown {

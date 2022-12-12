@@ -4,7 +4,6 @@ import styles from "./NavItem.module.css";
 import ProfilePicture from "../Elements/ProfilePIcture";
 
 const NavItem = ({
-  searchRef,
   type,
   showSearch,
   hideSearch,
@@ -40,7 +39,6 @@ const NavItem = ({
 
   return (
     <div
-      ref={searchRef}
       className={`${style} ${showSearch && !hideSearch && styles.hideNavItem}
                   ${
                     type === "Search" &&
