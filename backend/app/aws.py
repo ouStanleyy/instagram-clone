@@ -90,7 +90,8 @@ def upload_file_to_s3(file_path, bucket, object_name=None):
     # Upload the file
     s3_client = boto3.client('s3',
                     aws_access_key_id=os.environ.get("S3_KEY"),
-                    aws_secret_access_key=os.environ.get("S3_SECRET"))
+                    aws_secret_access_key=os.environ.get("S3_SECRET"),
+                    aws_region="us-east-2")
 
     # print("S3 BUCKETS",s3_client.list_buckets())
     try:
