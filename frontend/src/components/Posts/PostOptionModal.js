@@ -14,6 +14,8 @@ const PostOptionModal = ({ post, toggleOptionModal, toggleEditModal }) => {
     )
   );
 
+  console.log("here", follow);
+
   const isOwner = post?.user_id === user.id;
 
   const redirectToPost = (e) => {
@@ -36,7 +38,6 @@ const PostOptionModal = ({ post, toggleOptionModal, toggleEditModal }) => {
       formData.append("allow_comments", !post?.allow_comments);
       formData.append("show_like_count", post?.show_like_count);
       await dispatch(updatePost(post?.id, formData));
-
     }
   };
 
@@ -70,9 +71,11 @@ const PostOptionModal = ({ post, toggleOptionModal, toggleEditModal }) => {
     </>
   ) : (
     <div className={styles.postOptionContainer}>
-      <div className={styles.redButton} onClick={handleUnfollow}>
-        Unfollow
-      </div>
+      {follow && !follow.is_pending && (
+        <div className={styles.redButton} onClick={handleUnfollow}>
+          Unfollow
+        </div>
+      )}
       <div onClick={redirectToPost}>Go to post</div>
       <div>Copy link</div>
       <div onClick={toggleOptionModal}>Cancel</div>
