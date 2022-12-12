@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./EditProfile.module.css";
 import { ProfilePicture } from "../Elements";
@@ -25,7 +25,6 @@ const EditProfile = () => {
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(true);
-  const inputRef = useRef(null);
 
   const updateProfilePicture = (e) => setProfilePicture(e.target.value);
   const updateFullName = (e) => setFullName(e.target.value);
