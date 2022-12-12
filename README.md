@@ -229,12 +229,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+<!-- ## Contact -->
 
 <!-- Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/Daniel-Wong94/meetup_Project)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
