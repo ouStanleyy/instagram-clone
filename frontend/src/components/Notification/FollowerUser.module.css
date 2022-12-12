@@ -2,16 +2,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 400px;
     padding: 4px 24px;
     margin-top: 5px;
   }
 
   .userDetails {
+    /* width: 130px; */
     width: 100%;
     padding: 8px 12px;
     font-size: 14px;
     line-height: 18px;
+
   }
 
   .username {
@@ -22,7 +24,9 @@
 
   .fullName {
     color: #8e8e8e;
-    width: max-content;
+    /* width: max-content; */
+    word-wrap: break-word;
+    /* text-overflow:ellipsis ; */
   }
 
   .buttonContainer{
