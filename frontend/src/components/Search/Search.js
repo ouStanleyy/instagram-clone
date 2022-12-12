@@ -5,7 +5,7 @@ import { LoadingSpinner } from "../Elements";
 import styles from "./Search.module.css";
 import SearchUser from "./SearchUser";
 
-const Search = ({ hideSearch, searchRef, refSearchBar }) => {
+const Search = ({ hideSearch, searchRef, refSearchBar, onClose }) => {
   const dispatch = useDispatch();
   const searchResults = useSelector((state) =>
     Object.values(state.users.searchResults)
@@ -63,7 +63,7 @@ const Search = ({ hideSearch, searchRef, refSearchBar }) => {
       <div className={styles.searchResults}>
         {loaded ? (
           searchResults.map((result) => (
-            <SearchUser key={result.id} user={result} />
+            <SearchUser onClose={onClose} key={result.id} user={result} />
           ))
         ) : (
           <div className={styles.loadingSpinner}>

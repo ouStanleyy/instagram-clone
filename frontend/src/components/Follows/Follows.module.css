@@ -9,6 +9,14 @@
   animation: onShow 150ms ease;
 }
 
+.headerContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .title {
   font-size: 16px;
   font-weight: 500;
@@ -16,6 +24,12 @@
   text-align: center;
   padding: 12px 0;
   border-bottom: 1px solid #dbdbdb;
+}
+
+.svgContainer {
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
 }
 
 .listContainer {
