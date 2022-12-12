@@ -71,7 +71,7 @@ def get_unique_filename(filename):
 # import os
 
 
-def upload_file_to_s3(file_storage, bucket, object_name=None):
+def upload_file_to_s3(file_path, bucket, object_name=None):
     """Upload a file to an S3 bucket
 
     :param file_name: File to upload
@@ -81,8 +81,8 @@ def upload_file_to_s3(file_storage, bucket, object_name=None):
     """
 
     # If S3 object_name was not specified, use file_name
-    if object_name is None:
-        object_name = os.path.basename(file_storage.filename)
+    # if object_name is None:
+    #     object_name = os.path.basename(file_name)
 
     # Upload the file
     s3_client = boto3.client('s3',
@@ -91,14 +91,13 @@ def upload_file_to_s3(file_storage, bucket, object_name=None):
 
     # print("S3 BUCKETS",s3_client.list_buckets())
     try:
-        file = open(file_storage.filename, "rb").read()
-        s3_client.upload_file(file, bucket, object_name, ExtraArgs={
-                "ACL": "public-read",
-                "ContentType": file_storage.content_type
-            })
-
+        # absolute_path = os.path.dirname(__file__)
+        # path_pwd = os.path.dirname(os.path.dirname(absolute_path)) + "/frontend/public/assets/" + file_storage.filename
+        print("AWS PY", file_path)
+        response = s3_client.upload_file(file_path, bucket, object_name)
+        os.remove(file_path)
     except ClientError as e:
         logging.error(e)
         return False
 
-    return {"url": f"{S3_LOCATION}{file_storage.filename}"}
+    return {"url": f"{S3_LOCATION}{os.path.basename(file_path)}"}
