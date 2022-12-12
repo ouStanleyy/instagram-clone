@@ -194,6 +194,7 @@ const NavBar = () => {
         </div>
         {user && (
           <div className={styles.moreLink} onClick={handleShowMore}>
+
             <div
               className={showMore ? styles.moreDropDown : styles.hideDropDown}
               id="menu-dropdown"
@@ -217,8 +218,16 @@ const NavBar = () => {
               <NavLink to="#" exact={true} className={styles.navLink}>
                 <MoreItem type="Log Out" onClick={handleLogout} />
               </NavLink>
+
             </div>
-            <NavItem type="More" />
+            <NavItem
+              type="More"
+              showSearch={showSearch}
+              hideSearch={hideSearch}
+              hasNotification={hasNotification}
+              showNotification={showNotification}
+              hideNotification={hideNotification}
+             />
           </div>
         )}
         {!user && loggedInNav}

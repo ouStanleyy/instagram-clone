@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from app.models import Comment, Post, Reply, db
 from app.forms import CommentForm, ReplyForm
@@ -51,7 +51,7 @@ def delete_comment(comment_id):
     if comment.user_id == current_user.id or owner_id == current_user.id:
         db.session.delete(comment)
         db.session.commit()
-        return "Successfully deleted"
+        return jsonify({"message":"Successfully deleted"})
     return redirect(url_for("auth.unauthorized"))
 
 

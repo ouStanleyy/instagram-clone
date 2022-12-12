@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for
+from flask import Blueprint, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from app.models import Follow, db
 
@@ -34,5 +34,5 @@ def delete_follow(follow_id):
     if current_user.id == follow.follower_id or current_user.id == follow.following_id:
         db.session.delete(follow)
         db.session.commit()
-        return "Successfully deleted"
+        return jsonify({"message":"Successfully deleted"})
     return redirect(url_for("auth.unauthorized"))

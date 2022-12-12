@@ -7,13 +7,32 @@
     gap:12px;
     margin-top: 15px;
     margin-bottom: 15px;
+    width: 320px;
+}
+.replyCon{
+    display: flex;
 }
 
 .replyText{
+    word-wrap:break-word;
+    /* word-break: break-all; */
     display: flex;
+    flex-direction: column;
+    margin-right: 20px;
 }
 
 .username{
     font-weight: 600;
     margin-right: 5px;
+}
+
+.moreButton{
+    align-self: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.buttonDiv{
+    margin-top: 5px;
 }
