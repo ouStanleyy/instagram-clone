@@ -1,5 +1,3 @@
-import { ADD_COMMENT } from "./comments";
-
 // constants
 const LOAD_POSTS_FEED = "posts/LOAD_POSTS_FEED";
 const LOAD_MORE_POSTS_FEED = "posts/LOAD_MORE_POSTS_FEED";
@@ -33,11 +31,11 @@ const loadMorePostsExplore = (posts) => ({
   posts,
 });
 
-const addCommentToPost = (postId, comment) => ({
-  type: ADD_COMMENT,
-  postId,
-  comment,
-});
+// const addCommentToPost = (postId, comment) => ({
+//   type: ADD_COMMENT,
+//   postId,
+//   comment,
+// });
 
 // THUNKS
 export const getPostsFeed =

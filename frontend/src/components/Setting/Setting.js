@@ -1,4 +1,3 @@
-import { useSelector, useDispatch } from "react-redux";
 import styles from "./Setting.module.css";
 import { NavLink, Route, Switch } from "react-router-dom";
 import EditProfile from "./EditProfile";
