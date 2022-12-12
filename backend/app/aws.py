@@ -1,14 +1,17 @@
+import eventlet
+eventlet.monkey_patch()
 import boto3
 import botocore
 import os
 import uuid
 import logging
 from botocore.exceptions import ClientError
-
+from boto3.s3.transfer import TransferConfig
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"http://{BUCKET_NAME}.s3.amazonaws.com/"
 ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", "mov", "mp4"}
+CONFIG = TransferConfig(use_threads=False)
 
 # s3 = boto3.client(
 #     "s3",
@@ -94,7 +97,7 @@ def upload_file_to_s3(file_path, bucket, object_name=None):
         # absolute_path = os.path.dirname(__file__)
         # path_pwd = os.path.dirname(os.path.dirname(absolute_path)) + "/frontend/public/assets/" + file_storage.filename
         print("AWS PY", file_path)
-        response = s3_client.upload_file(file_path, bucket, object_name)
+        response = s3_client.upload_file(file_path, bucket, object_name, Config=CONFIG)
         os.remove(file_path)
     except ClientError as e:
         logging.error(e)
