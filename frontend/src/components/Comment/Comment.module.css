@@ -61,7 +61,7 @@
   color:#262626;
   margin-left: 5px;
   word-wrap: break-word;
-  /* word-break: break-all; */
+  word-break: break-all;
   /* padding-right: 30px; */
 }
 
