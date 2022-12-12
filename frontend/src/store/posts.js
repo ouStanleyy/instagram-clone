@@ -83,7 +83,11 @@ export const addPost = (formData) => async (dispatch) => {
 
   const data = await res.json();
   if (data.errors) {
-    throw new Error(data);
+    // console.log("DATA ERROR", data.errors);
+    const err = new Error();
+    err.message = data.errors;
+    // console.log("ERER", err);
+    throw err;
   }
 };
 
