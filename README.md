@@ -34,7 +34,9 @@ A clone of a popular social media platform, [Instagram](instagram.com). Users on
 <!-- [![Stargazers][stars-shield]][stars-url] -->
 <!-- [![Issues][issues-shield]][issues-url] -->
 <!-- [![MIT License][license-shield]][license-url] -->
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shield]][linkedin-url-daniel]
+[![LinkedIn][linkedin-shield]][linkedin-url-reyhaneh]
+[![LinkedIn][linkedin-shield]][linkedin-url-stanley]
 
 
 
@@ -48,16 +50,17 @@ A clone of a popular social media platform, [Instagram](instagram.com). Users on
 <h3 align="center">Instantgram (Instagram Clone)</h3>
 
   <p align="center">
-    A clone of a popular social media platform, <a href="instagram.com">Instagram</a>. Users on Meetup may host live/virtual events, organize groups, and meet like-minded peers based on interests, hobbies, professions, and more. 
+    A clone of a popular social media platform, <a href="instagram.com">Instagram</a>. Users on Instagram can share posts (videos and photos) to their network of followers. 
     <br />
     <!-- <a href="https://upload.wikimedia.org/wikipedia/commons/1/10/Meetup.png"><strong>Explore the docs »</strong></a> -->
     <br />
     <br />
-    <a href="https://lets-meetup-clone.herokuapp.com/">Live Link</a>
+    <a href="https://instagram-clone-6n2p.onrender.com/">Live Link</a>
        ·
-    <a href="https://github.com/Daniel-Wong94/meetup_Project/wiki/DB-Schema">DB Schema</a>
+    <a href="https://github.com/ouStanleyy/instagram-clone/wiki/Database-Schema">DB Schema</a>
        ·
-    <a href="https://github.com/Daniel-Wong94/meetup_Project/wiki/API-Documentation">API Documentation</a>
+    <a href="https://github.com/ouStanleyy/instagram-clone/wiki/API-Documentation">API Documentation</a>
+    
    <!-- <a href="https://github.com/github_username/repo_name/issues">Report Bug</a> -->
    <!-- · -->
    <!-- <a href="https://github.com/github_username/repo_name/issues">Request Feature</a> -->
@@ -98,7 +101,7 @@ A clone of a popular social media platform, [Instagram](instagram.com). Users on
 ## About The Project
 <!-- <img width="1638" alt="Screen Shot 2022-10-04 at 8 59 15 PM" src="https://user-images.githubusercontent.com/90014250/193957812-22cd83df-f0b3-4479-b593-129798382a1d.png"> -->
 
-[![Product Name Screen Shot][product-screenshot]](https://user-images.githubusercontent.com/90014250/193957812-22cd83df-f0b3-4479-b593-129798382a1d.png)
+<img width="2477" alt="Screenshot 2022-12-12 at 5 13 41 PM" src="https://user-images.githubusercontent.com/90014250/207166502-437e5fbf-8908-4157-9349-7b0dda7af1d9.png">
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
@@ -113,6 +116,8 @@ My first full stack project is an attempt to clone the main functionalities of M
 * [![HTML5][HTML5]][HTML-url]
 * [![CSS][CSS]][CSS-url]
 * [![Javascript][Javascript]][Javascript-url]
+* [![Python][Python]][Python-url]
+* [![Flask][Flask]][Flask-url]
 * [![Express.js][Express.js]][Express-url]
 * [![React][React.js]][React-url]
 * [![Node.js][Node.js]][Node-url]
@@ -179,14 +184,19 @@ _For more examples, please refer to the [Documentation]("https://github.com/Dani
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Features
 
-- [X] User Login, Sign Up, Authentication, and Validations
-- [X] Full CRUD of Groups
-- [X] Full CRUD of Events
-- [ ] Full CRUD of Venues
-- [X] Implement Google Maps API for Venue locations
+Users can: 
 
+-[X] Create a post (photos and videos) with the use of AWS to handle media storage
+-[X] Send instant messages to each other with the use of the socket.io library
+-[X] Edit their profile's information (bio, phone number, password, gender, etc)
+-[X] Get a random list of suggested users to follow (public profiles)
+-[X] Edit their post (turning off comments, allowing like counts to show, and changing caption)
+-[X] Search for other users with auto suggestion
+-[X] Reply to other user's comments
+-[X] Infinitely scroll through their feed
+-[X] Get notifications of pending follow requests
 
 <!-- See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
@@ -256,7 +266,9 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/daniel-kachun-wong/
+[linkedin-url-daniel]: https://www.linkedin.com/in/daniel-kachun-wong/
+[linkedin-url-reyhaneh]:https://www.linkedin.com/in/reyhaneh-abdollahi-408895110/
+[linkedin-url-stanley]:https://www.linkedin.com/in/stanley-ou/
 [product-screenshot]: https://user-images.githubusercontent.com/90014250/193957812-22cd83df-f0b3-4479-b593-129798382a1d.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
@@ -296,3 +308,8 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Heroku-url]: https://id.heroku.com/
 [SQLite]: https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white
 [SQLite-url]: https://www.sqlite.org/index.html
+[Flask]:https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white
+[Flask-url]: https://flask.palletsprojects.com/en/2.2.x/
+[Python]:https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]:https://docs.python.org/3/
+
