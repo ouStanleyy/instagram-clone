@@ -72,11 +72,11 @@ const CreatePost = () => {
       await dispatch(addPost(data));
       return history.push(`/users/${user.id}`);
     } catch (e) {
-      // console.log("HERE", e.errors);
-      setErrors(e);
-      // console.log("ERROR", errors);
+      // console.log("HERE", e.message);
+      setErrors({ error: e.message });
     }
   };
+  // console.log("ERROR", errors);
 
   const handlePreview = (e) => {
     e.stopPropagation();
@@ -145,8 +145,17 @@ const CreatePost = () => {
           </button>
         )}
         {page === 3 && (
-          <button className={styles.submitButton} onClick={handleSubmit}>
+          <button
+            className={styles.submitButton}
+            onClick={handleSubmit}
+            disabled={errors.error}
+          >
             Share
+            {errors.error && (
+              <span className={styles.fileTypeError}>
+                File Type Not Allowed!
+              </span>
+            )}
           </button>
         )}
       </div>
