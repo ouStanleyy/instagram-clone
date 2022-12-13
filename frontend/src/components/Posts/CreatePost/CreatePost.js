@@ -39,7 +39,7 @@ const CreatePost = () => {
   const [charCount, setCharCount] = useState(0);
   const [turnOffComments, setTurnOffComments] = useState(false);
   const [hideLikeCount, setHideLikeCount] = useState(false);
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
 
   const handleOpenUpload = (e) => {
     e.preventDefault();
@@ -148,14 +148,14 @@ const CreatePost = () => {
           <button
             className={styles.submitButton}
             onClick={handleSubmit}
-            disabled={errors.error}
+            // disabled={errors.error}
           >
             Share
-            {errors.error && (
+            {/* {errors.error && (
               <span className={styles.fileTypeError}>
                 File Type Not Allowed!
               </span>
-            )}
+            )} */}
           </button>
         )}
       </div>
