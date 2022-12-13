@@ -10,6 +10,7 @@ import { normalizeErrors } from "../Utill";
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const isDemoUser = user?.id === 1;
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -88,6 +89,7 @@ const ChangePassword = () => {
               value={oldPassword}
               maxLength={15}
               onChange={updateOldPassword}
+              disabled={isDemoUser}
             />
           </div>
         </div>
@@ -102,6 +104,7 @@ const ChangePassword = () => {
               value={newPassword}
               maxLength={15}
               onChange={updateNewPassword}
+              disabled={isDemoUser}
             />
           </div>
         </div>
@@ -116,6 +119,7 @@ const ChangePassword = () => {
               value={confirmPassword}
               maxLength={15}
               onChange={updateConfirmPassword}
+              disabled={isDemoUser}
             />
           </div>
         </div>
@@ -127,7 +131,7 @@ const ChangePassword = () => {
               disableButton && stylesPassword.disabledButton
             }`}
           >
-            Change password
+            {isDemoUser ? "Disabled for Demo User" : "Change password"}
           </button>
         </div>
       </form>

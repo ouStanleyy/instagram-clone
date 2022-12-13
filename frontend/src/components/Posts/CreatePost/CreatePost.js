@@ -60,21 +60,21 @@ const CreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const data = new FormData();
-      Object.values(files[0]).forEach((file) => data.append("images", file));
+    // try {
+    const data = new FormData();
+    Object.values(files[0]).forEach((file) => data.append("images", file));
 
-      data.append("caption", caption);
-      data.append("is_story", false);
-      data.append("show_like_count", !hideLikeCount);
-      data.append("allow_comments", !turnOffComments);
+    data.append("caption", caption);
+    data.append("is_story", false);
+    data.append("show_like_count", !hideLikeCount);
+    data.append("allow_comments", !turnOffComments);
 
-      await dispatch(addPost(data));
-      return history.push(`/users/${user.id}`);
-    } catch (e) {
-      // console.log("HERE", e.message);
-      setErrors({ error: e.message });
-    }
+    await dispatch(addPost(data));
+    return history.push(`/users/${user.id}`);
+    // } catch (e) {
+    // console.log("HERE", e.message);
+    // setErrors({ error: e.message });
+    // }
   };
   // console.log("ERROR", errors);
 
