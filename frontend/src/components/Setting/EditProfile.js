@@ -12,6 +12,7 @@ const EditProfile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
+  const isDemoUser = user.id === 1;
   const [profilePicture, setProfilePicture] = useState(user?.profile_picture);
   // const [profilePicture, setProfilePicture] = useState("");
   const [fullName, setFullName] = useState(user?.full_name);
@@ -298,9 +299,11 @@ const EditProfile = () => {
             >
               Submit
             </button>
-            <button className={styles.deactivateButton} onClick={toggleModal}>
-              Deactivate my account
-            </button>
+            {isDemoUser && (
+              <button className={styles.deactivateButton} onClick={toggleModal}>
+                Deactivate my account
+              </button>
+            )}
           </div>
         </div>
       </form>
