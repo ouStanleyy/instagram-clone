@@ -50,7 +50,7 @@ A clone of a popular social media platform, [Instagram](instagram.com). Users on
 <h3 align="center">Instantgram (Instagram Clone)</h3>
 
   <p align="center">
-    A clone of a popular social media platform, <a href="instagram.com">Instagram</a>. Users on Instagram can share posts (videos and photos) to their network of followers. 
+    A clone of a popular social media platform, <a href="instagram.com">Instagram</a>. Instagram is a social media platform that allows users to share photos and videos, as well as to interact with others through likes, comments, and direct messaging. The app is known for its sleek, user-friendly interface and powerful editing tools that allow users to enhance their photos and videos with filters, stickers, and other creative features. 
     <br />
     <!-- <a href="https://upload.wikimedia.org/wikipedia/commons/1/10/Meetup.png"><strong>Explore the docs »</strong></a> -->
     <br />
@@ -195,10 +195,18 @@ Users can:
 - [X] Infinitely scroll through their feed
 - [X] Get notifications of pending follow requests
 
+## Stretch Goals
+
+- [ ] Infinite scroll on the explore page
+- [ ] "Saved" tab that stores all posts saved by the user
+- [ ] "Report a Problem" button to send an email to the creators
+- [ ] Stories
+- [ ] Reels
+- [ ] Highlights
+
 <!-- See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
 
 
 <!-- CONTRIBUTING -->
